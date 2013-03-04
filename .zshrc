@@ -338,7 +338,7 @@ function update_dotfiles_adm_user {
 }
 
 function update_dotfiles {
-    curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
+    curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1 | cut -d '/' -f 2-
     #bash <(wget -O - df.dust.cx)
 }
 
