@@ -26,6 +26,8 @@ if [ ! -n "$PS1" ]; then return; fi
 # remove .oh-my-zsh if exists
 [[ -d "$HOME/.oh-my-zsh" ]] && rm -rfv $HOME/.oh-my-zsh
 
+[[ -f "/var/lib/puppet/state/NO_CRON_RUN" ]] && echo "NO_CRON_RUN exists on this machine!"
+
 ###
 ### .oh-my-zsh/lib/spectrum.zsh
 ###
