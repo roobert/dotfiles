@@ -80,7 +80,7 @@ vmap <C-a>e :Ta /=<CR>
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " expert difficulty
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>

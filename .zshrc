@@ -381,7 +381,7 @@ function gh_checkin {
     if [[ -d $WORK_DIR ]]; then
         ( cd $WORK_DIR && git pull )
     else
-        git clone ssh://git@github.com:roobert/dotfiles $WORK_DIR
+        git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
     fi
 
     for file in `find $WORK_DIR | grep -v '.git$'`; do
