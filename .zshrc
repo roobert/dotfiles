@@ -275,7 +275,6 @@ SAVEHIST=9999
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd j vi-down-line-or-history
 
-<<<<<<< HEAD
 # enable advanced globbing
 setopt extended_glob
 
@@ -389,7 +388,7 @@ function gh_checkin {
         echo cp -v $SOURCE_DIR/`basename $file` $WORK_DIR
     done
 
-    echo ( cd $WORK_DIR && git commit -am 'updated' && git push )
+    echo "( cd $WORK_DIR && git commit -am 'updated' && git push )"
 }
 
 function install_common_tools {
