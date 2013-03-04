@@ -284,14 +284,12 @@ function die {
     exit 1
 }
 
-=======
 # this fixes switching between vi-modes
-bindkey -M viins '^['
+bindkey -rpM viins '^['
 
 # enable advanced globbing
 setopt extended_glob
 
->>>>>>> c29a1557f91743272d49aab8b4d460763c6ea0d1
 # useful function to update zshrc for adm user
 function update_dotfiles_adm_user {
 
@@ -352,7 +350,6 @@ function update_dotfiles_adm_user {
 }
 
 function update_dotfiles {
-<<<<<<< HEAD
     cd; curl -#L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
     #bash <(wget -O - df.dust.cx)
 }
@@ -393,16 +390,6 @@ function gh_checkin {
     done
 
     echo ( cd $WORK_DIR && git commit -am 'updated' && git push )
-=======
-    curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
-    #bash <(wget -O - df.dust.cx)
-}
-
-function checkin_dotfiles {
-    # check out dotfiles
-    # copy dotfiles from homedir into dotfiles/
-    # check in dotfiles
->>>>>>> c29a1557f91743272d49aab8b4d460763c6ea0d1
 }
 
 function install_common_tools {
