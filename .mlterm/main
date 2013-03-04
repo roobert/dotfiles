@@ -1,0 +1,13 @@
+use_transbg = true
+use_clipboard = true
+brightness = 20
+fade_ratio = 100
+fg_color = white
+bg_color = black
+scrollbar_mode = none
+borderless = true
+fontsize = 13
+use_anti_alias = false
+name = xterm
+logsize = 4096
+word_separators = " ,;="

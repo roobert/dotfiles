@@ -1,0 +1,2 @@
+vmware-user &
+exec ssh-agent notion

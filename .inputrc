@@ -1,0 +1,5 @@
+set editing-mode vi
+"\C-l": clear-screen
+set visible-stats on
+set print-completions-horizontally on
+set show-all-if-ambiguous on

@@ -1,0 +1,4 @@
+ISO8859_1 = bitstream vera sans mono-medium-iso8859-1;
+ISO8859_15 = bitstream vera sans mono-medium-iso8859-15;
+ISO10646_UCS2_1 = bitstream vera sans mono-medium-iso10646-1;
+ISO10646_UCS2_1_BOLD = bitstream vera sans mono-bold-iso10646-1;

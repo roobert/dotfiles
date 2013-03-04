@@ -1,0 +1,222 @@
+{
+   "browser": {
+      "window_placement": {
+         "bottom": 652,
+         "left": 0,
+         "maximized": false,
+         "right": 1360,
+         "top": 0,
+         "work_area_bottom": 682,
+         "work_area_left": 0,
+         "work_area_right": 1366,
+         "work_area_top": 0
+      }
+   },
+   "countryid_at_install": 21843,
+   "default_apps_install_state": 1,
+   "default_search_provider": {
+      "enabled": true,
+      "encodings": "UTF-8",
+      "icon_url": "http://www.google.com/favicon.ico",
+      "id": "2",
+      "instant_url": "{google:baseURL}webhp?{google:RLZ}sourceid=chrome-instant&{google:instantFieldTrialGroupParameter}ie={inputEncoding}{google:instantEnabledParameter}{searchTerms}",
+      "keyword": "google.com",
+      "name": "Google",
+      "prepopulate_id": "1",
+      "search_url": "{google:baseURL}search?{google:RLZ}{google:acceptedSuggestion}{google:originalQueryForSuggestion}{google:searchFieldtrialParameter}{google:instantFieldTrialGroupParameter}sourceid=chrome&client=ubuntu&channel=cs&ie={inputEncoding}&q={searchTerms}",
+      "suggest_url": "{google:baseSuggestURL}search?{google:searchFieldtrialParameter}{google:instantFieldTrialGroupParameter}client=chrome&hl={language}&q={searchTerms}"
+   },
+   "dns_prefetching": {
+      "host_referral_list": [ 2, [ "http://tools.google.com/", [ "http://fonts.googleapis.com/", 2.1894160854077476, "http://tools.google.com/", 2.1894160854077476, "http://www.google.com/", 2.467177827586342 ] ], [ "http://www.google.com/", [ "http://ssl.gstatic.com/", 0.453038801083955, "http://www.google.com/", 0.9703144470977244 ] ], [ "https://chrome.google.com/", [ "https://apis.google.com/", 2.387589482583341, "https://chrome.google.com/", 2.690492625896153, "https://fls.doubleclick.net/", 2.9933957692089646, "https://fonts.googleapis.com/", 2.084686339270529, "https://ssl.google-analytics.com/", 2.690492625896153, "https://ssl.gstatic.com/", 2.084686339270529, "https://www.google.com/", 2.9933957692089646 ] ], [ "https://fls.doubleclick.net/", [ "https://ad.yieldmanager.com/", 2.084686339270529, "https://conversion-pixel.invitemedia.com/", 2.084686339270529, "https://googleads.g.doubleclick.net/", 2.1197019426374895, "https://segment-pixel.invitemedia.com/", 2.084686339270529, "https://www.googleadservices.com/", 2.251646551864551 ] ], [ "https://plusone.google.com/", [ "https://plusone.google.com/", 2.690492625896153 ] ] ],
+      "startup_list": [ 1, "http://www.google.com/" ]
+   },
+   "download": {
+      "directory_upgrade": true,
+      "extensions_to_open": ""
+   },
+   "extensions": {
+      "autoupdate": {
+         "next_check": "12984958439237775"
+      },
+      "chrome_url_overrides": {
+         "bookmarks": [ "chrome-extension://eemcgdkfndhakfknompkggombfjjjeno/main.html" ],
+         "newtab": [ "chrome-extension://dpjamkmjmigaoobjbekmfgabipmfilij/empty_ntp.html" ]
+      },
+      "settings": {
+         "ahfgeienlihckogmohjhadlkjgocpleb": {
+            "active_permissions": {
+               "api": [ "appNotifications", "management", "webstorePrivate" ]
+            },
+            "app_launcher_ordinal": "n",
+            "page_ordinal": "n"
+         },
+         "dpjamkmjmigaoobjbekmfgabipmfilij": {
+            "from_bookmark": false,
+            "from_webstore": true,
+            "install_time": "12984957772545896",
+            "location": 1,
+            "manifest": {
+               "chrome_url_overrides": {
+                  "newtab": "empty_ntp.html"
+               },
+               "description": "With this extension, new tabs display a blank page instead of the usual new tab page with thumbnails.",
+               "icons": {
+                  "128": "icon_128.png"
+               },
+               "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDcpDJDTUPu98yHwsjPXxeE3myreL1apj+QC6K6ZXwJ5qHYTFFUxwj3gRwuBmcfYSfvh0MB7T1MxuQl+x/Zza/bSu8dP/ArCcvOQ90q/sVcKYb93ffrXb+TOEDrlH1CNEvlJO10W2pW00RxFoiBdQt1JWhiDMs5TH45mYtKK0OFjQIDAQAB",
+               "name": "Empty New Tab Page",
+               "update_url": "http://clients2.google.com/service/update2/crx",
+               "version": "1.1"
+            },
+            "path": "dpjamkmjmigaoobjbekmfgabipmfilij/1.1_0",
+            "state": 1
+         }
+      }
+   },
+   "homepage": "http://www.google.com/",
+   "homepage_is_newtabpage": true,
+   "http_throttling": {
+      "enabled": true
+   },
+   "instant": {
+      "enabled_time": "12984957697423584"
+   },
+   "net": {
+      "http_server_properties": {
+         "chrome.google.com:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         },
+         "fls.doubleclick.net:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         },
+         "googleads.g.doubleclick.net:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         },
+         "lh4.googleusercontent.com:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         },
+         "ssl.google-analytics.com:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         },
+         "www.googleadservices.com:443": {
+            "settings": [ {
+               "id": 4,
+               "value": 100
+            } ],
+            "supports_spdy": true
+         }
+      }
+   },
+   "ntp": {
+      "app_page_names": [ "Apps" ],
+      "promo_build": 4,
+      "promo_closed": false,
+      "promo_end": 1338940740.0,
+      "promo_feature_mask": 0,
+      "promo_group": 9,
+      "promo_group_max": 99,
+      "promo_group_timeslice": 0,
+      "promo_is_logged_in_to_plus": false,
+      "promo_line": "We\u2019ve remodeled! \u003Ca href=\"https://support.google.com/chromeos/?p=ntp19\"\u003ELearn more about the latest features\u003C/a\u003E on your Chromebook.",
+      "promo_platform": 8,
+      "promo_resource_cache_update": "1340484120.833187",
+      "promo_start": 1338321600.0,
+      "promo_views": 0,
+      "promo_views_max": 20
+   },
+   "plugins": {
+      "enabled_internal_pdf3": true,
+      "enabled_nacl": true,
+      "last_internal_directory": "/usr/lib/chromium-browser",
+      "plugins_list": [ {
+         "enabled": true,
+         "name": "Remoting Viewer",
+         "path": "internal-remoting-viewer",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "Remoting Viewer"
+      }, {
+         "enabled": true,
+         "name": "Shockwave Flash",
+         "path": "/usr/lib/flashplugin-installer/libflashplayer.so",
+         "version": "11.2 r202"
+      }, {
+         "enabled": true,
+         "name": "Flash"
+      }, {
+         "enabled": true,
+         "name": "iTunes Application Detector",
+         "path": "/usr/lib/mozilla/plugins/librhythmbox-itms-detection-plugin.so",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "iTunes Application Detector"
+      }, {
+         "enabled": true,
+         "name": "VLC Multimedia Plugin (compatible Totem 3.0.1)",
+         "path": "/usr/lib/mozilla/plugins/libtotem-cone-plugin.so",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "VLC Multimedia Plugin (compatible Totem 3.0.1)"
+      }, {
+         "enabled": true,
+         "name": "DivX\u00AE Web Player",
+         "path": "/usr/lib/mozilla/plugins/libtotem-mully-plugin.so",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "DivX\u00AE Web Player"
+      }, {
+         "enabled": true,
+         "name": "Windows Media Player Plug-in 10 (compatible; Totem)",
+         "path": "/usr/lib/mozilla/plugins/libtotem-gmp-plugin.so",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "Windows Media Player Plug-in 10 (compatible; Totem)"
+      }, {
+         "enabled": true,
+         "name": "QuickTime Plug-in 7.6.6",
+         "path": "/usr/lib/mozilla/plugins/libtotem-narrowspace-plugin.so",
+         "version": ""
+      }, {
+         "enabled": true,
+         "name": "QuickTime Plug-in 7.6.6"
+      } ]
+   },
+   "profile": {
+      "avatar_index": 0,
+      "content_settings": {
+         "pref_version": 1
+      },
+      "exited_cleanly": true,
+      "name": "First user"
+   },
+   "sync_promo": {
+      "startup_count": 3,
+      "user_skipped": true,
+      "view_count": 3
+   }
+}
