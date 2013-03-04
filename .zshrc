@@ -275,12 +275,23 @@ SAVEHIST=9999
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd j vi-down-line-or-history
 
+<<<<<<< HEAD
+# enable advanced globbing
+setopt extended_glob
+
+function die {
+    echo $1
+    exit 1
+}
+
+=======
 # this fixes switching between vi-modes
 bindkey -M viins '^['
 
 # enable advanced globbing
 setopt extended_glob
 
+>>>>>>> c29a1557f91743272d49aab8b4d460763c6ea0d1
 # useful function to update zshrc for adm user
 function update_dotfiles_adm_user {
 
@@ -341,6 +352,48 @@ function update_dotfiles_adm_user {
 }
 
 function update_dotfiles {
+<<<<<<< HEAD
+    cd; curl -#L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
+    #bash <(wget -O - df.dust.cx)
+}
+
+# Examples:
+#
+#    gh_checkin dotfiles
+#    gh_checkin bin
+#
+function gh_checkin {
+
+       REPOS="$1"
+     TMP_DIR="$HOME/tmp"
+    WORK_DIR="$TMP_DIR/$REPOS"
+
+    case $REPOS in
+        dotfiles)
+            SOURCE_DIR=$HOME
+        ;;
+        bin)
+            SOURCE_DIR=$HOME/bin
+        ;;
+        *)
+            die "unknown repository: $REPOS"
+        ;;
+    esac
+
+    [[ ! -d $TMP_DIR ]] && die "no such directory \$TMP_DIR: $TMPDIR"
+
+    if [[ -d $WORK_DIR ]]; then
+        ( cd $WORK_DIR && git pull )
+    else
+        git clone ssh://git@github.com:roobert/dotfiles $WORK_DIR
+    fi
+
+    for file in `find $WORK_DIR | grep -v '.git$'`; do
+        echo cp -v $SOURCE_DIR/`basename $file` $WORK_DIR
+    done
+
+    echo ( cd $WORK_DIR && git commit -am 'updated' && git push )
+=======
     curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
     #bash <(wget -O - df.dust.cx)
 }
@@ -349,6 +402,7 @@ function checkin_dotfiles {
     # check out dotfiles
     # copy dotfiles from homedir into dotfiles/
     # check in dotfiles
+>>>>>>> c29a1557f91743272d49aab8b4d460763c6ea0d1
 }
 
 function install_common_tools {
