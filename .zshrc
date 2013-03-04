@@ -366,10 +366,10 @@ function gh_checkin {
 
     case $REPOS in
         dotfiles)
-            SOURCE_DIR=$HOME
+            SOURCE_DIR=~
         ;;
         bin)
-            SOURCE_DIR=$HOME/bin
+            SOURCE_DIR=~/bin
         ;;
         *)
             die "unknown repository: $REPOS"
@@ -384,8 +384,14 @@ function gh_checkin {
         git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
     fi
 
-    for file in `find $WORK_DIR | grep -v '.git$'`; do
-        echo cp -v $SOURCE_DIR/`basename $file` $WORK_DIR
+    for file in `find $WORK_DIR -type f -not -wholename "$WORK_DIR/.git/*" -not -iwholename "$WORK_DIR/.git"`; do
+
+        SRC_FILE=`echo $file | sed "s|$WORK_DIR/||"`
+
+        diff $file $SOURCE_DIR/$SRC_FILE
+
+        # only copy changed files..
+        [[ $? != 0 ]] && echo cp -v $SOURCE_DIR/$SRC_FILE $WORK_DIR
     done
 
     echo "( cd $WORK_DIR && git commit -am 'updated' && git push )"
