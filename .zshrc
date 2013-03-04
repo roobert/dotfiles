@@ -26,8 +26,6 @@ if [ ! -n "$PS1" ]; then return; fi
 # remove .oh-my-zsh if exists
 [[ -d "$HOME/.oh-my-zsh" ]] && rm -rfv $HOME/.oh-my-zsh
 
-[[ -f "/var/lib/puppet/state/NO_CRON_RUN" ]] && echo "NO_CRON_RUN exists on this machine!"
-
 ###
 ### .oh-my-zsh/lib/spectrum.zsh
 ###
@@ -277,6 +275,9 @@ SAVEHIST=9999
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd j vi-down-line-or-history
 
+# this fixes switching between vi-modes
+bindkey -M viins '^['
+
 # enable advanced globbing
 setopt extended_glob
 
@@ -340,7 +341,7 @@ function update_dotfiles_adm_user {
 }
 
 function update_dotfiles {
-    curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1 | cut -d '/' -f 2-
+    curl -s -L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
     #bash <(wget -O - df.dust.cx)
 }
 
