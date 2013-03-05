@@ -224,6 +224,7 @@ alias ssh="ssh -t" # force-allocate pseudo-tty
 alias grep="egrep --exclude-dir=\.svn -n"
 alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
+alias gup='git commit -am "updated" && git push'
 
 # stuff in ~/bin
 alias f="r_find"
