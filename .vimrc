@@ -13,20 +13,22 @@
 "let xterm16_colormap    = 'soft'
 "let xterm16_colormap    = 'softlight'
 "let xterm16_colormap    = 'standard'
-let xterm16_colormap    = 'allblue'
+""let xterm16_colormap    = 'allblue'
 
 " Select brightness: 'low', 'med', 'high', 'default' or custom levels.
 "let xterm16_brightness  = 'low'
 "let xterm16_brightness  = 'med'
 "let xterm16_brightness  = 'high'
-let xterm16_brightness  = 'default'
+""let xterm16_brightness  = 'default'
 
-"colorscheme xterm16
-" colorscheme jellybeans
+""colorscheme xterm16
+
+" Solarized settings
 colorscheme solarized
 set background=dark
 let g:solarized_termcolors=256
 
+" colorscheme jellybeans
 
 " syntax isn't always enabled by default
 syntax enable
@@ -69,15 +71,20 @@ autocmd Syntax * syn match ExtraWhitespace /[^\t]\zs\t\+/
 "disable autocomment stuff
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Tab navigation
 map <C-l> :tabnext<CR>
 map <C-h> :tabprev<CR>
 
+" Tabularize plugin bindings
 nmap <C-a>p :Ta /=><CR>
 vmap <C-a>p :Ta /=><CR>
 nmap <C-a>e :Ta /=<CR>
 vmap <C-a>e :Ta /=<CR>
 
+" write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
+command Wq WQ
 
 " expert difficulty
 "noremap <Up> <NOP>
