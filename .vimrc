@@ -23,19 +23,22 @@
 
 ""colorscheme xterm16
 
+" this allows 256 colours in non xterm-256 terminals that support 256
+" colours (testing)
+let &t_Co=256
+
 " Solarized settings
 colorscheme solarized
 set background=dark
-let g:solarized_termcolors=256
+let g:solarized_termcolors = 256
+let g:solarized_underline = 0
+let g:solarized_contrast = "high"
 
 " colorscheme jellybeans
 
 " syntax isn't always enabled by default
 syntax enable
 
-" this allows 256 colours in non xterm-256 terminals that support 256
-" colours (testing)
-let &t_Co=256
 
 " settings
 "set cursorline      " highlight line that cursor is on
@@ -78,7 +81,7 @@ map <C-h> :tabprev<CR>
 " Tabularize plugin bindings
 nmap <C-a>p :Ta /=><CR>
 vmap <C-a>p :Ta /=><CR>
-nmap <C-a>e :Ta /=<CR>
+map <C-a>e :Ta /=<CR>
 vmap <C-a>e :Ta /=<CR>
 
 " write file using sudo don't prompt to re-open file

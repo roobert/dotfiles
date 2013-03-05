@@ -56,17 +56,6 @@ function spectrum_ls() {
   done
 }
 
-###
-### .oh-my-zsh/plugins/vi-mode
-###
-
-function zle-line-init zle-keymap-select {
-  zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 #changing mode clobbers the keybinds, so store the keybinds before and execute 
 #them after
 binds=`bindkey -L`
@@ -272,8 +261,20 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
 
+# this fixes switching between vi-modes
+bindkey -rpM viins '^['
+
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd j vi-down-line-or-history
+
+# fix some stuff that breaks when using vi-mode
+bindkey -M viins '^R' history-incremental-search-backward
+bindkey -M vicmd '^R' history-incremental-search-backward
+bindkey -M viins "^[[A" up-line-or-history
+bindkey -M vicmd "^[[A" up-line-or-history
+bindkey -M viins "^[[B" down-line-or-history
+bindkey -M vicmd "^[[B" down-line-or-history
+
 
 # enable advanced globbing
 setopt extended_glob
@@ -283,8 +284,6 @@ function die {
     return 1
 }
 
-# this fixes switching between vi-modes
-bindkey -rpM viins '^['
 
 # enable advanced globbing
 setopt extended_glob
@@ -360,10 +359,12 @@ function update_dotfiles {
 #
 function gh_checkin {
 
+    # avant-garde indenting
        REPOS="$1"
      TMP_DIR="$HOME/tmp"
     WORK_DIR="$TMP_DIR/$REPOS"
 
+    # determine where to copy files to based on parameter
     case $REPOS in
         dotfiles)
             SOURCE_DIR=~
@@ -376,24 +377,29 @@ function gh_checkin {
         ;;
     esac
 
+    # fail if tmp dir doesn't exist
     [[ ! -d $TMP_DIR ]] && die "no such directory \$TMP_DIR: $TMPDIR"
 
+    # either clone or update repo depending on whether it's already checked out
     if [[ -d $WORK_DIR ]]; then
         ( cd $WORK_DIR && git pull )
     else
         git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
     fi
 
+    # for each file that has been checked out, copy over it with file from $SOURCE_DIR
     for file in `find $WORK_DIR -type f -not -wholename "$WORK_DIR/.git/*" -not -iwholename "$WORK_DIR/.git"`; do
 
         SRC_FILE=`echo $file | sed "s|$WORK_DIR/||"`
 
+        # display a diff of changed files
         diff $file $SOURCE_DIR/$SRC_FILE
 
         # only copy changed files..
         [[ $? != 0 ]] && echo cp -v $SOURCE_DIR/$SRC_FILE $WORK_DIR
     done
 
+    # commit and push
     echo "( cd $WORK_DIR && git commit -am 'updated' && git push )"
 }
 
@@ -405,3 +411,17 @@ function install_common_tools_osx {
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
     brew install zsh coreutils wget
 }
+
+# NOTE: moved this to the bottom since it may break other stuff.. (ordering matters!)
+
+###
+### .oh-my-zsh/plugins/vi-mode
+###
+
+function zle-line-init zle-keymap-select {
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
