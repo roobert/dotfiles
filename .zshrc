@@ -351,7 +351,7 @@ function gh_checkout {
     REPOS="$1"
 
     # execute in subshell
-    ( cd; curl -sL https://github.com/roobert/$REPOS/tarball/master | tar -xzv --strip-components 1 | cut -d '/' -f 2- )
+    ( cd; curl -sL https://github.com/roobert/$REPOS/tarball/master | tar -xzv --strip-components 1 --exclude={README.md} | cut -d '/' -f 2- )
 }
 
 # Examples:
