@@ -347,9 +347,11 @@ function update_dotfiles_adm_user {
     fi
 }
 
-function update_dotfiles {
-    cd; curl -#L https://github.com/roobert/dotfiles/tarball/master | tar -xzv --strip-components 1
-    #bash <(wget -O - df.dust.cx)
+function gh_checkout {
+    REPOS="$1"
+
+    # execute in subshell
+    ( cd; curl -#L https://github.com/roobert/$REPOS/tarball/master | tar -xzv --strip-components 1 )
 }
 
 # Examples:
