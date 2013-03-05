@@ -77,6 +77,7 @@ unsetopt flowcontrol
 setopt auto_menu         # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
+setopt sh_word_split     # don't retokenize variables on expansion WARNING: could this mess things up? is this the default for posix sh?
 
 WORDCHARS=''
 
@@ -348,13 +349,46 @@ function update_dotfiles_adm_user {
     fi
 }
 
-function gh_checkout {
+# Examples:
+#
+#   gh_install dotfiles
+#   gh_install bin
+#
+function gh_install {
     REPOS="$1"
 
-    # execute in subshell
-    ( cd; curl -sL https://github.com/roobert/$REPOS/tarball/master \
-      | tar -xzv --strip-components 1 --exclude={README.md} \
-      | cut -d '/' -f 2- )
+    case $REPOS in
+        bin)
+            [[ ! -d ~/bin ]] && ( mkdir -p ~/bin || die "$HOME/bin does not exist and could not be created!" )
+
+            EXTRA_TAR_OPTS="-C $HOME/bin"
+        ;;
+        *)
+            die "unknown repository: $REPOS"
+        ;;
+    esac
+
+    curl -sL https://github.com/roobert/$REPOS/tarball/master \
+    | tar -xzv --strip-components 1 --exclude=README.md $EXTRA_TAR_OPTS
+}
+
+# Examples:
+#
+#   gh_checkout dotfiles
+#   gh_checkout bin
+#
+function gh_checkout {
+    REPOS="$1"
+    TMP_DIR="$HOME/tmp"
+
+    [[ ! -d $TMP_DIR ]] && die "no such directory \$TMP_DIR: $TMPDIR"
+
+    # either clone or update repo depending on whether it's already checked out
+    if [[ -d $WORK_DIR ]]; then
+        ( cd $WORK_DIR && git pull )
+    else
+        git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
+    fi
 }
 
 # Examples:
@@ -365,8 +399,8 @@ function gh_checkout {
 function gh_checkin {
 
     # avant-garde indenting
-       REPOS="$1"
-     TMP_DIR="$HOME/tmp"
+    REPOS="$1"
+    TMP_DIR="$HOME/tmp"
     WORK_DIR="$TMP_DIR/$REPOS"
 
     # determine where to copy files to based on parameter
@@ -382,15 +416,8 @@ function gh_checkin {
         ;;
     esac
 
-    # fail if tmp dir doesn't exist
-    [[ ! -d $TMP_DIR ]] && die "no such directory \$TMP_DIR: $TMPDIR"
-
-    # either clone or update repo depending on whether it's already checked out
-    if [[ -d $WORK_DIR ]]; then
-        ( cd $WORK_DIR && git pull )
-    else
-        git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
-    fi
+    # checkout or update repository
+    gh_checkout $REPOS
 
     # for each file that has been checked out, copy over it with file from $SOURCE_DIR
     for file in `find $WORK_DIR -type f -not -wholename "$WORK_DIR/.git/*" -not -iwholename "$WORK_DIR/.git"`; do
@@ -407,6 +434,10 @@ function gh_checkin {
     # commit and push
     echo "( cd $WORK_DIR && git commit -am 'updated' && git push )"
 }
+
+#
+# functions to install some useful tools..
+#
 
 function install_common_tools {
     sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep
