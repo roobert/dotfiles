@@ -319,30 +319,31 @@ function update_dotfiles_adm_user {
 
     BRANCHES=(trunk branches/testing branches/production)
     DOTFILES=(
-        bash_profile
-        bashrc
-        inputrc
-        lscolorsrc
-        vimrc
-        zshrc
-        vim/colors/xterm16.vim
-        vim/colors/jellybeans.vim
-        vim/ftdetect/puppet.vim
-        vim/syntax/puppet.vim
-        vim/after/plugin/TabularMaps.vim
-        vim/after/plugin/solarized.vim
-        vim/autoload/tabular.vim
-        vim/plugin/Tabular.vim
+        .bash_profile
+        .bashrc
+        .inputrc
+        .lscolorsrc
+        .vimrc
+        .zshrc
+        .vim/colors/xterm16.vim
+        .vim/colors/jellybeans.vim
+        .vim/colors/solarized.vim
+        .vim/ftdetect/puppet.vim
+        .vim/syntax/puppet.vim
+        .vim/after/plugin/TabularMaps.vim
+        .vim/autoload/tabular.vim
+        .vim/plugin/Tabular.vim
     )
 
     # copy dotfiles to adm env/ directory
     for dotfile in $DOTFILES; do
         for branch in $BRANCHES; do
-            DOTFILE_PATH="$HOME/.$dotfile $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`dirname $dotfile`"
+            DOTFILE_PATH="$HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`dirname $dotfile`"
 
             [[ ! -d "$DOTFILE_PATH" ]] && mkdir -p $DOTFILE_PATH
+            #[[ ! -f $dotfile ]] && ( echo "dotfile does not exist: $dotfile" && exit 1 )
 
-            cp -v $HOME/.$dotfile $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/$dotfile
+            cp -v $HOME/$dotfile $DOTFILE_PATH
         done
     done
 
@@ -351,25 +352,38 @@ function update_dotfiles_adm_user {
 
     # commit files (one commit per file is inefficient but whatever..)
     for branch in $BRANCHES; do
-        for new_dotfile in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/|grep '^?'|awk '{print $2}'`; do
-            NEW_DOTFILES=($new_dotfile $NEW_DOTFILES)
-        done
+        OLD_IFS="$IFS"
+        IFS='\n'
 
-        for updated_dotfile in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/|awk '{print $2}'`; do
-            UPDATED_DOTFILES=($updated_dotfile $UPDATED_DOTFILES)
+        for svn_entry in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`; do
+
+            dotfile_status=`echo "$svn_entry" | awk '{ print $1 }'`
+
+            dotfile=`echo "$svn_entry" | awk '{ print $2 }'`
+
+            if [[ "$dotfile_status" = "?" ]]; then
+                NEW_DOTFILES=($dotfile $NEW_DOTFILES)
+
+            elif [[ "$dotfile_status" = "M" ]]; then
+                UPDATED_DOTFILES=($dotfile $UPDATED_DOTFILES)
+
+            else
+                die "file '$dotfile' has unknown status: $dotfile_status"
+
+            fi
         done
     done
 
     # add any new files/dirs to svn
     if [ ! -z "$NEW_DOTFILES" ]; then
-        echo NEW DF $NEW_DOTFILES
+        echo "# new dotfiles: $NEW_DOTFILES"
         for dotfile in $NEW_DOTFILES; svn add $dotfile
     fi
 
     # commit any changed dotfiles
-    if [ ! -z "$UPDATED_DOTFILES" ]; then
+    if [ ! -z "$UPDATED_DOTFILES" ] || [ ! -z "$NEW_DOTFILES" ]; then
         svn status $UPDATED_DOTFILES
-        svn ci -m 'updated robwadm dotfiles..' $UPDATED_DOTFILES
+        svn ci -m '# updated robwadm dotfiles..' $UPDATED_DOTFILES
     fi
 }
 
