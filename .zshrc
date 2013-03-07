@@ -1,3 +1,18 @@
+#
+# some nice things to remember..
+#
+# =foo expands to $PATH/foo
+#
+# !(^|$|:#) expands to arguments of previous command
+#
+# filename(<tab> expands 
+#
+# zmv '(*).mp3' '$1.wma'
+#
+# zcalc
+#
+#
+
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
@@ -258,6 +273,8 @@ export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # history settings
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 unsetopt correct_all
 unsetopt share_history
 setopt inc_append_history
@@ -430,7 +447,7 @@ function gh_checkout {
     if [[ -d $WORK_DIR ]]; then
         ( cd $WORK_DIR && git pull )
     else
-        git clone ssh://git@github.com/roobert/dotfiles $WORK_DIR
+        git clone ssh://git@github.com/roobert/$REPOS $WORK_DIR
     fi
 }
 
