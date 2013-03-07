@@ -482,6 +482,8 @@ function gh_checkin {
 
         SRC_FILE=`echo $file | sed "s|$WORK_DIR/||"`
 
+        echo "# < $file"
+        echo "# > $SOURCE_DIR/$SRC_FILE"
         # display a diff of changed files
         diff $file $SOURCE_DIR/$SRC_FILE
 
