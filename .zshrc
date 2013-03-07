@@ -329,7 +329,7 @@ setopt extended_glob
 
 function die {
     echo $1
-    return 1
+    exit 1
 }
 
 
@@ -441,13 +441,11 @@ function gh_checkout {
     REPOS="$1"
     TMP_DIR="$HOME/tmp"
 
-    [[ ! -d $TMP_DIR ]] && die "no such directory \$TMP_DIR: $TMPDIR"
-
     # either clone or update repo depending on whether it's already checked out
-    if [[ -d $WORK_DIR ]]; then
-        ( cd $WORK_DIR && git pull )
+    if [[ -d $TMP_DIR/$REPOS ]]; then
+        ( cd $TMP_DIR/$REPOS && git pull )
     else
-        git clone ssh://git@github.com/roobert/$REPOS $WORK_DIR
+        git clone ssh://git@github.com/roobert/$REPOS $TMP_DIR/$REPOS
     fi
 }
 
