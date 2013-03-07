@@ -227,6 +227,10 @@ alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
 
+# connect to os X and login to vagrant instances
+alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
+alias vpa="ssh rpro -t 'cd vagrant-puppet-client; vagrant ssh'"
+
 # stuff in ~/bin
 alias f="r_find"
 alias fw="r_find_wild"
