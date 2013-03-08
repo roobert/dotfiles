@@ -19,6 +19,7 @@ if [ ! -n "$PS1" ]; then return; fi
 # bookmarks! https://github.com/flavio/jump
 if type jump-bin 2>&1 > /dev/null; then
     source `jump-bin --zsh-integration`
+    alias j="jump"
 fi
 
 # stuff i like from oh-my-zsh: lib/grep.zsh lib/spectrum.zsh lib/completion.zsh? plugins/vi-mode plugins/git plugins/nyan
