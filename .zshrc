@@ -16,6 +16,11 @@
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
+# bookmarks! https://github.com/flavio/jump
+if type jump-bin 2>&1 > /dev/null; then
+    `jump-bin --bash-integration`/shell_driver
+fi
+
 # stuff i like from oh-my-zsh: lib/grep.zsh lib/spectrum.zsh lib/completion.zsh? plugins/vi-mode plugins/git plugins/nyan
 # this stuff has now been merged into zshrc.. keep list here for future reference
 
