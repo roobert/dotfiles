@@ -438,6 +438,8 @@ function gh_install {
     | tar -xzv --strip-components 1 --exclude=README.md $EXTRA_TAR_OPTS
 }
 
+alias gh_update="gh_install"
+
 # Examples:
 #
 #   gh_checkout dotfiles
