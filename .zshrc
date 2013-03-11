@@ -243,7 +243,6 @@ alias vim="vim -T xterm-256color"
 alias screen="TERM=xterm screen"
 alias ls="ls --color=yes"
 alias ssh="ssh -t" # force-allocate pseudo-tty
-alias grep="egrep --exclude-dir=\.svn -n"
 alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
@@ -513,6 +512,14 @@ function install_common_tools {
 function install_common_tools_osx {
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
     brew install zsh coreutils wget
+}
+
+function p {
+    ps axu | grep -v puppet | grep $*
+}
+
+function g {
+   egrep --exclude-dir=\.svn $* | grep -v grep
 }
 
 # NOTE: moved this to the bottom since it may break other stuff.. (ordering matters!)
