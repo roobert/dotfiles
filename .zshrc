@@ -335,7 +335,7 @@ setopt extended_glob
 
 function die {
     echo $1
-    exit 1
+    return 1
 }
 
 
