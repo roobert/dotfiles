@@ -248,6 +248,7 @@ alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
 alias pa="puppet agent --onetime --no-daemonize -v"
+alias pt="puppet_alltags -f"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
