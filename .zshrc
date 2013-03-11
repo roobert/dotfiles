@@ -429,6 +429,9 @@ function gh_install {
 
             EXTRA_TAR_OPTS="-C $HOME/bin"
         ;;
+        dotfiles)
+            true
+        ;;
         *)
             die "unknown repository: $REPOS"
         ;;
