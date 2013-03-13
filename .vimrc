@@ -89,6 +89,9 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
 command Wq WQ
 
+" include _ as a word boundary
+set iskeyword-=_
+
 " expert difficulty
 "noremap <Up> <NOP>
 "noremap <Down> <NOP>
