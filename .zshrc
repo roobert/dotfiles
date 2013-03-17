@@ -250,6 +250,7 @@ alias pa="puppet agent --onetime --no-daemonize -v"
 alias pt="puppet_alltags -f"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
+alias am="alsamixer"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
