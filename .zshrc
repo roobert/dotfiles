@@ -473,6 +473,7 @@ function gh_push {
         return 1
     fi
 
+    # FIXME: perhaps this should just be `pwd`.. how can we test `pwd` is actually the desired $SOURCE_DIR?
     # determine where to copy files to based on parameter
     case $REPOS in
         dotfiles)
@@ -533,7 +534,7 @@ function install_common_tools_osx {
 }
 
 function p {
-    ps axu | grep -v puppet | grep $*
+    ps axu | grep -v grep | grep $*
 }
 
 function g {
