@@ -400,7 +400,6 @@ function update_dotfiles_adm_user {
 
             else
                 die "file '$dotfile' has unknown status: $dotfile_status"
-
             fi
         done
     done
@@ -488,13 +487,7 @@ function gh_push {
     # checkout or update repository
     gh_clone $REPOS
 
-    #DOTFILES=(`find $WORK_DIR -type f -not -wholename \"$WORK_DIR/.git/*\" -not -iwholename \"$WORK_DIR/.git\" -not -wholename \"$WORK_DIR/README.md\"`)
     DOTFILES=( $WORK_DIR/.*/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
-
-    #TMP_ZIP=`mktemp XXXXX.zip`
-    #curl -s https://nodeload.github.com/roobert/dotfiles/zip/master > $TMP_ZIP
-    #DOTFILES=`unzip -qqql $TMP_ZIP | cut -d '/' -f 2- | egrep -v '^$|README.md'` # quiet quiet quiet! suppress list header from unzip
-    #rm $TMP_ZIP
 
     # for each file that has been checked out, copy over it with file from $SOURCE_DIR
     for old_file in $DOTFILES; do
