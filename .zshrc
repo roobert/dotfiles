@@ -420,38 +420,36 @@ function update_dotfiles_adm_user {
 
 # Examples:
 #
-#   gh_install dotfiles
-#   gh_install bin
+#   gh_fetch <repo> <path>
 #
-function gh_install {
-    REPOS="$1"
-
-    case $REPOS in
-        bin)
-            [[ ! -d ~/bin ]] && ( mkdir -p ~/bin || die "$HOME/bin does not exist and could not be created!" )
-
-            EXTRA_TAR_OPTS="-C $HOME/bin"
-        ;;
-        dotfiles)
-            true
-        ;;
-        *)
-            die "unknown repository: $REPOS"
-        ;;
-    esac
-
-    curl -sL https://github.com/roobert/$REPOS/tarball/master \
-    | tar -xzv --strip-components 1 --exclude=README.md $EXTRA_TAR_OPTS
-}
-
-alias gh_update="gh_install"
+#function gh_fetch {
+#
+#    REPOS="$1"
+#    TARGET="$2"
+#
+#    if [[ $# -eq 0 ]]; then
+#        die "$0 <repo> <path>"
+#    fi
+#
+#    if [[ $# > 2 ]]; then
+#        die "too many arguments!"
+#    fi
+#
+#    if [[ $TARGET == "" ]]l then
+#        TARGET="."
+#    else
+#        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || die "target directory does not exist and could not be created: $TARGET" )
+#    fi
+#
+#    curl -sL https://github.com/roobert/$REPOS/tarball/master \
+#    | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
+#}
 
 # Examples:
 #
-#   gh_checkout dotfiles
-#   gh_checkout bin
+#   gh_pull <repo>
 #
-function gh_checkout {
+function gh_clone {
     REPOS="$1"
     TMP_DIR="$HOME/tmp"
 
@@ -465,23 +463,22 @@ function gh_checkout {
 
 # Examples:
 #
-#    gh_checkin dotfiles
-#    gh_checkin bin
+#    gh_push <repo>
 #
-function gh_checkin {
+function gh_push {
 
     # avant-garde indenting
-    REPOS="$1"
-    TMP_DIR="$HOME/tmp"
+       REPOS="$1"
+     TMP_DIR="$HOME/tmp"
     WORK_DIR="$TMP_DIR/$REPOS"
 
     # determine where to copy files to based on parameter
     case $REPOS in
         dotfiles)
-            SOURCE_DIR=~
+            SOURCE_DIR=~/
         ;;
         bin)
-            SOURCE_DIR=~/bin
+            SOURCE_DIR=~/bin/
         ;;
         *)
             die "unknown repository: $REPOS"
@@ -489,24 +486,41 @@ function gh_checkin {
     esac
 
     # checkout or update repository
-    gh_checkout $REPOS
+    gh_clone $REPOS
+
+    #DOTFILES=(`find $WORK_DIR -type f -not -wholename \"$WORK_DIR/.git/*\" -not -iwholename \"$WORK_DIR/.git\" -not -wholename \"$WORK_DIR/README.md\"`)
+    DOTFILES=( $WORK_DIR/.*/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
+
+    #TMP_ZIP=`mktemp XXXXX.zip`
+    #curl -s https://nodeload.github.com/roobert/dotfiles/zip/master > $TMP_ZIP
+    #DOTFILES=`unzip -qqql $TMP_ZIP | cut -d '/' -f 2- | egrep -v '^$|README.md'` # quiet quiet quiet! suppress list header from unzip
+    #rm $TMP_ZIP
 
     # for each file that has been checked out, copy over it with file from $SOURCE_DIR
-    for file in `find $WORK_DIR -type f -not -wholename "$WORK_DIR/.git/*" -not -iwholename "$WORK_DIR/.git"`; do
+    for old_file in $DOTFILES; do
 
-        SRC_FILE=`echo $file | sed "s|$WORK_DIR/||"`
+        # skip directories
+        [[ -d $old_file ]] && continue
 
-        echo "# < $file"
-        echo "# > $SOURCE_DIR/$SRC_FILE"
-        # display a diff of changed files
-        diff $file $SOURCE_DIR/$SRC_FILE
+        new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
+
+        # FIXME: it's ineffecient to diff twice..
+        diff "$old_file" "$new_file" > /dev/null 2>&1
 
         # only copy changed files..
-        [[ $? != 0 ]] && echo cp -v $SOURCE_DIR/$SRC_FILE $WORK_DIR
+        if [[ $? != 0 ]]; then
+            echo "# < \"$old_file\""
+            echo "# > \"$new_file\""
+
+            # display a diff of changed files (repeat of previous diff)
+            diff "$old_file" "$new_file"
+
+            cp -vr "$new_file" "$WORK_DIR"
+        fi
     done
 
     # commit and push
-    echo "( cd $WORK_DIR && git commit -am 'updated' && git push )"
+    ( cd $WORK_DIR && git commit -am 'updated' && git push )
 }
 
 #
