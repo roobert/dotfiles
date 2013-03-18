@@ -502,7 +502,11 @@ function gh_push {
             echo "# > \"$new_file\""
 
             # display a diff of changed files (repeat of previous diff)
-            diff "$old_file" "$new_file"
+            if type colordiff > /dev/null 2>&1; then
+                colordiff "$old_file" "$new_file" # mmm sexy!
+            else
+                diff "$old_file" "$new_file"
+            fi
 
             cp -vr "$new_file" "$old_file"
         fi
