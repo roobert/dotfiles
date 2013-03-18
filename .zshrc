@@ -479,13 +479,15 @@ function gh_push {
     # checkout or update repository
     gh_clone $REPOS
 
-    DOTFILES=( $WORK_DIR/.**/*~$WORK_DIR/.git/* $WORK_DIR/.**~$WORK_DIR/.git )
+    DOTFILES=( $WORK_DIR/.*/**/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
 
     # for each file that has been checked out, copy over it with file from $SOURCE_DIR
     for old_file in $DOTFILES; do
 
         # skip directories
-        [[ -d $old_file ]] && continue
+        if [[ -d $old_file ]]; then
+            continue
+        fi
 
         new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
 
