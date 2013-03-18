@@ -332,10 +332,6 @@ bindkey -M vicmd "$" end-of-line
 bindkey -M viins "^[[7~" beginning-of-line # home
 bindkey -M viins "^[[8~" end-of-line # end
 
-
-# enable advanced globbing
-setopt extended_glob
-
 # enable advanced globbing
 setopt extended_glob
 
