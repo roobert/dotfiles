@@ -473,25 +473,13 @@ function gh_push {
         return 1
     fi
 
-    # FIXME: perhaps this should just be `pwd`.. how can we test `pwd` is actually the desired $SOURCE_DIR?
-    # determine where to copy files to based on parameter
-    case $REPOS in
-        dotfiles)
-            SOURCE_DIR=~/
-        ;;
-        bin)
-            SOURCE_DIR=~/bin/
-        ;;
-        *)
-            echo "unknown repository: $REPOS"
-            return 1
-        ;;
-    esac
+    # determine where to copy files from
+    SOURCE_DIR="`pwd`/"
 
     # checkout or update repository
     gh_clone $REPOS
 
-    DOTFILES=( $WORK_DIR/.*/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
+    DOTFILES=( $WORK_DIR/.**/*~$WORK_DIR/.git/* $WORK_DIR/.**~$WORK_DIR/.git )
 
     # for each file that has been checked out, copy over it with file from $SOURCE_DIR
     for old_file in $DOTFILES; do
@@ -500,6 +488,11 @@ function gh_push {
         [[ -d $old_file ]] && continue
 
         new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
+
+        if [[ ! -f $new_file ]]; then
+            echo "# file does not exist: $new_file (skipping)"
+            continue
+        fi
 
         # FIXME: it's ineffecient to diff twice..
         diff "$old_file" "$new_file" > /dev/null 2>&1
