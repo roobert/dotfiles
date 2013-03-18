@@ -508,7 +508,7 @@ function gh_push {
         diff "$old_file" "$new_file" > /dev/null 2>&1
 
         # only copy changed files..
-        if [[ $? != 0 ]]; then
+        if [[ $? -ne 0 ]]; then
             echo "# < \"$old_file\""
             echo "# > \"$new_file\""
 
