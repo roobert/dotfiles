@@ -336,12 +336,6 @@ bindkey -M viins "^[[8~" end-of-line # end
 # enable advanced globbing
 setopt extended_glob
 
-function die {
-    echo $1
-    return 1
-}
-
-
 # enable advanced globbing
 setopt extended_glob
 
@@ -399,7 +393,8 @@ function update_dotfiles_adm_user {
                 UPDATED_DOTFILES=($dotfile $UPDATED_DOTFILES)
 
             else
-                die "file '$dotfile' has unknown status: $dotfile_status"
+                echo "file '$dotfile' has unknown status: $dotfile_status"
+                return 1
             fi
         done
     done
@@ -427,17 +422,19 @@ function update_dotfiles_adm_user {
 #    TARGET="$2"
 #
 #    if [[ $# -eq 0 ]]; then
-#        die "$0 <repo> <path>"
+#        echo "$0 <repo> <path>"
+#        return 1
 #    fi
 #
 #    if [[ $# > 2 ]]; then
-#        die "too many arguments!"
+#        echo "too many arguments!"
+#        return 1
 #    fi
 #
 #    if [[ $TARGET == "" ]]l then
 #        TARGET="."
 #    else
-#        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || die "target directory does not exist and could not be created: $TARGET" )
+#        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || ( echo "target directory does not exist and could not be created: $TARGET" && return 1 ))
 #    fi
 #
 #    curl -sL https://github.com/roobert/$REPOS/tarball/master \
@@ -471,6 +468,11 @@ function gh_push {
      TMP_DIR="$HOME/tmp"
     WORK_DIR="$TMP_DIR/$REPOS"
 
+    if [[ $# -eq 0 ]]; then
+        echo "$0 <repository>"
+        return 1
+    fi
+
     # determine where to copy files to based on parameter
     case $REPOS in
         dotfiles)
@@ -480,7 +482,8 @@ function gh_push {
             SOURCE_DIR=~/bin/
         ;;
         *)
-            die "unknown repository: $REPOS"
+            echo "unknown repository: $REPOS"
+            return 1
         ;;
     esac
 
