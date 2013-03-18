@@ -515,7 +515,7 @@ function gh_push {
             # display a diff of changed files (repeat of previous diff)
             diff "$old_file" "$new_file"
 
-            cp -vr "$new_file" "$WORK_DIR"
+            cp -vr "$new_file" "$old_file"
         fi
     done
 
