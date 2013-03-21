@@ -263,7 +263,6 @@ alias hl="r_highlight"
 alias highlight="r_highlight"
 
 # configure some stuff
-export PSARGS="-ax"
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
 export GREP_OPTIONS='--color=auto'
@@ -293,6 +292,12 @@ setopt hist_save_no_dups
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
+
+# ps stuff
+export PS_FORMAT="user,pid,args"
+alias ps='ps w'                   # ps - always assume unlimited width
+alias p='ps axcwf'                # p  - display all, 
+alias pu='ps -o user,pid,command' # pu
 
 # all taken from: https://github.com/tureba/myconfigfiles/blob/master/zshrc
 # this fixes switching between vi-modes
@@ -441,7 +446,7 @@ function update_dotfiles_adm_user {
 #
 #   gh_pull <repo>
 #
-function gh_clone {
+function gh_pull {
     REPOS="$1"
     TMP_DIR="$HOME/tmp"
 
@@ -473,7 +478,7 @@ function gh_push {
     SOURCE_DIR="`pwd`/"
 
     # checkout or update repository
-    gh_clone $REPOS
+    gh_pull $REPOS
 
     # FIXME: files with spaces in get broken up..
     DOTFILES=( $WORK_DIR/.*/**/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
@@ -527,10 +532,6 @@ function install_common_tools {
 function install_common_tools_osx {
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
     brew install zsh coreutils wget
-}
-
-function p {
-    ps axu | grep -v grep | grep $*
 }
 
 function g {
