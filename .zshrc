@@ -213,20 +213,19 @@ if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
-# xterm titlebars
+# terminal settings
 case $TERM in
-    xterm*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\007"'
-    ;;
-    screen)
-        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\033\\"'
+    rxvt|*term)
+        precmd() {
+            print -Pn "\e]0;%m:%~\a"
+        }
+        preexec() {
+            print -Pn "\e]0;$1\a"
+        }
+
+      TERM="xterm-256color"
     ;;
 esac
-
-# set term
-if [ "$TERM" = "xterm" ] || [ "$TERM" = "mlterm" ] || [ "$TERM" = "rxvt-unicode-256color" ]; then
-  TERM="xterm-256color"
-fi
 
 # include my paths in path
 MY_PATHS=($HOME/bin /opt/semantico/bin)
@@ -251,6 +250,8 @@ alias pt="puppet_alltags -f"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
 alias am="alsamixer"
+alias empty_trash="rm -rf ~/.local/share/Trash"
+alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
@@ -267,9 +268,6 @@ export PS_FORMAT="user,pid,args"
 alias ps='ps w'                   # ps - always assume unlimited width
 alias p='ps axcwf'                # p  - display all, 
 alias pu='ps -o user,pid,command' # pu
-
-# rubygems goodness
-alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
