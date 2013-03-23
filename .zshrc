@@ -526,7 +526,7 @@ function gh_push {
 #
 
 function install_common_tools {
-    sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep
+    sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
 
 function install_common_tools_osx {
