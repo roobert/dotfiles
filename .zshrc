@@ -379,7 +379,7 @@ function update_dotfiles_adm_user {
     # commit files (one commit per file is inefficient but whatever..)
     for branch in $BRANCHES; do
         OLD_IFS="$IFS"
-        IFS='\n'
+        IFS=$'\n'
 
         for svn_entry in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`; do
 
