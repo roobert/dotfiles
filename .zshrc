@@ -262,6 +262,15 @@ alias fw="r_find_wild"
 alias hl="r_highlight"
 alias highlight="r_highlight"
 
+# ps stuff
+export PS_FORMAT="user,pid,args"
+alias ps='ps w'                   # ps - always assume unlimited width
+alias p='ps axcwf'                # p  - display all, 
+alias pu='ps -o user,pid,command' # pu
+
+# rubygems goodness
+alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
+
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
@@ -292,12 +301,6 @@ setopt hist_save_no_dups
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
-
-# ps stuff
-export PS_FORMAT="user,pid,args"
-alias ps='ps w'                   # ps - always assume unlimited width
-alias p='ps axcwf'                # p  - display all, 
-alias pu='ps -o user,pid,command' # pu
 
 # all taken from: https://github.com/tureba/myconfigfiles/blob/master/zshrc
 # this fixes switching between vi-modes
