@@ -1,2 +1,3 @@
 vmware-user &
+eval $(gnome-keyring-daemon --start) &
 exec ssh-agent notion
