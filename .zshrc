@@ -213,20 +213,19 @@ if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
-# xterm titlebars
+# terminal settings
 case $TERM in
-    xterm*)
-        PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\007"'
-    ;;
-    screen)
-        PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\033\\"'
+    rxvt|*term)
+        precmd() {
+            print -Pn "\e]0;%m:%~\a"
+        }
+        preexec() {
+            print -Pn "\e]0;$1\a"
+        }
+
+      TERM="xterm-256color"
     ;;
 esac
-
-# set term
-if [ "$TERM" = "xterm" ] || [ "$TERM" = "mlterm" ] || [ "$TERM" = "rxvt-unicode-256color" ]; then
-  TERM="xterm-256color"
-fi
 
 # include my paths in path
 MY_PATHS=($HOME/bin /opt/semantico/bin)
@@ -251,6 +250,8 @@ alias pt="puppet_alltags -f"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
 alias am="alsamixer"
+alias empty_trash="rm -rf ~/.local/share/Trash"
+alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
@@ -261,6 +262,12 @@ alias f="r_find"
 alias fw="r_find_wild"
 alias hl="r_highlight"
 alias highlight="r_highlight"
+
+# ps stuff
+export PS_FORMAT="user,pid,args"
+alias ps='ps w'                   # ps - always assume unlimited width
+alias p='ps axcwf'                # p  - display all, 
+alias pu='ps -o user,pid,command' # pu
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
@@ -292,12 +299,6 @@ setopt hist_save_no_dups
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
-
-# ps stuff
-export PS_FORMAT="user,pid,args"
-alias ps='ps w'                   # ps - always assume unlimited width
-alias p='ps axcwf'                # p  - display all, 
-alias pu='ps -o user,pid,command' # pu
 
 # all taken from: https://github.com/tureba/myconfigfiles/blob/master/zshrc
 # this fixes switching between vi-modes
@@ -373,6 +374,9 @@ function update_dotfiles_adm_user {
         done
     done
 
+    UPDATED_DOTFILES=""
+    NEW_DOTFILES=""
+
     # commit files (one commit per file is inefficient but whatever..)
     for branch in $BRANCHES; do
         OLD_IFS="$IFS"
@@ -396,8 +400,6 @@ function update_dotfiles_adm_user {
             fi
         done
     done
-
-    IFS="$OLD_IFS"
 
     # add any new files/dirs to svn
     if [ ! -z "$NEW_DOTFILES" ]; then
@@ -459,12 +461,13 @@ function gh_pull {
 
 # Examples:
 #
-#    gh_push <repo>
+#    gh_push <repo> -f
 #
 function gh_push {
 
     # avant-garde indenting
        REPOS="$1"
+       FORCE="$2"
      TMP_DIR="$HOME/tmp"
     WORK_DIR="$TMP_DIR/$REPOS"
 
@@ -512,12 +515,20 @@ function gh_push {
                 diff "$old_file" "$new_file"
             fi
 
-            cp -vr "$new_file" "$old_file"
+            if [[ "$FORCE" = "-f" ]]; then
+                cp -vr "$new_file" "$old_file"
+            else
+                echo
+                echo "# not pushing changes as -f wasn't specified"
+                echo
+            fi
         fi
     done
 
-    # commit and push
-    ( cd $WORK_DIR && git commit -am 'updated' && git push )
+    if [[ "$FORCE" = "-f" ]]; then
+        # commit and push
+        ( cd $WORK_DIR && git commit -am 'updated' && git push )
+    fi
 }
 
 #
@@ -525,7 +536,7 @@ function gh_push {
 #
 
 function install_common_tools {
-    sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep
+    sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
 
 function install_common_tools_osx {
