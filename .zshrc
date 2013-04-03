@@ -269,6 +269,9 @@ alias ps='ps w'                   # ps - always assume unlimited width
 alias p='ps axcwf'                # p  - display all, 
 alias pu='ps -o user,pid,command' # pu
 
+# subversion
+alias si='svn ci -m'
+
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
