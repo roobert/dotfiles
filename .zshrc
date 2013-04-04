@@ -245,13 +245,18 @@ alias ssh="ssh -t" # force-allocate pseudo-tty
 alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
-alias pa="puppet agent --onetime --no-daemonize -v"
-alias pt="puppet_alltags -f"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
 alias am="alsamixer"
 alias empty_trash="rm -rf ~/.local/share/Trash"
 alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
+
+# puppet
+alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice.*$\)/\1\n/'"
+alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice.*$\)/\1\n/'"
+alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
+alias pa="puppet_alltags"
+alias pn="puppet_noop"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
