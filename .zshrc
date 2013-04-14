@@ -652,7 +652,10 @@ bookmarks reload
 compdef _path_files cd
 
 # initialize rbenv
-eval "$(rbenv init -)"
+type rbenv > /dev/null 2>&1
+if [[ $? -eq 0 ]]; then
+  eval "$(rbenv init -)"
+fi
 
 # check if my bin/ is checked out
 if [[ ! -x "$HOME/bin/r_find" ]]; then
