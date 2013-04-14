@@ -601,7 +601,9 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-eval "$(rbenv init -)"
+###
+### bookmark stuff
+###
 
 function bookmarks {
 
@@ -649,5 +651,13 @@ alias br="bookmarks reload"
 
 bookmarks reload
 
+###
+### misc.
+###
+
 # list files as well as dirs when cd tab completing
 compdef _path_files cd
+
+# initialize rbenv
+eval "$(rbenv init -)"
+
