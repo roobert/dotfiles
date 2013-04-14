@@ -281,7 +281,6 @@ export EDITOR="vim"
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export SEMANTICO_SVN_SERVER="https://svn.semantico.net/repos/"
-alias svn.sem="svn $1 $SEMANTICO_SVN_SERVER/$2"
 
 # subversion
 alias si='svn ci -m'
@@ -660,3 +659,13 @@ eval "$(rbenv init -)"
 if [[ ! -x "$HOME/bin/r_find" ]]; then
   echo "# install bin files: gh_fetch bin bin"
 fi
+
+
+function svn.sem {
+  if [[ $# -ne '2' ]]; then
+    echo "$0 <command> <repos>"
+    die  "e.g: $0 checkout systems"
+  fi
+
+  svn $1 $SEMANTICO_SVN_SERVER/$2
+}
