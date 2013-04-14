@@ -648,3 +648,6 @@ alias b="bookmarks"
 alias br="bookmarks reload"
 
 bookmarks reload
+
+# list files as well as dirs when cd tab completing
+compdef _path_files cd
