@@ -16,12 +16,6 @@
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
-# bookmarks! https://github.com/flavio/jump
-if type jump-bin 2>&1 > /dev/null; then
-    source `jump-bin --zsh-integration`
-    alias j="jump"
-fi
-
 # stuff i like from oh-my-zsh: lib/grep.zsh lib/spectrum.zsh lib/completion.zsh? plugins/vi-mode plugins/git plugins/nyan
 # this stuff has now been merged into zshrc.. keep list here for future reference
 
@@ -358,6 +352,7 @@ bindkey -M viins "^[[8~" end-of-line # end
 setopt extended_glob
 
 # useful function to update zshrc for adm user
+# FIXME: simplify by doing: cd to trunk/, gh_fetch, sf . both -f, svn-addall; svn commit
 function update_dotfiles_adm_user {
 
     BRANCHES=(trunk branches/testing branches/production)
@@ -605,6 +600,8 @@ zle -N zle-keymap-select
 ### bookmark stuff
 ###
 
+BOOKMARKS="$HOME/.bookmarks-zsh"
+
 function bookmarks {
 
   if [[ $# -eq 0 ]]; then
@@ -612,13 +609,13 @@ function bookmarks {
     # list bookmarks
     echo "# bookmarks"
     bookmarks reload
-    hash -d
+    hash -d | column -t -s '='
 
     return
   fi
 
   if [[ $1 = 'reload' ]]; then
-    hash -d -r && touch ~/.zshmarks && source ~/.zshmarks
+    hash -d -r && touch $BOOKMARKS && source $BOOKMARKS
 
     return
   fi
@@ -643,7 +640,7 @@ function bookmarks {
   fi
 
   echo "# adding bookmark '$name': `pwd`"
-  echo "hash -d $name=\"`pwd`\"" >> ~/.zshmarks && source ~/.zshmarks
+  echo "hash -d $name=\"`pwd`\"" >> $BOOKMARKS && bookmarks reload
 }
 
 alias b="bookmarks"
