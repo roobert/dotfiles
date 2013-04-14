@@ -654,7 +654,7 @@ compdef _path_files cd
 # initialize rbenv
 eval "$(rbenv init -)"
 
-# check if bin is checked out, if not, checkout!
+# check if my bin/ is checked out
 if [[ ! -x "$HOME/bin/r_find" ]]; then
   echo "# install bin files: gh_fetch bin bin"
 fi
