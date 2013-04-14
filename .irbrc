@@ -3,11 +3,6 @@ require 'rubygems'
 require 'ap' # Awesome Print
 require 'net-http-spy' # Print information about any HTTP requests being made
 
-# ASCII table views
-require 'hirb/import_object'
-Hirb.enable
-extend Hirb::Console
-
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:AUTO_INDENT]  = false
 
@@ -33,7 +28,6 @@ Wirble::Colorize.colors = colors
 # Bash-like tab completion
 require 'bond'; Bond.start
 
-
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 class Object
@@ -47,5 +41,7 @@ class Object
    end
 end
 
-# to handle mistyping - "did you mean ..."
-require 'guessmethod'
+puts 'loaded .irbrc!'
+
+require 'boson/console'
+

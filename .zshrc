@@ -245,18 +245,13 @@ alias ssh="ssh -t" # force-allocate pseudo-tty
 alias haste="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
+alias pa="puppet agent --onetime --no-daemonize -v"
+alias pt="puppet_alltags -f"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
 alias am="alsamixer"
 alias empty_trash="rm -rf ~/.local/share/Trash"
 alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
-
-# puppet
-alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice.*$\)/\1\n/'"
-alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice.*$\)/\1\n/'"
-alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
-alias pa="puppet_alltags"
-alias pn="puppet_noop"
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
@@ -274,8 +269,12 @@ alias ps='ps w'                   # ps - always assume unlimited width
 alias p='ps axcwf'                # p  - display all, 
 alias pu='ps -o user,pid,command' # pu
 
-# subversion
-alias si='svn ci -m'
+# puppet
+alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice.*$\)/\1\n/'"
+alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice.*$\)/\1\n/'"
+alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
+alias pa="puppet_alltags"
+alias pn="puppet_noop
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
@@ -284,6 +283,10 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 export SEMANTICO_SVN_SERVER="https://svn.semantico.net/repos/"
 alias svn.sem="svn $1 $SEMANTICO_SVN_SERVER/$2"
+
+# subversion
+alias si='svn ci -m'
+
 
 # Prettier directory colours
 # https://github.com/trapd00r/LS_COLORS
@@ -554,6 +557,15 @@ function install_common_tools_osx {
 
 function g {
    egrep --exclude-dir=\.svn $* | grep -v grep
+}
+
+function help {
+    # list useful stuff like aliases and functions..
+}
+
+# ask kill
+function ak {
+    PS_LIST=`ps ax|grep $1`
 }
 
 # NOTE: moved this to the bottom since it may break other stuff.. (ordering matters!)

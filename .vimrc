@@ -28,11 +28,13 @@
 let &t_Co=256
 
 " Solarized settings
-colorscheme solarized
-set background=dark
-let g:solarized_termcolors = 256
-let g:solarized_underline = 0
-let g:solarized_contrast = "high"
+"colorscheme solarized
+"set background=dark
+"let g:solarized_termcolors = 256
+"let g:solarized_underline = 0
+"let g:solarized_contrast = "high"
+
+colorscheme molokai
 
 " colorscheme jellybeans
 
