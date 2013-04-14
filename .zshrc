@@ -280,7 +280,6 @@ export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
-export SEMANTICO_SVN_SERVER="https://svn.semantico.net/repos/"
 
 # subversion
 alias si='svn ci -m'
@@ -563,7 +562,7 @@ function install_common_tools {
 
 function install_ruby_tools {
   sudo apt-get install rbenv ruby-build
-  gem install awesome_print net-http-spy wirble bond boson
+  gem install awesome_print net-http-spy wirble bond boson looksee
 }
 
 function install_common_tools_osx {
@@ -660,6 +659,11 @@ if [[ ! -x "$HOME/bin/r_find" ]]; then
   echo "# install bin files: gh_fetch bin bin"
 fi
 
+###
+### semantico svn stuff
+###
+
+export SEMANTICO_SVN_SERVER="https://svn.semantico.net/repos/"
 
 function svn.sem {
   if [[ $# -ne '2' ]]; then

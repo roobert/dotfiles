@@ -1,12 +1,8 @@
 require 'rubygems'
 
-begin
-    require 'ap' # Awesome Print
-    require 'net-http-spy' # Print information about any HTTP requests being made
-rescue => e
-    puts e
-    puts '!'
-end
+require 'ap' # Awesome Print
+require 'net-http-spy' # Print information about any HTTP requests being made
+require 'looksee'
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:AUTO_INDENT]  = false
@@ -37,17 +33,17 @@ Bond.start
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 class Object
-  # what methods are here that are not present on basic objects?
   def interesting_methods
-    (self.methods - Object.new.methods).sort
+    ap (self.methods - Object.new.methods).sort
   end
 
-   def which_method(method_name)
-      self.method(method_name.to_sym)
-   end
+  alias_method :show_methods,  :interesting_methods
+  alias_method :print_methods, :interesting_methods
+  alias_method :list_methods,  :interesting_methods
 end
 
-puts 'loaded .irbrc!'
-
 require 'boson/console'
+
+# if you don't see this then irbrc silently failed somewhere, try: ruby ~/.irbrc
+puts 'loaded .irbrc!'
 
