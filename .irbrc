@@ -1,7 +1,12 @@
 require 'rubygems'
 
-require 'ap' # Awesome Print
-require 'net-http-spy' # Print information about any HTTP requests being made
+begin
+    require 'ap' # Awesome Print
+    require 'net-http-spy' # Print information about any HTTP requests being made
+rescue => e
+    puts e
+    puts '!'
+end
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:AUTO_INDENT]  = false
@@ -26,12 +31,13 @@ colors = Wirble::Colorize.colors.merge({
 Wirble::Colorize.colors = colors
 
 # Bash-like tab completion
-require 'bond'; Bond.start
+require 'bond'
+Bond.start
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
 class Object
-  # what methods are ghere that are not present on basic objects?
+  # what methods are here that are not present on basic objects?
   def interesting_methods
     (self.methods - Object.new.methods).sort
   end

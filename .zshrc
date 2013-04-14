@@ -550,6 +550,11 @@ function install_common_tools {
     sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
 
+function install_ruby_tools {
+    sudo apt-get install rbenv ruby-build
+    gem install awesome_print net-http-spy wirble bond boson
+}
+
 function install_common_tools_osx {
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
     brew install zsh coreutils wget
