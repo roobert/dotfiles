@@ -276,6 +276,11 @@ alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
 alias pa="puppet_alltags"
 alias pn="puppet_noop"
 
+# reload zshrc
+alias rzsh="exec zsh -l"
+alias rz="rzsh"
+alias zr="rz"
+
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
@@ -429,30 +434,34 @@ function update_dotfiles_adm_user {
 #
 #   gh_fetch <repo> <path>
 #
-#function gh_fetch {
-#
-#    REPOS="$1"
-#    TARGET="$2"
-#
-#    if [[ $# -eq 0 ]]; then
-#        echo "$0 <repo> <path>"
-#        return 1
-#    fi
-#
-#    if [[ $# > 2 ]]; then
-#        echo "too many arguments!"
-#        return 1
-#    fi
-#
-#    if [[ $TARGET == "" ]]l then
-#        TARGET="."
-#    else
-#        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || ( echo "target directory does not exist and could not be created: $TARGET" && return 1 ))
-#    fi
-#
-#    curl -sL https://github.com/roobert/$REPOS/tarball/master \
-#    | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
-#}
+function gh_fetch {
+
+    REPOS="$1"
+    TARGET="$2"
+
+    if [[ $# -eq 0 ]]; then
+        echo "$0 <repo> <path>"
+        return 1
+    fi
+
+    if [[ $# > 2 ]]; then
+        echo "too many arguments!"
+        return 1
+    fi
+
+    if [[ $TARGET = "" ]]; then
+        TARGET="."
+    else
+        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || ( echo "target directory does not exist and could not be created: $TARGET" && return 1 ))
+    fi
+
+    # FIXME: check to see if repo exists..
+
+    curl -sL https://github.com/roobert/$REPOS/tarball/master \
+    | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
+}
+
+alias gh_install="gh_fetch"
 
 # Examples:
 #
@@ -564,8 +573,14 @@ function g {
    egrep --exclude-dir=\.svn $* | grep -v grep
 }
 
+# list useful stuff like aliases and functions..
 function help {
-    # list useful stuff like aliases and functions..
+  echo "# functions"
+  echo "gh_pull"
+  echo "gh_push"
+  echo "gh_fetch"
+  echo "# aliases"
+  alias
 }
 
 # ask kill
@@ -587,3 +602,49 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 eval "$(rbenv init -)"
+
+function bookmarks {
+
+  if [[ $# -eq 0 ]]; then
+
+    # list bookmarks
+    echo "# bookmarks"
+    bookmarks reload
+    hash -d
+
+    return
+  fi
+
+  if [[ $1 = 'reload' ]]; then
+    hash -d -r && touch ~/.zshmarks && source ~/.zshmarks
+
+    return
+  fi
+
+#  if [[ $1 = 'rm' ]]; then
+#
+#    echo "# attempting to remove directory from bookmarks: `pwd`"
+#    sed -i "/.*\"`pwd`\"/d" ~/.zshmarks
+#
+#    bookmarks reload
+#
+#    return
+#  fi
+
+  if [[ $1 = '.' ]]; then
+
+    # set bookmark name to be current dir name
+    name="`basename $(pwd)`"
+  else
+    # set bookmark name manually
+    name="$1"
+  fi
+
+  echo "# adding bookmark '$name': `pwd`"
+  echo "hash -d $name=\"`pwd`\"" >> ~/.zshmarks && source ~/.zshmarks
+}
+
+alias b="bookmarks"
+alias br="bookmarks reload"
+
+bookmarks reload
