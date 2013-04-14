@@ -44,9 +44,9 @@ syntax enable
 
 " settings
 "set cursorline      " highlight line that cursor is on
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4   " work uses 'spaces' not tabs
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2   " work uses 'spaces' not tabs
 set expandtab       " make tabs spaces
 set showmatch       " show matching brackets
 set noautoindent
