@@ -22,14 +22,14 @@ if [ ! -n "$PS1" ]; then return; fi
 # checkout .oh-my-zsh if it doesn't exist
 #if [ ! -d "$HOME/.oh-my-zsh" ]; then
 #
-#    # check for git
-#    which git 2>&1 > /dev/null
+#  # check for git
+#  which git 2>&1 > /dev/null
 #
-#    if [ $? -eq 0 ]; then
-#        git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-#    else
-#        echo ".oh-my-zsh does not exist but cannot checkout since 'git' is not available"
-#    fi
+#  if [ $? -eq 0 ]; then
+#    git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+#  else
+#    echo ".oh-my-zsh does not exist but cannot checkout since 'git' is not available"
+#  fi
 #fi
 
 # initialize oh-my-zsh
@@ -51,23 +51,23 @@ if [ ! -n "$PS1" ]; then return; fi
 typeset -Ag FX FG BG
 
 FX=(
-    reset     "%{[00m%}"
-    bold      "%{[01m%}" no-bold      "%{[22m%}"
-    italic    "%{[03m%}" no-italic    "%{[23m%}"
-    underline "%{[04m%}" no-underline "%{[24m%}"
-    blink     "%{[05m%}" no-blink     "%{[25m%}"
-    reverse   "%{[07m%}" no-reverse   "%{[27m%}"
+  reset     "%{[00m%}"
+  bold      "%{[01m%}" no-bold      "%{[22m%}"
+  italic    "%{[03m%}" no-italic    "%{[23m%}"
+  underline "%{[04m%}" no-underline "%{[24m%}"
+  blink     "%{[05m%}" no-blink     "%{[25m%}"
+  reverse   "%{[07m%}" no-reverse   "%{[27m%}"
 )
 
 for color in {000..255}; do
-    FG[$color]="%{[38;5;${color}m%}"
-    BG[$color]="%{[48;5;${color}m%}"
+  FG[$color]="%{[38;5;${color}m%}"
+  BG[$color]="%{[48;5;${color}m%}"
 done
 
 # Show all 256 colors with color number
-function spectrum_ls() {
+function spectrum_ls {
   for code in {000..255}; do
-    print -P -- "$code: %F{$code}Test%f"
+  print -P -- "$code: %F{$code}Test%f"
   done
 }
 
@@ -87,12 +87,12 @@ fi
 ### .oh-my-zsh/lib/completion.zsh
 ###
 
-unsetopt menu_complete   # do not autoselect the first completion entry
+unsetopt menu_complete  # do not autoselect the first completion entry
 unsetopt flowcontrol
-setopt auto_menu         # show completion menu on succesive tab press
+setopt auto_menu        # show completion menu on succesive tab press
 setopt complete_in_word
 setopt always_to_end
-setopt sh_word_split     # don't retokenize variables on expansion WARNING: could this mess things up? is this the default for posix sh?
+setopt sh_word_split    # don't retokenize variables on expansion WARNING: could this mess things up? is this the default for posix sh?
 
 WORDCHARS=''
 
@@ -138,13 +138,13 @@ zstyle ':completion::complete:*' cache-path $ZSH/cache/
 
 # Don't complete uninteresting users
 zstyle ':completion:*:*:*:users' ignored-patterns \
-        adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
-        hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
-        mailman mailnull mldonkey mysql nagios \
-        named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
-        operator pcap postfix postgres privoxy pulse pvm quagga radvd \
-        rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
+  adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
+  dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+  hacluster haldaemon halt hsqldb ident junkbust ldap lp mail \
+  mailman mailnull mldonkey mysql nagios \
+  named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
+  operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+  rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs
 
 # ... unless we really want to.
 zstyle '*' single-ignored show
@@ -170,26 +170,26 @@ PWHERE="%{$FG[250]%}%~"
 PPROMPT="%{$FG[040]%}%#"
 
 case `whoami` in
-    rw|robw)
-        PUSER="%{$FG[119]%}%n"
+  rw|robw)
+    PUSER="%{$FG[119]%}%n"
 
-    ;;
-    robwadm)
-        PUSER="%{$FG[166]%}%n"
-        PPROMPT="%{$FG[202]%}%#"
-    ;;
-    root)
-        PUSER="%{$FG[161]%}%n"
-        PPROMPT="%{$FG[160]%}%#"
-    ;;
-    *)
-        PUSER="%{$FG[166]%}%n"
-        PPROMPT="%{$FG[165]%}%#"
-    ;;
+  ;;
+  robwadm)
+    PUSER="%{$FG[166]%}%n"
+    PPROMPT="%{$FG[202]%}%#"
+  ;;
+  root)
+    PUSER="%{$FG[161]%}%n"
+    PPROMPT="%{$FG[160]%}%#"
+  ;;
+  *)
+    PUSER="%{$FG[166]%}%n"
+    PPROMPT="%{$FG[165]%}%#"
+  ;;
 esac
 
 if [ "$HOST" = "disco" ]; then
-    PHOST="$FG[200]%}%m"
+  PHOST="$FG[200]%}%m"
 fi
 
 export PS1="$PUSER $PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
@@ -199,35 +199,35 @@ export PS1="$PUSER $PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
 ###
 
 if [ -d "$HOME/work/systems/pm" ]; then
-    export CDPATH=".:$HOME/work/systems/pm/:$HOME/work/systems/trunk"
+  export CDPATH=".:$HOME/work/systems/pm/:$HOME/work/systems/trunk"
 fi
 
 # if you've installed brew using coreutils on osx then prefer gnu 'ls' etc over osx bsd utils
 if [ -d "/usr/local/opt/coreutils/libexec/gnubin" ]; then
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
 # terminal settings
 case $TERM in
-    rxvt|*term)
-        precmd() {
-            print -Pn "\e]0;%m:%~\a"
-        }
-        preexec() {
-            print -Pn "\e]0;$1\a"
-        }
+  rxvt|*term)
+    precmd() {
+      print -Pn "\e]0;%m:%~\a"
+    }
+    preexec() {
+      print -Pn "\e]0;$1\a"
+    }
 
-      TERM="xterm-256color"
-    ;;
+    TERM="xterm-256color"
+  ;;
 esac
 
 # include my paths in path
 MY_PATHS=($HOME/bin /opt/semantico/bin)
 
 for my_path in $MY_PATHS; do
-    if [ -d "$my_path" ]; then
-      export PATH="$PATH:$my_path"
-    fi
+  if [ -d "$my_path" ]; then
+    export PATH="$PATH:$my_path"
+  fi
 done
 
 # aliases
@@ -236,7 +236,7 @@ alias vim="vim -T xterm-256color"
 alias screen="TERM=xterm screen"
 alias ls="ls --color=yes"
 alias ssh="ssh -t" # force-allocate pseudo-tty
-alias haste="HASTE_SERVER=http://pasti.co haste"
+alias haste_work="HASTE_SERVER=http://pasti.co haste"
 alias m="mount | column -t"
 alias gup='git commit -am "updated" && git push'
 alias pa="puppet agent --onetime --no-daemonize -v"
@@ -286,12 +286,11 @@ alias svn.sem="svn $1 $SEMANTICO_SVN_SERVER/$2"
 # subversion
 alias si='svn ci -m'
 
-
 # Prettier directory colours
 # https://github.com/trapd00r/LS_COLORS
 # on os X install coreutils from brew and add gnubin to front of PATH 
 if type dircolors 2>&1 > /dev/null; then
-    eval $(dircolors -b $HOME/.lscolorsrc)
+  eval $(dircolors -b $HOME/.lscolorsrc)
 fi
 
 export ZLS_COLORS=$LS_COLORS
@@ -355,74 +354,74 @@ setopt extended_glob
 # FIXME: simplify by doing: cd to trunk/, gh_fetch, sf . both -f, svn-addall; svn commit
 function update_dotfiles_adm_user {
 
-    BRANCHES=(trunk branches/testing branches/production)
-    DOTFILES=(
-        .bash_profile
-        .bashrc
-        .inputrc
-        .lscolorsrc
-        .vimrc
-        .zshrc
-        .vim/colors/xterm16.vim
-        .vim/colors/jellybeans.vim
-        .vim/colors/solarized.vim
-        .vim/ftdetect/puppet.vim
-        .vim/syntax/puppet.vim
-        .vim/after/plugin/TabularMaps.vim
-        .vim/autoload/tabular.vim
-        .vim/plugin/Tabular.vim
-    )
+  BRANCHES=(trunk branches/testing branches/production)
+  DOTFILES=(
+    .bash_profile
+    .bashrc
+    .inputrc
+    .lscolorsrc
+    .vimrc
+    .zshrc
+    .vim/colors/xterm16.vim
+    .vim/colors/jellybeans.vim
+    .vim/colors/solarized.vim
+    .vim/ftdetect/puppet.vim
+    .vim/syntax/puppet.vim
+    .vim/after/plugin/TabularMaps.vim
+    .vim/autoload/tabular.vim
+    .vim/plugin/Tabular.vim
+  )
 
-    # copy dotfiles to adm env/ directory
-    for dotfile in $DOTFILES; do
-        for branch in $BRANCHES; do
-            DOTFILE_PATH="$HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`dirname $dotfile`"
-
-            [[ ! -d "$DOTFILE_PATH" ]] && mkdir -p $DOTFILE_PATH
-            #[[ ! -f $dotfile ]] && ( echo "dotfile does not exist: $dotfile" && exit 1 )
-
-            cp -v $HOME/$dotfile $DOTFILE_PATH
-        done
-    done
-
-    UPDATED_DOTFILES=""
-    NEW_DOTFILES=""
-
-    # commit files (one commit per file is inefficient but whatever..)
+  # copy dotfiles to adm env/ directory
+  for dotfile in $DOTFILES; do
     for branch in $BRANCHES; do
-        OLD_IFS="$IFS"
-        IFS=$'\n'
+      DOTFILE_PATH="$HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`dirname $dotfile`"
 
-        for svn_entry in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`; do
+      [[ ! -d "$DOTFILE_PATH" ]] && mkdir -p $DOTFILE_PATH
+      #[[ ! -f $dotfile ]] && ( echo "dotfile does not exist: $dotfile" && exit 1 )
 
-            dotfile_status=`echo "$svn_entry" | awk '{ print $1 }'`
-
-            dotfile=`echo "$svn_entry" | awk '{ print $2 }'`
-
-            if [[ "$dotfile_status" = "?" ]]; then
-                NEW_DOTFILES=($dotfile $NEW_DOTFILES)
-
-            elif [[ "$dotfile_status" = "M" ]]; then
-                UPDATED_DOTFILES=($dotfile $UPDATED_DOTFILES)
-
-            else
-                echo "file '$dotfile' has unknown status: $dotfile_status"
-                return 1
-            fi
-        done
+      cp -v $HOME/$dotfile $DOTFILE_PATH
     done
+  done
 
-    # add any new files/dirs to svn
-    if [ ! -z "$NEW_DOTFILES" ]; then
-        echo "# new dotfiles: $NEW_DOTFILES"
-        for dotfile in $NEW_DOTFILES; svn add $dotfile
-    fi
+  UPDATED_DOTFILES=""
+  NEW_DOTFILES=""
 
-    # commit any changed dotfiles
-    if [ ! -z "$UPDATED_DOTFILES" ] || [ ! -z "$NEW_DOTFILES" ]; then
-        svn status $UPDATED_DOTFILES
-        svn ci -m '# updated robwadm dotfiles..' $UPDATED_DOTFILES
-    fi
+  # commit files (one commit per file is inefficient but whatever..)
+  for branch in $BRANCHES; do
+    OLD_IFS="$IFS"
+    IFS=$'\n'
+
+    for svn_entry in `svn status $HOME/work/systems/pm/fileserver/$branch/dist/user/robwadm/env/`; do
+
+      dotfile_status=`echo "$svn_entry" | awk '{ print $1 }'`
+
+      dotfile=`echo "$svn_entry" | awk '{ print $2 }'`
+
+      if [[ "$dotfile_status" = "?" ]]; then
+        NEW_DOTFILES=($dotfile $NEW_DOTFILES)
+
+      elif [[ "$dotfile_status" = "M" ]]; then
+        UPDATED_DOTFILES=($dotfile $UPDATED_DOTFILES)
+
+      else
+        echo "file '$dotfile' has unknown status: $dotfile_status"
+        return 1
+      fi
+    done
+  done
+
+  # add any new files/dirs to svn
+  if [ ! -z "$NEW_DOTFILES" ]; then
+    echo "# new dotfiles: $NEW_DOTFILES"
+    for dotfile in $NEW_DOTFILES; svn add $dotfile
+  fi
+
+  # commit any changed dotfiles
+  if [ ! -z "$UPDATED_DOTFILES" ] || [ ! -z "$NEW_DOTFILES" ]; then
+    svn status $UPDATED_DOTFILES
+    svn ci -m '# updated robwadm dotfiles..' $UPDATED_DOTFILES
+  fi
 }
 
 # Examples:
@@ -431,29 +430,29 @@ function update_dotfiles_adm_user {
 #
 function gh_fetch {
 
-    REPOS="$1"
-    TARGET="$2"
+  REPOS="$1"
+  TARGET="$2"
 
-    if [[ $# -eq 0 ]]; then
-        echo "$0 <repo> <path>"
-        return 1
-    fi
+  if [[ $# -eq 0 ]]; then
+    echo "$0 <repo> <path>"
+    return 1
+  fi
 
-    if [[ $# > 2 ]]; then
-        echo "too many arguments!"
-        return 1
-    fi
+  if [[ $# > 2 ]]; then
+    echo "too many arguments!"
+    return 1
+  fi
 
-    if [[ $TARGET = "" ]]; then
-        TARGET="."
-    else
-        [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || ( echo "target directory does not exist and could not be created: $TARGET" && return 1 ))
-    fi
+  if [[ $TARGET = "" ]]; then
+    TARGET="."
+  else
+    [[ ! -d $TARGET ]] && ( mkdir -p $TARGET || ( echo "target directory does not exist and could not be created: $TARGET" && return 1 ))
+  fi
 
-    # FIXME: check to see if repo exists..
+  # FIXME: check to see if repo exists..
 
-    curl -sL https://github.com/roobert/$REPOS/tarball/master \
-    | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
+  curl -sL https://github.com/roobert/$REPOS/tarball/master \
+  | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
 }
 
 alias gh_install="gh_fetch"
@@ -463,124 +462,124 @@ alias gh_install="gh_fetch"
 #   gh_pull <repo>
 #
 function gh_pull {
-    REPOS="$1"
-    TMP_DIR="$HOME/tmp"
+  REPOS="$1"
+  TMP_DIR="$HOME/tmp"
 
-    # either clone or update repo depending on whether it's already checked out
-    if [[ -d $TMP_DIR/$REPOS ]]; then
-        ( cd $TMP_DIR/$REPOS && git pull )
-    else
-        git clone ssh://git@github.com/roobert/$REPOS $TMP_DIR/$REPOS
-    fi
+  # either clone or update repo depending on whether it's already checked out
+  if [[ -d $TMP_DIR/$REPOS ]]; then
+    ( cd $TMP_DIR/$REPOS && git pull )
+  else
+    git clone ssh://git@github.com/roobert/$REPOS $TMP_DIR/$REPOS
+  fi
 }
 
 # Examples:
 #
-#    gh_push <repo> -f
+#  gh_push <repo> -f
 #
 function gh_push {
 
-    # avant-garde indenting
-       REPOS="$1"
-       FORCE="$2"
-     TMP_DIR="$HOME/tmp"
-    WORK_DIR="$TMP_DIR/$REPOS"
+  # avant-garde indenting
+     REPOS="$1"
+     FORCE="$2"
+   TMP_DIR="$HOME/tmp"
+  WORK_DIR="$TMP_DIR/$REPOS"
 
-    if [[ $# -eq 0 ]]; then
-        echo "$0 <repository>"
-        return 1
+  if [[ $# -eq 0 ]]; then
+    echo "$0 <repository>"
+    return 1
+  fi
+
+  # determine where to copy files from
+  SOURCE_DIR="`pwd`/"
+
+  # checkout or update repository
+  gh_pull $REPOS
+
+  # FIXME: files with spaces in get broken up..
+  DOTFILES=( $WORK_DIR/.*/**/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
+
+  # for each file that has been checked out, copy over it with file from $SOURCE_DIR
+  for old_file in $DOTFILES; do
+
+    # skip directories
+    if [[ -d $old_file ]]; then
+      continue
     fi
 
-    # determine where to copy files from
-    SOURCE_DIR="`pwd`/"
+    new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
 
-    # checkout or update repository
-    gh_pull $REPOS
-
-    # FIXME: files with spaces in get broken up..
-    DOTFILES=( $WORK_DIR/.*/**/*~$WORK_DIR/.git/* $WORK_DIR/.*~$WORK_DIR/.git )
-
-    # for each file that has been checked out, copy over it with file from $SOURCE_DIR
-    for old_file in $DOTFILES; do
-
-        # skip directories
-        if [[ -d $old_file ]]; then
-            continue
-        fi
-
-        new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
-
-        if [[ ! -f $new_file ]]; then
-            echo "# file does not exist: $new_file (skipping)"
-            continue
-        fi
-
-        # FIXME: it's ineffecient to diff twice..
-        diff "$old_file" "$new_file" > /dev/null 2>&1
-
-        # only copy changed files..
-        if [[ $? -ne 0 ]]; then
-            echo "# < \"$old_file\""
-            echo "# > \"$new_file\""
-
-            # display a diff of changed files (repeat of previous diff)
-            if type colordiff > /dev/null 2>&1; then
-                colordiff "$old_file" "$new_file" # mmm sexy!
-            else
-                diff "$old_file" "$new_file"
-            fi
-
-            if [[ "$FORCE" = "-f" ]]; then
-                cp -vr "$new_file" "$old_file"
-            else
-                echo
-                echo "# not pushing changes as -f wasn't specified"
-                echo
-            fi
-        fi
-    done
-
-    if [[ "$FORCE" = "-f" ]]; then
-        # commit and push
-        ( cd $WORK_DIR && git commit -am 'updated' && git push )
+    if [[ ! -f $new_file ]]; then
+      echo "# file does not exist: $new_file (skipping)"
+      continue
     fi
+
+    # FIXME: it's ineffecient to diff twice..
+    diff "$old_file" "$new_file" > /dev/null 2>&1
+
+    # only copy changed files..
+    if [[ $? -ne 0 ]]; then
+      echo "# < \"$old_file\""
+      echo "# > \"$new_file\""
+
+      # display a diff of changed files (repeat of previous diff)
+      if type colordiff > /dev/null 2>&1; then
+        colordiff "$old_file" "$new_file" # mmm sexy!
+      else
+        diff "$old_file" "$new_file"
+      fi
+
+      if [[ "$FORCE" = "-f" ]]; then
+        cp -vr "$new_file" "$old_file"
+      else
+        echo
+        echo "# not pushing changes as -f wasn't specified"
+        echo
+      fi
+    fi
+  done
+
+  if [[ "$FORCE" = "-f" ]]; then
+    # commit and push
+    ( cd $WORK_DIR && git commit -am 'updated' && git push )
+  fi
 }
 
 #
 # functions to install some useful tools..
 #
 
+# list useful stuff like aliases and functions..
+function help {
+  echo "# functions"
+  grep '^function' ~/.zshrc | awk '{ print $2 }'
+
+  echo "# aliases"
+  alias
+}
+
 function install_common_tools {
-    sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
+  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
 
 function install_ruby_tools {
-    sudo apt-get install rbenv ruby-build
-    gem install awesome_print net-http-spy wirble bond boson
+  sudo apt-get install rbenv ruby-build
+  gem install awesome_print net-http-spy wirble bond boson
 }
 
 function install_common_tools_osx {
-    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
-    brew install zsh coreutils wget
+  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+  brew install zsh coreutils wget
 }
 
 function g {
    egrep --exclude-dir=\.svn $* | grep -v grep
 }
 
-# list useful stuff like aliases and functions..
-function help {
-  echo "# functions"
-  echo "gh_pull"
-  echo "gh_push"
-  echo "gh_fetch"
-  echo "# aliases"
-  alias
-}
-
 # ask kill
 function ak {
-    PS_LIST=`ps ax|grep $1`
+  PS_LIST=`ps ax|grep $1`
+  echo $PS_LIST
 }
 
 # NOTE: moved this to the bottom since it may break other stuff.. (ordering matters!)
@@ -631,7 +630,6 @@ function bookmarks {
 #  fi
 
   if [[ $1 = '.' ]]; then
-
     # set bookmark name to be current dir name
     name="`basename $(pwd)`"
   else
@@ -658,3 +656,7 @@ compdef _path_files cd
 # initialize rbenv
 eval "$(rbenv init -)"
 
+# check if bin is checked out, if not, checkout!
+if [[ ! -x "$HOME/bin/r_find" ]]; then
+  echo "# install bin files: gh_fetch bin bin"
+fi
