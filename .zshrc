@@ -274,7 +274,7 @@ alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice.*$\)/\1\n
 alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice.*$\)/\1\n/'"
 alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
 alias pa="puppet_alltags"
-alias pn="puppet_noop
+alias pn="puppet_noop"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
