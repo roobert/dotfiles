@@ -666,7 +666,9 @@ fi
 
 # check if my bin/ is checked out
 if [[ ! -x "$HOME/bin/r_find" ]]; then
-  echo "# install bin files: gh_fetch bin bin"
+  echo "# attempting to install bin files using subshell for: gh_fetch bin bin"
+  timeout 5 gh_fetch bin bin
+  #( gh_fetch bin bin ) & sleep 5; kill $!
 fi
 
 ###
