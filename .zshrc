@@ -264,8 +264,8 @@ alias p='ps axcwf'                # p  - display all,
 alias pu='ps -o user,pid,command' # pu
 
 # puppet
-alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice.*$\)/\1\n/'"
-alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice.*$\)/\1\n/'"
+alias pa="puppet agent --onetime --no-daemonize -v| sed -e 's/\(notice\|info\|err\)/\1\n/'"
+alias puppet_alltags="puppet_alltags -f| sed -e 's/\(notice\|info\|err\)/\1\n/'"
 alias puppet_noop="puppet_noop | sed -e 's/\(notice.*$\)/\1\n/'"
 alias pa="puppet_alltags"
 alias pn="puppet_noop"
