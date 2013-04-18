@@ -264,7 +264,7 @@ alias p='ps axcwf'                # p  - display all,
 alias pu='ps -o user,pid,command' # pu
 
 # puppet
-alias puppet_alltags="puppet_alltags -f | sed -e 's/\(.*\(notice:\|info:\|err:\).*\)/\1\n/'"
+alias puppet_alltags="puppet_alltags -f | sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
 alias puppet_noop="puppet_noop | sed -e 's/\(.*\(notice:\|info:\|err:\).*\)/\1\n/'"
 
 # reload zshrc
