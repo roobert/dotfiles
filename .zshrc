@@ -560,7 +560,7 @@ function install_common_tools {
 
 function install_ruby_tools {
   sudo apt-get install rbenv ruby-build
-  gem install awesome_print net-http-spy wirble bond boson looksee
+  sudo gem install awesome_print net-http-spy wirble bond boson looksee
 }
 
 function install_common_tools_osx {
