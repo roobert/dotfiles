@@ -282,6 +282,9 @@ export GREP_COLOR='1;32'
 # subversion
 alias si='svn ci -m'
 
+# camera
+alias getpics="gphoto2 --get-all-files"
+
 # Prettier directory colours
 # https://github.com/trapd00r/LS_COLORS
 # on os X install coreutils from brew and add gnubin to front of PATH 
@@ -429,6 +432,9 @@ function gh_fetch {
   REPOS="$1"
   TARGET="$2"
 
+  # TODO: hmm...
+  # if $0 == gh_install / gh_update then $TARGET = $HOME ?
+
   if [[ $# -eq 0 ]]; then
     echo "$0 <repo> <path>"
     return 1
@@ -452,6 +458,7 @@ function gh_fetch {
 }
 
 alias gh_install="gh_fetch"
+alias gh_update="gh_fetch"
 
 # Examples:
 #
