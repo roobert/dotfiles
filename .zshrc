@@ -11,7 +11,6 @@
 #
 # zcalc
 #
-#
 
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
@@ -674,8 +673,8 @@ fi
 
 # check if my bin/ is checked out
 if [[ ! -x "$HOME/bin/r_find" ]]; then
-  echo "# attempting to install bin files using subshell for: gh_fetch bin bin"
-  ( gh_fetch bin bin ) & sleep 5 > /dev/null 2>&1; kill $! > /dev/null 2>&1
+  echo "# attempting to install bin files"
+  gh_fetch bin bin
 fi
 
 ###
