@@ -285,6 +285,9 @@ alias si='svn ci -m'
 # camera
 alias getpics="gphoto2 --get-all-files"
 
+# nagios
+alias nrpe-runner="nrpe-runner -d /etc/nagios/nrpe.conf.d"
+
 # Prettier directory colours
 # https://github.com/trapd00r/LS_COLORS
 # on os X install coreutils from brew and add gnubin to front of PATH 
