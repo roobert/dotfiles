@@ -11,6 +11,9 @@
 #
 # zcalc
 #
+# -- Reference
+#
+# **/foo - search recursively for 'foo'
 
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
@@ -300,6 +303,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # history settings
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
+setopt EXTENDED_HISTORY
 unsetopt correct_all
 unsetopt share_history
 setopt inc_append_history
@@ -309,6 +313,28 @@ setopt hist_save_no_dups
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
+
+#  auto expand ~ vars
+setopt CDABLE_VARS
+# dont auto remove slash
+unsetopt AUTO_REMOVE_SLASH
+# Append a trailing `/' to all directory names resulting from filename generation (globbing).
+setopt MARK_DIRS
+# dont ask me about rm stuff
+setopt RM_STAR_SILENT
+
+# When  the  current  word has a glob pattern, do not insert all the words resulting from the expansion but generate matches as for completion
+# and cycle through them like MENU_COMPLETE. The matches are generated as if a `*' was added to the end of the word, or inserted at the cursor
+# when  COMPLETE_IN_WORD  is  set.   This actually uses pattern matching, not globbing, so it works not only for files but for any completion,
+# such as options, user names, etc.
+setopt GLOB_COMPLETE
+
+# global aliases mean you can do: foo DN and it'll expand to 'foo >/dev/null 2>&1'
+alias -g DN='>/dev/null 2>&1'
+
+# Make home and end keys work.
+[[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
+[[ -z "$terminfo[kend]" ]] || bindkey -M emacs "$terminfo[kend]" end-of-line
 
 # all taken from: https://github.com/tureba/myconfigfiles/blob/master/zshrc
 # this fixes switching between vi-modes
