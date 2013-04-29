@@ -332,6 +332,17 @@ setopt GLOB_COMPLETE
 # global aliases mean you can do: foo DN and it'll expand to 'foo >/dev/null 2>&1'
 alias -g DN='>/dev/null 2>&1'
 
+# woo! echo 'foo bar baz' | COL2
+alias -g COL1="awk '{ print $1 }'"
+alias -g COL2="awk '{ print $2 }'"
+alias -g COL3="awk '{ print $3 }'"
+alias -g COL4="awk '{ print $4 }'"
+alias -g COL5="awk '{ print $5 }'"
+alias -g COL6="awk '{ print $6 }'"
+alias -g COL7="awk '{ print $7 }'"
+alias -g COL8="awk '{ print $8 }'"
+alias -g COL9="awk '{ print $9 }'"
+
 # Make home and end keys work.
 [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
 [[ -z "$terminfo[kend]" ]] || bindkey -M emacs "$terminfo[kend]" end-of-line
