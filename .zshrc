@@ -333,15 +333,24 @@ setopt GLOB_COMPLETE
 alias -g DN='>/dev/null 2>&1'
 
 # woo! echo 'foo bar baz' | COL2
-alias -g COL1="awk '{ print $1 }'"
-alias -g COL2="awk '{ print $2 }'"
-alias -g COL3="awk '{ print $3 }'"
-alias -g COL4="awk '{ print $4 }'"
-alias -g COL5="awk '{ print $5 }'"
-alias -g COL6="awk '{ print $6 }'"
-alias -g COL7="awk '{ print $7 }'"
-alias -g COL8="awk '{ print $8 }'"
-alias -g COL9="awk '{ print $9 }'"
+alias -g COL1="awk '{ print \$1 }'"
+alias -g COL2="awk '{ print \$2 }'"
+alias -g COL3="awk '{ print \$3 }'"
+alias -g COL4="awk '{ print \$4 }'"
+alias -g COL5="awk '{ print \$5 }'"
+alias -g COL6="awk '{ print \$6 }'"
+alias -g COL7="awk '{ print \$7 }'"
+alias -g COL8="awk '{ print \$8 }'"
+alias -g COL9="awk '{ print \$9 }'"
+
+alias c2="../../"
+alias c3="../../../"
+alias c4="../../../../"
+alias c5="../../../../../"
+alias c6="../../../../../../"
+alias c7="../../../../../../../"
+alias c8="../../../../../../../../"
+alias c9="../../../../../../../../../"
 
 # Make home and end keys work.
 [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
@@ -492,7 +501,8 @@ function gh_fetch {
 
   # FIXME: check to see if repo exists..
 
-  curl -sL https://github.com/roobert/$REPOS/tarball/master \
+  # insecure option is necessary for some reason..
+  curl -sL --insecure https://github.com/roobert/$REPOS/tarball/master \
   | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
 }
 
@@ -710,8 +720,11 @@ fi
 
 # check if my bin/ is checked out
 if [[ ! -x "$HOME/bin/r_find" ]]; then
-  echo "# attempting to install bin files"
-  gh_fetch bin bin
+  ping -c1 -W1 github.com > /dev/null 2>&1
+  if [[ $? == 0 ]]; then 
+    echo "# attempting to install bin files"
+    gh_install bin bin
+  fi
 fi
 
 ###
