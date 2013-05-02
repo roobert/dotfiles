@@ -500,6 +500,7 @@ function gh_fetch {
   fi
 
   # FIXME: check to see if repo exists..
+  # FIXME: no --strip-components option for older versions of tar
 
   # insecure option is necessary for some reason..
   curl -sL --insecure https://github.com/roobert/$REPOS/tarball/master \
