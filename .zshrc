@@ -15,6 +15,7 @@
 #
 # **/foo - search recursively for 'foo'
 
+
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
@@ -275,6 +276,9 @@ alias rzsh="exec zsh -l"
 alias rz="rzsh"
 alias zr="rz"
 
+# use facter to display lsbdistcodename
+alias lsbdc="facter lsb lsbdistcodename | tail -n 1 | COL3"
+
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
@@ -314,6 +318,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999
 SAVEHIST=9999
 
+# test out this ignore cd command yo
+setopt AUTOCD
 #  auto expand ~ vars
 setopt CDABLE_VARS
 # dont auto remove slash
@@ -500,7 +506,7 @@ function gh_fetch {
   fi
 
   # FIXME: check to see if repo exists..
-  # FIXME: no --strip-components option for older versions of tar
+  # FIXME: no --strip-components option for older versions of tar (tar (GNU tar) 1.14)
 
   # insecure option is necessary for some reason..
   curl -sL --insecure https://github.com/roobert/$REPOS/tarball/master \
@@ -724,7 +730,7 @@ if [[ ! -x "$HOME/bin/r_find" ]]; then
   ping -c1 -W1 github.com > /dev/null 2>&1
   if [[ $? == 0 ]]; then 
     echo "# attempting to install bin files"
-    gh_install bin bin
+    gh_install bin bin > /dev/null 2>&1 
   fi
 fi
 
