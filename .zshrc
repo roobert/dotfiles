@@ -265,6 +265,7 @@ export PS_FORMAT="user,pid,args"
 alias ps='ps ww'                     # ps - always assume unlimited width
 alias p='ps axcwwf'                  # p  - display all, 
 alias pu='ps -o user,pid,command ww' # pu
+alias ak='$HOME/bin/ask_kill.rb'
 
 # puppet
 alias puppet_alltags="puppet_alltags -f  | sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
