@@ -96,3 +96,7 @@ command Wq WQ
 "noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
+
+autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'   | normal G
+autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
+autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
