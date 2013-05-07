@@ -509,9 +509,9 @@ function gh_fetch {
   # FIXME: check to see if repo exists..
   # FIXME: no --strip-components option for older versions of tar (tar (GNU tar) 1.14)
 
-  # insecure option is necessary for some reason..
+  # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/$REPOS/tarball/master \
-  | tar -xzv --strip-components 1 --exclude=README.md -C $TARGET
+  | tar -xzv -m --strip-components 1 --exclude=README.md -C $TARGET
 }
 
 alias gh_install="gh_fetch"
@@ -527,7 +527,7 @@ function gh_pull {
 
   # either clone or update repo depending on whether it's already checked out
   if [[ -d $TMP_DIR/$REPOS ]]; then
-    ( cd $TMP_DIR/$REPOS && git pull )
+    git --git-dir=$TMP_DIR/$REPOS/.git --work-tree=$TMP_DIR/$REPOS/  pull
   else
     git clone ssh://git@github.com/roobert/$REPOS $TMP_DIR/$REPOS
   fi
