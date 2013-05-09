@@ -169,7 +169,8 @@ fi
 # colour chart:  http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png or use 'spectrum_ls'
 
 PHOST="%{$FG[104]%}%m"
-PWHERE="%{$FG[250]%}%~"
+#PWHERE="%{$FG[250]%}%~"
+PWHERE="%{$FG[250]%}%d"
 PPROMPT="%{$FG[040]%}%#"
 
 case `whoami` in
@@ -563,13 +564,13 @@ function gh_push {
   for old_file in $DOTFILES; do
 
     # skip directories
-    if [[ -d $old_file ]]; then
+    if [[ -d "$old_file" ]]; then
       continue
     fi
 
     new_file=`echo "$old_file" | sed "s|$WORK_DIR/|$SOURCE_DIR|"`
 
-    if [[ ! -f $new_file ]]; then
+    if [[ ! -f "$new_file" ]]; then
       echo "# file does not exist: $new_file (skipping)"
       continue
     fi
