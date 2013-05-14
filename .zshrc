@@ -607,10 +607,10 @@ function gh_push {
 }
 
 #
-# functions to install some useful tools..
+# shortcuts to install some useful tools..
 #
 
-# list useful stuff like aliases and functions..
+# list useful stuff like aliases and functions.. make this into something more useful?
 function help {
   echo "# functions"
   grep '^function' ~/.zshrc | awk '{ print $2 }'
@@ -619,9 +619,13 @@ function help {
   alias
 }
 
+alias h='help'
+
 function install_common_tools {
   sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
+
+alias install_flash='sudo apt-get install ubuntu-restricted-extras'
 
 function install_ruby_tools {
   sudo apt-get install rbenv ruby-build
