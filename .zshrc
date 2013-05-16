@@ -524,6 +524,7 @@ function gh_fetch {
 
 alias gh_install="gh_fetch"
 alias gh_update="gh_fetch"
+alias update_dotfiles="gh_fetch dotfile $HOME"
 
 # Examples:
 #
@@ -611,6 +612,9 @@ function gh_push {
     # commit and push
     ( cd $WORK_DIR && git commit -am 'updated' && git push )
   fi
+
+  echo "# removing temporary files.."
+  rm -rf $HOME/tmp/$REPOS
 }
 
 #
@@ -763,3 +767,4 @@ if [[ $? = 0 ]]; then
   for id in `find $HOME/.ssh/ -name "id_rsa*" | grep -v 'id_rsa.pub'`; ssh-add $id
   ssh-add -l
 fi
+
