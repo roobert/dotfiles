@@ -524,7 +524,7 @@ function gh_fetch {
 
 alias gh_install="gh_fetch"
 alias gh_update="gh_fetch"
-alias update_dotfiles="gh_fetch dotfile $HOME"
+alias update_dotfiles="gh_fetch dotfiles $HOME"
 
 # Examples:
 #
