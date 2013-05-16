@@ -32,18 +32,33 @@ XTERM="xterm"
 -- TODO: trim and inline these
 --dopath("cfg_notioncore")
 --dopath("mod_tiling")
+defbindings("WScreen", {
+    kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
+    kpress(META.."F9", "ioncore.create_ws(_)"),
+    kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
+})
 
-
-
-
-
+defbindings("WMPlex.toplevel", {
+    kpress(ALTMETA.."F1", nil),
+    kpress(ALTMETA.."F2", nil),
+    kpress(ALTMETA.."F3", nil),
+    kpress(ALTMETA.."F3", nil),
+    kpress(ALTMETA.."F4", nil),
+    kpress(ALTMETA.."F5", nil),
+    kpress(ALTMETA.."F6", nil),
+    kpress(ALTMETA.."F7", nil),
+    kpress(ALTMETA.."F8", nil),
+    kpress(ALTMETA.."F9", nil),
+    kpress(ALTMETA.."F10", nil),
+    kpress(ALTMETA.."F11", nil),
+    kpress(ALTMETA.."F12", nil),
+})
 
 if not gr.select_engine("de") then
 	return
 end
 
 de.reset()
-
 
 -- font = "xft: Sans-8"
 

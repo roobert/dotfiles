@@ -90,6 +90,7 @@ vmap <C-a>e :Ta /=<CR>
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
 command Wq WQ
+command Q q
 
 " expert difficulty
 "noremap <Up> <NOP>
@@ -100,3 +101,7 @@ command Wq WQ
 autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'   | normal G
 autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+set runtimepath^=~/.vim/bundle/vim-surround
+let g:ctrlp_working_path_mode = 'c'

@@ -12,5 +12,3 @@
   br = branch
   l = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
   lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
-[push]
-	default = simple
