@@ -768,3 +768,11 @@ if [[ $? = 0 ]]; then
   ssh-add -l
 fi
 
+source $HOME/zsh-history-substring-search.zsh
+
+# bind k and j for VI mode
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# mattf props!
+function cheesy-ctrlp () { BUFFER='vim +:CtrlP' zle accept-line } && zle -N cheesy-ctrlp cheesy-ctrlp && bindkey -M viins '^P' cheesy-ctrlp
