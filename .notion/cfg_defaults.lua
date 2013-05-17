@@ -36,6 +36,7 @@ defbindings("WScreen", {
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
     kpress(META.."F9", "ioncore.create_ws(_)"),
     kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
+    kpress(META.."F3", "mod_query.query_exec(_)"),
 })
 
 defbindings("WMPlex.toplevel", {

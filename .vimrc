@@ -92,9 +92,13 @@ command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
 command Wq WQ
 command Q q
 
+" Entering Ex mode.  Type "visual" to go to Normal mode.
+" NO. THANK. YOU.
+map Q <Nop>
+
 " expert difficulty
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
+"noiemap <Up> <NOP>
+"norema NOP> <>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
 

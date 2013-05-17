@@ -235,21 +235,28 @@ for my_path in $MY_PATHS; do
 done
 
 # aliases
-alias vi="vim"
-alias vim="vim -T xterm-256color"
-alias screen="TERM=xterm screen"
+
+# system tools
 alias ls="ls --color=yes"
-alias ssh="ssh -t" # force-allocate pseudo-tty
-alias haste_work="HASTE_SERVER=http://pasti.co haste"
+alias hist="history 1"
 alias m="mount | column -t"
-alias gup='git commit -am "updated" && git push'
-alias pa="puppet agent --onetime --no-daemonize -v"
-alias pt="puppet_alltags -f"
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gd="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -p"
 alias am="alsamixer"
-alias empty_trash="rm -rf ~/.local/share/Trash"
+alias screen="TERM=xterm screen"
+alias ssh="ssh -t"
+
+# shortcuts
+alias haste_work="HASTE_SERVER=http://pasti.co haste"
 alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
+alias empty_trash="rm -rf ~/.local/share/Trash"
+
+# vim
+alias vi="vim"
+alias vim="vim -T xterm-256color -p"
+
+# git
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gd="gl -p"
+alias gup='git commit -am "updated" && git push'
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
@@ -269,9 +276,11 @@ alias pu='ps -o user,pid,command ww' # pu
 alias ak='$HOME/bin/ask_kill.rb'
 
 # puppet
-alias puppet_alltags="puppet_alltags -f  | sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
-alias puppet_autoapply="puppet_autoapply | sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
-alias puppet_noop="puppet_noop           | sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
+alias -g PUPPET_FILTER="| sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
+alias puppet_alltags="puppet_alltags -f  | PUPPET_FILTER"
+alias puppet_autoapply="puppet_autoapply | PUPPET_FILTER"
+alias puppet_noop="puppet_noop           | PUPPET_FILTER"
+alias pa="puppet_alltags -f"
 
 # reload zshrc
 alias rzsh="exec zsh -l"
@@ -630,8 +639,6 @@ function help {
   alias
 }
 
-alias h='help'
-
 function install_common_tools {
   sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file
 }
@@ -768,11 +775,20 @@ if [[ $? = 0 ]]; then
   ssh-add -l
 fi
 
-source $HOME/zsh-history-substring-search.zsh
+source $HOME/.zsh/zsh-history-substring-search.zsh
+source $HOME/.zsh/fuzzy-match.zsh
 
-# bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# bind UP and DOWN arrow keys
+for keycode in '[' '0'; do
+  bindkey "^[${keycode}A" history-substring-search-up
+  bindkey "^[${keycode}B" history-substring-search-down
+done
+unset keycode
 
-# mattf props!
+# mattf props! - open vim ctrl-p with ^P
 function cheesy-ctrlp () { BUFFER='vim +:CtrlP'; zle accept-line } && zle -N cheesy-ctrlp cheesy-ctrlp && bindkey -M viins '^P' cheesy-ctrlp
+
+# ^X^X stuff
+autoload -Uz history-beginning-search-menu
+zle -N history-beginning-search-menu
+bindkey '^X^X' history-beginning-search-menu

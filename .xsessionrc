@@ -1,3 +1,7 @@
 vmware-user &
+
+# remap caps-lock to escape
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+
 eval $(gnome-keyring-daemon --start) &
 exec ssh-agent notion
