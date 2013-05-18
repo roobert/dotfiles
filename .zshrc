@@ -775,8 +775,10 @@ if [[ $? = 0 ]]; then
   ssh-add -l
 fi
 
-source $HOME/.zsh/zsh-history-substring-search.zsh
-source $HOME/.zsh/fuzzy-match.zsh
+#source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+#source $HOME/.zsh/zsh-fuzzy-match/fuzzy-match.zsh
+#source $HOME/.zsh/auto-fu.zsh/auto-fu.zsh
+#source $HOME/.zsh/auto-fu.sh
 
 # bind UP and DOWN arrow keys
 for keycode in '[' '0'; do
