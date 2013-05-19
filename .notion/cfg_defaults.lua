@@ -33,16 +33,15 @@ XTERM="xterm"
 --dopath("cfg_notioncore")
 --dopath("mod_tiling")
 defbindings("WScreen", {
-    kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
-    kpress(META.."F9", "ioncore.create_ws(_)"),
     kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
     kpress(META.."F3", "mod_query.query_exec(_)"),
+    kpress(META.."F9", "ioncore.create_ws(_)"),
+    kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
 })
 
 defbindings("WMPlex.toplevel", {
     kpress(ALTMETA.."F1", nil),
     kpress(ALTMETA.."F2", nil),
-    kpress(ALTMETA.."F3", nil),
     kpress(ALTMETA.."F3", nil),
     kpress(ALTMETA.."F4", nil),
     kpress(ALTMETA.."F5", nil),
@@ -52,7 +51,18 @@ defbindings("WMPlex.toplevel", {
     kpress(ALTMETA.."F9", nil),
     kpress(ALTMETA.."F10", nil),
     kpress(ALTMETA.."F11", nil),
-    kpress(ALTMETA.."F12", nil),
+    kpress(META.."F1", nil),
+    kpress(META.."F2", nil),
+    kpress(META.."F3", nil),
+    kpress(META.."F4", nil),
+    kpress(META.."F5", nil),
+    kpress(META.."F6", nil),
+    kpress(META.."F7", nil),
+    kpress(META.."F8", nil),
+    kpress(META.."F9", nil),
+    kpress(META.."F10", nil),
+    kpress(META.."F11", nil),
+    kpress(META.."F12", nil),
 })
 
 if not gr.select_engine("de") then
