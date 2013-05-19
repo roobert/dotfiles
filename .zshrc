@@ -666,6 +666,7 @@ function g {
 ###
 
 function zle-line-init zle-keymap-select {
+  #zle auto-fu-init
   zle reset-prompt
 }
 
@@ -791,6 +792,13 @@ unset keycode
 function cheesy-ctrlp () { BUFFER='vim +:CtrlP'; zle accept-line } && zle -N cheesy-ctrlp cheesy-ctrlp && bindkey -M viins '^P' cheesy-ctrlp
 
 # ^X^X stuff
-autoload -Uz history-beginning-search-menu
-zle -N history-beginning-search-menu
-bindkey '^X^X' history-beginning-search-menu
+#autoload -Uz history-beginning-search-menu
+#zle -N history-beginning-search-menu
+#bindkey '^X^X' history-beginning-search-menu
+
+
+
+#zle-line-init() {
+#    auto-fu-init
+#}
+#zle -N zle-line-init
