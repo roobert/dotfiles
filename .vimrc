@@ -109,3 +109,5 @@ autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 set runtimepath^=~/.vim/bundle/vim-surround
 let g:ctrlp_working_path_mode = 'c'
+
+set iskeyword-=_

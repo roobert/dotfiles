@@ -282,6 +282,9 @@ alias puppet_autoapply="puppet_autoapply | PUPPET_FILTER"
 alias puppet_noop="puppet_noop           | PUPPET_FILTER"
 alias pa="puppet_alltags -f"
 
+# ffs
+alias ffs="sudo !!"
+
 # reload zshrc
 alias rzsh="exec zsh -l"
 alias rz="rzsh"
@@ -723,6 +726,10 @@ alias b="bookmarks"
 alias br="bookmarks reload"
 
 bookmarks reload
+
+function svn.add_all () {
+  for f in `svn status|grep \^\?|COL2`; svn add $f
+}
 
 ###
 ### misc.
