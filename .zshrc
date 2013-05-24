@@ -809,3 +809,6 @@ function cheesy-ctrlp () { BUFFER='vim +:CtrlP'; zle accept-line } && zle -N che
 #    auto-fu-init
 #}
 #zle -N zle-line-init
+
+# more mattf magic
+function wrap-my-shizz () { BUFFER="vim \$($BUFFER)"; }; zle -N wrap-my-shizz; bindkey -M viins '^B' wrap-my-shizz
