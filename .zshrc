@@ -196,7 +196,8 @@ if [ "$HOST" = "disco" ]; then
   PHOST="$FG[200]%}%m"
 fi
 
-export PS1="$PUSER $PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
+#export PS1="$PUSER $PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
+export PS1="$PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
 
 ###
 ### my settings, aliases and functions
