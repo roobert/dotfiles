@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh 
 
-for f in ~/.dotfiles/.?*; ln -vsf $f ~/`basename $f`
+for new_file in ~/.dotfiles/.?*; do
+  cp -Rv $new_file $HOME
+done
 

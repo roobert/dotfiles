@@ -2,7 +2,7 @@
 if [ ! -n "$PS1" ]; then return; fi
 
 # install dotfiles if they arent installed
-[[ ! -d $HOME/.dotfiles ]]; then
+if [[ ! -d $HOME/.dotfiles ]]; then
   mkdir $HOME/.dotfiles
 
   curl -sL https://github.com/roobert/dotfiles/tarball/master \
