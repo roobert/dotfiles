@@ -2,13 +2,9 @@
 if [ ! -n "$PS1" ]; then return; fi
 
 # install dotfiles if they arent installed
-if [[ ! -d $HOME/.dotfiles ]]; then
-  mkdir $HOME/.dotfiles
-
+if [[ ! -d $HOME/.zsh/ ]]; then
   curl -sL https://github.com/roobert/dotfiles/tarball/master \
-    | tar -xzv --strip-components 1 --exclude=README.md -C $HOME/.dotfiles
-
-  $HOME/.dotfiles/bootstrap.zsh
+    | tar -xzv --strip-components 1 --exclude=README.md -C $HOME
 fi
 
 # source main good stuff
