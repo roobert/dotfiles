@@ -1,4 +1,4 @@
 #!/usr/bin/env zsh 
 
-for f in ~/.dotfiles/.?*; ln -sf ~/`basename $f` $f
+for f in ~/.dotfiles/.?*; ln -vsf $f ~/`basename $f`
 

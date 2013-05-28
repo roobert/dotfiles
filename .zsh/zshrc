@@ -1,8 +1,5 @@
 # stuff to research: auto-fu.sh  zsh-fuzzy-match  zsh-history-substring-search
 
-# stop here if not a shell
-if [ ! -n "$PS1" ]; then return; fi
-
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
