@@ -136,3 +136,5 @@ function gh_push {
   echo "# removing temporary files.."
   rm -rf $HOME/tmp/$REPOS
 }
+
+# FIXME: add gh_add <repo> <file>
