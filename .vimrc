@@ -86,6 +86,8 @@ vmap <C-a>p :Ta /=><CR>
 map <C-a>e :Ta /=<CR>
 vmap <C-a>e :Ta /=<CR>
 
+map <Leader>r :!!<CR>
+
 " write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
