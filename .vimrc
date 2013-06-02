@@ -77,16 +77,17 @@ autocmd Syntax * syn match ExtraWhitespace /[^\t]\zs\t\+/
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Tab navigation
-map <C-l> :tabnext<CR>
-map <C-h> :tabprev<CR>
+map <Ctrl-l> :tabnext<CR>
+map <Ctrl-h> :tabprev<CR>
 
 " Tabularize plugin bindings
-nmap <C-a>p :Ta /=><CR>
-vmap <C-a>p :Ta /=><CR>
-map <C-a>e :Ta /=<CR>
-vmap <C-a>e :Ta /=<CR>
+nmap <Leader>p :Ta /=><CR>
+vmap <Leader>p :Ta /=><CR>
+nmap <Leader>e :Ta /=<CR>
+vmap <Leader>e :Ta /=<CR>
 
-map <Leader>r :!!<CR>
+nmap <Leader>r :!!<CR>
+vmap <Leader>r :!!<CR>
 
 " write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -100,7 +101,7 @@ map Q <Nop>
 
 " expert difficulty
 "noiemap <Up> <NOP>
-"norema NOP> <>
+"noremap <Down> <NOP>
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
 
