@@ -44,7 +44,9 @@ alias -g PUPPET_FILTER="sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\
 alias puppet_alltags="puppet_alltags -f  | PUPPET_FILTER"
 alias puppet_autoapply="puppet_autoapply | PUPPET_FILTER"
 alias puppet_noop="puppet_noop           | PUPPET_FILTER"
-alias pa="puppet_alltags -f"
+alias pa="puppet_alltags"
+alias pt="puppet_tags"
+alias paa="puppet_autoapply"
 
 # ffs
 alias ffs="sudo !!"
