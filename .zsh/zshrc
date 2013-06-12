@@ -9,3 +9,6 @@ export GREP_COLOR='1;32'
 ZSH_ROOT="$HOME/.zsh"
 
 for f in $ZSH_ROOT/**/*.zsh; source $f
+
+b > /dev/null 2>&1
+
