@@ -77,8 +77,8 @@ autocmd Syntax * syn match ExtraWhitespace /[^\t]\zs\t\+/
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Tab navigation
-map <Ctrl-l> :tabnext<CR>
-map <Ctrl-h> :tabprev<CR>
+map <C-l> :tabnext<CR>
+map <C-h> :tabprev<CR>
 
 " Tabularize plugin bindings
 nmap <Leader>p :Ta /=><CR>
