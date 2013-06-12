@@ -13,7 +13,7 @@ if [[ ! -d $HOME/.zsh/ ]]; then
 
   # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/dotfiles/tarball/master \
-  | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $TARGET
+  | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME
 fi
 
 # source main good stuff
