@@ -6,18 +6,7 @@ function update_dotfiles-adm_user {
   DOTFILES=(
     .bash_profile
     .bashrc
-    .inputrc
-    .lscolorsrc
-    .vimrc
     .zshrc
-    .vim/colors/xterm16.vim
-    .vim/colors/jellybeans.vim
-    .vim/colors/solarized.vim
-    .vim/ftdetect/puppet.vim
-    .vim/syntax/puppet.vim
-    .vim/after/plugin/TabularMaps.vim
-    .vim/autoload/tabular.vim
-    .vim/plugin/Tabular.vim
   )
 
   # copy dotfiles to adm env/ directory
