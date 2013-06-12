@@ -17,14 +17,15 @@ for f in $ZSH_ROOT/**/*.zsh; do
   autoload -U is-at-least
 
   if is-at-least 4.3.0; then
+    source $f
+  else
     # don't load these things
     case $f in
-      "$ZSH_ROOT/.zsh/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
-      "$ZSH_ROOT/.zsh/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
+      "$ZSH_ROOT/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
+      "$ZSH_ROOT/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
+      *) source $f ;;
     esac
   fi
-
-  source $f
 done
 
 b > /dev/null 2>&1
