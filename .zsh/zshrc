@@ -8,7 +8,24 @@ export GREP_COLOR='1;32'
 
 ZSH_ROOT="$HOME/.zsh"
 
-for f in $ZSH_ROOT/**/*.zsh; source $f
+# broken stuff in zsh 4.2.0:
+# * git.plugin.zsh - compdef
+# * vi-mode.zsh    - reset-prompt
+
+for f in $ZSH_ROOT/**/*.zsh; do
+
+  autoload -U is-at-least
+
+  if is-at-least 4.3.0; then
+    # don't load these things
+    case $f in
+      "$ZSH_ROOT/.zsh/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
+      "$ZSH_ROOT/.zsh/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
+    esac
+  fi
+
+  source $f
+done
 
 b > /dev/null 2>&1
 
