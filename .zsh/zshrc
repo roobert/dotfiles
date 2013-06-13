@@ -12,6 +12,10 @@ ZSH_ROOT="$HOME/.zsh"
 # * git.plugin.zsh - compdef
 # * vi-mode.zsh    - reset-prompt
 
+# vim
+# * Tabularize
+# * -p
+
 for f in $ZSH_ROOT/**/*.zsh; do
 
   autoload -U is-at-least
