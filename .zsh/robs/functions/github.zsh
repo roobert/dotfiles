@@ -44,7 +44,7 @@ function gh_fetch {
 
 alias gh_install="gh_fetch"
 alias gh_update="gh_fetch"
-alias update_dotfiles="gh_fetch dotfiles $HOME"
+alias update_dotfiles="gh_fetch dotfiles $HOME && chmod -R 700 $HOME/.ssh"
 
 # Examples:
 #
