@@ -26,9 +26,17 @@ if [[ $INSTALL_DOTFILES = true ]]; then
     STRIP_CMD="--strip-path"
   fi
 
+  echo -n "updating dotfiles: "
+
   # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/dotfiles/tarball/master \
-    | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME
+    | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME > /dev/null 2> .zsh/failure_log
+
+  if [[ $? -eq 0 ]]; then
+    echo 'ok!'
+  else
+    echo 'failures logged to .zsh/failure_log'
+  fi
 
   chmod 700 -R $HOME/.ssh
 
