@@ -114,3 +114,7 @@ set runtimepath^=~/.vim/bundle/vim-surround
 let g:ctrlp_working_path_mode = 'c'
 
 set iskeyword-=_
+
+" by default this is 10 and has bitten me hard!
+set tabpagemax=999
+
