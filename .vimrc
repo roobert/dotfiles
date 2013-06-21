@@ -92,5 +92,6 @@ let g:ctrlp_working_path_mode = 'c'
 "noremap <Right> <NOP>
 
 " override default vertical split binding to open a new buffer rather than split current buffer
-noremap <C-W>n :vnew<CR>
+map <C-W>v :vnew<CR>
+map <C-w><C-v> :vnew<CR>
 "noremap <C-UP>
