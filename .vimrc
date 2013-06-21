@@ -37,6 +37,7 @@ set guioptions=-MtR " disable menus, tabs and scrollbars in gvim
 set hidden          " make buffers hidden by default
 set iskeyword-=_
 set tabpagemax=999  " by default this is 10 and has bitten me hard!
+set splitright      " when splitting the buffer, create new buffer on right
 "set cursorline      " highlight line that cursor is on
 
 " highlight text after 80th column
