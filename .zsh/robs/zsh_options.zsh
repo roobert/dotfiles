@@ -41,3 +41,5 @@ fi
 
 setopt sh_word_split    # don't retokenize variables on expansion WARNING: could this mess things up? is this the default for posix sh?
 
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic

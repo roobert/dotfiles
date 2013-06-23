@@ -3,5 +3,9 @@ vmware-user &
 # remap caps-lock to escape
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
+# make my laptop keyboard more like a mac keyboard
+# remap £ to #
+# remap ¬ to ~
+
 eval $(gnome-keyring-daemon --start) &
 exec ssh-agent notion
