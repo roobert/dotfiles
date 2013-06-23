@@ -37,6 +37,8 @@ export PS_FORMAT="user,pid,args"
 alias ps='ps ww'                     # ps - always assume unlimited width
 alias p='ps axcwwf'                  # p  - display all, 
 alias pu='ps -o user,pid,command ww' # pu
+
+# ask_kill shortcuts
 alias ak='$HOME/bin/ask_kill.rb'
 alias akc='$HOME/bin/ask_kill.rb -c'
 alias aku='$HOME/bin/ask_kill.rb -u'
