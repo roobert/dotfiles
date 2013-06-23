@@ -38,6 +38,9 @@ alias ps='ps ww'                     # ps - always assume unlimited width
 alias p='ps axcwwf'                  # p  - display all, 
 alias pu='ps -o user,pid,command ww' # pu
 alias ak='$HOME/bin/ask_kill.rb'
+alias akc='$HOME/bin/ask_kill.rb -c'
+alias aku='$HOME/bin/ask_kill.rb -u'
+alias akp='$HOME/bin/ask_kill.rb -p'
 
 # puppet
 alias -g PUPPET_FILTER="sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\n/'"
