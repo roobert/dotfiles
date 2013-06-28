@@ -1,4 +1,4 @@
-set editing-mode vi
+#set editing-mode vi
 "\C-l": clear-screen
 set visible-stats on
 set print-completions-horizontally on
