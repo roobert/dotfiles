@@ -31,6 +31,8 @@ Bundle "tpope/vim-surround"
 "Bundle "kien/ctrlp"
 Bundle "godlygeek/tabular"
 Bundle "puppetlabs/puppet-syntax-vim"
+Bundle "rodjek/vim-puppet"
+Bundle "scrooloose/syntastic"
 
 if iCanHazVundle == 0
   echo "Installing Bundles, please ignore key map error messages"
