@@ -1,12 +1,28 @@
 ".vimrc
 
-set nocompatible " be iMproved
-filetype off     " required!
+" this stuff is requied by vundle
+set nocompatible
+filetype off
+
+" install vundle stuff!
+" jacked from: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+  let iCanHazVundle=0
+endif
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+" me plugins!
+Bundle "tomasr/molokai"
+Bundle "gmarik/vundle"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -16,8 +32,16 @@ Bundle "tpope/vim-surround"
 Bundle "godlygeek/tabular"
 Bundle "puppetlabs/puppet-syntax-vim"
 
+if iCanHazVundle == 0
+  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  :BundleInstall
+endif
+
 " ctrl-p preferences
 let g:ctrlp_working_path_mode = 'c'
+
+" make it colourful..
 
 " For windows, the colors directory is: c:\Users\<user>\vimfiles\colors 
 
@@ -39,6 +63,7 @@ let &t_Co=256
 
 syntax enable
 
+" me settins
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -56,7 +81,7 @@ set iskeyword-=_
 set tabpagemax=999  " by default this is 10 and has bitten me hard!
 set splitright      " when splitting the buffer, create new buffer on right
 
-" get rid of ugly vertical split char |, note the space after \
+" get rid of ugly vertical split char | for split windows, note the space after \
 set fillchars+=vert:\ 
 
 " Show trailing whitepace and spaces before a tab:
@@ -113,6 +138,8 @@ map <C-w><C-Up>    <C-w><Up>
 map <C-w><C-Down>  <C-w><Down>
 map <C-w><C-Left>  <C-w><Left>
 map <C-w><C-Right> <C-w><Right>
+
+" not os-x workstation friendly..
 map <C-Up>    <C-w><Up>
 map <C-Down>  <C-w><Down>
 map <C-Left>  <C-w><Left>
