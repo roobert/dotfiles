@@ -1,5 +1,24 @@
 ".vimrc
 
+set nocompatible " be iMproved
+filetype off     " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+Bundle "tpope/vim-surround"
+"Bundle "kien/ctrlp"
+Bundle "godlygeek/tabular"
+Bundle "puppetlabs/puppet-syntax-vim"
+
+" ctrl-p preferences
+let g:ctrlp_working_path_mode = 'c'
+
 " For windows, the colors directory is: c:\Users\<user>\vimfiles\colors 
 
 " dont set TERM=xterm-256color since this will break the terminal when
@@ -107,9 +126,4 @@ map <C-h> :tabprev<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
-
-" plugins
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-set runtimepath^=~/.vim/bundle/vim-surround
-let g:ctrlp_working_path_mode = 'c'
 
