@@ -101,3 +101,6 @@ alias c6="../../../../../../"
 alias c7="../../../../../../../"
 alias c8="../../../../../../../../"
 alias c9="../../../../../../../../../"
+
+alias ansible="ansible -i $HOME/.ansible_hosts"
+alias ansible-playbook="ansible-playbook -i $HOME/.ansible_hosts"
