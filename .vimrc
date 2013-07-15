@@ -1,44 +1,47 @@
 ".vimrc
 
-" this stuff is requied by vundle
 set nocompatible
 filetype off
 
-" install vundle stuff!
-" jacked from: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+" install neobundle stuff!
+if has('vim_starting')
+    " install neobundle stuff!
+    " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+    if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
+        echo "Installing NeoBundle.."
+        echo ""
+        silent !mkdir -p ~/.vim/bundle
+        silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    endif
 
-if !filereadable(vundle_readme)
-  echo "Installing Vundle.."
-  echo ""
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-  let iCanHazVundle=0
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+call neobundle#rc(expand('~/.vim/bundle/'))
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \     'windows' : 'make -f make_mingw32.mak',
+  \     'cygwin'  : 'make -f make_cygwin.mak',
+  \     'mac'     : 'make -f make_mac.mak',
+  \     'unix'    : 'make -f make_unix.mak',
+  \     },
+  \ }
+
 
 " me plugins!
-Bundle "tomasr/molokai"
-Bundle "gmarik/vundle"
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
-Bundle "tpope/vim-surround"
-"Bundle "kien/ctrlp"
-Bundle "godlygeek/tabular"
-Bundle "puppetlabs/puppet-syntax-vim"
-Bundle "rodjek/vim-puppet"
-Bundle "scrooloose/syntastic"
+NeoBundle "tomasr/molokai"
+NeoBundle "MarcWeber/vim-addon-mw-utils"
+NeoBundle "tomtom/tlib_vim"
+NeoBundle "garbas/vim-snipmate"
+NeoBundle "honza/vim-snippets"
+NeoBundle "tpope/vim-surround"
+NeoBundle "godlygeek/tabular"
+NeoBundle "puppetlabs/puppet-syntax-vim"
+NeoBundle "rodjek/vim-puppet"
+NeoBundle "scrooloose/syntastic"
 
-if iCanHazVundle == 0
-  echo "Installing Bundles, please ignore key map error messages"
-  echo ""
-  :BundleInstall
-endif
+NeoBundleCheck
 
 " ctrl-p preferences
 let g:ctrlp_working_path_mode = 'c'
