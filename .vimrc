@@ -4,9 +4,10 @@ set nocompatible
 filetype off
 
 " install neobundle stuff!
+" stollen from:
+" https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
+" inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 if has('vim_starting')
-    " install neobundle stuff!
-    " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
     if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
         echo "Installing NeoBundle.."
         echo ""
