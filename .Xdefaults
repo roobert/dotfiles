@@ -3,6 +3,7 @@ xterm*utf8: 1
 xterm*trimSelection: true
 xterm*borderColor: black
 xterm*scrollBar: false
+XTerm*TrimSelection: true
 XTerm*VT100.Translations:    #override
 	Shift<Btn1Down>:		select-start()
 	Shift<Btn1Motion>:		select-extend()
