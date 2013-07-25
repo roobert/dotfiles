@@ -77,3 +77,5 @@ function svn.add_all () {
   for f in `svn status|grep \^\?|COL2`; svn add $f
 }
 
+# search puppet
+function sp { grep -R $1 ~modules/*/trunk ~nodes ~site }
