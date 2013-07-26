@@ -25,9 +25,11 @@ if randr_screen_change_notify_hook ~= nil then
 end
 -- $Id$
 
---XTERM="xterm"
+XTERM="xterm"
 --XTERM="mlterm"
-XTERM="urxvt"
+
+-- broken! https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
+--XTERM="urxvt"
 
 -- TODO: trim and inline these
 --dopath("cfg_notioncore")
