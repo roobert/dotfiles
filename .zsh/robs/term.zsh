@@ -1,6 +1,6 @@
 # terminal settings
 case $TERM in
-  rxvt|*term)
+  *rxvt*|*term)
     precmd() {
       print -Pn "\e]0;%m:%~\a"
     }

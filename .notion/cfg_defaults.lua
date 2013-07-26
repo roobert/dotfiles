@@ -25,9 +25,9 @@ if randr_screen_change_notify_hook ~= nil then
 end
 -- $Id$
 
-XTERM="xterm"
+--XTERM="xterm"
 --XTERM="mlterm"
---XTERM="urxvt"
+XTERM="urxvt"
 
 -- TODO: trim and inline these
 --dopath("cfg_notioncore")

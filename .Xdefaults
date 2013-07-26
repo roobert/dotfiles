@@ -12,3 +12,16 @@ XTerm*VT100.Translations:    #override
 	Shift<Btn3Down>:		start-extend()
 	Shift<Btn3Motion>:		select-extend()
 	Shift<BtnUp>:			select-end(CLIPBOARD)
+
+! fonts
+! run "fc-list" for a list of available fonts
+!URxvt*font: xft:Monospace:pixelsize=12
+
+URxvt*scrollBar: False
+URxvt*scrollTtyOutput: False
+URxvt*scrollTtyKeypress: True
+URxvt*secondaryScroll: True
+URxvt*saveLines: 8000
+URxvt*foreground:White
+URxvt*background:Black
+
