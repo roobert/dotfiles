@@ -4,8 +4,14 @@ vmware-user &
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 # make my laptop keyboard more like a mac keyboard
+# remap ¬ (notsign) to ~ 
+xmodmap -e 'keycode 49 = grave asciitilde'
+
 # remap £ to #
-# remap ¬ to ~
+xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
+#xmodmap -e 'keycode 51 = sterling asciitilde'
+#xmodmap -e 'keycode 51 = numbersign asciitilde'
+
 
 eval $(gnome-keyring-daemon --start) &
 exec ssh-agent notion
