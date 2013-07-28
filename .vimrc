@@ -41,6 +41,7 @@ NeoBundle "godlygeek/tabular"
 NeoBundle "puppetlabs/puppet-syntax-vim"
 NeoBundle "rodjek/vim-puppet"
 NeoBundle "scrooloose/syntastic"
+NeoBundle "vim-scripts/YankRing.vim"
 
 NeoBundleCheck
 
@@ -162,4 +163,7 @@ map <C-h> :tabprev<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
+
+" yank ring
+nnoremap <silent> <Leader>p :YRShow<CR>
 
