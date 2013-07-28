@@ -104,3 +104,6 @@ alias c9="../../../../../../../../../"
 
 alias ansible="ansible -i $HOME/.ansible_hosts"
 alias ansible-playbook="ansible-playbook -i $HOME/.ansible_hosts"
+
+alias copy="xsel --clipboard --input"
+alias paste="xsel --clipboard --output"
