@@ -108,6 +108,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "highlight OverLength ctermbg=red guibg=#FFD9D9
 "match OverLength /\%81v.*/
 
+" disable help since sometimes i accidently hit it when aiming for Esc.
+nmap <F1> <nop>
+
 " Tabularize plugin bindings
 nmap <Leader>p :Ta /=><CR>
 vmap <Leader>p :Ta /=><CR>
