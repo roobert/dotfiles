@@ -58,6 +58,10 @@ function haste_client {
 
   output=`curl -s -X POST -d "$str" $HASTE_SERVER/documents |perl -pi -e 's|.+:\"(.+)\"}|$1|'`
 
+  if [[ ! -z $DISPLAY ]] && type -f xclip > /dev/null 2>&1; then
+    echo $HASTE_SERVER/$output$EXTENSION | copy
+  fi
+
   echo $HASTE_SERVER/$output$EXTENSION
 }
 

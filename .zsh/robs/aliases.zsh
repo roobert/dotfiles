@@ -105,5 +105,8 @@ alias c9="../../../../../../../../../"
 alias ansible="ansible -i $HOME/.ansible_hosts"
 alias ansible-playbook="ansible-playbook -i $HOME/.ansible_hosts"
 
-alias copy="xsel --clipboard --input"
-alias paste="xsel --clipboard --output"
+# whats the diff between these two clipboards?
+#alias copy="xsel --clipboard --input"
+#alias paste="xsel --clipboard --output"
+alias copy="xclip -i -selection p"
+alias paste="xclip -o -selection p"
