@@ -30,15 +30,33 @@ end
 
 -- broken! https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
 XTERM="urxvt"
+BROWSER="chromium-browser"
+BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
+MUSIC="spotify"
 
--- TODO: trim and inline these
---dopath("cfg_notioncore")
---dopath("mod_tiling")
+defbindings("WScreen", {
+    kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
+})
+
+defbindings("WScreen", {
+    kpress(ALTMETA.."F12", nil),
+})
+
 defbindings("WScreen", {
     kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
     kpress(META.."F3", "mod_query.query_exec(_)"),
+    kpress(META.."F4", "notioncore.exec_on(_, MUSIC or 'x-music')"),
+    kpress(META.."F5", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
+    kpress(META.."F6", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
     kpress(META.."F9", "ioncore.create_ws(_)"),
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
+
+    kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
+    kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
+    kpress("XF86AudioPrev", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous')"),
+    kpress("XF86AudioRaiseVolume", "notioncore.exec('amixer set Master 5%+')"),
+    kpress("XF86AudioLowerVolume", "notioncore.exec('amixer set Master 5%-')"),
+    kpress("XF86AudioMute", "notioncore.exec('amixer -D pulse set Master 1+ toggle')"),
 })
 
 defbindings("WMPlex.toplevel", {
@@ -83,12 +101,12 @@ de.reset()
 de.defstyle("*", {
 	background_colour = "#000",
 	foreground_colour = "#777",
-	
+
 	shadow_pixels = 0,
 	highlight_pixels = 0,
 	padding_pixels = 0,
 	spacing = 0,
-	
+
 --	font = "-*-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*",
 -- font = "fixed",
 --font = "Ubuntu Mono",
@@ -145,7 +163,7 @@ de.defstyle("stdisp", {
 })
 
 -- Define some additional title shortening rules to use when the full
--- title doesn't fit in the available space. The first-defined matching 
+-- title doesn't fit in the available space. The first-defined matching
 -- rule that succeeds in making the title short enough is used.
 ioncore.defshortening("(.*) - Mozilla(<[0-9]+>)", "$1$2$|$1$<...$2")
 ioncore.defshortening("(.*) - Mozilla", "$1$|$1$<...")
