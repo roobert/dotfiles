@@ -15,3 +15,4 @@ xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
 
 eval $(gnome-keyring-daemon --start) &
 exec ssh-agent notion
+#exec ssh-agent i3

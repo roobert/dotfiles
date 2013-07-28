@@ -1,17 +1,54 @@
 function haste_client {
 
-  # jacked from: https://gist.github.com/flores/3670953
+  # originally jacked from here: https://gist.github.com/flores/3670953
+  # added file type detection and personal aliases..
 
   server=$HASTE_SERVER
 
-  usage="$0 pastes into $server
+  usage="$0 pastes into $HASTE_SERVER
     usage: $0 something
     example: '$0 pie' or 'ps aufx |$0'"
 
   if [ -z $1 ]; then
     str=`cat /dev/stdin`;
   else
-    str=$1;
+    str=`cat $1`;
+
+    # attempt to detect file type by extension..
+    EXTENSION="$(echo "$1" | rev | cut -d. -f1 | rev)"
+
+    if [[ ! -z "$EXTENSION" ]]; then
+      EXTENSION=".$EXTENSION"
+    fi
+  fi
+
+  # try and guess type from contents of paste
+  if [[ -z "$EXTENSION" ]]; then
+    if $(echo "$str" | grep "#!/" | grep ruby > /dev/null 2>&1); then
+      EXTENSION=".rb"
+    fi
+
+    if $(echo "$str" | grep "#!/" | grep zsh > /dev/null 2>&1); then
+      EXTENSION=".zsh"
+    fi
+
+    if $(echo "$str" | grep "#!/" | grep sh > /dev/null 2>&1); then
+      EXTENSION=".sh"
+    fi
+
+    if $(echo "$str" | grep "#!/" | grep python > /dev/null 2>&1); then
+      EXTENSION=".py"
+    fi
+
+    # hope to god i never have to do any php..
+    if $(echo "$str" | grep "<php" > /dev/null 2>&1); then
+      EXTENSION=".php"
+    fi
+
+    # or perl..!
+    if $(echo "$str" | grep "#!/" | grep perl > /dev/null 2>&1); then
+      EXTENSION=".pl"
+    fi
   fi
 
   if [ -z "$str" ]; then
@@ -19,9 +56,9 @@ function haste_client {
     exit 1;
   fi
 
-  output=`curl -s -X POST -d "$str" $server/documents |perl -pi -e 's|.+:\"(.+)\"}|$1|'`
+  output=`curl -s -X POST -d "$str" $HASTE_SERVER/documents |perl -pi -e 's|.+:\"(.+)\"}|$1|'`
 
-  echo $server/$output
+  echo $HASTE_SERVER/$output$EXTENSION
 }
 
 function pasti {

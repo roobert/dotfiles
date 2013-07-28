@@ -9,7 +9,7 @@ alias screen="TERM=xterm screen"
 alias ssh="ssh -t"
 
 # shortcuts
-alias haste_work="HASTE_SERVER=http://pasti.co haste"
+alias haste_work="pasti"
 alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials"
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
