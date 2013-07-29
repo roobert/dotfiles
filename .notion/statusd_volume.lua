@@ -31,13 +31,19 @@
 local function get_volume()
    local f=io.popen('amixer sget Master','r')
    local s=f:read('*all')
+
    f:close()
+
    local _, _, master_level, master_state = string.find(s, "%[(%d*%%)%] %[.%d*...dB%] %[(%a*)%]")
    local sound_state = ""
+
    if master_state == "off" then
-      sound_state = "MUTE "
+      sound_state = "critical"
+   else
+      sound_state = "normal"
    end
-  return master_level.."", sound_state..""
+
+   return master_level.."", sound_state..""
 end
 
 local function inform_volume(name, value)
@@ -47,22 +53,18 @@ local function inform_volume(name, value)
       io.stdout:write(name..": "..value.."\n")
    end
 end
-local function inform_state(value)
-   if statusd ~= nil then
-      statusd.inform("volume_state", value)
-   else
-      io.stdout:write("volume_state"..value.."\n")
-   end
-end
 
 if statusd ~= nil then
    volume_timer = statusd.create_timer()
 end
 
 local function update_volume()
+
    local master_level, sound_state = get_volume()
+
    inform_volume("volume_level", master_level)
-   inform_volume("volume_state", sound_state)
+   inform_volume("volume_level_hint", sound_state)
+
    if statusd ~= nil then
       volume_timer:set(100, update_volume)
    end
