@@ -37,7 +37,7 @@ mod_statusbar.create{
     -- windows and icons.
     --
     --template="[ %tunnel - %tunnel_ticker ][ %date ][ load: %load ] %filler%systray",
-    template=" %load %filler%systray %date ",
+    template=" %load %filler%systray%volume_state%volume_level | %date ",
     --template="[ %date ][ load: %load ] %filler%systray",
     --template="[ %date || load:% %>load || mail:% %>mail_new/%>mail_total ] %filler%systray",
     --template="[ %date || load: %05load_1min || mail: %02mail_new/%02mail_total ] %filler%systray",

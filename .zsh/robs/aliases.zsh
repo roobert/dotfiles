@@ -4,7 +4,7 @@
 alias ls="ls --color=yes"
 alias hist="history 1"
 alias m="mount | column -t"
-alias am="alsamixer"
+alias am="alsamixer -D pulse"
 alias screen="TERM=xterm screen"
 alias ssh="ssh -t"
 
