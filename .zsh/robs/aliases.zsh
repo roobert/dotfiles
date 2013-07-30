@@ -1,9 +1,9 @@
 # aliases
 
-alias s="sudo"
-
 # system tools
-alias ls="ls --color=yes"
+alias s="sudo"
+alias c="r"
+alias ls="ls --color=auto"
 alias hist="history 1"
 alias m="mount | column -t"
 alias am="alsamixer -D pulse"
