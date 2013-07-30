@@ -2,7 +2,6 @@
 
 # system tools
 alias s="sudo"
-alias c="cdr"
 alias ls="ls --color=auto"
 alias hist="history 1"
 alias m="mount | column -t"
