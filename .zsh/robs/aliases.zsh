@@ -1,5 +1,7 @@
 # aliases
 
+alias s="sudo"
+
 # system tools
 alias ls="ls --color=yes"
 alias hist="history 1"

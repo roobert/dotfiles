@@ -79,3 +79,17 @@ function svn.add_all () {
 
 # search puppet
 function sp { grep -R $1 ~modules/*/trunk ~nodes ~site }
+
+# stuff stolen from: http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
+
+# toggle vi with ctrl-z
+function foreground-vi {
+  fg %vi
+}
+zle -N foreground-vi
+bindkey '^Z' foreground-vi
+
+# easily search zsh man pages
+function zman {
+  PAGER="less -g -s '+/^       "$1"'" man zshall
+}
