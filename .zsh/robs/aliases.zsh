@@ -111,3 +111,11 @@ alias ansible-playbook="ansible-playbook -i $HOME/.ansible_hosts"
 #alias paste="xsel --clipboard --output"
 alias copy="xclip -i -selection p"
 alias paste="xclip -o -selection p"
+
+# apt
+alias add="sudo apt-get install"
+alias remove="sudo apt-get remove"
+alias purge="sudo apt-get purge"
+alias update="sudo apt-get update"
+alias search="sudo apt-cache search"
+alias dsearch="dpkg -l | grep"

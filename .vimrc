@@ -1,7 +1,7 @@
 ".vimrc
 
+" backwards compatibility is limiting so turn it off
 set nocompatible
-filetype off
 
 " install neobundle stuff!
 " stollen from:
@@ -158,9 +158,7 @@ map <C-Down>  <C-w><Down>
 map <C-Left>  <C-w><Left>
 map <C-Right> <C-w><Right>
 
-map <C-l> :tabnext<CR>
-map <C-h> :tabprev<CR>
-
+" tab navigation
 map <C-l> :tabnext<CR>
 map <C-h> :tabprev<CR>
 
