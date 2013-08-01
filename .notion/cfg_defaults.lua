@@ -64,6 +64,7 @@ defbindings("WScreen", {
     kpress(META.."F5", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
     kpress(META.."F6", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
     kpress(META.."F9", "ioncore.create_ws(_)"),
+    kpress(META.."F11", "ioncore.restart()"),
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
 
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),

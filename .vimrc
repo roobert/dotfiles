@@ -167,4 +167,5 @@ map <Leader>/ :noh<CR>
 
 " yank ring
 nnoremap <silent> <Leader>p :YRShow<CR>
+let g:yankring_history_dir = '$HOME/.vim'
 
