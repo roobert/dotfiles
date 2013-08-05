@@ -112,8 +112,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 nmap <F1> <nop>
 
 " Tabularize plugin bindings
-nmap <Leader>p :Ta /=><CR>
-vmap <Leader>p :Ta /=><CR>
+nmap <Leader>= :Ta /=><CR>
+vmap <Leader>= :Ta /=><CR>
 nmap <Leader>e :Ta /=<CR>
 vmap <Leader>e :Ta /=<CR>
 
