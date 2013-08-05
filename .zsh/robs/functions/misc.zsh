@@ -78,7 +78,7 @@ function svn.add_all () {
 }
 
 # search puppet
-function sp { grep -R $1 ~modules/*/trunk ~nodes ~site }
+function sp { grep -R $* ~modules/*/trunk ~nodes ~site }
 
 # stuff stolen from: http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
 
