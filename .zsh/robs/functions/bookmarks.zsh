@@ -19,16 +19,6 @@ function bookmarks {
     return
   fi
 
-#  if [[ $1 = 'rm' ]]; then
-#
-#    echo "# attempting to remove directory from bookmarks: `pwd`"
-#    sed -i "/.*\"`pwd`\"/d" ~/.zshmarks
-#
-#    bookmarks reload
-#
-#    return
-#  fi
-
   if [[ $1 = '.' ]]; then
     # set bookmark name to be current dir name
     name="`basename $(pwd)`"
@@ -43,4 +33,3 @@ function bookmarks {
 
 alias b="bookmarks"
 alias br="bookmarks reload"
-
