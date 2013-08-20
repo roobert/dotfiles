@@ -53,7 +53,7 @@ function haste_client {
 
   if [ -z "$str" ]; then
     echo $usage;
-    exit 1;
+    return 1;
   fi
 
   output=`curl -s -X POST -d "$str" $HASTE_SERVER/documents |perl -pi -e 's|.+:\"(.+)\"}|$1|'`
