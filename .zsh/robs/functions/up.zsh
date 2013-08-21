@@ -6,7 +6,7 @@ function up {
 
     while [ $dir != "/" ]; do
         if [ $dir:t = $1 ]; then
-            cd $dir
+            builtin cd $dir 2> /dev/null
             return 0
         fi
         dir=$dir:h
@@ -14,6 +14,7 @@ function up {
     return 1
 }
 
-function cd {
-  builtin cd $* &>/dev/null || up $*
-}
+if ! builtin cd $* &>/dev/null; then
+  up $* || builtin cd $*
+fi
+
