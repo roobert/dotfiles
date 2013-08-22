@@ -93,3 +93,43 @@ bindkey '^Z' foreground-vi
 function zman {
   PAGER="less -g -s '+/^       "$1"'" man zshall
 }
+
+# stolen from: http://www.bashoneliners.com/main/oneliner/102/
+# older versions of sort don't have the -h flag that allows clever sorting of du -h output, e.g: du -sh | sort -h
+function du.sorted {
+  for i in G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done | tac 2>/dev/null
+}
+
+# find
+function f {
+  case $# in
+    1) find . -name $1 ;;
+    2) find $1 -name $2 ;;
+    *) echo "Invalid number of arguments!" >&2; exit 1 ;;
+  esac
+}
+
+# find wild
+function fw {
+  case $# in
+    1) find . -name "*$1*" ;;
+    2) find $1 -name "*$2*" ;;
+    *) echo "Invalid number of arguments!" >&2; exit 1 ;;
+  esac
+}
+
+# highlight
+function hl {
+  SEARCH_STRING="$1"
+
+  if [[ $# -eq 0 ]]; then
+    echo "not enough arguments!"
+    exit 1
+  elif [[ $# -eq 1 ]]; then
+    FILES="-"
+  else
+    FILES="$@"
+  fi
+
+  egrep "${SEARCH_STRING}|^" $FILES
+}
