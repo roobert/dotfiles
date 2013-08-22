@@ -3,17 +3,22 @@ if [ ! -n "$PS1" ]; then return; fi
 
 
 # if not installed yet..
-if [[ ! -d $HOME/.zsh/ ]]; then
+if [[ ! -d "$HOME/.zsh/" ]]; then
   INSTALL_DOTFILES=true
 
 # if older than 12 hours..
-elif [[ "$(find .zsh/last_checkout -amin +1|wc -l)" -gt 0 ]]; then
+elif [[ "$(find $HOME/.zsh/last_checkout -amin +720|wc -l)" -gt 0 ]]; then
 
   INSTALL_DOTFILES=true
 
-# checked out but no last_checkout file..
+elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
+
+  # checked out but no last_checkout file..
+  date > $HOME/.zsh/last_checkout
+
 else
-  date > ~/.zsh/last_checkout
+  # dotfiles already installed..
+  true
 
 fi
 
