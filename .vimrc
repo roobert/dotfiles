@@ -48,6 +48,10 @@ NeoBundleCheck
 " ctrl-p preferences
 let g:ctrlp_working_path_mode = 'c'
 
+" yank ring
+nnoremap <silent> <Leader>p :YRShow<CR>
+let g:yankring_history_dir = '~/.vim'
+
 " make it colourful..
 
 " For windows, the colors directory is: c:\Users\<user>\vimfiles\colors 
@@ -164,8 +168,4 @@ map <C-h> :tabprev<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
-
-" yank ring
-nnoremap <silent> <Leader>p :YRShow<CR>
-let g:yankring_history_dir = '$HOME/.vim'
 
