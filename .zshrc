@@ -7,7 +7,7 @@ if [[ ! -d $HOME/.zsh/ ]]; then
   INSTALL_DOTFILES=true
 
 # if older than 12 hours..
-elif test `find .zsh/last_checkout -amin +720 >/dev/null 2>&1`; then
+elif find .zsh/last_checkout -amin +720 >/dev/null 2>&1; then
   INSTALL_DOTFILES=true
 
 # checked out but no last_checkout file..
