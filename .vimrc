@@ -45,9 +45,8 @@ NeoBundle "vim-scripts/YankRing.vim"
 
 NeoBundleCheck
 
-" plugin settings
+" ctrl-p preferences
 let g:ctrlp_working_path_mode = 'c'
-let g:yankring_history_dir = '~/.vim/'
 
 " make it colourful..
 

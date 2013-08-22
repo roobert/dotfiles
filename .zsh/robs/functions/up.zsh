@@ -2,19 +2,20 @@
 
 function up {
 
-    dir=$PWD;
+  dir=$PWD;
 
-    while [ $dir != "/" ]; do
-        if [ $dir:t = $1 ]; then
-            builtin cd $dir 2> /dev/null
-            return 0
-        fi
-        dir=$dir:h
-    done
-    return 1
+  while [ $dir != "/" ]; do
+    if [ $dir:t = $1 ]; then
+      cd $dir
+      return 0
+    fi
+
+    dir=$dir:h
+  done
+
+  return 1
 }
 
-if ! builtin cd $* &>/dev/null; then
-  up $* || builtin cd $*
-fi
-
+function cd {
+  builtin cd $* &>/dev/null || up $*
+}
