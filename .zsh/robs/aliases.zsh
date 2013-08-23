@@ -27,12 +27,6 @@ alias gup='git commit -am "updated" && git push'
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
 alias vpa="ssh rpro -t 'cd vagrant-puppet-client; vagrant ssh'"
 
-# stuff in ~/bin
-alias f="r_find"
-alias fw="r_find_wild"
-alias hl="r_highlight"
-alias highlight="r_highlight"
-
 # ps stuff
 export PS_FORMAT="user,pid,args"
 alias ps='ps ww'                     # ps - always assume unlimited width
