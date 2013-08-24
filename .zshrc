@@ -1,7 +1,6 @@
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
-
 # if not installed yet..
 if [[ ! -d "$HOME/.zsh/" ]]; then
   echo "no .zsh dir.."
