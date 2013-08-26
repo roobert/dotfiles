@@ -12,7 +12,6 @@ elif [[ "$(find $HOME/.zsh/last_checkout -amin +720|wc -l)" -gt 0 ]]; then
   INSTALL_DOTFILES=true
 
 elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
-
   echo ".zsh/last_checkout doesn't exist, creating.."
 
   # checked out but no last_checkout file..
