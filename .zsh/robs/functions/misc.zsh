@@ -56,10 +56,10 @@ function svn.sem {
 }
 
 # mattf props! - open vim ctrl-p with ^P
-function cheesy-ctrlp () {
-  BUFFER='vim +:CtrlP'
-  zle accept-line
-}
+#function cheesy-ctrlp () {
+#  BUFFER='vim +:CtrlP'
+#  zle accept-line
+#}
 
 zle -N cheesy-ctrlp cheesy-ctrlp
 bindkey -M viins '^P' cheesy-ctrlp
