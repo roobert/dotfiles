@@ -7,7 +7,7 @@ if [[ ! -d "$HOME/.zsh/" ]]; then
   INSTALL_DOTFILES=true
 
 # if older than 12 hours..
-elif [[ "$(find $HOME/.zsh/last_checkout -amin +720|wc -l)" -gt 0 ]]; then
+elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720|wc -l)" -gt 0 ]]; then
   echo "dotfiles older than 12hrs old.."
   INSTALL_DOTFILES=true
 
