@@ -6,16 +6,16 @@ if [[ ! -d "$HOME/.zsh/" ]]; then
   echo "no .zsh dir.."
   INSTALL_DOTFILES=true
 
-# if older than 12 hours..
-elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720|wc -l)" -gt 0 ]]; then
-  echo "dotfiles older than 12hrs old.."
-  INSTALL_DOTFILES=true
-
 elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
   echo ".zsh/last_checkout doesn't exist, creating.."
 
   # checked out but no last_checkout file..
   date > $HOME/.zsh/last_checkout
+
+# if older than 12 hours..
+elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720|wc -l)" -gt 0 ]]; then
+  echo "dotfiles older than 12hrs old.."
+  INSTALL_DOTFILES=true
 
 else
   # dotfiles already installed..
