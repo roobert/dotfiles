@@ -133,3 +133,11 @@ function hl {
 
   egrep "${SEARCH_STRING}|^" $FILES
 }
+
+function si {
+  if [[ $# -gt 0 ]]; then
+    svn ci -m $*
+  else
+    svn ci -m ''
+  fi
+}

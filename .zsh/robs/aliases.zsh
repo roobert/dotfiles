@@ -67,9 +67,6 @@ export EDITOR="vim"
 export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;32'
 
-# subversion
-alias si='svn ci -m'
-
 # camera
 alias getpics="gphoto2 --get-all-files"
 
