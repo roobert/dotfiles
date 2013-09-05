@@ -4,7 +4,7 @@ if [ ! -n "$PS1" ]; then return; fi
 # if not installed yet..
 if [[ ! -d "$HOME/.zsh/" ]]; then
   echo "no .zsh dir.."
-  INSTALL_DOTFILES=true
+  export INSTALL_DOTFILES="true"
 
 elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
   echo ".zsh/last_checkout doesn't exist, creating.."
@@ -13,17 +13,17 @@ elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
   date > $HOME/.zsh/last_checkout
 
 # if older than 12 hours..
-elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720|wc -l)" -gt 0 ]]; then
+elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720 2>/dev/null|wc -l)" -gt 0 ]]; then
   echo "dotfiles older than 12hrs old.."
-  INSTALL_DOTFILES=true
+  export INSTALL_DOTFILES="true"
 
 else
   # dotfiles already installed..
-  true
+  INSTALL_DOTFILES="false"
 
 fi
 
-if [[ $INSTALL_DOTFILES = true ]]; then
+if $($INSTALL_DOTFILES); then
 
   # no --strip-components option for older versions of tar (tar (GNU tar) 1.14)
   tar --help | grep strip-components > /dev/null 2>&1
