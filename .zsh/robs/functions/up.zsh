@@ -4,10 +4,16 @@
 
 function up {
 
-  dir=$PWD;
+  if [[ $# == 0 ]]; then
+    target=$(pwd | sed -e 's/.*modules\/\([^/]*\)\/.*/\1/')
+  else
+    target=$1
+  fi
+
+  dir=$PWD
 
   while [ $dir != "/" ]; do
-    if [ $dir:t = $1 ]; then
+    if [ $dir:t = $target ]; then
       builtin cd $dir
       return 0
     fi
@@ -19,7 +25,7 @@ function up {
 }
 
 function cd {
-    if ! builtin cd $* &>/dev/null; then
-        up $* || builtin cd $*
-    fi
+  if ! builtin cd $* &>/dev/null; then
+    up $* || builtin cd $*
+  fi
 }
