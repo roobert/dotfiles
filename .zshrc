@@ -1,26 +1,28 @@
+#
+# TODO
+# * trap ^C?
+# * ping test or fail?
+#
+
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
-# if not installed yet..
-if [[ ! -d "$HOME/.zsh/" ]]; then
-  echo "no .zsh dir.."
+if [[ ! -f "$HOME/.dotfiles-last_checkout" ]]; then
+  echo ".dotfiles-last_checkout doesn't exist.."
   export INSTALL_DOTFILES="true"
 
-elif [[ ! -f "$HOME/.zsh/last_checkout" ]]; then
-  echo ".zsh/last_checkout doesn't exist, creating.."
-
-  # checked out but no last_checkout file..
-  date > $HOME/.zsh/last_checkout
-
-# if older than 12 hours..
-elif [[ "$(find $HOME/.zsh/last_checkout -cmin +720 2>/dev/null|wc -l)" -gt 0 ]]; then
+elif [[ "$(find $HOME/.dotfiles-last_checkout -cmin +720 2>/dev/null|wc -l)" -gt 0 ]]; then
   echo "dotfiles older than 12hrs old.."
   export INSTALL_DOTFILES="true"
 
 else
   # dotfiles already installed..
   INSTALL_DOTFILES="false"
+fi
 
+if [[ -f "$HOME/.dotfiles-no_checkout" ]]; then
+  echo "no dotfiles checkout due to file: $HOME/.dotfiles-no_checkout"
+  INSTALL_DOTFILES="false"
 fi
 
 if $($INSTALL_DOTFILES); then
@@ -38,17 +40,17 @@ if $($INSTALL_DOTFILES); then
 
   # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/dotfiles/tarball/master \
-    | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME > /dev/null 2> .zsh/failure_log
+    | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME > /dev/null 2> .dotfiles-failure_log
 
   if [[ $? -eq 0 ]]; then
     echo 'ok!'
   else
-    echo 'failures logged to .zsh/failure_log'
+    echo 'failures logged to .dotfiles-failure_log'
   fi
 
   chmod 700 -R $HOME/.ssh
 
-  date > $HOME/.zsh/last_checkout
+  date > $HOME/.dotfiles-last_checkout
 fi
 
 # source main good stuff
