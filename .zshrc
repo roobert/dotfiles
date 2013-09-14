@@ -45,6 +45,7 @@ if $($INSTALL_DOTFILES); then
   if [[ $? -eq 0 ]]; then
     echo 'ok!'
   else
+    echo "failed!"
     echo 'failures logged to .dotfiles-failure_log'
   fi
 

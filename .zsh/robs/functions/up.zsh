@@ -4,8 +4,23 @@
 
 function up {
 
+  echo "up!!!"
+
   if [[ $# == 0 ]]; then
-    target=$(pwd | sed -e 's/.*modules\/\([^/]*\)\/.*/\1/')
+    if [[ -z "${UP_PATHS}" ]]; then
+      echo "no up paths, boo"
+      return 1
+    fi
+
+    IFS=";"
+
+    for up_path in $UP_PATHS; do
+      echo "up_path: $up_path"
+      up $(pwd | sed -e "s/.*${up_path}\/\([^/]*\)\/.*/\1/")
+      if [[ $? == 0 ]]; then
+        return 0
+      fi
+    done
   else
     target=$1
   fi
