@@ -40,6 +40,9 @@ function gh_fetch {
   # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/$REPOS/tarball/master \
   | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $TARGET
+
+  # merge any local ssh configs into main config - for stuff that would be silly to store in github
+  cat $HOME/.ssh-* >> ~/.ssh/config > /dev/null 2>&1
 }
 
 alias gh_install="gh_fetch"
