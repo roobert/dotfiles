@@ -141,3 +141,13 @@ function si {
     svn ci -m ''
   fi
 }
+
+function ssh_merge_config {
+  # merge any local ssh configs into main config - for stuff that would be silly to store in github                                                           
+  if ls $HOME/.ssh-* > /dev/null 2>&1; then
+    echo "merging ssh configs.."
+    cat $HOME/.ssh-* >> $HOME/.ssh/config
+  else
+    echo "no ssh configs to merge"
+  fi
+}
