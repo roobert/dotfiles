@@ -27,6 +27,8 @@ for f in $ZSH_ROOT/**/*.zsh; do
     case $f in
       "$ZSH_ROOT/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
       "$ZSH_ROOT/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
+      "$ZSH_ROOT/robs/cdr.zsh")                                  continue ;;
+      "$ZSH_ROOT/robs/functions/cdr.zsh")                        continue ;;
       *) source $f ;;
     esac
   fi
