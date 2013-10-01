@@ -12,7 +12,7 @@ if has('vim_starting')
         echo "Installing NeoBundle.."
         echo ""
         silent !mkdir -p ~/.vim/bundle
-        silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+        silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     endif
 
     set runtimepath+=~/.vim/bundle/neobundle.vim/
