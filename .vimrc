@@ -3,47 +3,50 @@
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
-" install neobundle stuff!
-" stollen from:
-" https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
-" inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-if has('vim_starting')
-    if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
-        echo "Installing NeoBundle.."
-        echo ""
-        silent !mkdir -p ~/.vim/bundle
-        silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    endif
 
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+if version >= 701
+  " install neobundle stuff!
+  " stollen from:
+  " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
+  " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+  if has('vim_starting')
+      if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
+          echo "Installing NeoBundle.."
+          echo ""
+          silent !mkdir -p ~/.vim/bundle
+          silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+      endif
+
+      set runtimepath+=~/.vim/bundle/neobundle.vim/
+  endif
+  call neobundle#rc(expand('~/.vim/bundle/'))
+
+  NeoBundleFetch 'Shougo/neobundle.vim'
+  NeoBundle 'Shougo/vimproc', {
+    \ 'build' : {
+    \     'windows' : 'make -f make_mingw32.mak',
+    \     'cygwin'  : 'make -f make_cygwin.mak',
+    \     'mac'     : 'make -f make_mac.mak',
+    \     'unix'    : 'make -f make_unix.mak',
+    \     },
+    \ }
+
+
+  " me plugins!
+  NeoBundle "tomasr/molokai"
+  NeoBundle "MarcWeber/vim-addon-mw-utils"
+  NeoBundle "tomtom/tlib_vim"
+  NeoBundle "garbas/vim-snipmate"
+  NeoBundle "honza/vim-snippets"
+  NeoBundle "tpope/vim-surround"
+  NeoBundle "godlygeek/tabular"
+  NeoBundle "puppetlabs/puppet-syntax-vim"
+  NeoBundle "rodjek/vim-puppet"
+  NeoBundle "scrooloose/syntastic"
+  NeoBundle "vim-scripts/YankRing.vim"
+
+  NeoBundleCheck
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-  \     'windows' : 'make -f make_mingw32.mak',
-  \     'cygwin'  : 'make -f make_cygwin.mak',
-  \     'mac'     : 'make -f make_mac.mak',
-  \     'unix'    : 'make -f make_unix.mak',
-  \     },
-  \ }
-
-
-" me plugins!
-NeoBundle "tomasr/molokai"
-NeoBundle "MarcWeber/vim-addon-mw-utils"
-NeoBundle "tomtom/tlib_vim"
-NeoBundle "garbas/vim-snipmate"
-NeoBundle "honza/vim-snippets"
-NeoBundle "tpope/vim-surround"
-NeoBundle "godlygeek/tabular"
-NeoBundle "puppetlabs/puppet-syntax-vim"
-NeoBundle "rodjek/vim-puppet"
-NeoBundle "scrooloose/syntastic"
-NeoBundle "vim-scripts/YankRing.vim"
-
-NeoBundleCheck
 
 " ctrl-p preferences
 let g:ctrlp_working_path_mode = 'c'
