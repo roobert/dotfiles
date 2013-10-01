@@ -3,8 +3,8 @@
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
+if version > 701
 
-if version >= 702
   " install neobundle stuff!
   " stollen from:
   " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
