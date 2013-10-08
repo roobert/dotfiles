@@ -151,3 +151,8 @@ function ssh_merge_config {
     echo "no ssh configs to merge"
   fi
 }
+
+function make_html_index {
+  echo "<style>img { width: 800px; }" >> index.html
+  for f in *; echo "<img src=\"$f\">" >> index.html
+}
