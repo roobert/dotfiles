@@ -4,14 +4,14 @@ xterm*trimSelection: true
 xterm*borderColor: black
 xterm*scrollBar: false
 XTerm*TrimSelection: true
-XTerm*VT100.Translations:    #override
-	Shift<Btn1Down>:		select-start()
-	Shift<Btn1Motion>:		select-extend()
-	Shift<Btn1Up>:			select-end(CLIPBOARD)
-	Shift<Btn2Up>:			insert-selection(CLIPBOARD)
-	Shift<Btn3Down>:		start-extend()
-	Shift<Btn3Motion>:		select-extend()
-	Shift<BtnUp>:			select-end(CLIPBOARD)
+XTerm*VT100.Translations: #override
+	Shift<Btn1Down>: select-start()
+	Shift<Btn1Motion>: select-extend()
+	Shift<Btn1Up>: select-end(CLIPBOARD)
+	Shift<Btn2Up>: insert-selection(CLIPBOARD)
+	Shift<Btn3Down>: start-extend()
+	Shift<Btn3Motion>: select-extend()
+	Shift<BtnUp>: select-end(CLIPBOARD)
 
 ! fonts
 ! run "fc-list" for a list of available fonts
@@ -22,18 +22,24 @@ URxvt*scrollTtyOutput: False
 URxvt*scrollTtyKeypress: True
 URxvt*secondaryScroll: True
 URxvt*saveLines: 8000
-URxvt*foreground:White
-URxvt*background:Black
+URxvt*foreground: White
+URxvt*background: Black
 URxvt*iso14755: false
 
+! url matching stuff..
 
-URxvt.perl-ext-common:  default,matcher
+URxvt.perl-ext-common: default,matcher
+URxvt.colorUL: #cccccc
+
+! list urls to open
+URxvt.keysym.C-o:  perl:matcher:list
+
+! copy url
+!URxvt.perl-ext:      default,url-select
+!URxvt.keysym.C-y:    perl:url-select:select_next
+
+! click to open urls..
 !URxvt.url-launcher:      /usr/bin/chromium-browser
 !URxvt.matcher.button:   1
-URxvt.colorUL: #4682B4
-!URxvt.keysym.C-w:  perl:matcher:list
 
-!URxvt.keysym.M-w:  perl:matcher:list
-
-URxvt.perl-ext:      default,url-select
-URxvt.keysym.C-w:    perl:url-select:select_next
+!URxvt.matcher.rend.0: -Uline fg8
