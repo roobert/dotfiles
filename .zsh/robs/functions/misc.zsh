@@ -156,3 +156,11 @@ function make_html_index {
   for f in *; echo "<img src=\"$f\">" >> index.html
   echo "<style>img { width: 800px; }</style>" >> index.html
 }
+
+function dus {
+  if echo | sort -h > /dev/null 2>&1; then
+    du -sh $* | sort -h
+  else
+    du -s $* | sort -n
+  fi
+}
