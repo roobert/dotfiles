@@ -8,11 +8,11 @@
 if [ ! -n "$PS1" ]; then return; fi
 
 if [[ ! -f "$HOME/.dotfiles-last_checkout" ]]; then
-  echo ".dotfiles-last_checkout doesn't exist.."
+  #echo ".dotfiles-last_checkout doesn't exist.."
   export INSTALL_DOTFILES="true"
 
 elif [[ "$(find $HOME/.dotfiles-last_checkout -cmin +720 2>/dev/null|wc -l)" -gt 0 ]]; then
-  echo "dotfiles older than 12hrs old.."
+  #echo "dotfiles older than 12hrs old.."
   export INSTALL_DOTFILES="true"
 
 else
@@ -21,7 +21,7 @@ else
 fi
 
 if [[ -f "$HOME/.dotfiles-no_checkout" ]]; then
-  echo "no dotfiles checkout due to file: $HOME/.dotfiles-no_checkout"
+  #echo "no dotfiles checkout due to file: $HOME/.dotfiles-no_checkout"
   INSTALL_DOTFILES="false"
 fi
 
@@ -43,7 +43,8 @@ if $($INSTALL_DOTFILES); then
     | tar -xzv -m $STRIP_CMD 1 --exclude=README.md -C $HOME > /dev/null 2> .dotfiles-failure_log
 
   if [[ $? -eq 0 ]]; then
-    echo 'ok!'
+    #echo 'ok!'
+    true
   else
     echo "failed!"
     echo 'failures logged to .dotfiles-failure_log'
