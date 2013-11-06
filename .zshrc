@@ -36,7 +36,7 @@ if $($INSTALL_DOTFILES); then
     STRIP_CMD="--strip-path"
   fi
 
-  echo -n "updating dotfiles: "
+  #echo -n "updating dotfiles: "
 
   # insecure option is necessary for some reason.. -m means dont care about mtime
   curl -sL --insecure https://github.com/roobert/dotfiles/tarball/master \
@@ -46,7 +46,6 @@ if $($INSTALL_DOTFILES); then
     #echo 'ok!'
     true
   else
-    echo "failed!"
     echo 'failures logged to .dotfiles-failure_log'
   fi
 
