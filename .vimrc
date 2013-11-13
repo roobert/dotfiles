@@ -6,7 +6,7 @@ set nocompatible
 if version > 701
 
   " install neobundle stuff!
-  " stollen from:
+  " stolen from:
   " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
