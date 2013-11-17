@@ -31,7 +31,6 @@ if version > 701
     \     },
     \ }
 
-
   " me plugins!
   NeoBundle "tomasr/molokai"
   NeoBundle "MarcWeber/vim-addon-mw-utils"
@@ -74,6 +73,9 @@ colorscheme molokai
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
+
+" remap \
+let mapleader = ","
 
 syntax enable
 
@@ -119,10 +121,10 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 nmap <F1> <nop>
 
 " Tabularize plugin bindings
-nmap <Leader>= :Ta /=><CR>
-vmap <Leader>= :Ta /=><CR>
-nmap <Leader>e :Ta /=<CR>
-vmap <Leader>e :Ta /=<CR>
+nmap <Leader>> :Ta /=><CR>
+vmap <Leader>> :Ta /=><CR>
+nmap <Leader>= :Ta /=<CR>
+vmap <Leader>= :Ta /=<CR>
 
 nmap <Leader>r :!!<CR>
 vmap <Leader>r :!!<CR>
