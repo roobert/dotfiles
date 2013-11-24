@@ -123,8 +123,12 @@ nmap <F1> <nop>
 " Tabularize plugin bindings
 nmap <Leader>> :Ta /=><CR>
 vmap <Leader>> :Ta /=><CR>
+nmap <Leader>. :Ta /=><CR>
+vmap <Leader>. :Ta /=><CR>
 nmap <Leader>= :Ta /=<CR>
 vmap <Leader>= :Ta /=<CR>
+nmap <Leader>e :Ta /=<CR>
+vmap <Leader>e :Ta /=<CR>
 
 nmap <Leader>r :!!<CR>
 vmap <Leader>r :!!<CR>
@@ -168,8 +172,8 @@ map <C-Left>  <C-w><Left>
 map <C-Right> <C-w><Right>
 
 " tab navigation
-map <C-l> :tabnext<CR>
-map <C-h> :tabprev<CR>
+map <C-L> :tabnext<CR>
+map <C-H> :tabprev<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
