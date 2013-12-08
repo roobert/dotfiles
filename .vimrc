@@ -129,7 +129,10 @@ nmap <Leader>= :Ta /=<CR>
 vmap <Leader>= :Ta /=<CR>
 nmap <Leader>e :Ta /=<CR>
 vmap <Leader>e :Ta /=<CR>
+nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 
+" re-run last command
 nmap <Leader>r :!!<CR>
 vmap <Leader>r :!!<CR>
 
