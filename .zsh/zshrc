@@ -16,9 +16,10 @@ ZSH_ROOT="$HOME/.zsh"
 # * Tabularize
 # * -p
 
-for f in $ZSH_ROOT/**/*.zsh; do
+autoload -U compinit && compinit
+autoload -U is-at-least
 
-  autoload -U is-at-least
+for f in $ZSH_ROOT/**/*.zsh; do
 
   if is-at-least 4.4.0; then
     source $f
