@@ -175,8 +175,8 @@ map <C-Left>  <C-w><Left>
 map <C-Right> <C-w><Right>
 
 " tab navigation
-map <C-L> :tabnext<CR>
-map <C-H> :tabprev<CR>
+map <C-[> :tabprev<CR>
+map <C-]> :tabnext<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
