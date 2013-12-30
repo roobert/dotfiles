@@ -112,3 +112,6 @@ alias purge="sudo apt-get purge"
 alias update="sudo apt-get update"
 alias search="sudo apt-cache search"
 alias dsearch="dpkg -l | grep"
+
+# mute
+alias mute='amixer sset Master toggle'
