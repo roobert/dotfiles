@@ -132,9 +132,15 @@ vmap <Leader>e :Ta /=<CR>
 nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 
-" re-run last command
+" run shortcuts..
 nmap <Leader>r :!!<CR>
 vmap <Leader>r :!!<CR>
+nmap <Leader>R :!./%<CR>
+vmap <Leader>R :!./%<CR>
+nmap <Leader>x :!chmod +x ./%<CR>
+vmap <Leader>x :!chmod +x ./%<CR>
+nmap <Leader>X :!chmod +x ./%<CR>
+vmap <Leader>X :!chmod +x ./%<CR>
 
 " write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
