@@ -85,8 +85,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab       " make tabs spaces
 set showmatch       " show matching brackets
-set noautoindent
-set nocindent
+set autoindent
+set cindent
 set esckeys         " cursor keys in insert mode
 set hls             " highlight search
 set nonumber        " display line numbers
@@ -99,6 +99,7 @@ set splitright      " when splitting the buffer, create new buffer on right
 set t_ut=           " make tmux/screen display properly for vim themes with coloured backgrounds
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
+autoin
 
 " get rid of ugly vertical split char | for split windows, note the space after \
 set fillchars+=vert:\ 
