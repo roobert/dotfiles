@@ -99,7 +99,6 @@ set splitright      " when splitting the buffer, create new buffer on right
 set t_ut=           " make tmux/screen display properly for vim themes with coloured backgrounds
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
-autoin
 
 " get rid of ugly vertical split char | for split windows, note the space after \
 set fillchars+=vert:\ 
