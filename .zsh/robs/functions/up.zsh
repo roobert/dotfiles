@@ -23,7 +23,7 @@ function up {
     target="$1"
   fi
 
-  dir=$PWD
+  dir="$PWD"
 
   while [ $dir != "/" ]; do
     if [ "$dir:t" = "$target" ]; then
@@ -38,7 +38,7 @@ function up {
 }
 
 function cd {
-  if ! builtin cd $* &>/dev/null; then
-    up $* || builtin cd $*
+  if ! builtin cd "$*" &>/dev/null; then
+    up "$*" || builtin cd "$*"
   fi
 }
