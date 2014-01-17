@@ -38,6 +38,10 @@ function up {
 }
 
 function cd {
+  if [[ $# == 0 ]]; then
+    builtin cd
+  fi
+
   if ! builtin cd "$*" &>/dev/null; then
     up "$*" || builtin cd "$*"
   fi
