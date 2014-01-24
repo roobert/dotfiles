@@ -85,8 +85,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab       " make tabs spaces
 set showmatch       " show matching brackets
-set autoindent
-set cindent
+set noautoindent
+set nocindent
 set esckeys         " cursor keys in insert mode
 set hls             " highlight search
 set nonumber        " display line numbers
