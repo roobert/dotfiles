@@ -17,6 +17,9 @@ XTerm*VT100.Translations: #override
 ! run "fc-list" for a list of available fonts
 !URxvt*font: xft:Monospace:pixelsize=12
 
+URxvt.perl-ext-common: default,selection-autotransform
+URxvt.selection-autotransform.0: s/ +$//gm
+
 URxvt*scrollBar: False
 URxvt*scrollTtyOutput: False
 URxvt*scrollTtyKeypress: True
@@ -28,7 +31,6 @@ URxvt*iso14755: false
 
 ! url matching stuff..
 
-URxvt.perl-ext-common: default,matcher
 URxvt.colorUL: #cccccc
 
 ! list urls to open
