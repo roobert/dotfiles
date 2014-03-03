@@ -43,6 +43,7 @@ if version > 701
   NeoBundle "rodjek/vim-puppet"
   NeoBundle "scrooloose/syntastic"
   NeoBundle "vim-scripts/YankRing.vim"
+  NeoBundle "jiangmiao/auto-pairs"
 
   NeoBundleCheck
 endif
