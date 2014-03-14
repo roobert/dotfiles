@@ -12,36 +12,3 @@ XTerm*VT100.Translations: #override
 	Shift<Btn3Down>: start-extend()
 	Shift<Btn3Motion>: select-extend()
 	Shift<BtnUp>: select-end(CLIPBOARD)
-
-! fonts
-! run "fc-list" for a list of available fonts
-!URxvt*font: xft:Monospace:pixelsize=12
-
-URxvt.perl-ext-common: default,selection-autotransform
-URxvt.selection-autotransform.0: s/ +$//gm
-
-URxvt*scrollBar: False
-URxvt*scrollTtyOutput: False
-URxvt*scrollTtyKeypress: True
-URxvt*secondaryScroll: True
-URxvt*saveLines: 8000
-URxvt*foreground: White
-URxvt*background: Black
-URxvt*iso14755: false
-
-! url matching stuff..
-
-URxvt.colorUL: #cccccc
-
-! list urls to open
-URxvt.keysym.C-o:  perl:matcher:list
-
-! copy url
-!URxvt.perl-ext:      default,url-select
-!URxvt.keysym.C-y:    perl:url-select:select_next
-
-! click to open urls..
-!URxvt.url-launcher:      /usr/bin/chromium-browser
-!URxvt.matcher.button:   1
-
-!URxvt.matcher.rend.0: -Uline fg8

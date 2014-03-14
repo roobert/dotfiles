@@ -21,7 +21,7 @@ if randr_screen_change_notify_hook ~= nil then
 end
 
 -- urxvt is broken on my work machine..? https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
-XTERM="urxvt"
+XTERM="xterm"
 BROWSER="chromium-browser"
 BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
 MUSIC="spotify"
