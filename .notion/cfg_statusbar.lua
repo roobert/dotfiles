@@ -37,7 +37,10 @@ mod_statusbar.create{
     -- windows and icons.
     --
     --template="[ %tunnel - %tunnel_ticker ][ %date ][ load: %load ] %filler%systray",
-    template=" %load | %exec%filler%systray%volume_level | %date ",
+
+    --template=" %load | %exec%filler%systray%volume_level | %systray | %date ",
+    template=" %load | %exec%filler%systray %volume_level %date ",
+
     --template="[ %date ][ load: %load ] %filler%systray",
     --template="[ %date || load:% %>load || mail:% %>mail_new/%>mail_total ] %filler%systray",
     --template="[ %date || load: %05load_1min || mail: %02mail_new/%02mail_total ] %filler%systray",
@@ -50,7 +53,7 @@ mod_statusbar.launch_statusd{
     -- Date meter
     date={
         -- ISO-8601 date format with additional abbreviated day name
-        date_format='%Y-%m-%d %H:%M',
+        date_format='%H:%M %Y-%m-%d',
         -- Finnish etc. date format
         --date_format='%a %d.%m.%Y %H:%M',
         -- Locale date format (usually shows seconds, which would require
