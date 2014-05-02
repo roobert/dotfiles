@@ -13,20 +13,20 @@ function requests_per_minute () {
   done
 }
 
-function requests_per_minute_95th_percentile () {
+function requests_per_minute-percentile () {
   for log in $*; do
 
     REQUESTS_PER_MINUTE_DATA="$(cat $log| awk '{ print $4  }' | cut -d':' -f 2-3 | uniq -c | sort -n)"
 
     NUMBER_OF_REQUESTS_PER_MINUTE="$(echo ${REQUESTS_PER_MINUTE_DATA} | wc -l | awk '{ print $1  }')"
 
-    NUMBER_OF_REQUESTS_IN_95TH_PERCENTILE="$(($(($NUMBER_OF_REQUESTS_PER_MINUTE * 95)) / 100))"
+    NUMBER_OF_REQUESTS_IN_PERCENTILE="$(($(($NUMBER_OF_REQUESTS_PER_MINUTE * $PERCENTILE)) / 100))"
 
     PEAK="$(echo $REQUESTS_PER_MINUTE_DATA| tail -n 1)"
 
-    echo -n "$log: (peak: $PEAK) - 95th percentile average: "
+    echo -n "$log: (peak: $PEAK) - ${PERCENTILE}th percentile average: "
 
-    echo $REQUESTS_PER_MINUTE_DATA | head -n $NUMBER_OF_REQUESTS_IN_95TH_PERCENTILE | \
+    echo $REQUESTS_PER_MINUTE_DATA | head -n $NUMBER_OF_REQUESTS_IN_PERCENTILE | \
       awk 'BEGIN { count = 0; total = 0  } { count += 1; total += $1  } END { print total/count  }'
   done
 }
