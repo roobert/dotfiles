@@ -47,6 +47,9 @@ if version > 701
   NeoBundle "jiangmiao/auto-pairs"
   NeoBundle "ervandew/supertab"
 
+  " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
+  NeoBundle "rstacruz/sparkup"
+
   NeoBundleCheck
 endif
 
