@@ -38,12 +38,14 @@ if version > 701
   NeoBundle "garbas/vim-snipmate"
   NeoBundle "honza/vim-snippets"
   NeoBundle "tpope/vim-surround"
+  NeoBundle "tpope/vim-endwise"
   NeoBundle "godlygeek/tabular"
   NeoBundle "puppetlabs/puppet-syntax-vim"
   NeoBundle "rodjek/vim-puppet"
   NeoBundle "scrooloose/syntastic"
   NeoBundle "vim-scripts/YankRing.vim"
   NeoBundle "jiangmiao/auto-pairs"
+  NeoBundle "ervandew/supertab"
 
   NeoBundleCheck
 endif
@@ -54,6 +56,9 @@ let g:ctrlp_working_path_mode = 'c'
 " yank ring
 nnoremap <silent> <Leader>p :YRShow<CR>
 let g:yankring_history_dir = '~/.vim'
+
+" molokai 256 colour
+"let g:rehash256 = 1
 
 " make it colourful..
 
@@ -187,4 +192,3 @@ map <S-l> :tabnext<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
-
