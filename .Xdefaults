@@ -1,14 +1,28 @@
-xterm*reverseVideo: true
-xterm*utf8: 1
-xterm*trimSelection: true
-xterm*borderColor: black
-xterm*scrollBar: false
+;XTerm*ReverseVideo: true
+XTerm*Utf8: 1
+XTerm*BorderColor: black
+XTerm*ScrollBar: false
 XTerm*TrimSelection: true
-XTerm*VT100.Translations: #override
-	Shift<Btn1Down>: select-start()
-	Shift<Btn1Motion>: select-extend()
-	Shift<Btn1Up>: select-end(CLIPBOARD)
-	Shift<Btn2Up>: insert-selection(CLIPBOARD)
-	Shift<Btn3Down>: start-extend()
-	Shift<Btn3Motion>: select-extend()
-	Shift<BtnUp>: select-end(CLIPBOARD)
+XTerm*ReverseVideo: true
+Xterm*SaveLines: 9999
+XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+XTerm*on2Clicks: regex [[:alpha:]]+://([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+*VT100*translations: #override Meta <Btn1Up>: exec-formatted("google-chrome '%t'", PRIMARY)
+*foreground: rgb:00/00/00
+*background: rgb:ff/ff/ff
+*color0:     rgb:00/00/00
+*color1:     rgb:d3/62/65
+*color2:     rgb:ae/ce/91
+*color3:     rgb:e7/e1/8c
+*color4:     rgb:7a/7a/b0
+*color5:     rgb:96/3c/59
+*color6:     rgb:41/81/79
+*color7:     rgb:be/be/be
+*color8:     rgb:66/66/66
+*color9:     rgb:ef/81/71
+*color10:    rgb:e5/f7/79
+*color11:    rgb:ff/f7/96
+*color12:    rgb:41/86/be
+*color13:    rgb:ef/9e/be
+*color14:    rgb:71/be/be
+*color15:    rgb:ff/ff/ff
