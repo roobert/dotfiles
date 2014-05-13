@@ -39,6 +39,7 @@ if version > 701
   NeoBundle "honza/vim-snippets"
   NeoBundle "tpope/vim-surround"
   NeoBundle "tpope/vim-endwise"
+  NeoBundle "tpope/vim-repeat"
   NeoBundle "godlygeek/tabular"
   NeoBundle "puppetlabs/puppet-syntax-vim"
   NeoBundle "rodjek/vim-puppet"
