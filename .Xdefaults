@@ -1,13 +1,18 @@
 ;XTerm*ReverseVideo: true
+
 XTerm*Utf8: 1
 XTerm*BorderColor: black
 XTerm*ScrollBar: false
 XTerm*TrimSelection: true
 XTerm*ReverseVideo: true
-Xterm*SaveLines: 9999
-XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
-XTerm*on2Clicks: regex [[:alpha:]]+://([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
-*VT100*translations: #override Meta <Btn1Up>: exec-formatted("google-chrome '%t'", PRIMARY)
+XTerm*SaveLines: 9999
+;XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
+;XTerm*on2Clicks: regex [[:alpha:]]+://([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+
+XTerm*VT100.cutNewLine: false
+XTerm*VT100.cutToBeginningOfLine: false
+XTerm*VT100.charClass: 33:48,35:48,37:48,42:48,45-47:48,64:48,95:48,126:48
+
 *foreground: rgb:00/00/00
 *background: rgb:ff/ff/ff
 *color0:     rgb:00/00/00
