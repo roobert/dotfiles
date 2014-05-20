@@ -62,6 +62,11 @@ let g:ctrlp_working_path_mode = 'c'
 nnoremap <silent> <Leader>p :YRShow<CR>
 let g:yankring_history_dir = '~/.vim'
 
+" syntastic
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_aggregate_errors = 1
+"autocmd BufWritePost * :Errors
+
 " molokai 256 colour
 "let g:rehash256 = 1
 
@@ -111,6 +116,10 @@ set t_ut=           " make tmux/screen display properly for vim themes with colo
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
 set nrformats=      " treat numbers as decimal when using <C-a> and <C-x>
+
+" zsh style tab completion for 
+set wildmenu
+set wildmode=full
 
 " get rid of ugly vertical split char | for split windows, note the space after \
 set fillchars+=vert:\ 
