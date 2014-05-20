@@ -38,6 +38,7 @@ if version > 701
   NeoBundle "garbas/vim-snipmate"
   NeoBundle "honza/vim-snippets"
   NeoBundle "tpope/vim-surround"
+  NeoBundle "tpope/vim-commentary"
   NeoBundle "tpope/vim-endwise"
   NeoBundle "tpope/vim-repeat"
   NeoBundle "godlygeek/tabular"
