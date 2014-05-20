@@ -125,6 +125,12 @@ autocmd Syntax * syn match ExtraWhitespace /[^\t]\zs\t\+/
 "disable autocomment stuff
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" commentary settings..
+autocmd FileType apache set commentstring=#\ %s
+autocmd FileType sh     set commentstring=#\ %s
+autocmd FileType zsh    set commentstring=#\ %s
+autocmd FileType ruby   set commentstring=#\ %s
+
 " highlight text after 80th column, maybe make this toggleable?
 "highlight OverLength ctermbg=red guibg=#FFD9D9
 "match OverLength /\%81v.*/
