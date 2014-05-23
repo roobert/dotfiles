@@ -1,5 +1,5 @@
 # stuff i like from oh-my-zsh
-function get_stuff_from_oh-my-zsh () {
+function get_stuff_from_oh_my_zsh () {
   omz_stuff=(lib/grep.zsh lib/spectrum.zsh lib/completion.zsh plugins/vi-mode plugins/git plugins/nyan)
   omz_tmp_dir=`mktemp -d`
 
@@ -43,37 +43,25 @@ function g {
    egrep --exclude-dir=\.svn $* | grep -v grep
 }
 
-# semantico svn stuff
-export SEMANTICO_SVN_SERVER="https://svn.semantico.net/repos/"
-
-function svn.sem {
-  if [[ $# -ne '2' ]]; then
-    echo "$0 <command> <repos>"
-    die  "e.g: $0 checkout systems"
-  fi
-
-  svn $1 $SEMANTICO_SVN_SERVER/$2
-}
-
 # mattf props! - open vim ctrl-p with ^P
 #function cheesy-ctrlp () {
 #  BUFFER='vim +:CtrlP'
 #  zle accept-line
 #}
 
-zle -N cheesy-ctrlp cheesy-ctrlp
-bindkey -M viins '^P' cheesy-ctrlp
+#zle -N cheesy-ctrlp cheesy-ctrlp
+#bindkey -M viins '^P' cheesy-ctrlp
+#
+## more mattf magic
+#function wrap-my-shizz () {
+#  BUFFER="vim \$($BUFFER)"
+#}
+#
+#zle -N wrap-my-shizz
+#bindkey -M viins '^B' wrap-my-shizz
 
-# more mattf magic
-function wrap-my-shizz () {
-  BUFFER="vim \$($BUFFER)"
-}
 
-zle -N wrap-my-shizz
-bindkey -M viins '^B' wrap-my-shizz
-
-
-function svn.add_all () {
+function svn_add_all () {
   for f in `svn status|grep \^\?|COL2`; svn add $f
 }
 
@@ -92,12 +80,6 @@ bindkey '^Z' foreground-vi
 # easily search zsh man pages
 function zman {
   PAGER="less -g -s '+/^       "$1"'" man zshall
-}
-
-# stolen from: http://www.bashoneliners.com/main/oneliner/102/
-# older versions of sort don't have the -h flag that allows clever sorting of du -h output, e.g: du -sh | sort -h
-function du.sorted {
-  for i in G M K; do du -hsx * | grep "[0-9]$i\b" | sort -nr; done | tac 2>/dev/null
 }
 
 # find
@@ -157,11 +139,13 @@ function make_html_index {
   echo "<style>img { width: 800px; }</style>" >> index.html
 }
 
-function dus {
+function du_sort {
   if echo | sort -h > /dev/null 2>&1; then
     du -sh $* | sort -h
   else
-    du -s $* | sort -n
+    # stolen from: http://www.bashoneliners.com/main/oneliner/102/
+    # older versions of sort don't have the -h flag that allows clever sorting of du -h output, e.g: du -sh | sort -h
+    for i in G M K; do du -hsx -- $* | grep --color=never "[0-9]$i\b" | sort -nr; done | tac 2>/dev/null
   fi
 }
 

@@ -3,14 +3,23 @@ function man {
 
   # list all man pages
   if [[ $# -eq 0 ]]; then
-    man -k .
+    command man -k .
+    echo
+    echo "$0 (-l|--list) for sections"
     return
   fi
 
-  # list man sections
-  if [[ $1 == "--list" ]]; then
-    if [[ -z "$2" ]]; then
+  # list man sections if --list or -l specified..
+  man_sections $*
 
+  if [[ $? -eq 0 ]]; then
+    command man $*
+  fi
+}
+
+function man_sections () {
+  for arg in $*; do
+    if [[ "$arg" == "--list" ]] || [[ "$arg" == "-l" ]]; then
       cat <<"      EOF" | sed -e 's/^        //'
 
         man(1) sections
@@ -29,11 +38,6 @@ function man {
 
       return 1
     fi
-
-    whatis -s $2 -r .
-    return
-  fi
-
-  echo $@
-  command man $*
+  done
 }
+
