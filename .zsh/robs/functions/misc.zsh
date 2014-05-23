@@ -1,4 +1,4 @@
-# stuff i like from oh-my-zsh
+# fetch the stuff i like from oh-my-zsh
 function get_stuff_from_oh_my_zsh () {
   omz_stuff=(lib/grep.zsh lib/spectrum.zsh lib/completion.zsh plugins/vi-mode plugins/git plugins/nyan)
   omz_tmp_dir=`mktemp -d`
@@ -14,33 +14,40 @@ function get_stuff_from_oh_my_zsh () {
 # shortcuts to install some useful tools..
 #
 
-# list useful stuff like aliases and functions.. make this into something more useful?
+# list useful stuff like aliases and functions along with description
 function help {
-  echo "# functions"
-  grep '^function' ~/.zshrc | awk '{ print $2 }'
-
   echo "# aliases"
   alias
+
+  echo "# functions"
+  FUNCTIONS="$(grep --no-filename --color=never '^function' -B1 -R ~/.zsh)"
+
+  echo $FUNCTIONS
+
 }
 
+# install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
 function install_common_tools {
   sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
 }
 
 alias install_flash='sudo apt-get install ubuntu-restricted-extras'
 
+# install some ruby tools and gems: rbenv, ruby-build, awesome_print net-http-spy wirble bond boson looksee
 function install_ruby_tools {
   sudo apt-get install rbenv ruby-build
   sudo gem install awesome_print net-http-spy wirble bond boson looksee
 }
 
+# install zsh, coreutils, wget and homebrew
 function install_common_tools_osx {
   ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
   brew install zsh coreutils wget
 }
 
+# egrep -- ignore .svn dirs
 function g {
-   egrep --exclude-dir=\.svn $* | grep -v grep
+   egrep --exclude-dir=\.svn $*
 }
 
 # mattf props! - open vim ctrl-p with ^P
@@ -60,13 +67,10 @@ function g {
 #zle -N wrap-my-shizz
 #bindkey -M viins '^B' wrap-my-shizz
 
-
+# add all uncommited files
 function svn_add_all () {
   for f in `svn status|grep \^\?|COL2`; svn add $f
 }
-
-# search puppet
-function sp { grep -R $* ~modules/*/trunk ~nodes ~site }
 
 # stuff stolen from: http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
 
@@ -87,7 +91,7 @@ function f {
   case $# in
     1) find . -name $1 ;;
     2) find $1 -name $2 ;;
-    *) echo "Invalid number of arguments!" >&2; exit 1 ;;
+    *) echo "Invalid number of arguments!" >&2; return 1 ;;
   esac
 }
 
@@ -96,11 +100,11 @@ function fw {
   case $# in
     1) find . -name "*$1*" ;;
     2) find $1 -name "*$2*" ;;
-    *) echo "Invalid number of arguments!" >&2; exit 1 ;;
+    *) echo "Invalid number of arguments!" >&2; return 1 ;;
   esac
 }
 
-# highlight
+# highlight a string
 function hl {
   SEARCH_STRING="$1"
 
@@ -116,16 +120,18 @@ function hl {
   egrep "${SEARCH_STRING}|^" $FILES
 }
 
+# svn checkin
 function si {
   if [[ $# -gt 0 ]]; then
     svn ci -m $*
   else
+    # naughty!
     svn ci -m ''
   fi
 }
 
+# merge any local ssh configs into main config - for stuff that would be silly to store in github
 function ssh_merge_config {
-  # merge any local ssh configs into main config - for stuff that would be silly to store in github                                                           
   if ls $HOME/.ssh-* > /dev/null 2>&1; then
     echo "merging ssh configs.."
     cat $HOME/.ssh-* >> $HOME/.ssh/config
@@ -134,11 +140,13 @@ function ssh_merge_config {
   fi
 }
 
+# create an html file containing images
 function make_html_index {
   for f in *; echo "<img src=\"$f\">" >> index.html
   echo "<style>img { width: 800px; }</style>" >> index.html
 }
 
+# du -- sorted by size
 function du_sort {
   if echo | sort -h > /dev/null 2>&1; then
     du -sh $* | sort -h
@@ -147,5 +155,10 @@ function du_sort {
     # older versions of sort don't have the -h flag that allows clever sorting of du -h output, e.g: du -sh | sort -h
     for i in G M K; do du -hsx -- $* | grep --color=never "[0-9]$i\b" | sort -nr; done | tac 2>/dev/null
   fi
+}
+
+# zsh man pages are missing from ubuntu 14.04: https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/1242108
+function install_zsh_docs {
+curl -L http://sourceforge.net/projects/zsh/files/zsh/5.0.2/zsh-5.0.2.tar.gz/download | sudo tar vzxf - -C /usr/share/man/man1 --wildcards --no-anchored '*.1' --strip-components 2
 }
 

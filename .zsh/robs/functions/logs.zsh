@@ -9,7 +9,7 @@ function requests_per_minute () {
     echo -n "$log: average: "
 
     cat $log | awk '{ print $4  }' | cut -d':' -f 2-3 | uniq -c | \
-      awk 'BEGIN { count = 0; total = 0  } { count += 1; total += $1  } END { print total/count  }'
+      awk -F "^--" 'BEGIN { count = 0; total = 0  } { count += 1; total += $1  } END { print total/count  }'
   done
 }
 
