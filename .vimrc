@@ -32,6 +32,7 @@ if version > 701
     \ }
 
   " me plugins!
+  NeoBundle "romainl/Apprentice"
   NeoBundle "tomasr/molokai"
   NeoBundle "MarcWeber/vim-addon-mw-utils"
   NeoBundle "tomtom/tlib_vim"
@@ -85,7 +86,8 @@ let g:yankring_history_dir = '~/.vim'
 ""colorscheme xterm16
 
 " hmm.. prefer this more colourful scheme for now..
-colorscheme molokai
+"colorscheme molokai
+colorscheme apprentice
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
