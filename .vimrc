@@ -7,7 +7,7 @@ if version > 701
 
   " install neobundle stuff!
   " stolen from:
-  " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc 
+  " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
       if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
@@ -32,6 +32,9 @@ if version > 701
     \ }
 
   " me plugins!
+  NeoBundle "vim-scripts/xterm16.vim"
+  NeoBundle "vim-scripts/Iceberg"
+  NeoBundle "vim-scripts/xoria256.vim"
   NeoBundle "romainl/Apprentice"
   NeoBundle "tomasr/molokai"
   NeoBundle "MarcWeber/vim-addon-mw-utils"
@@ -83,11 +86,12 @@ let g:yankring_history_dir = '~/.vim'
 " xterm16 color scheme settings
 "let xterm16_colormap    = 'allblue'
 "let xterm16_brightness  = 'default'
-""colorscheme xterm16
+"colorscheme xterm16
 
 " hmm.. prefer this more colourful scheme for now..
 "colorscheme molokai
-colorscheme apprentice
+"colorscheme apprentice
+colorscheme iceberg
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
@@ -107,6 +111,7 @@ set noautoindent
 set nocindent
 set esckeys         " cursor keys in insert mode
 set hls             " highlight search
+set incsearch
 set nonumber        " display line numbers
 set wrap
 set guioptions=-MtR " disable menus, tabs and scrollbars in gvim
@@ -119,7 +124,7 @@ set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
 set nrformats=      " treat numbers as decimal when using <C-a> and <C-x>
 
-" zsh style tab completion for 
+" zsh style tab completion for
 set wildmenu
 set wildmode=full
 
@@ -215,3 +220,30 @@ map <S-l> :tabnext<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
+
+nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
+function s:SearchMode()
+  if !exists('s:searchmode') || s:searchmode == 0
+    echo 'Search next: scroll hit to middle if not on same page'
+    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>
+    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>
+    let s:searchmode = 1
+  elseif s:searchmode == 1
+    echo 'Search next: scroll hit to middle'
+    nnoremap n nzz
+    nnoremap N Nzz
+    let s:searchmode = 2
+  else
+    echo 'Search next: normal'
+    nunmap n
+    nunmap N
+    let s:searchmode = 0
+  endif
+endfunction
+
+" If cursor is in first or last line of window, scroll to middle line.
+function s:MaybeMiddle()
+  if winline() == 1 || winline() == winheight(0)
+    normal! zz
+  endif
+endfunction
