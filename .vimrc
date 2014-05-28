@@ -3,6 +3,10 @@
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
+" annoyingly, this needs to be set before yankring is installed otherwise
+" the yankring_history file is created in ~/
+let g:yankring_history_dir = '~/.vim'
+
 if version > 701
 
   " install neobundle stuff!
@@ -31,12 +35,14 @@ if version > 701
     \     },
     \ }
 
-  " me plugins!
+  " colorschemes
   NeoBundle "vim-scripts/xterm16.vim"
+  NeoBundle "tomasr/molokai"
   NeoBundle "vim-scripts/Iceberg"
   NeoBundle "vim-scripts/xoria256.vim"
   NeoBundle "romainl/Apprentice"
-  NeoBundle "tomasr/molokai"
+
+  " me plugins!
   NeoBundle "MarcWeber/vim-addon-mw-utils"
   NeoBundle "tomtom/tlib_vim"
   NeoBundle "garbas/vim-snipmate"
@@ -59,12 +65,9 @@ if version > 701
   NeoBundleCheck
 endif
 
-" ctrl-p preferences
-let g:ctrlp_working_path_mode = 'c'
+" remap \ (set this first since it affects plugin preferences)
+"let mapleader = ","
 
-" yank ring
-nnoremap <silent> <Leader>p :YRShow<CR>
-let g:yankring_history_dir = '~/.vim'
 
 " syntastic
 "let g:syntastic_always_populate_loc_list = 1
@@ -95,9 +98,6 @@ colorscheme iceberg
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
-
-" remap \
-let mapleader = ","
 
 syntax enable
 
@@ -183,6 +183,7 @@ command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
 " laziness
 command Wq WQ
 command Q q
+command wQ wq
 
 " Entering Ex mode.  Type "visual" to go to Normal mode?
 " NO. THANK. YOU.
