@@ -163,8 +163,8 @@ nmap <Leader>= :Ta /=<CR>
 vmap <Leader>= :Ta /=<CR>
 nmap <Leader>e :Ta /=<CR>
 vmap <Leader>e :Ta /=<CR>
-nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
-vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+"nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+"vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 
 " run shortcuts..
 nmap <Leader>r :!!<CR>
