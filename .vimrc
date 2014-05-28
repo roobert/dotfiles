@@ -183,7 +183,6 @@ command WQ :execute ':silent w !sudo tee % > /dev/null' | :quit!
 " laziness
 command Wq WQ
 command Q q
-command wQ wq
 
 " Entering Ex mode.  Type "visual" to go to Normal mode?
 " NO. THANK. YOU.
