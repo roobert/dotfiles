@@ -36,8 +36,21 @@ alias install_flash='sudo apt-get install ubuntu-restricted-extras'
 # install some ruby tools and gems: rbenv, ruby-build, awesome_print net-http-spy wirble bond boson looksee
 function install_ruby_tools {
   if ! dpkg -l git > /dev/null 2>&1; then
-    sudo apt-get install git 
+    sudo apt-get install git
   fi
+
+  if ! dpkg -l libreadline-dev > /dev/null 2>&1; then
+    sudo apt-get install libreadline-dev
+  fi
+
+  if ! dpkg -l zlib1g-dev > /dev/null 2>&1; then
+    sudo apt-get install zlib1g-dev
+  fi
+
+  if ! dpkg -l libssl-dev > /dev/null 2>&1; then
+    libssl-dev
+  fi
+
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
   sudo gem install awesome_print net-http-spy wirble bond boson looksee
