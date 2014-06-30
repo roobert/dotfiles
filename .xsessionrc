@@ -1,3 +1,9 @@
+if test -d ~/opt 2> /dev/null; then
+  for path in $(ls ~/opt); do
+    export PATH="$path:$PATH"
+  done
+fi
+
 vmware-user &
 trayion &
 nm-applet &
