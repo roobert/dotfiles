@@ -4,7 +4,7 @@ if [ -d "$HOME/work/systems/pm" ]; then
 fi
 
 # include my paths in path
-MY_PATHS=($HOME/bin /opt/semantico/bin)
+MY_PATHS=($HOME/bin $HOME/opt/notion/bin)
 
 for my_path in $MY_PATHS; do
   if [ -d "$my_path" ]; then
