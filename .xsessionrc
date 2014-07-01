@@ -2,6 +2,10 @@ if test -d ~/opt/notion/bin 2> /dev/null; then
   export PATH="$HOME/opt/notion/bin:$PATH"
 fi
 
+if test -d ~/bin 2> /dev/null; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
 vmware-user &
 trayion &
 nm-applet &
