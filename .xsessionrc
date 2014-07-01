@@ -9,15 +9,26 @@ nm-applet &
 # remap caps-lock to escape
 #xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
+
+# remap £ to #
+xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
+
+# work mac keyboard: 
+if [[ `hostname` == "grindelwald" ]]; then
+  # remap # to | and ~ to \
+  xmodmap -e 'keycode 51 = backslash bar'
+  # remap @ to "
+  xmodmap -e 'keycode 11 = 2 at'
+  # remap " to @ 
+  xmodmap -e 'keycode 48 = apostrophe quotedbl'
+  # remap key next to '1' key to be same as `~
+  xmodmap -e 'keycode 94 = grave asciitilde'
+fi
+
 if [[ `hostname` == "e420s" ]]; then
   # make my laptop keyboard more like a mac keyboard
   # remap ¬ (notsign) to ~ 
   xmodmap -e 'keycode 49 = grave asciitilde'
-
-  # remap £ to #
-  xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
-  #xmodmap -e 'keycode 51 = sterling asciitilde'
-  #xmodmap -e 'keycode 51 = numbersign asciitilde'
 fi
 
 # make xterm disregard spaces at end of line when copying to clipboard

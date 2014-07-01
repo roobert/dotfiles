@@ -116,3 +116,5 @@ alias dsearch="dpkg -l | grep"
 # mute
 alias mute='amixer sset Master toggle'
 alias screenoff='xset dpms force off'
+
+alias sus='su sysadmin'
