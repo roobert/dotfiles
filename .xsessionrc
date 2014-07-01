@@ -24,6 +24,6 @@ xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
 test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
 
 eval $(gnome-keyring-daemon --start) &
-exec ssh-agent notion
+exec ssh-agent ~/opt/notion/bin/notion
 
 #exec ssh-agent i3

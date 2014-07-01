@@ -55,6 +55,8 @@ defbindings("WMPlex.toplevel", {
     kpress(META.."F10", nil),
     kpress(META.."F11", nil),
     kpress(META.."F12", nil),
+    kpress(ALTMETA.."L", nil),
+    kpress(META.."L", nil),
 })
 
 defbindings("WScreen", {
@@ -66,6 +68,9 @@ defbindings("WScreen", {
     kpress(META.."F9", "ioncore.create_ws(_)"),
     kpress(META.."F11", "ioncore.restart()"),
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
+
+    bdoc("Lock screen"),
+    kpress(META.."F7", "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
 
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
