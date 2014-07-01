@@ -1,7 +1,5 @@
-if test -d ~/opt 2> /dev/null; then
-  for path in $(ls ~/opt); do
-    export PATH="$path:$PATH"
-  done
+if test -d ~/opt/notion/bin 2> /dev/null; then
+  export PATH="$HOME/opt/notion/bin:$PATH"
 fi
 
 vmware-user &
@@ -9,21 +7,24 @@ trayion &
 nm-applet &
 
 # remap caps-lock to escape
-xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
-# make my laptop keyboard more like a mac keyboard
-# remap ¬ (notsign) to ~ 
-xmodmap -e 'keycode 49 = grave asciitilde'
+if [[ `hostname` == "e420s" ]]; then
+  # make my laptop keyboard more like a mac keyboard
+  # remap ¬ (notsign) to ~ 
+  xmodmap -e 'keycode 49 = grave asciitilde'
 
-# remap £ to #
-xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
-#xmodmap -e 'keycode 51 = sterling asciitilde'
-#xmodmap -e 'keycode 51 = numbersign asciitilde'
+  # remap £ to #
+  xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
+  #xmodmap -e 'keycode 51 = sterling asciitilde'
+  #xmodmap -e 'keycode 51 = numbersign asciitilde'
+fi
 
 # make xterm disregard spaces at end of line when copying to clipboard
 test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
 
 eval $(gnome-keyring-daemon --start) &
-exec ssh-agent ~/opt/notion/bin/notion
+
+exec ssh-agent notion
 
 #exec ssh-agent i3
