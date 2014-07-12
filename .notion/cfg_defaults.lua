@@ -75,8 +75,12 @@ defbindings("WScreen", {
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
     kpress("XF86AudioPrev", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous')"),
-    kpress("XF86AudioRaiseVolume", "notioncore.exec('amixer set Master 5%+')"),
-    kpress("XF86AudioLowerVolume", "notioncore.exec('amixer set Master 5%-')"),
+
+    --kpress("XF86AudioRaiseVolume", "notioncore.exec('amixer set Master 5%+')"),
+    --kpress("XF86AudioLowerVolume", "notioncore.exec('amixer set Master 5%-')"),
+    kpress("XF86AudioRaiseVolume", "notioncore.exec('~/bin/pavol.sh plus')"),
+    kpress("XF86AudioLowerVolume", "notioncore.exec('~/bin/pavol.sh minus')"),
+
     kpress("XF86AudioMute", "notioncore.exec('amixer -D pulse set Master 1+ toggle')"),
 })
 
