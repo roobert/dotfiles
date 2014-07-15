@@ -58,6 +58,7 @@ if version > 701
   NeoBundle "vim-scripts/YankRing.vim"
   NeoBundle "jiangmiao/auto-pairs"
   NeoBundle "ervandew/supertab"
+  NeoBundle "chase/vim-ansible-yaml"
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   NeoBundle "rstacruz/sparkup"
