@@ -58,7 +58,7 @@ if version > 701
   NeoBundle "vim-scripts/YankRing.vim"
   NeoBundle "jiangmiao/auto-pairs"
   NeoBundle "ervandew/supertab"
-  NeoBundle "chase/vim-ansible-yaml"
+  "NeoBundle "chase/vim-ansible-yaml"
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   NeoBundle "rstacruz/sparkup"
@@ -88,17 +88,17 @@ endif
 " alias vi="vim -T xterm-256color"
 
 " xterm16 color scheme settings
-"let xterm16_colormap    = 'allblue'
-"let xterm16_brightness  = 'default'
-"colorscheme xterm16
+let xterm16_colormap    = 'allblue'
+let xterm16_brightness  = 'default'
+colorscheme xterm16
 
 " hmm.. prefer this more colourful scheme for now..
 "colorscheme molokai
 "colorscheme apprentice
-colorscheme iceberg
+"colorscheme iceberg
 
 " FIXME: coloured background breaks copy and paste
-hi Normal ctermfg=252 ctermbg=none
+"hi Normal ctermfg=252 ctermbg=none
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
