@@ -97,13 +97,13 @@ colorscheme xterm16
 "colorscheme apprentice
 "colorscheme iceberg
 
-" FIXME: coloured background breaks copy and paste
-"hi Normal ctermfg=252 ctermbg=none
-
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
 
 syntax enable
+
+" FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
+hi Normal ctermfg=252 ctermbg=none
 
 " me settins
 set tabstop=2
