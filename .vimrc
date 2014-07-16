@@ -88,14 +88,14 @@ endif
 " alias vi="vim -T xterm-256color"
 
 " xterm16 color scheme settings
-"let xterm16_colormap    = 'allblue'
-"let xterm16_brightness  = 'default'
-"colorscheme xterm16
+let xterm16_colormap    = 'allblue'
+let xterm16_brightness  = 'default'
+colorscheme xterm16
 
 " hmm.. prefer this more colourful scheme for now..
 "colorscheme molokai
 "colorscheme apprentice
-colorscheme iceberg
+"colorscheme iceberg
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
