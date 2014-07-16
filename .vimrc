@@ -197,10 +197,10 @@ autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
 
 " expert difficulty!!!
-"noiemap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
 
 " override default vertical split binding to open a new buffer rather than split current buffer
 map <C-W>v :vnew<CR>
