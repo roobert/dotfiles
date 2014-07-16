@@ -89,7 +89,7 @@ if not gr.select_engine("de") then return end
 de.reset()
 
 de.defstyle("*", {
-	background_colour = "#000",
+	background_colour = "#222",
 	foreground_colour = "#777",
 	shadow_pixels     = 0,
 	highlight_pixels  = 0,
@@ -101,11 +101,21 @@ de.defstyle("*", {
 })
 
 de.defstyle("tab", {
-	de.substyle("inactive-selected", {}),
+    de.substyle("inactive-selected", {
+		background_colour = "#222",
+    }),
+    de.substyle("inactive-unselected", {
+		background_colour = "#222",
+    }),
+    de.substyle("active-unselected", {
+		background_colour = "#222",
+    }),
 
 	de.substyle("active-selected", {
 		foreground_colour = "#fff",
+		background_colour = "#333",
 	}),
+    text_align = "center",
 })
 
 de.defstyle("frame", {
@@ -121,8 +131,8 @@ de.defstyle("frame", {
 	}),
 
 	de.substyle("active", {
-		highlight_colour = "#fff",
-		shadow_colour    = "#fff",
+		highlight_colour = "#333",
+		shadow_colour    = "#333",
 	}),
 })
 
