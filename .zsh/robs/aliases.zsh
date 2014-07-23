@@ -26,6 +26,8 @@ alias gup='git commit -am "updated" && git push'
 alias gi='git commit -m'
 alias gs='git status'
 alias gp='git push'
+alias ga='git add'
+alias gaa='git add *'
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"

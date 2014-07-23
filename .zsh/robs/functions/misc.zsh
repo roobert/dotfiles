@@ -179,3 +179,16 @@ function install_zsh_docs {
 curl -L http://sourceforge.net/projects/zsh/files/zsh/5.0.2/zsh-5.0.2.tar.gz/download | sudo tar vzxf - -C /usr/share/man/man1 --wildcards --no-anchored '*.1' --strip-components 2
 }
 
+
+function install_lnav {
+  if which xmllint > /dev/null; then
+    LNAV_VERSION=0.7.0
+  else
+    LNAV_VERSION=$(curl http://lnav.org/downloads/ -s  | xmllint --xpath 'string(//div[@id="content"]//div[@class="sqs-block-content"]/p/strong)' --format --nowarning --html - 2> /dev/null | awk '{ print $2  }' | tr -d ':')
+0.7.0 
+  fi
+
+  TMP=$(tempfile)
+  wget -q -O $TMP https://github.com/tstack/lnav/releases/download/v${LNAV_VERSION}/lnav-${LNAV_VERSION}-linux-64bit.zip
+  unzip -d ~/bin $TMP lnav-${LNAV_VERSION}/lnav
+}
