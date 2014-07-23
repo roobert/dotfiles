@@ -23,6 +23,9 @@ alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%
 alias gd="gl -p"
 alias gup='git commit -am "updated" && git push'
 
+alias gi='git commit -m'
+alias gs='git status'
+
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
 alias vpa="ssh rpro -t 'cd vagrant-puppet-client; vagrant ssh'"
@@ -118,3 +121,4 @@ alias mute='amixer sset Master toggle'
 alias screenoff='xset dpms force off'
 
 alias sus='su sysadmin'
+
