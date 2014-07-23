@@ -9,6 +9,9 @@ dopath("mod_statusbar")
 dopath("mod_sp")
 dopath("mod_xrandr")
 
+--dopath('wrap_workspace_or_screen')
+dopath('min_tabs')
+
 -- refresh xinerama on screen layout updates
 function screenlayoutupdated()
     mod_xinerama.refresh()
@@ -82,6 +85,11 @@ defbindings("WScreen", {
     kpress("XF86AudioLowerVolume", "notioncore.exec('~/bin/pavol.sh minus')"),
 
     kpress("XF86AudioMute", "notioncore.exec('amixer -D pulse set Master 1+ toggle')"),
+
+    --kpress(META..'Up', "wrap_wsscr.goto_next(_sub, 'up', {no_ascend=_})"),
+    --kpress(META..'Down', "wrap_wsscr.goto_next(_sub, 'down', {no_ascend=_})"),
+    --kpress(META..'Right', "wrap_wsscr.goto_next(_sub, 'right')"),
+    --kpress(META..'Left', "wrap_wsscr.goto_next(_sub, 'left')"),
 })
 
 if not gr.select_engine("de") then return end
