@@ -192,3 +192,7 @@ function install_lnav {
   wget -q -O $TMP https://github.com/tstack/lnav/releases/download/v${LNAV_VERSION}/lnav-${LNAV_VERSION}-linux-64bit.zip
   unzip -d ~/bin $TMP lnav-${LNAV_VERSION}/lnav
 }
+
+function mcd {
+  mkdir -v $* && cd $*
+}
