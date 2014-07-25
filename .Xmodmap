@@ -1,0 +1,22 @@
+! map capslock to escape and unmap escape
+clear Lock
+keycode 0x42 = Escape
+keycode 9 =
+
+! remap £ to #
+keycode 12 = 3 numbersign sterling sterling
+! remap # to | and ~ to \
+keycode 51 = backslash bar
+! remap @ to "
+keycode 11 = 2 at
+! remap " to @
+keycode 48 = apostrophe quotedbl
+! remap key next to '1' key to be same as `~
+keycode 94 = grave asciitilde
+! make my laptop keyboard more like a mac keyboard
+! remap ¬ (notsign) to ~
+keycode 49 = grave asciitilde
+
+! remap windows and alt keys
+keycode 133 = Super_L Super_L
+keycode 64 = Alt_L Alt_L
