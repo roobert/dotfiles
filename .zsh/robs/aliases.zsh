@@ -20,13 +20,15 @@ alias vim="vim -T xterm-256color -p"
 
 # git
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gd="gl -p"
+alias gdl="gl -p"
 alias gup='git commit -am "updated" && git push'
 
 alias gi='git commit -m'
 alias gs='git status'
 alias gp='git push'
 alias ga='git add'
+alias gd='git diff'
+alias gdh='git diff HEAD'
 alias gaa='git add *'
 
 # connect to os X and login to vagrant instances
