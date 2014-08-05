@@ -127,3 +127,5 @@ alias screenoff='xset dpms force off'
 
 alias sus='su sysadmin'
 
+# list java processes and highlight catalina.base argument for easy reading
+alias jcb='jps -lv | hl "base[^ ]*"'
