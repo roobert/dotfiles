@@ -196,3 +196,8 @@ function install_lnav {
 function mcd {
   mkdir -v $* && cd $*
 }
+
+function install_jq {
+  mkdir -v ~/bin
+  curl http://stedolan.github.io/jq/download/linux64/jq > ~/bin/jq
+}
