@@ -157,6 +157,11 @@ function ssh_merge_config {
   fi
 }
 
+function ssh_unmerge_config {
+  gh_pull dotfiles
+  cp -v ~/tmp/dotfiles/.ssh/config ~/.ssh/config
+}
+
 # create an html file containing images
 function make_html_index {
   for f in *; echo "<img src=\"$f\">" >> index.html
