@@ -196,7 +196,7 @@ command Q q
 " NO. THANK. YOU.
 map Q <Nop>
 
-autocmd BufNewFile *.rb 0put = \"#!/usr/bin/env ruby\n# encoding=utf-8\n\n\"   | normal G
+autocmd BufNewFile *.rb 0put = \"#!/usr/bin/env ruby\n#encoding=utf-8\n\n\"   | normal G
 autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
 
