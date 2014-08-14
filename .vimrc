@@ -7,6 +7,10 @@ set nocompatible
 " the yankring_history file is created in ~/
 let g:yankring_history_dir = '~/.vim'
 
+if !filewritable(expand('~/.viminfo'))
+  echo "~/.viminfo is not writable!"
+endif
+
 if version > 701
 
   " install neobundle stuff!
