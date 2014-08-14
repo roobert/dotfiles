@@ -80,7 +80,17 @@ endif
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
-nmap <Leader>e :Errors<CR>
+
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+
+nmap <Leader>e :<C-u>call ToggleErrors()<CR>
 
 
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
@@ -177,6 +187,9 @@ nmap <Leader>= :Ta /=<CR>
 vmap <Leader>= :Ta /=<CR>
 "nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 "vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+
+" change surround bindings
+"nmap <Leader>' 
 
 " run shortcuts..
 nmap <Leader>r :!!<CR>
