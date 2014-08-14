@@ -59,6 +59,7 @@ if version > 701
   NeoBundle "jiangmiao/auto-pairs"
   NeoBundle "ervandew/supertab"
   "NeoBundle "chase/vim-ansible-yaml"
+  "NeoBundle "ngmy/vim-rubocop"
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   NeoBundle "rstacruz/sparkup"
@@ -74,6 +75,8 @@ endif
 "let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
+
+let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
 " molokai 256 colour
 "let g:rehash256 = 1
@@ -224,6 +227,10 @@ map <S-l> :tabnext<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
+
+" remap leader-ru to leader-r
+"let g:vimrubocop_keymap = 0
+"nmap <Leader>r :RuboCop<CR>
 
 nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
 function s:SearchMode()
