@@ -61,7 +61,7 @@ if version > 701
   NeoBundle "scrooloose/syntastic"
   NeoBundle "vim-scripts/YankRing.vim"
   NeoBundle "jiangmiao/auto-pairs"
-  NeoBundle "ervandew/supertab"
+  "NeoBundle "ervandew/supertab"
   "NeoBundle "chase/vim-ansible-yaml"
   "NeoBundle "ngmy/vim-rubocop"
   NeoBundle "tpope/vim-unimpaired"
