@@ -60,6 +60,7 @@ if version > 701
   NeoBundle "ervandew/supertab"
   "NeoBundle "chase/vim-ansible-yaml"
   "NeoBundle "ngmy/vim-rubocop"
+  NeoBundle "tpope/vim-unimpaired"
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   NeoBundle "rstacruz/sparkup"
@@ -72,9 +73,11 @@ endif
 
 
 " syntastic
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
+nmap <Leader>e :Errors<CR>
+
 
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
@@ -168,8 +171,6 @@ nmap <Leader>. :Ta /=><CR>
 vmap <Leader>. :Ta /=><CR>
 nmap <Leader>= :Ta /=<CR>
 vmap <Leader>= :Ta /=<CR>
-nmap <Leader>e :Ta /=<CR>
-vmap <Leader>e :Ta /=<CR>
 "nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 "vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
 
@@ -195,7 +196,7 @@ command Q q
 " NO. THANK. YOU.
 map Q <Nop>
 
-autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'   | normal G
+autocmd BufNewFile *.rb 0put = \"#!/usr/bin/env ruby\n#encoding=utf-8\n\n\"   | normal G
 autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
 
