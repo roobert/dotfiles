@@ -1,5 +1,6 @@
 ".vimrc
 
+
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
@@ -92,6 +93,8 @@ endfunction
 
 nmap <Leader>e :<C-u>call ToggleErrors()<CR>
 
+" toggle yankring
+nnoremap <Leader>p :YRShow<CR>
 
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
