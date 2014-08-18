@@ -66,6 +66,8 @@ if version > 701
   "NeoBundle "chase/vim-ansible-yaml"
   "NeoBundle "ngmy/vim-rubocop"
   NeoBundle "tpope/vim-unimpaired"
+  NeoBundle "fatih/vim-go.git"
+  NeoBundle "nelstrom/vim-textobj-rubyblock"
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   NeoBundle "rstacruz/sparkup"
