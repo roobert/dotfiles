@@ -26,13 +26,13 @@ if version > 701
   " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
-      if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
-          echo "Installing Vundle.."
-          echo ""
-          silent !mkdir -p ~/.vim/bundle
-          silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
-          let fresh_vundle=0
-      endif
+    if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
+      echo "Installing Vundle.."
+      echo ""
+      silent !mkdir -p ~/.vim/bundle
+      silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
+      let fresh_vundle=0
+    endif
   endif
 
   set runtimepath+=~/.vim/bundle/Vundle.vim
@@ -89,8 +89,10 @@ filetype plugin indent on
 "let mapleader = ","
 
 " indent colours
+let g:indent_guides_start_level = 2
 let g:indent_guides_auto_colors = 0
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 let g:indent_guides_enable_on_vim_startup = 1
 
@@ -103,8 +105,8 @@ function! ToggleErrors()
     let old_last_winnr = winnr('$')
     lclose
     if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
+      " Nothing was closed, open syntastic error location panel
+      Errors
     endif
 endfunction
 
