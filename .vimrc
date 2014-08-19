@@ -24,10 +24,9 @@ if version > 701
   if has('vim_starting')
     if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
       echo "Installing Vundle.."
-      echo ""
+
       silent !mkdir -p ~/.vim/bundle
       silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
-      let fresh_vundle=0
     endif
   endif
 
@@ -86,12 +85,11 @@ if version > 701
 
   call vundle#end()
 
-  if fresh_vundle == 0 || vundle_new_plugins == 0
-    edit!
+  if vundle_new_plugins == 0
     silent VundleInstall
     bdelete
-    syntax on
-    edit!
+    "syntax on
+    "edit!
   endif
 endif
 
