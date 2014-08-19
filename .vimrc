@@ -82,7 +82,6 @@ if version > 701
   endif
 endif
 
-
 filetype plugin indent on
 
 " remap \ (set this first since it affects plugin preferences)
@@ -102,12 +101,12 @@ let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
 
 function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-      " Nothing was closed, open syntastic error location panel
-      Errors
-    endif
+  let old_last_winnr = winnr('$')
+  lclose
+  if old_last_winnr == winnr('$')
+    " Nothing was closed, open syntastic error location panel
+    Errors
+  endif
 endfunction
 
 nmap <Leader>e :<C-u>call ToggleErrors()<CR>
@@ -130,8 +129,8 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 " alias vi="vim -T xterm-256color"
 
 " xterm16 color scheme settings
-let xterm16_colormap    = 'allblue'
-let xterm16_brightness  = 'default'
+let xterm16_colormap   = 'allblue'
+let xterm16_brightness = 'default'
 colorscheme xterm16
 
 " hmm.. prefer this more colourful scheme for now..
