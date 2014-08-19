@@ -4,6 +4,9 @@
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
+" required until vundle has done its dance
+filetype off
+
 " annoyingly, this needs to be set before yankring is installed otherwise
 " the yankring_history file is created in ~/
 let g:yankring_history_dir = '~/.vim'
@@ -14,70 +17,81 @@ endif
 
 if version > 701
 
-  " install neobundle stuff!
+  let fresh_vundle=1
+
+  syntax off
+
+  " install vundle stuff!
   " stolen from:
   " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
-      if !filereadable(expand('~/.vim/bundle/neobundle.vim/README.md'))
-          echo "Installing NeoBundle.."
+      if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
+          echo "Installing Vundle.."
           echo ""
           silent !mkdir -p ~/.vim/bundle
-          silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+          silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
+          let fresh_vundle=0
       endif
-
-      set runtimepath+=~/.vim/bundle/neobundle.vim/
   endif
-  call neobundle#rc(expand('~/.vim/bundle/'))
 
-  NeoBundleFetch 'Shougo/neobundle.vim'
-  NeoBundle 'Shougo/vimproc', {
-    \ 'build' : {
-    \     'windows' : 'make -f make_mingw32.mak',
-    \     'cygwin'  : 'make -f make_cygwin.mak',
-    \     'mac'     : 'make -f make_mac.mak',
-    \     'unix'    : 'make -f make_unix.mak',
-    \     },
-    \ }
+  set runtimepath+=~/.vim/bundle/Vundle.vim
+
+  call vundle#begin()
 
   " colorschemes
-  NeoBundle "vim-scripts/xterm16.vim"
-  NeoBundle "tomasr/molokai"
-  NeoBundle "vim-scripts/Iceberg"
-  NeoBundle "vim-scripts/xoria256.vim"
-  NeoBundle "romainl/Apprentice"
+  Plugin 'vim-scripts/xterm16.vim'
+  "Plugin 'tomasr/molokai'
+  "Plugin 'vim-scripts/Iceberg'
+  "Plugin 'vim-scripts/xoria256.vim'
+  "Plugin 'romainl/Apprentice'
+  Plugin 'gmarik/Vundle.vim'
 
   " me plugins!
-  NeoBundle "MarcWeber/vim-addon-mw-utils"
-  NeoBundle "tomtom/tlib_vim"
-  NeoBundle "garbas/vim-snipmate"
-  NeoBundle "honza/vim-snippets"
-  NeoBundle "tpope/vim-surround"
-  NeoBundle "tpope/vim-commentary"
-  "NeoBundle "tpope/vim-endwise"
-  NeoBundle "tpope/vim-repeat"
-  NeoBundle "godlygeek/tabular"
-  NeoBundle "puppetlabs/puppet-syntax-vim"
-  NeoBundle "rodjek/vim-puppet"
-  NeoBundle "scrooloose/syntastic"
-  NeoBundle "vim-scripts/YankRing.vim"
-  NeoBundle "jiangmiao/auto-pairs"
-  "NeoBundle "ervandew/supertab"
-  "NeoBundle "chase/vim-ansible-yaml"
-  "NeoBundle "ngmy/vim-rubocop"
-  NeoBundle "tpope/vim-unimpaired"
-  NeoBundle "fatih/vim-go.git"
-  NeoBundle "nelstrom/vim-textobj-rubyblock"
+  Plugin 'MarcWeber/vim-addon-mw-utils'
+  Plugin 'tomtom/tlib_vim'
+  Plugin 'garbas/vim-snipmate'
+  Plugin 'honza/vim-snippets'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-commentary'
+  "Plugin 'tpope/vim-endwise'
+  Plugin 'tpope/vim-repeat'
+  Plugin 'godlygeek/tabular'
+  Plugin 'puppetlabs/puppet-syntax-vim'
+  Plugin 'rodjek/vim-puppet'
+  Plugin 'scrooloose/syntastic'
+  Plugin 'vim-scripts/YankRing.vim'
+  Plugin 'jiangmiao/auto-pairs'
+  "Plugin 'ervandew/supertab'
+  "Plugin 'chase/vim-ansible-yaml'
+  "Plugin 'ngmy/vim-rubocop'
+  Plugin 'tpope/vim-unimpaired'
+  Plugin 'fatih/vim-go.git'
+  "Plugin 'nelstrom/vim-textobj-rubyblock'
+  Plugin 'nathanaelkane/vim-indent-guides'
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
-  NeoBundle "rstacruz/sparkup"
+  "Plugin 'rstacruz/sparkup'
 
-  NeoBundleCheck
+  call vundle#end()
+
+  if fresh_vundle == 0
+    :VundleInstall
+    silent :bdelete
+  endif
 endif
+
+
+filetype plugin indent on
 
 " remap \ (set this first since it affects plugin preferences)
 "let mapleader = ","
 
+" indent colours
+let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+let g:indent_guides_enable_on_vim_startup = 1
 
 " syntastic
 let g:syntastic_always_populate_loc_list = 1
