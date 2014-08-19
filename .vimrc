@@ -1,6 +1,5 @@
 ".vimrc
 
-
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
@@ -32,8 +31,6 @@ if version > 701
     endif
   endif
 
-  let vundle_new_plugins = 1
-
   let plugins = [
     \'vim-scripts/xterm16.vim',
     \'gmarik/Vundle.vim',
@@ -62,29 +59,39 @@ if version > 701
 
   call vundle#begin()
 
+  let vundle_new_plugins = 1
+
   " if a plugin isn't installed, install it!
   for plugin in plugins
-    let plugin_name                  = split(plugin, '/')[1]
-    let plugin_dir                   = expand('~') . '/.vim/bundle/' . plugin_name
-    let plugin_dir_without_extension = split(plugin_dir, '.')
 
-    "echo plugin_dir
-    "echo plugin_dir_without_extension
+    let plugin_name = split(plugin, '/')[1]
+    let plugin_dir  = expand('~') . '/.vim/bundle/' . plugin_name
 
-    if !isdirectory(plugin_dir) || !isdirectory(plugin_dir_without_extension)
-      echo "new plugin detected: " . plugin_dir
+    " FIXME: duh
+    if plugin_dir =~ '.git'
+      let plugin_dir_without_extension = split(plugin_dir, '\.git')[0]
+    else
+      let plugin_dir_without_extension = "jibbajabba!!!"
+    endif
+
+    " if possible plugin directories aren't found...
+    if !isdirectory(plugin_dir) && !isdirectory(plugin_dir_without_extension)
+      echo "detected new plugin: " . plugin
       let vundle_new_plugins = 0
     endif
 
+    " register all plugin paths, even those not installed
     Plugin plugin
   endfor
 
   call vundle#end()
 
   if fresh_vundle == 0 || vundle_new_plugins == 0
-    " || fresh_vundle == 0
-    silent :VundleInstall
-    silent :bdelete
+    edit!
+    silent VundleInstall
+    bdelete
+    syntax on
+    edit!
   endif
 endif
 
@@ -94,11 +101,11 @@ filetype plugin indent on
 "let mapleader = ","
 
 " indent colours
-let g:indent_guides_start_level = 2
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+let g:indent_guides_start_level = 2
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size  = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
 " syntastic
@@ -109,8 +116,9 @@ let g:syntastic_aggregate_errors = 1
 function! ToggleErrors()
   let old_last_winnr = winnr('$')
   lclose
+
+  " Nothing was closed, open syntastic error location panel
   if old_last_winnr == winnr('$')
-    " Nothing was closed, open syntastic error location panel
     Errors
   endif
 endfunction
@@ -245,9 +253,9 @@ autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
 
 " expert difficulty!!!
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
+noremap <Up>    <NOP>
+noremap <Down>  <NOP>
+noremap <Left>  <NOP>
 noremap <Right> <NOP>
 
 " override default vertical split binding to open a new buffer rather than split current buffer
