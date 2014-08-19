@@ -63,12 +63,13 @@ if version > 701
   Plugin 'vim-scripts/YankRing.vim'
   Plugin 'jiangmiao/auto-pairs'
   "Plugin 'ervandew/supertab'
-  "Plugin 'chase/vim-ansible-yaml'
-  "Plugin 'ngmy/vim-rubocop'
+  Plugin 'chase/vim-ansible-yaml'
+  Plugin 'ngmy/vim-rubocop'
   Plugin 'tpope/vim-unimpaired'
   Plugin 'fatih/vim-go.git'
   "Plugin 'nelstrom/vim-textobj-rubyblock'
   Plugin 'nathanaelkane/vim-indent-guides'
+  Plugin 'gabrielelana/vim-markdown'
 
   " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
   "Plugin 'rstacruz/sparkup'
