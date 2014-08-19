@@ -21,9 +21,6 @@ if version > 701
 
   syntax off
 
-  " install vundle stuff!
-  " stolen from:
-  " https://github.com/matthewfranglen/dotfiles/blob/master/vim/vimrc
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
     if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
@@ -35,49 +32,58 @@ if version > 701
     endif
   endif
 
+  let vundle_new_plugins = 1
+
+  let plugins = [
+    \'vim-scripts/xterm16.vim',
+    \'gmarik/Vundle.vim',
+    \'MarcWeber/vim-addon-mw-utils',
+    \'tomtom/tlib_vim',
+    \'garbas/vim-snipmate',
+    \'honza/vim-snippets',
+    \'tpope/vim-surround',
+    \'tpope/vim-commentary',
+    \'tpope/vim-repeat',
+    \'godlygeek/tabular',
+    \'puppetlabs/puppet-syntax-vim',
+    \'rodjek/vim-puppet',
+    \'scrooloose/syntastic',
+    \'vim-scripts/YankRing.vim',
+    \'jiangmiao/auto-pairs',
+    \'chase/vim-ansible-yaml',
+    \'ngmy/vim-rubocop',
+    \'tpope/vim-unimpaired',
+    \'fatih/vim-go.git',
+    \'nathanaelkane/vim-indent-guides',
+    \'gabrielelana/vim-markdown'
+  \]
+
   set runtimepath+=~/.vim/bundle/Vundle.vim
 
   call vundle#begin()
 
-  " colorschemes
-  Plugin 'vim-scripts/xterm16.vim'
-  "Plugin 'tomasr/molokai'
-  "Plugin 'vim-scripts/Iceberg'
-  "Plugin 'vim-scripts/xoria256.vim'
-  "Plugin 'romainl/Apprentice'
-  Plugin 'gmarik/Vundle.vim'
+  " if a plugin isn't installed, install it!
+  for plugin in plugins
+    let plugin_name                  = split(plugin, '/')[1]
+    let plugin_dir                   = expand('~') . '/.vim/bundle/' . plugin_name
+    let plugin_dir_without_extension = split(plugin_dir, '.')
 
-  " me plugins!
-  Plugin 'MarcWeber/vim-addon-mw-utils'
-  Plugin 'tomtom/tlib_vim'
-  Plugin 'garbas/vim-snipmate'
-  Plugin 'honza/vim-snippets'
-  Plugin 'tpope/vim-surround'
-  Plugin 'tpope/vim-commentary'
-  "Plugin 'tpope/vim-endwise'
-  Plugin 'tpope/vim-repeat'
-  Plugin 'godlygeek/tabular'
-  Plugin 'puppetlabs/puppet-syntax-vim'
-  Plugin 'rodjek/vim-puppet'
-  Plugin 'scrooloose/syntastic'
-  Plugin 'vim-scripts/YankRing.vim'
-  Plugin 'jiangmiao/auto-pairs'
-  "Plugin 'ervandew/supertab'
-  Plugin 'chase/vim-ansible-yaml'
-  Plugin 'ngmy/vim-rubocop'
-  Plugin 'tpope/vim-unimpaired'
-  Plugin 'fatih/vim-go.git'
-  "Plugin 'nelstrom/vim-textobj-rubyblock'
-  Plugin 'nathanaelkane/vim-indent-guides'
-  Plugin 'gabrielelana/vim-markdown'
+    "echo plugin_dir
+    "echo plugin_dir_without_extension
 
-  " just incase i ever write html!? this thing is crazy.. may be worth checking emmit.io?
-  "Plugin 'rstacruz/sparkup'
+    if !isdirectory(plugin_dir) || !isdirectory(plugin_dir_without_extension)
+      echo "new plugin detected: " . plugin_dir
+      let vundle_new_plugins = 0
+    endif
+
+    Plugin plugin
+  endfor
 
   call vundle#end()
 
-  if fresh_vundle == 0
-    :VundleInstall
+  if fresh_vundle == 0 || vundle_new_plugins == 0
+    " || fresh_vundle == 0
+    silent :VundleInstall
     silent :bdelete
   endif
 endif

@@ -4,7 +4,6 @@
 # * ping test or fail?
 #
 
-
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi
 
