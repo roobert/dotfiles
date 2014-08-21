@@ -49,10 +49,13 @@ if version > 701
     \'chase/vim-ansible-yaml',
     \'ngmy/vim-rubocop',
     \'tpope/vim-unimpaired',
-    \'fatih/vim-go.git',
     \'nathanaelkane/vim-indent-guides',
     \'gabrielelana/vim-markdown'
   \]
+
+  if filereadable('/usr/bin/go')
+    call add(plugins, 'fatih/vim-go.git')
+  endif
 
   set runtimepath+=~/.vim/bundle/Vundle.vim
 
