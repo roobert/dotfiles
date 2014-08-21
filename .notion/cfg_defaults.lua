@@ -28,6 +28,7 @@ XTERM="xterm"
 BROWSER="chromium-browser"
 BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
 MUSIC="spotify"
+META="Mod1+"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
