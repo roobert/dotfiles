@@ -5,14 +5,19 @@ keycode 9 =
 
 ! remap £ to #
 keycode 12 = 3 numbersign sterling sterling
+
 ! remap # to | and ~ to \
 keycode 51 = backslash bar
+
 ! remap @ to "
 keycode 11 = 2 at
+
 ! remap " to @
 keycode 48 = apostrophe quotedbl
+
 ! remap key next to '1' key to be same as `~
 keycode 94 = grave asciitilde
+
 ! make my laptop keyboard more like a mac keyboard
 ! remap ¬ (notsign) to ~
 keycode 49 = grave asciitilde
