@@ -46,7 +46,6 @@ if version > 701
     \'scrooloose/syntastic',
     \'vim-scripts/YankRing.vim',
     \'jiangmiao/auto-pairs',
-    \'chase/vim-ansible-yaml',
     \'ngmy/vim-rubocop',
     \'tpope/vim-unimpaired',
     \'nathanaelkane/vim-indent-guides',
