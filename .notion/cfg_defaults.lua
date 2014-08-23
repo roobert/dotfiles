@@ -31,6 +31,8 @@ XTERM="xterm"
 BROWSER="chromium-browser"
 BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
 MUSIC="spotify"
+SCREENSAVER="gnome-screensaver-command --lock"
+SCREENBLANK="bash -c 'sleep 1; xset dpms force off'"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
@@ -76,7 +78,10 @@ defbindings("WScreen", {
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
 
     bdoc("Lock screen"),
-    kpress(META.."F7", "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
+    kpress(META.."F7", "notioncore.exec_on(_, SCREENSAVER)"),
+
+    bdoc("Blank screen"),
+    kpress(META.."F8", "notioncore.exec_on(_, SCREENBLANK)"),
 
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
