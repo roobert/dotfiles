@@ -3,6 +3,8 @@
 	email = roobert@gmail.com
 [color]
 	ui = true
+
+[color "diff"]
 [alias]
   co = checkout
   ci = commit

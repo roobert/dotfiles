@@ -29,7 +29,7 @@ alias gp='git push'
 alias ga='git add'
 alias gd='git diff'
 alias gdh='git diff HEAD'
-alias gaa='git add *'
+alias gaa='git add .'
 
 # connect to os X and login to vagrant instances
 alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
