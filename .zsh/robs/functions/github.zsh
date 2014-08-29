@@ -137,4 +137,40 @@ function gh_push {
   rm -rf $HOME/tmp/$REPOS
 }
 
-# FIXME: add gh_add <repo> <file>
+function gh_add_dotfiles {
+  FILE="$1"
+
+  test -f "$1" || { echo "no such file: $1"; exit 1 }
+
+  gh_pull dotfiles
+
+  # work out directory relative to zsh root
+  FILE_LOCATION=$(readlink -f $FILE | sed 's/.*\.zsh\//.zsh\//')
+
+  cp -v $FILE ~/tmp/dotfiles/${FILE_LOCATION}
+
+  (
+    cd ~/tmp/dotfiles/
+    git add ${FILE_LOCATION}
+    git commit -m 'added file'
+    git push
+  )
+}
+
+function gh_remove_dotfiles {
+  FILE="$1"
+
+  test -f "$1" || { echo "no such file: $1"; exit 1 }
+
+  gh_pull dotfiles
+
+  # work out directory relative to zsh root
+  FILE_LOCATION=$(readlink -f $FILE | sed 's/.*\.zsh\//.zsh\//')
+
+  (
+    cd ~/tmp/dotfiles/
+    git rm ${FILE_LOCATION}
+    git commit -m "removed file"
+    git push
+  )
+}
