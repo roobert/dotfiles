@@ -145,7 +145,7 @@ function gh_add_dotfiles {
   gh_pull dotfiles
 
   # work out directory relative to zsh root
-  FILE_LOCATION=$(readlink -f $FILE | sed 's/.*\.zsh\//.zsh\//')
+  FILE_LOCATION=$(readlink -f $FILE | sed "s/$HOME//")
 
   cp -v $FILE ~/tmp/dotfiles/${FILE_LOCATION}
 
