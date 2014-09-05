@@ -161,6 +161,7 @@ syntax enable
 hi Normal ctermfg=252 ctermbg=none
 
 " me settins
+set matchpairs+=<:>,{:},(:),[:]
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
