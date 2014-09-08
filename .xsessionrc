@@ -38,6 +38,8 @@ fi
 # make xterm disregard spaces at end of line when copying to clipboard
 test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
 
+/usr/bin/setxkbmap -option caps:escape
+
 eval $(gnome-keyring-daemon --start) &
 
 exec ssh-agent notion
