@@ -49,7 +49,7 @@ if version > 701
     \'ngmy/vim-rubocop',
     \'tpope/vim-unimpaired',
     \'nathanaelkane/vim-indent-guides',
-    \'gabrielelana/vim-markdown'
+    \'vim-scripts/nginx.vim.git'
   \]
 
   if filereadable('/usr/bin/go')
@@ -252,6 +252,12 @@ map Q <Nop>
 autocmd BufNewFile *.rb 0put = \"#!/usr/bin/env ruby\n#encoding=utf-8\n\n\"   | normal G
 autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
 autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" spellcheck for .txt and .md
+autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.txt setlocal spell
+
 
 " expert difficulty!!!
 noremap <Up>    <NOP>
