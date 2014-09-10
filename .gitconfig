@@ -2,7 +2,7 @@
 	name = Rob Wilson
 	email = roobert@gmail.com
 [color]
-	ui = true
+	ui = always
 
 [color "diff"]
 [alias]
