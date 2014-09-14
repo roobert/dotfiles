@@ -3,9 +3,6 @@
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
-" required until vundle has done its dance
-filetype off
-
 " annoyingly, this needs to be set before yankring is installed otherwise
 " the yankring_history file is created in ~/
 let g:yankring_history_dir = '~/.vim'
@@ -16,23 +13,22 @@ endif
 
 if version > 701
 
-  let fresh_vundle=1
-
   syntax off
 
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
-    if !filereadable(expand('~/.vim/bundle/Vundle.vim/README.md'))
-      echo "Installing Vundle.."
+    if !filereadable(expand('~/.vim/plugged/vim-plug/README.md'))
+      echo "Installing vim-plug.."
 
-      silent !mkdir -p ~/.vim/bundle
-      silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
+      silent !mkdir -p ~/.vim/plugged
+      silent !GIT_SSL_NO_VERIFY=1 git clone https://github.com/junegunn/vim-plug.git ~/.vim/plugged/vim-plug
     endif
   endif
 
+  set runtimepath+=~/.vim/plugged/vim-plug
+
   let plugins = [
     \'vim-scripts/xterm16.vim',
-    \'gmarik/Vundle.vim',
     \'MarcWeber/vim-addon-mw-utils',
     \'tomtom/tlib_vim',
     \'garbas/vim-snipmate',
@@ -49,49 +45,37 @@ if version > 701
     \'ngmy/vim-rubocop',
     \'tpope/vim-unimpaired',
     \'nathanaelkane/vim-indent-guides',
-    \'vim-scripts/nginx.vim.git'
+    \'vim-scripts/nginx.vim'
   \]
 
   if filereadable('/usr/bin/go')
-    call add(plugins, 'fatih/vim-go.git')
+    call add(plugins, 'fatih/vim-go')
   endif
 
-  set runtimepath+=~/.vim/bundle/Vundle.vim
+  let new_plugins = 1
 
-  call vundle#begin()
-
-  let vundle_new_plugins = 1
+  call plug#begin('~/.vim/plugged')
 
   " if a plugin isn't installed, install it!
   for plugin in plugins
 
     let plugin_name = split(plugin, '/')[1]
-    let plugin_dir  = expand('~') . '/.vim/bundle/' . plugin_name
-
-    " FIXME: duh
-    if plugin_dir =~ '.git'
-      let plugin_dir_without_extension = split(plugin_dir, '\.git')[0]
-    else
-      let plugin_dir_without_extension = "jibbajabba!!!"
-    endif
+    let plugin_dir  = expand('~') . '/.vim/plugged/' . plugin_name
 
     " if possible plugin directories aren't found...
-    if !isdirectory(plugin_dir) && !isdirectory(plugin_dir_without_extension)
-      echo "detected new plugin: " . plugin
-      let vundle_new_plugins = 0
+    if !isdirectory(plugin_dir)
+      let new_plugins = 0
     endif
 
     " register all plugin paths, even those not installed
-    Plugin plugin
+    Plug plugin
   endfor
 
-  call vundle#end()
+  call plug#end()
 
-  if vundle_new_plugins == 0
-    silent VundleInstall
+  if new_plugins == 0
+    silent PlugInstall
     bdelete
-    "syntax on
-    "edit!
   endif
 endif
 
