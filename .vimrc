@@ -44,7 +44,7 @@ if version > 701
     \'jiangmiao/auto-pairs',
     \'ngmy/vim-rubocop',
     \'nathanaelkane/vim-indent-guides',
-    \'junegunn/vim-easy-align'
+    \'junegunn/vim-easy-align',
     \'junegunn/vim-plug'
   \]
 
