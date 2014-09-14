@@ -25,6 +25,8 @@ if version > 701
     endif
   endif
 
+  let g:plug_window = 'new'
+
   set runtimepath+=~/.vim/plugged/vim-plug
 
   let plugins = [
