@@ -38,7 +38,6 @@ if version > 701
     \'tpope/vim-surround',
     \'tpope/vim-commentary',
     \'tpope/vim-repeat',
-    \'godlygeek/tabular',
     \'puppetlabs/puppet-syntax-vim',
     \'rodjek/vim-puppet',
     \'scrooloose/syntastic',
@@ -47,8 +46,11 @@ if version > 701
     \'ngmy/vim-rubocop',
     \'tpope/vim-unimpaired',
     \'nathanaelkane/vim-indent-guides',
-    \'vim-scripts/nginx.vim'
+    \'vim-scripts/nginx.vim',
+    \'junegunn/vim-easy-align'
   \]
+
+  "\'godlygeek/tabular',
 
   if filereadable('/usr/bin/go')
     call add(plugins, 'fatih/vim-go')
@@ -201,14 +203,22 @@ autocmd FileType ruby   set commentstring=#\ %s
 nmap <F1> <nop>
 
 " Tabularize plugin bindings
-nmap <Leader>> :Ta /=><CR>
-vmap <Leader>> :Ta /=><CR>
-nmap <Leader>. :Ta /=><CR>
-vmap <Leader>. :Ta /=><CR>
-nmap <Leader>= :Ta /=<CR>
-vmap <Leader>= :Ta /=<CR>
-"nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
-"vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+"nmap <Leader>> :Ta /=><CR>
+"vmap <Leader>> :Ta /=><CR>
+"nmap <Leader>. :Ta /=><CR>
+"vmap <Leader>. :Ta /=><CR>
+"nmap <Leader>= :Ta /=<CR>
+"vmap <Leader>= :Ta /=<CR>
+""nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+""vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
+
+" vim easy align
+" start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
+nmap <Leader>a <Plug>(EasyAlign)
+
 
 " change surround bindings
 "nmap <Leader>' 
