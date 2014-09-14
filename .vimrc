@@ -13,8 +13,6 @@ endif
 
 if version > 701
 
-  syntax off
-
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
     if !filereadable(expand('~/.vim/plugged/vim-plug/README.md'))
@@ -30,27 +28,25 @@ if version > 701
   set runtimepath+=~/.vim/plugged/vim-plug
 
   let plugins = [
+    \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
+    \'vim-scripts/YankRing.vim',
     \'MarcWeber/vim-addon-mw-utils',
-    \'tomtom/tlib_vim',
     \'garbas/vim-snipmate',
     \'honza/vim-snippets',
     \'tpope/vim-surround',
     \'tpope/vim-commentary',
     \'tpope/vim-repeat',
+    \'tpope/vim-unimpaired',
     \'puppetlabs/puppet-syntax-vim',
     \'rodjek/vim-puppet',
     \'scrooloose/syntastic',
-    \'vim-scripts/YankRing.vim',
     \'jiangmiao/auto-pairs',
     \'ngmy/vim-rubocop',
-    \'tpope/vim-unimpaired',
     \'nathanaelkane/vim-indent-guides',
-    \'vim-scripts/nginx.vim',
     \'junegunn/vim-easy-align'
+    \'junegunn/vim-plug'
   \]
-
-  "\'godlygeek/tabular',
 
   if filereadable('/usr/bin/go')
     call add(plugins, 'fatih/vim-go')
@@ -79,14 +75,13 @@ if version > 701
 
   if new_plugins == 0
     silent PlugInstall
+
+    " close install buffer
     bdelete
   endif
 endif
 
 filetype plugin indent on
-
-" remap \ (set this first since it affects plugin preferences)
-"let mapleader = ","
 
 " indent colours
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
@@ -118,9 +113,6 @@ nnoremap <Leader>p :YRShow<CR>
 
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
-" molokai 256 colour
-"let g:rehash256 = 1
-
 " make it colourful..
 
 " For windows, the colors directory is: c:\Users\<user>\vimfiles\colors 
@@ -135,7 +127,9 @@ let xterm16_colormap   = 'allblue'
 let xterm16_brightness = 'default'
 colorscheme xterm16
 
-" hmm.. prefer this more colourful scheme for now..
+" molokai 256 colour
+"let g:rehash256 = 1
+
 "colorscheme molokai
 "colorscheme apprentice
 "colorscheme iceberg
