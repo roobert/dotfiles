@@ -164,7 +164,8 @@ function ssh_unmerge_config {
 
 # create an html file containing images
 function make_html_index {
-  for f in *; echo "<img src=\"$f\">" >> index.html
+  rm -vi index.html
+  for f in *; echo "<a href=\"$f\"><img src=\"$f\"></a>" >> index.html
   echo "<style>img { width: 800px; }</style>" >> index.html
 }
 
