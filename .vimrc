@@ -28,6 +28,7 @@ if version > 701
   set runtimepath+=~/.vim/plugged/vim-plug
 
   let plugins = [
+    \'vim-scripts/tlib',
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
