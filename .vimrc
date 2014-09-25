@@ -279,6 +279,9 @@ map <S-l> :tabnext<CR>
 " un-highlight last search
 map <Leader>/ :noh<CR>
 
+" tmux
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%")) 
+
 " remap leader-ru to leader-r
 "let g:vimrubocop_keymap = 0
 "nmap <Leader>r :RuboCop<CR>
