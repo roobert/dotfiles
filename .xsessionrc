@@ -40,6 +40,8 @@ test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km
 
 /usr/bin/setxkbmap -option caps:escape
 
+which autocutsel && (autocutsel &; autocutsel -s PRIMARY)
+
 eval $(gnome-keyring-daemon --start) &
 
 exec ssh-agent notion
