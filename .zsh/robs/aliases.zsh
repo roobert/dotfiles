@@ -125,7 +125,7 @@ alias dsearch="dpkg -l | grep"
 alias mute='amixer sset Master toggle'
 alias screenoff='xset dpms force off'
 
-alias sus='su sysadmin'
+alias sus="su - sysadmin -c 'sudo su'"
 
 # list java processes and highlight catalina.base argument for easy reading
 alias jcb='jps -lv | hl "base[^ ]*"'
