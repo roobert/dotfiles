@@ -18,29 +18,25 @@ nm-applet &
 xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
 
 # work mac keyboard: 
-if [[ `hostname` == "grindelwald" ]]; then
-  # remap # to | and ~ to \
-  xmodmap -e 'keycode 51 = backslash bar'
-  # remap @ to "
-  xmodmap -e 'keycode 11 = 2 at'
-  # remap " to @ 
-  xmodmap -e 'keycode 48 = apostrophe quotedbl'
-  # remap key next to '1' key to be same as `~
-  xmodmap -e 'keycode 94 = grave asciitilde'
-fi
+# remap # to | and ~ to \
+xmodmap -e 'keycode 51 = backslash bar'
+# remap @ to "
+xmodmap -e 'keycode 11 = 2 at'
+# remap " to @ 
+xmodmap -e 'keycode 48 = apostrophe quotedbl'
+# remap key next to '1' key to be same as `~
+xmodmap -e 'keycode 94 = grave asciitilde'
 
-if [[ `hostname` == "e420s" ]]; then
-  # make my laptop keyboard more like a mac keyboard
-  # remap ¬ (notsign) to ~ 
-  xmodmap -e 'keycode 49 = grave asciitilde'
-fi
+# make my laptop keyboard more like a mac keyboard
+# remap ¬ (notsign) to ~ 
+xmodmap -e 'keycode 49 = grave asciitilde'
 
 # make xterm disregard spaces at end of line when copying to clipboard
-test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
+#test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
 
 /usr/bin/setxkbmap -option caps:escape
 
-which autocutsel && (autocutsel &; autocutsel -s PRIMARY)
+#which autocutsel && (autocutsel &; autocutsel -s PRIMARY)
 
 eval $(gnome-keyring-daemon --start) &
 
