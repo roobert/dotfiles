@@ -32,6 +32,7 @@ if version > 701
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
+    \'vim-scripts/gnupg.vim',
     \'MarcWeber/vim-addon-mw-utils',
     \'garbas/vim-snipmate',
     \'honza/vim-snippets',
