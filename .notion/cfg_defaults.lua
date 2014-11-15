@@ -27,7 +27,7 @@ if randr_screen_change_notify_hook ~= nil then
 end
 
 -- urxvt is broken on my work machine..? https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
-XTERM="xterm"
+XTERM="gnome-terminal"
 BROWSER="chromium-browser"
 BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
 MUSIC="spotify"
@@ -135,9 +135,9 @@ de.defstyle("tab", {
 })
 
 de.defstyle("frame", {
-	transparent_background = false,
+	transparent_background = true,
 
-	padding_pixels   = 2,
+	padding_pixels   = 0,
 	shadow_pixels    = 1,
 	highlight_pixels = 1,
 
