@@ -1,5 +1,5 @@
-META="Mod1+"
-ALTMETA="Mod1+"
+--META="Mod1+"
+--ALTMETA="Mod1+"
 
 dopath("cfg_notioncore")
 dopath("cfg_kludges")
@@ -11,8 +11,6 @@ dopath("mod_tiling")
 dopath("mod_statusbar")
 dopath("mod_sp")
 dopath("mod_xrandr")
-
---dopath('wrap_workspace_or_screen')
 dopath('min_tabs')
 
 -- refresh xinerama on screen layout updates
@@ -28,8 +26,8 @@ end
 
 -- urxvt is broken on my work machine..? https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
 XTERM="gnome-terminal"
-BROWSER="chromium-browser"
-BROWSER_SECRET="chromium-browser --user-data-dir=~/.chromium-noproxy --incognito"
+BROWSER="google-chrome"
+BROWSER_SECRET="google-chrome --user-data-dir=~/.chromium-noproxy --incognito"
 MUSIC="spotify"
 SCREENSAVER="gnome-screensaver-command --lock"
 SCREENBLANK="bash -c 'sleep 1; xset dpms force off'"
@@ -70,10 +68,10 @@ defbindings("WMPlex.toplevel", {
 defbindings("WScreen", {
     kpress(META.."F2", "notioncore.exec_on(_, XTERM or 'x-terminal-emulator')"),
     kpress(META.."F3", "mod_query.query_exec(_)"),
-    kpress(META.."F4", "notioncore.exec_on(_, MUSIC or 'x-music')"),
-    kpress(META.."F5", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
-    kpress(META.."F6", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
-    kpress(META.."F9", "ioncore.create_ws(_)"),
+    kpress(META.."F4", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
+    kpress(META.."F5", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
+    kpress(META.."F6", "notioncore.exec_on(_, MUSIC or 'x-music')"),
+    kpress(META.."F10", "ioncore.create_ws(_)"),
     kpress(META.."F11", "ioncore.restart()"),
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
 
@@ -86,18 +84,6 @@ defbindings("WScreen", {
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
     kpress("XF86AudioPrev", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous')"),
-
-    --kpress("XF86AudioRaiseVolume", "notioncore.exec('amixer set Master 5%+')"),
-    --kpress("XF86AudioLowerVolume", "notioncore.exec('amixer set Master 5%-')"),
-    kpress("XF86AudioRaiseVolume", "notioncore.exec('~/bin/pavol.sh plus')"),
-    kpress("XF86AudioLowerVolume", "notioncore.exec('~/bin/pavol.sh minus')"),
-
-    kpress("XF86AudioMute", "notioncore.exec('amixer -D pulse set Master 1+ toggle')"),
-
-    --kpress(META..'Up', "wrap_wsscr.goto_next(_sub, 'up', {no_ascend=_})"),
-    --kpress(META..'Down', "wrap_wsscr.goto_next(_sub, 'down', {no_ascend=_})"),
-    --kpress(META..'Right', "wrap_wsscr.goto_next(_sub, 'right')"),
-    --kpress(META..'Left', "wrap_wsscr.goto_next(_sub, 'left')"),
 })
 
 if not gr.select_engine("de") then return end

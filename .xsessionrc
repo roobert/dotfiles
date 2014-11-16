@@ -6,40 +6,28 @@ if test -d ~/bin 2> /dev/null; then
   export PATH="$HOME/bin:$PATH"
 fi
 
-vmware-user &
-trayion &
-nm-applet &
+if test -d $HOME/.screenlayout/; then
+  bash $HOME/.screenlayout/default.sh
+fi
 
-# remap caps-lock to escape
-#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+if which feh > /dev/null 2>&1; then
+  feh --bg-fill /usr/share/backgrounds/warty-final-ubuntu.png
+fi
 
+if which autocutsel > /dev/null 2>&1; then
+  autocutsel &
+  autocutsel -s PRIMARY &
+fi
 
-# remap £ to #
-xmodmap -e 'keycode 12 = 3 numbersign sterling sterling'
+if which vmware-user > /dev/null 2>&1; then
+  vmware-user &
+fi
 
-# work mac keyboard: 
-# remap # to | and ~ to \
-xmodmap -e 'keycode 51 = backslash bar'
-# remap @ to "
-xmodmap -e 'keycode 11 = 2 at'
-# remap " to @ 
-xmodmap -e 'keycode 48 = apostrophe quotedbl'
-# remap key next to '1' key to be same as `~
-xmodmap -e 'keycode 94 = grave asciitilde'
-
-# make my laptop keyboard more like a mac keyboard
-# remap ¬ (notsign) to ~ 
-xmodmap -e 'keycode 49 = grave asciitilde'
-
-# make xterm disregard spaces at end of line when copying to clipboard
-#test -f .terminfo/x/xterm-256color || (infocmp xterm-256color | sed -e 's/am, km,/am, bce, km,/' | tic -)
-
-/usr/bin/setxkbmap -option caps:escape
-
-#which autocutsel && (autocutsel &; autocutsel -s PRIMARY)
+if which trayion > /dev/null 2>&1; then
+  trayion &
+  nm-applet &
+fi
 
 eval $(gnome-keyring-daemon --start) &
 
 exec ssh-agent notion
-
-#exec ssh-agent i3
