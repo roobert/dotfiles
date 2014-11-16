@@ -28,6 +28,12 @@ if which trayion > /dev/null 2>&1; then
   nm-applet &
 fi
 
+if [[ "$(hostname)" == "mbp0" ]]; then
+  synclient MaxTapTime=0
+  synclient HorizTwoFingerScroll=1
+  synclient PalmDetect=1
+fi
+
 eval $(gnome-keyring-daemon --start) &
 
 exec ssh-agent notion
