@@ -83,6 +83,9 @@ defbindings("WScreen", {
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
     kpress("XF86AudioPrev", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous')"),
+    kpress("XF86AudioLowerVolume", "notioncore.exec('$HOME/bin/volume down')"),
+    kpress("XF86AudioRaiseVolume", "notioncore.exec('$HOME/bin/volume up')"),
+    kpress("XF86AudioMute", "notioncore.exec('$HOME/bin/volume mute')"),
 })
 
 if not gr.select_engine("de") then return end
