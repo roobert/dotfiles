@@ -26,7 +26,7 @@ end
 
 XTERM="gnome-terminal"
 BROWSER="google-chrome"
-BROWSER_SECRET="google-chrome --user-data-dir=~/.chromium-noproxy --incognito"
+BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"
 SCREENSAVER="gnome-screensaver-command --lock"
 SCREENBLANK="bash -c 'sleep 1; xset dpms force off'"
