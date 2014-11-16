@@ -26,6 +26,7 @@ if version > 701
   let g:plug_window = 'new'
 
   set runtimepath+=~/.vim/plugged/vim-plug
+  source ~/.vim/plugged/vim-plug/plug.vim
 
   let plugins = [
     \'vim-scripts/tlib',
