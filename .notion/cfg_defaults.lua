@@ -24,7 +24,6 @@ if randr_screen_change_notify_hook ~= nil then
     randr_screen_change_notify_hook:add(screenlayoutupdated)
 end
 
--- urxvt is broken on my work machine..? https://bugs.launchpad.net/ubuntu/+source/compiz/+bug/861268
 XTERM="gnome-terminal"
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=~/.chromium-noproxy --incognito"
@@ -97,8 +96,7 @@ de.defstyle("*", {
 	highlight_pixels  = 0,
 	padding_pixels    = 0,
 	spacing           = 0,
-  font              = "-misc-ubuntu-medium-r-normal--12-0-0-0-p-0-iso10646-1",
-	font              = "xft: ubuntu mono-12",
+  font              = "-*-lucidia-*-r-*--13-*-*-*-*-*-*-*",
 	text_align        = "center",
 })
 
@@ -152,23 +150,6 @@ de.defstyle("stdisp", {
         foreground_colour = "red",
     }),
 })
-
---UP="Up" ; DOWN="Down" ; LEFT="Left" ; RIGHT="Right"
---
---defbindings("WScreen", {
---    kpress(META..UP, "WScreen.switch_prev(_)"),
---    kpress(META..DOWN, "WScreen.switch_next(_)"), })
---defbindings("WFrame", {
---    kpress(META..LEFT.."+Control", "WFrame.dec_index(_, _sub)", "_sub:non-nil"),
---    kpress(META..RIGHT.."+Control", "WFrame.inc_index(_, _sub)", "_sub:non-nil"),
---    kpress(META..LEFT, "WFrame.switch_prev(_)"),
---    kpress(META..RIGHT, "WFrame.switch_next(_)"), })
---defbindings("WTiling", {
---    kpress(META..UP.."+Shift", "WTiling.goto_dir(_, 'above')"),
---    kpress(META..DOWN.."+Shift", "WTiling.goto_dir(_, 'below')"),
---    kpress(META..LEFT.."+Shift", "WTiling.goto_dir(_, 'left')"),
---    kpress(META..RIGHT.."+Shift", "WTiling.goto_dir(_, 'right')"), })
-
 
 -- Define some additional title shortening rules to use when the full
 -- title doesn't fit in the available space. The first-defined matching
