@@ -23,9 +23,10 @@ if which vmware-user > /dev/null 2>&1; then
   vmware-user &
 fi
 
-if which trayion > /dev/null 2>&1; then
-  trayion &
-  nm-applet &
+if which stalonetray > /dev/null 2>&1; then
+  true
+  #stalonetray --geometry 1x1 --grow-gravity W --icon-size 1 --decorations none --dockapp-mode wmaker --max-geometry 1x1
+  #nm-applet &
 fi
 
 if [[ "$(hostname)" == "mbp0" ]]; then
