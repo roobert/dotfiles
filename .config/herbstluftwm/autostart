@@ -39,9 +39,9 @@ hc keybind $Mod-F3 spawn dmenu_run -nb '#000' -nf '#fff' -sb '#f00' -sf '#fff' -
 hc keybind $Mod-F4 spawn google-chrome
 
 # media keys
-hc keybind XF86AudioMute        spawn $HOME/bin/volume mute
-hc keybind XF86AudioRaiseVolume spawn $HOME/bin/volume up
-hc keybind XF86AudioLowerVolume spawn $HOME/bin/volume down
+hc keybind XF86AudioMute        spawn $HOME/.zsh/robs/bin/volume mute
+hc keybind XF86AudioRaiseVolume spawn $HOME/.zsh/robs/bin/volume up
+hc keybind XF86AudioLowerVolume spawn $HOME/.zsh/robs/bin/volume down
 
 # set layout
 hc keybind $Mod-m set_layout max
