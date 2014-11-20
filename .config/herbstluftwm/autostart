@@ -10,10 +10,16 @@ hc emit_hook reload
 
 hc keyunbind --all
 
-# keyboard setup
+# settings
+hc set focus_follows_mouse 1
+hc set tree_style '╾│ ├└╼─┐'
+# 2 = max layout
+hc set default_frame_layout 2
 
+# keyboard setup
 Mod=Mod4
 
+# basic 
 hc keybind $Mod-Shift-q   quit
 hc keybind $Mod-Shift-r   reload
 hc keybind $Mod-c         close_or_remove
@@ -26,13 +32,27 @@ hc keybind $Mod-space     cycle_layout 1
 hc keybind $Mod-period    use_index +1 --skip-visible
 hc keybind $Mod-comma     use_index -1 --skip-visible
 
+# run stuff 
 hc keybind $Mod-F2 spawn gnome-terminal
 hc keybind $Mod-F3 spawn dmenu_run -nb '#000' -nf '#fff' -sb '#f00' -sf '#fff' -fn 'DejaVu Sans-10:ExtraLight'
 hc keybind $Mod-F4 spawn google-chrome
 
+# media keys
 hc keybind XF86AudioMute        spawn $HOME/bin/volume mute
 hc keybind XF86AudioRaiseVolume spawn $HOME/bin/volume up
 hc keybind XF86AudioLowerVolume spawn $HOME/bin/volume down
+
+# set layout
+hc keybind $Mod-m set_layout max
+hc keybind $Mod-| set_layout vertical
+hc keybind $Mod-- set_layout horizontal 
+hc keybind $Mod-g set_layout grid
+
+# splitting frames
+hc keybind $Mod-v       chain . split top     0.5 . set_layout max
+hc keybind $Mod-h       chain . split left    0.5 . set_layout max
+hc keybind $Mod-Shift-v chain . split bottom  0.5 . set_layout max
+hc keybind $Mod-Shift-h chain . split right   0.5 . set_layout max
 
 # focusing clients
 hc keybind $Mod-Left  focus left
@@ -45,12 +65,6 @@ hc keybind $Mod-Shift-Left  shift left
 hc keybind $Mod-Shift-Down  shift down
 hc keybind $Mod-Shift-Up    shift up
 hc keybind $Mod-Shift-Right shift right
-
-# splitting frames
-hc keybind $Mod-v       split   top     0.5
-hc keybind $Mod-h       split   left    0.5
-hc keybind $Mod-Shift-v split   bottom  0.5
-hc keybind $Mod-Shift-h split   right   0.5
 
 # resizing frames
 resizestep=0.05
@@ -85,8 +99,6 @@ hc mouseunbind --all
 hc mousebind $Mod-Button1 move
 hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
-
-hc set focus_follows_mouse 1
 
 # theme
 hc attr theme.tiling.reset 1
@@ -128,8 +140,6 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 
 # unlock, just to be sure
 hc unlock
-
-herbstclient set tree_style '╾│ ├└╼─┐'
 
 # detect monitor resolution
 hc detect_monitors
