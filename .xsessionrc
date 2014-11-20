@@ -24,9 +24,8 @@ if which vmware-user > /dev/null 2>&1; then
 fi
 
 if which stalonetray > /dev/null 2>&1; then
-  true
-  #stalonetray --geometry 1x1 --grow-gravity W --icon-size 1 --decorations none --dockapp-mode wmaker --max-geometry 1x1
-  #nm-applet &
+  killall stalonetray; stalonetray -i 16 --background '#101010' --icon-gravity W --grow-gravity E --geometry 1-150 &
+  killall nm-applet;   nm-applet &
 fi
 
 if [[ "$(hostname)" == "mbp0" ]]; then
@@ -37,4 +36,5 @@ fi
 
 eval $(gnome-keyring-daemon --start) &
 
-exec ssh-agent notion
+# requires suckless-tools
+exec ssh-agent herbstluftwm
