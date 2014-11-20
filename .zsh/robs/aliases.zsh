@@ -129,3 +129,5 @@ alias sus="su - sysadmin -c 'sudo su'"
 
 # list java processes and highlight catalina.base argument for easy reading
 alias jcb='jps -lv | hl "base[^ ]*"'
+
+alias hc='herbstclient'

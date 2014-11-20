@@ -11,7 +11,7 @@ if test -d $HOME/.screenlayout/; then
 fi
 
 if which feh > /dev/null 2>&1; then
-  feh --bg-fill /usr/share/backgrounds/warty-final-ubuntu.png
+  true #feh --bg-fill /usr/share/backgrounds/warty-final-ubuntu.png
 fi
 
 if which autocutsel > /dev/null 2>&1; then
