@@ -1,0 +1,13 @@
+#!/bin/bash
+
+sink=$(pactl list short sinks | grep 'RUNNING' | awk '{ print $1 }')
+
+case $1 in
+  up)   pactl set-sink-volume $sink -- +5% ;;
+  down) pactl set-sink-volume $sink -- -5% ;;
+  mute) pactl set-sink-mute   $sink -- toggle ;;
+esac
+
+volume=$(pactl list sinks | grep "Sink #$sink" -A9 | grep Volume | awk '{ print $3 }')
+
+echo "Volume: $volume" | dzen2 -p 1
