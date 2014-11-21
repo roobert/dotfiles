@@ -50,9 +50,9 @@ hc keybind $Mod-- set_layout horizontal
 hc keybind $Mod-g set_layout grid
 
 # splitting frames
-hc keybind $Mod-h       chain . split top     0.5 . set_layout max
+hc keybind $Mod-s       chain . split top     0.5 . set_layout max
 hc keybind $Mod-v       chain . split left    0.5 . set_layout max
-hc keybind $Mod-Shift-h chain . split bottom  0.5 . set_layout max
+hc keybind $Mod-Shift-s chain . split bottom  0.5 . set_layout max
 hc keybind $Mod-Shift-v chain . split right   0.5 . set_layout max
 
 # focusing clients
