@@ -14,4 +14,4 @@ esac
 
 volume=$(pactl list sinks | grep "Sink #$sink" -A9 | grep Volume | awk '{ print $3 }')
 
-echo "Volume: $volume" | dzen2 -p 1
+echo "Volume: $volume" | dzen2 -p 1 &
