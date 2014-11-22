@@ -3,6 +3,7 @@
 sink=$(pactl list short sinks | grep 'RUNNING' | awk '{ print $1 }')
 
 if [[ -z "$sink" ]]; then
+  echo "no active audio-sinks" | dzen2 -p 1 &
   exit
 fi
 
