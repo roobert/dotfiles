@@ -34,7 +34,8 @@ if [[ "$(hostname)" == "mbp0" ]]; then
   synclient PalmDetect=1
 fi
 
-eval $(gnome-keyring-daemon --start) &
+#eval $(gnome-keyring-daemon --start) &
 
+# ssh-agent and wm are now exec'd from Xsession.d/ scripts
 # requires suckless-tools
-exec ssh-agent herbstluftwm
+#exec ssh-agent herbstluftwm
