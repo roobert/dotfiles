@@ -130,7 +130,7 @@ hc pad $monitor $panel_height
         #done
 
         #echo -n "$separator"
-        echo -n "^bg()^fg() ${windowtitle//^/^^} $(($(hc attr tags.focus.curframe_windex) + 1))/$(hc attr tags.focus.curframe_wcount)"
+        echo -n "^bg()^fg()$(($(hc attr tags.focus.curframe_windex) + 1))/$(hc attr tags.focus.curframe_wcount) ${windowtitle//^/^^}"
 
         # small adjustments
         right="$separator^bg() $date"
