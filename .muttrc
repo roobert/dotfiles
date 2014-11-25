@@ -1,0 +1,35 @@
+set realname   = 'Rob'
+set from       = 'roobert@gmail.com'
+set sendmail   = '/usr/bin/msmtp'
+set folder     = $HOME/Mail/Gmail
+
+source ~/.mutt/mailboxes
+source ~/.mutt/common
+
+set sidebar_visible=no
+
+# google contacts lookup
+set query_command="goobook query '%s'"
+set editor = "vim --cmd 'let g:goobookrc=\"$HOME/.goobookrc\"'"
+bind editor <Tab> complete-query
+
+# bindings
+macro index M \
+  "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>" \
+  "mark all messages read"
+
+macro index I \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+INBOX\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to INBOX"
+
+macro index d \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+bin\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to bin"
+
+macro index S \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+spam\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to spam"
+
+macro index A \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to archive"

@@ -1,0 +1,27 @@
+# set up the sidebar, default visible
+set sidebar_width=30
+set sidebar_visible=yes
+set sidebar_delim   = ' '
+
+# color of folders with new mail
+color sidebar_new red default
+
+# b toggles sidebar visibility
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
+
+# up/down to select next, prev folder
+# right to open selected folder
+bind index,pager K sidebar-prev
+bind index,pager J sidebar-next
+bind index,pager o sidebar-open
+bind index,pager O sidebar-open
+
+# ctrl-n, ctrl-p to select next, prev folder
+# ctrl-o to open selected folder
+bind index CP sidebar-prev
+bind index CN sidebar-next
+bind index CO sidebar-open
+bind pager CP sidebar-prev
+bind pager CN sidebar-next
+bind pager CO sidebar-open

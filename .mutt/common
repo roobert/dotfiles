@@ -1,0 +1,88 @@
+set move       = no
+set mbox_type  = Maildir
+set spoolfile  = +/INBOX
+set mail_check = 3
+set record     = +/"sent"
+set postponed  = +/"drafts"
+set check_new  = yes
+set envelope_from
+set quit             # don't ask, just do!!
+set delete           # don't ask, just do
+unset confirmappend  # don't ask, just do!
+unset mark_old       # read/new is good enough for me
+set sort_browser = alpha
+set pager_stop
+set menu_scroll
+set smart_wrap
+set tilde
+unset markers
+set fcc_attach
+unset mime_forward
+set forward_format = "Fwd: %s"
+set include
+set forward_quote
+
+# sort/threading
+set sort     = threads
+set sort_aux = reverse-last-date-received
+set sort_re
+
+# headers
+ignore *                                    # first, ignore all headers
+unignore from: to: cc: bcc: date: subject:  # then, show only these
+hdr_order from: to: cc: bcc: date: subject: # and in this order
+
+# views
+set folder_format = "%2C   %f"
+set index_format = "%4C %Z  %{%b %d}  %-20.20L  %s"
+
+# html email
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# unbind some stuff
+bind index,pager l noop
+bind index,pager h noop
+bind pager J noop
+bind pager K noop
+bind pager H noop
+bind pager L noop
+bind pager <Left> noop
+bind pager <Right> noop
+
+# up / down
+bind index j next-entry
+bind index k previous-entry
+bind index <Down> next-entry
+bind index <Up> previous-entry
+
+bind pager j next-line
+bind pager k previous-line
+bind pager <Down> next-line
+bind pager <Up> previous-line
+
+# page-up / page-down
+bind index,pager D half-down
+bind index,pager U half-up
+
+# top / bottom
+bind index G last-entry
+bind index g first-entry
+
+bind pager G bottom
+bind pager g top
+
+# display headers
+bind pager H display-toggle-weed
+
+# use patterns to filter messages: http://www.mutt.org/doc/manual/manual.html#toc4.2
+bind index l limit
+
+# use ctrl-c to quit
+bind index q noop
+
+# go back to INBOX
+macro index =  "<change-folder> =INBOX<enter>"  "go to Inbox"
+
+# save tagged to ...
+macro index S ";s"
