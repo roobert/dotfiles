@@ -13,6 +13,8 @@ set query_command="goobook query '%s'"
 set editor = "vim --cmd 'let g:goobookrc=\"$HOME/.goobookrc\"'"
 bind editor <Tab> complete-query
 
+my_hdr Bcc: roobert@gmail.com
+
 # bindings
 macro index M \
   "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>" \

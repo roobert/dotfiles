@@ -1,9 +1,9 @@
 set move       = no
 set mbox_type  = Maildir
 set spoolfile  = +/INBOX
-set mail_check = 3
 set record     = +/"sent"
 set postponed  = +/"drafts"
+set mail_check = 3
 set check_new  = yes
 set envelope_from
 set quit             # don't ask, just do!!

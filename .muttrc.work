@@ -7,6 +7,8 @@ source ~/.mutt/mailboxes.work
 source ~/.mutt/sidebar
 source ~/.mutt/common
 
+my_hdr Bcc: robw@brandwatch.com
+
 macro index M \
   "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>" \
   "mark all messages read"
