@@ -1,0 +1,20 @@
+set realname   = 'Rob Wilson'
+set from       = 'robw@brandwatch.com'
+set sendmail   = '/usr/bin/msmtp -C ~/.msmtprc.work'
+set folder     = $HOME/Mail/Work
+
+source ~/.mutt/mailboxes.work
+source ~/.mutt/sidebar
+source ~/.mutt/common
+
+macro index M \
+  "T~N<enter>;WNT~O<enter>;WO\CT~T<enter>" \
+  "mark all messages read"
+
+macro index I \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+INBOX\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to INBOX"
+
+macro index d \
+  ":set confirmappend=no delete=yes\n<tag-prefix><save-message>+Trash\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" \
+  "move message to bin"
