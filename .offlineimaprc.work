@@ -1,0 +1,32 @@
+[general]
+accounts = Work
+
+[mbnames]
+enabled  = yes
+filename = ~/.mutt/mailboxes.work
+header   = "mailboxes "
+peritem  = ="%(foldername)s"
+sep      = " "
+footer   = "\n"
+
+[Account Work]
+localrepository  = Local
+remoterepository = Remote
+autorefresh      = 2
+
+[Repository Local]
+type         = Maildir
+localfolders = ~/Mail/Work
+
+[Repository Remote]
+type               = IMAP
+remotehost         = mail.x.com
+remoteuser         = x
+remotepass         = x
+remoteport         = 993
+ssl                = yes
+maxconnections     = 10
+holdconnectionopen = yes
+keepalive          = 60
+cert_fingerprint   = x
+folderfilter = lambda foldername: foldername not in ['postmaster', 'spam', 'Archives']
