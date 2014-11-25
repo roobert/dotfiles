@@ -1,0 +1,53 @@
+[general]
+ui              = ttyui
+accounts        = GMail
+maxsyncaccounts = 5
+maxconnections  = 10
+
+[mbnames]
+enabled  = yes
+filename = ~/.mutt/mailboxes
+header   = "mailboxes "
+peritem  = ="%(foldername)s"
+sep      = " "
+footer   = "\n"
+
+[Account GMail]
+localrepository  = GMailLocal
+remoterepository = GMailRemote
+autorefresh      = 2
+
+[Repository GMailLocal]
+type = Maildir
+localfolders = ~/Mail/Gmail
+nametrans = lambda folder: {'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'drafts':  '[Gmail]/Drafts',
+                            'bin':     '[Gmail]/Bin',
+                            'archive': '[Gmail]/All Mail',
+                           }.get(folder, folder)
+
+[Repository GMailRemote]
+type               = Gmail
+realdelete         = no
+remoteuser         = x
+remotepass         = x
+holdconnectionopen = true
+keepalive          = 60
+timeout            = 120
+sslcacertfile      = /etc/ssl/certs/ca-certificates.crt
+
+nametrans = lambda folder: {'[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Bin':       'bin',
+                            '[Gmail]/All Mail':  'archive',
+                           }.get(folder, folder)
+
+folderfilter = lambda foldername: foldername not in ['[Gmail]/Spam',
+                                                     '[Gmail]/All Mail',
+                                                     '[Gmail]/Chats',
+                                                     '[Gmail]/Starred',
+                                                     '[Gmail]/Important',
+                                                     'Notes'
+                                                    ]
