@@ -131,3 +131,5 @@ alias sus="su - sysadmin -c 'sudo su'"
 alias jcb='jps -lv | hl "base[^ ]*"'
 
 alias hc='herbstclient'
+
+alias mutt-work="mutt -F ~/.muttrc.work"
