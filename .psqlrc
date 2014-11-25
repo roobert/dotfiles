@@ -1,0 +1,2 @@
+\set PROMPT1 '%x%/%R%# '
+\set COMP_KEYWORD_CASE upper
