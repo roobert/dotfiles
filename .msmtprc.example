@@ -1,0 +1,11 @@
+account default
+host smtp.gmail.com
+user x@gmail.com
+password x
+auth
+auto_from off
+from x@gmail.com
+logfile ~/.msmtp.log
+tls on
+tls_starttls on
+tls_fingerprint E7:48:1D:0B:99:4A:C3:A8:31:86:E5:8F:E5:EE:4F:2A
