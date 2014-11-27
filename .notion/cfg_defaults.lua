@@ -1,4 +1,4 @@
---META="Mod1+"
+META="Mod1+"
 --ALTMETA="Mod1+"
 
 dopath("cfg_notioncore")
@@ -24,7 +24,7 @@ if randr_screen_change_notify_hook ~= nil then
     randr_screen_change_notify_hook:add(screenlayoutupdated)
 end
 
-XTERM="gnome-terminal"
+XTERM="xterm"
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"
@@ -99,7 +99,7 @@ de.defstyle("*", {
 	highlight_pixels  = 0,
 	padding_pixels    = 0,
 	spacing           = 0,
-  font              = "-*-lucidia-*-r-*--13-*-*-*-*-*-*-*",
+  --font              = "-*-lucidia-*-r-*--13-*-*-*-*-*-*-*",
 	text_align        = "center",
 })
 
