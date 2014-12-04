@@ -27,6 +27,7 @@ fi
 
 if which stalonetray > /dev/null 2>&1; then
   killall stalonetray; stalonetray -i 16 --background '#101010' --icon-gravity W --grow-gravity E --geometry 1-150 &
+  #stalonetray --background '#101010' --icon-gravity W --grow-gravity E --dockapp-mode wmaker --geometry 1x1 --no-shrink --kludges force_icons_size -i 24
   killall nm-applet;   nm-applet &
 fi
 

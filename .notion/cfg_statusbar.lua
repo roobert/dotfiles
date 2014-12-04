@@ -39,7 +39,7 @@ mod_statusbar.create{
     --template="[ %tunnel - %tunnel_ticker ][ %date ][ load: %load ] %filler%systray",
 
     --template=" %load | %exec%filler%systray%volume_level | %systray | %date ",
-    template=" %load %filler%systray | %date ",
+    template=" %load%filler%systray %date ",
 
     --template="[ %date ][ load: %load ] %filler%systray",
     --template="[ %date || load:% %>load || mail:% %>mail_new/%>mail_total ] %filler%systray",
