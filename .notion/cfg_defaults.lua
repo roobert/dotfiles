@@ -1,4 +1,4 @@
-META="Mod1+"
+META="Mod4+"
 --ALTMETA="Mod1+"
 
 dopath("cfg_notioncore")
@@ -24,7 +24,7 @@ if randr_screen_change_notify_hook ~= nil then
     randr_screen_change_notify_hook:add(screenlayoutupdated)
 end
 
-XTERM="xterm"
+XTERM="gnome-terminal"
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"
