@@ -16,15 +16,15 @@ case `whoami` in
   ;;
   robwadm)
     PUSER="%{$FG[166]%}%n"
-    PPROMPT="%{$FG[202]%}%#"
+    PPROMPT="%{$FG[202]%}%# "
   ;;
   root)
     PUSER="%{$FG[161]%}%n"
-    PPROMPT="%{$FG[160]%}%#"
+    PPROMPT="%{$FG[160]%}%# "
   ;;
   *)
     PUSER="%{$FG[166]%}%n"
-    PPROMPT="%{$FG[165]%}%#"
+    PPROMPT="%{$FG[165]%}%# "
   ;;
 esac
 
@@ -33,6 +33,18 @@ if [ "$HOST" = "disco" ]; then
 fi
 
 source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+
+ZSH_THEME_GIT_PROMPT_PREFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}%{\u25cf%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{\u2716%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{\u271a%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{\u2193%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{\u2191%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{\u2026%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[blue]%}%{\u2714%G%}"
 
 export PS1='$PHOST $PWHERE $(git_super_status)$PPROMPT %{$FX[reset]%}'
 
