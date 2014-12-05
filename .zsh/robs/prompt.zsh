@@ -28,15 +28,12 @@ case `whoami` in
   ;;
 esac
 
-if [ -z "$DEBIAN_CHROOT"  ] && [ -r /etc/debian_chroot  ]; then
-  DEBIAN_CHROOT="%{$FG[135]%}$(cat /etc/debian_chroot)%{$FX[reset]%}:"
-fi
-
 if [ "$HOST" = "disco" ]; then
   PHOST="$FG[200]%}%m"
 fi
 
-#export PS1="$PUSER $PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
-export PS1="$DEBIAN_CHROOT$PHOST $PWHERE $PPROMPT %{$FX[reset]%}"
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+
+export PS1='$PHOST $PWHERE $(git_super_status)$PPROMPT %{$FX[reset]%}'
 
 RPS1=''
