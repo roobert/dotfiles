@@ -24,6 +24,11 @@ bindkey -M vicmd "^[[2~" overwrite-mode
 # fix delete key
 bindkey -M viins "^[[3~" delete-char
 bindkey -M vicmd "^[[3~" delete-char
+# fix ctrl + left/right to jump word
+bindkey -M viins "^[[1;5C" forward-word
+bindkey -M viins "^[[1;5D" backward-word
+bindkey -M vicmd "^[[1;5C" forward-word
+bindkey -M vicmd "^[[1;5D" backward-word
 # fix arrow keys
 bindkey -M viins "^[[A" up-line-or-history
 bindkey -M vicmd "^[[A" up-line-or-history
