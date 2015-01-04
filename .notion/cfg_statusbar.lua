@@ -9,7 +9,7 @@ mod_statusbar.create{
     pos='bl',
     fullsize=true,
     systray=true,
-    template=" %load%filler%systray_stalone %date",
+    template="  %load%filler%systray_stalone   %date  ",
 }
 
 defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
