@@ -35,6 +35,7 @@ if [[ "$(hostname)" == "mbp0" ]]; then
   synclient MaxTapTime=0
   synclient HorizTwoFingerScroll=1
   synclient PalmDetect=1
+  sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
 fi
 
 #eval $(gnome-keyring-daemon --start) &
