@@ -17,3 +17,5 @@
 
 [core]
   excludesfile = $HOME/.gitignore
+[push]
+	default = simple
