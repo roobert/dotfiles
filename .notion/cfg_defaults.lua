@@ -1,4 +1,4 @@
-META="Mod4+"
+META="Mod1+"
 --ALTMETA="Mod1+"
 
 dopath("cfg_notioncore")

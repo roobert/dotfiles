@@ -31,14 +31,18 @@ if which stalonetray > /dev/null 2>&1; then
   killall nm-applet; nm-applet &
 fi
 
-if [[ "$(hostname)" == "mbp0" ]]; then
+if hostname | grep mbp0 ; then
   synclient MaxTapTime=0
   synclient HorizTwoFingerScroll=1
   synclient PalmDetect=1
   sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
 fi
 
-#eval $(gnome-keyring-daemon --start) &
+if hostname | grep grindelwald; then
+  #eval $(gnome-keyring-daemon --start) &
+  ssh-agent notion
+fi
+
 
 # ssh-agent and wm are now exec'd from Xsession.d/ scripts
 # requires suckless-tools
