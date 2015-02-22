@@ -1,4 +1,15 @@
-META="Mod1+"
+local f = io.popen ("/bin/hostname")
+local hostname = f:read("*a") or ""
+f:close()
+hostname =string.gsub(hostname, "\n$", "")
+print(hostname)
+
+if hostname == "mbp0" then
+  META="Mod4+"
+else
+  META="Mod1+"
+end
+
 --ALTMETA="Mod1+"
 
 dopath("cfg_notioncore")
