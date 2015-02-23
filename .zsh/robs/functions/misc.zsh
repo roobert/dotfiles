@@ -208,3 +208,10 @@ function install_jq {
   curl http://stedolan.github.io/jq/download/linux64/jq > ~/bin/jq
   chmod +x ~/bin/jq
 }
+
+# after this select 'fixed semicondensed 10' from gnome terminal settings
+function install_gnome_terminal_bitmap_fonts {
+  sudo rm /etc/fonts/conf.d/70-no-bitmaps.conf
+  sudo ln -s /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-yes-bitmaps.conf
+  sudo dpkg-reconfigure fontconfig fontconfig-config
+}
