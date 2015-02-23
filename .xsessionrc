@@ -9,7 +9,11 @@ if test -d ~/bin 2> /dev/null; then
 fi
 
 if test -d $HOME/.screenlayout/; then
-  bash $HOME/.screenlayout/default.sh
+  if hostname | grep mbp0; then
+    bash $HOME/.screenlayout/work-laptop.sh
+  else
+    bash $HOME/.screenlayout/default.sh
+  fi 
 fi
 
 if which feh > /dev/null 2>&1; then
