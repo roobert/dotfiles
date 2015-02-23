@@ -28,7 +28,7 @@ function help {
 
 # install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
 function install_common_tools {
-  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
+  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color autocutsel
 }
 
 alias install_flash='sudo apt-get install ubuntu-restricted-extras'
