@@ -9,7 +9,7 @@ if test -d ~/bin 2> /dev/null; then
 fi
 
 if test -d $HOME/.screenlayout/; then
-  if hostname | grep mbp0; then
+  if hostname | grep acros ; then
     bash $HOME/.screenlayout/work-laptop.sh
   else
     bash $HOME/.screenlayout/default.sh
