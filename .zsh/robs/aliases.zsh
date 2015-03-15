@@ -104,6 +104,9 @@ alias c7="../../../../../../../"
 alias c8="../../../../../../../../"
 alias c9="../../../../../../../../../"
 
+# open pdfs and what not..
+alias open="xdg-open"
+
 #alias ansible="ansible -i $HOME/.ansible_hosts"
 #alias ansible-playbook="ansible-playbook -i $HOME/.ansible_hosts"
 
