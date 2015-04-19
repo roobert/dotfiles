@@ -1,14 +1,16 @@
-local f = io.popen ("/bin/hostname")
-local hostname = f:read("*a") or ""
-f:close()
-hostname =string.gsub(hostname, "\n$", "")
-print(hostname)
+--local f = io.popen ("/bin/hostname")
+--local hostname = f:read("*a") or ""
+--f:close()
+--hostname =string.gsub(hostname, "\n$", "")
+--print(hostname)
+--
+--if hostname == "mbp0" then
+--  META="Mod4+"
+--else
+--  META="Mod1+"
+--end
 
-if hostname == "mbp0" then
-  META="Mod4+"
-else
-  META="Mod1+"
-end
+META="Mod1+"
 
 --ALTMETA="Mod1+"
 
