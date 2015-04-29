@@ -136,3 +136,5 @@ alias jcb='jps -lv | hl "base[^ ]*"'
 alias hc='herbstclient'
 
 alias mutt-work="mutt -F ~/.muttrc.work"
+
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
