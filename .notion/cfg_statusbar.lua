@@ -2,6 +2,8 @@
 -- Notion statusbar module configuration file
 -- 
 
+-- in order for systray icons to get swallowed properly (e.g: nm-applet) - modify cfg_kludges
+-- as described in trayion README
 
 -- Create a statusbar
 mod_statusbar.create{
@@ -9,12 +11,8 @@ mod_statusbar.create{
     pos='bl',
     fullsize=true,
     systray=true,
-    template="  %load%filler%systray_stalone   %date  ",
+    template="  %load%filler%systray  %date  ",
 }
-
-defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{class="stalonetray",statusbar="systray_stalone"}
 
 ---- Create a statusbar
 --mod_statusbar.create{
