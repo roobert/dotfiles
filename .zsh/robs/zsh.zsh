@@ -21,3 +21,5 @@ source =(cat /etc/inputrc |
 
 # This allows alt-. to insert the last word of the last command (i.e. !$)
 bindkey "^[." insert-last-word
+
+autoload -U zmv
