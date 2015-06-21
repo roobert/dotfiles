@@ -56,3 +56,7 @@ fi
 
 # source main good stuff
 source $HOME/.zsh/zshrc
+
+if [ -r $HOME/.zsh/local ]; then
+  source $HOME/.zsh/local
+fi
