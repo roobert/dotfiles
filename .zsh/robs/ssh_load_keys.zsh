@@ -1,8 +1,12 @@
 # load ssh keys
-ssh-add -l|grep 'no identities' > /dev/null 2>&1
 
-if [[ $? = 0 ]]; then
-  for id in `find $HOME/.ssh/ -name "id_rsa*" | grep -v 'id_rsa.pub'`; ssh-add $id
+if ssh-add -l|grep 'no identities' > /dev/null 2>&1
+then
+  for id in `find $HOME/.ssh/ -name "id_rsa*" -and -not -name "*.pub"`
+  do
+    ssh-add $id
+  done
+
   ssh-add -l
 fi
 
