@@ -328,3 +328,4 @@ function! HelpInNewTab ()
   endif
 endfunction
 
+let g:netrw_liststyle=3
