@@ -43,3 +43,5 @@ setopt sh_word_split    # don't retokenize variables on expansion WARNING: could
 
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
+
+export KEYTIMEOUT=1

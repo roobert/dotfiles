@@ -7,24 +7,30 @@
 PHOST="%{$FG[104]%}%m"
 #PWHERE="%{$FG[250]%}%~"
 PWHERE="%{$FG[250]%}%d"
-PPROMPT="%{$FG[040]%}%#"
+#PPROMPT="%{$FG[040]%}%#"
+PPROMPT="%{$FG[160]%}>"
+VI_PROMPT="%{$FG[202]%}>"
 
 case `whoami` in
   rw|robw)
     PUSER="%{$FG[119]%}%n"
+    VI_PROMPT="%{$FG[119]%}>"
 
   ;;
   robwadm)
     PUSER="%{$FG[166]%}%n"
     PPROMPT="%{$FG[202]%}%# "
+    VI_PROMPT="%{$FG[202]%}> "
   ;;
   root)
     PUSER="%{$FG[161]%}%n"
     PPROMPT="%{$FG[160]%}%# "
+    VI_PROMPT="%{$FG[160]%}> "
   ;;
   *)
     PUSER="%{$FG[166]%}%n"
     PPROMPT="%{$FG[165]%}%# "
+    VI_PROMPT="%{$FG[165]%}> "
   ;;
 esac
 
@@ -47,5 +53,23 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}%{\u2717%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{\u2714%G%}"
 
 export PS1='$PHOST $PWHERE $(git_super_status)$PPROMPT %{$FX[reset]%}'
+export RPS1=''
 
-RPS1=''
+function zle-line-init zle-keymap-select {
+  INSERT_MODE_PROMPT='>'
+  case ${KEYMAP} in
+    (vicmd)      VI_MODE="$PPROMPT" ;;
+    (main|viins) VI_MODE="$VI_PROMPT" ;;
+    (*)          VI_MODE="$VI_PROMPT" ;;
+  esac
+  export PS1='$PHOST $PWHERE $(git_super_status) ${VI_MODE} %{$FX[reset]%}'
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# prevent 2*ESC-i insert-mode switch failure
+noop () { }
+zle -N noop
+bindkey -M vicmd '\e' noop
