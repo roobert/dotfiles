@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Transmission
+GenericName=BitTorrent Client
+X-GNOME-FullName=Transmission BitTorrent Client
+Comment=Download and share files over BitTorrent
+Exec=transmission-remote --add %u
+Icon=transmission
+Terminal=false
+TryExec=transmission-remote
+Type=Application
+StartupNotify=true
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;
+Categories=Network;FileTransfer;P2P;GTK;
+X-Ubuntu-Gettext-Domain=transmission
+X-AppInstall-Keywords=torrent
+Actions=Pause;Minimize;
