@@ -30,6 +30,7 @@ if version > 701
 
   let plugins = [
     \'vim-scripts/tlib',
+    \'vim-scripts/matchit',
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
@@ -51,7 +52,8 @@ if version > 701
     \'junegunn/vim-plug',
     \'wellle/targets.vim',
     \'easymotion/vim-easymotion',
-    \'rhysd/clever-f.vim'
+    \'rhysd/clever-f.vim',
+    \'vim-scripts/ruby-matchit'
   \]
 
   if filereadable('/usr/bin/go')
