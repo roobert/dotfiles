@@ -48,7 +48,10 @@ if version > 701
     \'ngmy/vim-rubocop',
     \'nathanaelkane/vim-indent-guides',
     \'junegunn/vim-easy-align',
-    \'junegunn/vim-plug'
+    \'junegunn/vim-plug',
+    \'wellle/targets.vim',
+    \'easymotion/vim-easymotion',
+    \'rhysd/clever-f.vim'
   \]
 
   if filereadable('/usr/bin/go')
@@ -329,3 +332,14 @@ function! HelpInNewTab ()
 endfunction
 
 let g:netrw_liststyle=3
+
+" smart f
+let g:clever_f_smart_case=1
+let g:clever_f_chars_match_any_signs=';'
+
+" easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
