@@ -62,7 +62,7 @@ function zle-line-init zle-keymap-select {
     (main|viins) VI_MODE="$VI_PROMPT" ;;
     (*)          VI_MODE="$VI_PROMPT" ;;
   esac
-  export PS1='$PHOST $PWHERE $(git_super_status) ${VI_MODE} %{$FX[reset]%}'
+  export PS1='$PHOST $PWHERE $(git_super_status)${VI_MODE} %{$FX[reset]%}'
   zle reset-prompt
 }
 
