@@ -2,7 +2,7 @@
 
 # system tools
 alias s="sudo"
-alias ls="ls --color=auto"
+alias ls="ls --group-directories-first --color=auto"
 alias hist="history 1"
 alias m="mount | column -t"
 alias am="alsamixer -D pulse"
