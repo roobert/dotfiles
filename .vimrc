@@ -30,7 +30,6 @@ if version > 701
 
   let plugins = [
     \'vim-scripts/tlib',
-    \'vim-scripts/matchit',
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
