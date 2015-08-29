@@ -4,65 +4,36 @@
 
 # colour chart:  http://upload.wikimedia.org/wikipedia/commons/9/95/Xterm_color_chart.png or use 'spectrum_ls'
 
-PHOST="%{$FG[104]%}%m"
-#PWHERE="%{$FG[250]%}%~"
-PWHERE="%{$FG[250]%}%d"
-#PPROMPT="%{$FG[040]%}%#"
-PPROMPT="%{$FG[160]%}>"
-VI_PROMPT="%{$FG[202]%}>"
-
-case `whoami` in
-  rw|robw)
-    PUSER="%{$FG[119]%}%n"
-    VI_PROMPT="%{$FG[119]%}>"
-
-  ;;
-  robwadm)
-    PUSER="%{$FG[166]%}%n"
-    PPROMPT="%{$FG[202]%}%# "
-    VI_PROMPT="%{$FG[202]%}> "
-  ;;
-  root)
-    PUSER="%{$FG[161]%}%n"
-    PPROMPT="%{$FG[160]%}%# "
-    VI_PROMPT="%{$FG[160]%}> "
-  ;;
-  *)
-    PUSER="%{$FG[166]%}%n"
-    PPROMPT="%{$FG[165]%}%# "
-    VI_PROMPT="%{$FG[165]%}> "
-  ;;
-esac
-
-if [ "$HOST" = "disco" ]; then
-  PHOST="$FG[200]%}%m"
-fi
-
 source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[yellow]%}%{\u25cf%G%}"
-ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{\u2716%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{\u271a%G%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{\u2193%G%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_BRANCH=" %{$FG[178]%}"
+ZSH_THEME_GIT_PROMPT_STAGED=" %{$fg[yellow]%}%{\u26ab%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS=" %{$fg[red]%}%{\u2716%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}%{\u271a%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND=" %{\u2193%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}%{\u2717%G%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{\u2714%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-export PS1='$PHOST $PWHERE $(git_super_status)$PPROMPT %{$FX[reset]%}'
+PHOST="%{$FG[240]%}%m"
+PWHERE="%{$FG[250]%}%d"
+
+MODE_CMD="%{$FG[088]%}"
+MODE_INS="%{$FG[156]%}"
+
 export RPS1=''
 
 function zle-line-init zle-keymap-select {
-  INSERT_MODE_PROMPT='>'
   case ${KEYMAP} in
-    (vicmd)      VI_MODE="$PPROMPT" ;;
-    (main|viins) VI_MODE="$VI_PROMPT" ;;
-    (*)          VI_MODE="$VI_PROMPT" ;;
+    (vicmd)      VI_MODE="$MODE_CMD" ;;
+    (main|viins) VI_MODE="$MODE_INS" ;;
+    (*)          VI_MODE="$MODE_INS" ;;
   esac
-  export PS1='$PHOST $PWHERE $(git_super_status)${VI_MODE} %{$FX[reset]%}'
+
+  export PS1='$PHOST $PWHERE$(git_super_status)${VI_MODE} >%{$FX[reset]%} '
   zle reset-prompt
 }
 
