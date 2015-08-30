@@ -34,6 +34,8 @@ if version > 701
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
     \'vim-scripts/gnupg.vim',
+    \'vim-scripts/gundo',
+    \'vim-scripts/SyntaxAttr.vim',
     \'MarcWeber/vim-addon-mw-utils',
     \'garbas/vim-snipmate',
     \'honza/vim-snippets',
@@ -51,7 +53,9 @@ if version > 701
     \'junegunn/vim-plug',
     \'wellle/targets.vim',
     \'easymotion/vim-easymotion',
+    \'chriskempson/base16-builder',
     \'rhysd/clever-f.vim',
+    \'roobert/robs.vim',
     \'vim-scripts/ruby-matchit'
   \]
 
@@ -130,9 +134,13 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 " alias vi="vim -T xterm-256color"
 
 " xterm16 color scheme settings
-let xterm16_colormap   = 'allblue'
-let xterm16_brightness = 'default'
-colorscheme xterm16
+"let xterm16_colormap   = 'allblue'
+"let xterm16_brightness = 'default'
+"colorscheme xterm16
+
+set background=dark
+let g:base16_shell_path='/home/rw/.vim/plugged/base16-builder/output/shell/'
+colorscheme base16-robs
 
 " molokai 256 colour
 "let g:rehash256 = 1
@@ -344,3 +352,6 @@ nmap s <Plug>(easymotion-s2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+" show syntax highlighting information about attribute under cursor
+map -c :call SyntaxAttr()<CR>
