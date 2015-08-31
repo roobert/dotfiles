@@ -55,7 +55,8 @@ if version > 701
     \'easymotion/vim-easymotion',
     \'rhysd/clever-f.vim',
     \'vim-scripts/ruby-matchit',
-    \'roobert/robs.vim'
+    \'roobert/robs.vim',
+    \'kien/ctrlp.vim',
   \]
 
   if filereadable('/usr/bin/go')
@@ -65,6 +66,8 @@ if version > 701
   let new_plugins = 1
 
   call plug#begin('~/.vim/plugged')
+
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
   " if a plugin isn't installed, install it!
   for plugin in plugins
@@ -80,6 +83,7 @@ if version > 701
     " register all plugin paths, even those not installed
     Plug plugin
   endfor
+
 
   call plug#end()
 
@@ -137,9 +141,10 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 "let xterm16_brightness = 'default'
 "colorscheme xterm16
 
-let base16colorspace=256
+set rtp+=~/.vim/plugged/robs.vim/output/vim
 set background=dark
-let g:base16_shell_path='/home/rw/.vim/plugged/base16-builder/output/shell/'
+let base16colorspace=256
+let g:base16_shell_path='/home/rw/.vim/plugged/robs.vim/output/shell/'
 colorscheme base16-robs
 
 " molokai 256 colour
@@ -269,6 +274,9 @@ noremap <Up>    <NOP>
 noremap <Down>  <NOP>
 noremap <Left>  <NOP>
 noremap <Right> <NOP>
+
+" toggle paste mode (!)
+set pastetoggle=<F1>
 
 " override default vertical split binding to open a new buffer rather than split current buffer
 map <C-W>v :vnew<CR>

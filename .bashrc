@@ -90,3 +90,5 @@ fi
 if [ -f /etc/bash_completion ] && [ -f $HOME/.ssh/known_hosts ]; then
     complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
