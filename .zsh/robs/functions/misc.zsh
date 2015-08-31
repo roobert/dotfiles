@@ -100,7 +100,7 @@ function vf {
   ( cd $* && vim +:FZF )
 }
 
-zle     -N   fzf-file-widget
+zle      -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 
 # wrap cli input in '$()' group
