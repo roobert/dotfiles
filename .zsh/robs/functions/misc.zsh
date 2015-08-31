@@ -20,7 +20,7 @@ function help {
   echo "^e            - wrap cli input in 'vim $()'"
   echo "^g            - wrap cli input in '$()' (group command)"
   echo "^p            - open vim +:CtrlP"
-  echo "vimp <dir>    - open vim +:CtrlP in specified dir"
+  echo "vp <dir>      - open vim +:CtrlP in specified dir"
   echo "hl            - highlight <string>"
   echo "g             - grep (ignore .git)"
   echo "f             - find . -name '<string>'   (find)"
@@ -30,6 +30,8 @@ function help {
   echo "mhi           - make html index for images"
   echo
   echo "# FZF"
+  echo "^f            - vim fzf"
+  echo "vf            - vim <path> (fzf)"
   echo "<cmd> ~~<tab> - fzf generic"
   echo "^r            - reverse-i-search fzf"
   echo "fgrep         - fzf grep"
@@ -90,9 +92,16 @@ zle -N                vim-ctrlp
 bindkey -M viins '^P' vim-ctrlp
 
 # this works well with CDPATH to do things like vimp ~project
-function vimp {
+function vp {
   ( cd $* && vim +:CtrlP )
 }
+
+function vf {
+  ( cd $* && vim +:FZF )
+}
+
+zle     -N   fzf-file-widget
+bindkey '^F' fzf-file-widget
 
 # wrap cli input in '$()' group
 function wrap-cli-input () {
