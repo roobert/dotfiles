@@ -16,7 +16,7 @@ function get_stuff_from_oh_my_zsh () {
 
 # list useful stuff like aliases and functions along with description
 function help {
-  echo "# reminders.."
+  echo "# cheat sheet"
   echo "^e            - wrap cli input in 'vim $()'"
   echo "^g            - wrap cli input in '$()' (group command)"
   echo "^p            - open vim +:CtrlP"
