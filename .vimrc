@@ -41,6 +41,7 @@ if version > 701
     \'vim-scripts/gnupg.vim',
     \'vim-scripts/gundo',
     \'vim-scripts/SyntaxAttr.vim',
+    \'vim-scripts/ZoomWin',
     \'MarcWeber/vim-addon-mw-utils',
     \'garbas/vim-snipmate',
     \'honza/vim-snippets',
@@ -160,7 +161,7 @@ let &t_Co=256
 syntax enable
 
 " FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
-hi Normal ctermfg=252 ctermbg=none
+"hi Normal ctermfg=252 ctermbg=none
 
 " me settins
 set matchpairs+=<:>,{:},(:),[:]
@@ -281,21 +282,28 @@ noremap <Right> <NOP>
 " toggle paste mode (!)
 set pastetoggle=<F1>
 
-" override default vertical split binding to open a new buffer rather than split current buffer
-map <C-W>v :vnew<CR>
-map <C-w><C-v> :vnew<CR>
+" window / buffer stuff
+set splitbelow
+set splitright
+" window move
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+" window create
+nmap <C-W><J> :topleft  vnew<CR>
+nmap <C-W><K> :botright vnew<CR>
+nmap <C-W><H> :topleft  new<CR>
+nmap <C-W><L> :botright new<CR>
+" buffer create
+nmap <C-B><H> :leftabove  vnew<CR>
+nmap <C-B><L> :rightbelow vnew<CR>
+nmap <C-B><J> :leftabove  new<CR>
+nmap <C-B><K> :rightbelow new<CR>
 
-" make navigating with ctrl- arrow keys less painful by making it so you dont have to let go of ctrl-w
-map <C-w><C-Up>    <C-w><Up>
-map <C-w><C-Down>  <C-w><Down>
-map <C-w><C-Left>  <C-w><Left>
-map <C-w><C-Right> <C-w><Right>
-
-" not os-x workstation friendly..
-map <C-Up>    <C-w><Up>
-map <C-Down>  <C-w><Down>
-map <C-Left>  <C-w><Left>
-map <C-Right> <C-w><Right>
+"ctrl + w _ "Max out the height of the current split
+"ctrl + w | "Max out the width of the current split
+"ctrl + w = "Normalize all split sizes, which is very handy when resizing terminal
 
 " tab navigation
 map <S-h> :tabprev<CR>
