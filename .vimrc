@@ -29,6 +29,11 @@ if version > 701
   source ~/.vim/plugged/vim-plug/plug.vim
 
   let plugins = [
+    \'junegunn/vim-plug',
+    \'tpope/vim-surround',
+    \'tpope/vim-commentary',
+    \'tpope/vim-repeat',
+    \'tpope/vim-unimpaired',
     \'vim-scripts/tlib',
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
@@ -39,10 +44,6 @@ if version > 701
     \'MarcWeber/vim-addon-mw-utils',
     \'garbas/vim-snipmate',
     \'honza/vim-snippets',
-    \'tpope/vim-surround',
-    \'tpope/vim-commentary',
-    \'tpope/vim-repeat',
-    \'tpope/vim-unimpaired',
     \'puppetlabs/puppet-syntax-vim',
     \'rodjek/vim-puppet',
     \'scrooloose/syntastic',
@@ -50,13 +51,11 @@ if version > 701
     \'ngmy/vim-rubocop',
     \'nathanaelkane/vim-indent-guides',
     \'junegunn/vim-easy-align',
-    \'junegunn/vim-plug',
     \'wellle/targets.vim',
     \'easymotion/vim-easymotion',
-    \'chriskempson/base16-builder',
     \'rhysd/clever-f.vim',
-    \'roobert/robs.vim',
-    \'vim-scripts/ruby-matchit'
+    \'vim-scripts/ruby-matchit',
+    \'roobert/robs.vim'
   \]
 
   if filereadable('/usr/bin/go')
@@ -138,6 +137,7 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 "let xterm16_brightness = 'default'
 "colorscheme xterm16
 
+let base16colorspace=256
 set background=dark
 let g:base16_shell_path='/home/rw/.vim/plugged/base16-builder/output/shell/'
 colorscheme base16-robs
