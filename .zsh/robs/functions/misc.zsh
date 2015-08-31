@@ -16,19 +16,24 @@ function get_stuff_from_oh_my_zsh () {
 
 # list useful stuff like aliases and functions along with description
 function help {
-  echo "# reminders"
-  echo "^t            - wrap cli input in 'vim $()'"
-  echo "^u            - wrap cli input in '$()'"
+  echo "# reminders.."
+  echo "^e            - wrap cli input in 'vim $()'"
+  echo "^g            - wrap cli input in '$()' (group command)"
   echo "^p            - open vim +:CtrlP"
   echo "vimp <dir>    - open vim +:CtrlP in specified dir"
   echo "hl            - highlight <string>"
-  echo "f             - find . -name '<string>'   (find)"
   echo "g             - grep (ignore .git)"
+  echo "f             - find . -name '<string>'   (find)"
   echo "fw            - find . -name '*<string>*' (find wild)"
   echo "mcd           - make and cd into (nested) dir"
   echo "dus           - du sorted by size"
   echo "mhi           - make html index for images"
-  echo "<cmd> ~~<tab> - awesome fuzzy finder"
+  echo
+  echo "# FZF"
+  echo "<cmd> ~~<tab> - fzf generic"
+  echo "^r            - reverse-i-search fzf"
+  echo "fgrep         - fzf grep"
+  echo "kill <tab>    - fzf kill"
 }
 
 # install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
@@ -89,12 +94,19 @@ function vimp {
   ( cd $* && vim +:CtrlP )
 }
 
-# wrap cli input in 'vim '$()'
+# wrap cli input in '$()' group
 function wrap-cli-input () {
-  BUFFER="vim \$($BUFFER)"
+  BUFFER="\$($BUFFER)"
 }
 zle -N wrap-cli-input
-bindkey -M viins '^t' wrap-cli-input
+bindkey -M viins '^g' wrap-cli-input
+
+# wrap cli input in 'vim '$()' (edit)
+function wrap-cli-input-vim () {
+  BUFFER="vim \$($BUFFER)"
+}
+zle -N wrap-cli-input-vim
+bindkey -M viins '^e' wrap-cli-input-vim
 
 # easily search zsh man pages
 function zman {

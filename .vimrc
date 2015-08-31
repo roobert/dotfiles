@@ -233,6 +233,9 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
+" Default fzf layout
+let g:fzf_layout = { 'down': '40%' }
+map <C-F> :FZF<CR>
 
 " change surround bindings
 "nmap <Leader>' 
