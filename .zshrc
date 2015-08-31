@@ -60,3 +60,5 @@ source $HOME/.zsh/zshrc
 if [ -r $HOME/.zsh/local ]; then
   source $HOME/.zsh/local
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

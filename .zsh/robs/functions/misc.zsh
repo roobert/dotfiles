@@ -16,19 +16,23 @@ function get_stuff_from_oh_my_zsh () {
 
 # list useful stuff like aliases and functions along with description
 function help {
-  echo "# aliases"
-  alias
-
-  echo "# functions"
-  FUNCTIONS="$(grep --no-filename --color=never '^function' -B1 -R ~/.zsh)"
-
-  echo $FUNCTIONS
-
+  echo "# reminders"
+  echo "^t         - wrap cli input in 'vim $()'"
+  echo "^u         - wrap cli input in '$()'"
+  echo "^p         - open vim +:CtrlP"
+  echo "vimp <dir> - open vim +:CtrlP in specified dir"
+  echo "hl         - highlight <string>"
+  echo "f          - find . -name '<string>'   (find)"
+  echo "g          - grep (ignore .git)"
+  echo "fw         - find . -name '*<string>*' (find wild)"
+  echo "mcd        - make and cd into (nested) dir"
+  echo "dus        - du sorted by size"
+  echo "mhi        - make html index for images"
 }
 
 # install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
 function install_common_tools {
-  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color autocutsel
+  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color autocutsel tcpdump
 }
 
 alias install_flash='sudo apt-get install ubuntu-restricted-extras'
@@ -67,36 +71,29 @@ function g {
    egrep --exclude-dir=\.svn $*
 }
 
-# mattf props! - open vim ctrl-p with ^P
-#function cheesy-ctrlp () {
-#  BUFFER='vim +:CtrlP'
-#  zle accept-line
-#}
+# Map control-p to the vim ctrlp command. Will open vim and run ctrlp. (from mattf)
+function vim-ctrlp () {
+    if [ $#BUFFER -ne 0 ]
+    then
+        zle push-line
+    fi
+    BUFFER='vim +:CtrlP'
+    zle accept-line
+}
+zle -N                vim-ctrlp
+bindkey -M viins '^P' vim-ctrlp
 
-#zle -N cheesy-ctrlp cheesy-ctrlp
-#bindkey -M viins '^P' cheesy-ctrlp
-#
-## more mattf magic
-#function wrap-my-shizz () {
-#  BUFFER="vim \$($BUFFER)"
-#}
-#
-#zle -N wrap-my-shizz
-#bindkey -M viins '^B' wrap-my-shizz
-
-# add all uncommited files
-function svn_add_all () {
-  for f in `svn status|grep \^\?|COL2`; svn add $f
+# this works well with CDPATH to do things like vimp ~project
+function vimp {
+  ( cd $* && vim +:CtrlP )
 }
 
-# stuff stolen from: http://chneukirchen.org/blog/archive/2012/02/10-new-zsh-tricks-you-may-not-know.html
-
-# toggle vi with ctrl-z
-function foreground-vi {
-  fg %vi
+# wrap cli input in 'vim '$()'
+function wrap-cli-input () {
+  BUFFER="vim \$($BUFFER)"
 }
-zle -N foreground-vi
-bindkey '^Z' foreground-vi
+zle -N wrap-cli-input
+bindkey -M viins '^t' wrap-cli-input
 
 # easily search zsh man pages
 function zman {
@@ -137,16 +134,6 @@ function hl {
   egrep "${SEARCH_STRING}|^" $FILES
 }
 
-# svn checkin
-function si {
-  if [[ $# -gt 0 ]]; then
-    svn ci -m $*
-  else
-    # naughty!
-    svn ci -m ''
-  fi
-}
-
 # merge any local ssh configs into main config - for stuff that would be silly to store in github
 function ssh_merge_config {
   if ls $HOME/.ssh-* > /dev/null 2>&1; then
@@ -168,6 +155,7 @@ function make_html_index {
   for f in *; echo "<a href=\"$f\"><img src=\"$f\"></a>" >> index.html
   echo "<style>img { width: 800px; }</style>" >> index.html
 }
+alias mhi=make_html_index
 
 # du -- sorted by size
 function du_sort {
@@ -179,6 +167,7 @@ function du_sort {
     for i in G M K; do du -hsx -- $* | grep --color=never "[0-9]$i\b" | sort -nr; done | tac 2>/dev/null
   fi
 }
+alias dus=du_sort
 
 # zsh man pages are missing from ubuntu 14.04: https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/1242108
 function install_zsh_docs {
@@ -199,8 +188,9 @@ function install_lnav {
   unzip -d ~/bin $TMP lnav-${LNAV_VERSION}/lnav
 }
 
+# create (nested) dir and change to it
 function mcd {
-  mkdir -v $* && cd $*
+  mkdir -vp $1 && cd $1
 }
 
 function install_jq {
