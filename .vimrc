@@ -145,7 +145,7 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 set rtp+=~/.vim/plugged/robs.vim/output/vim
 set background=dark
 let base16colorspace=256
-let g:base16_shell_path='/home/rw/.vim/plugged/robs.vim/output/shell/'
+let g:base16_shell_path='~/.vim/plugged/robs.vim/output/shell/'
 colorscheme base16-robs
 
 " molokai 256 colour
