@@ -17,7 +17,7 @@ function get_stuff_from_oh_my_zsh () {
 # list useful stuff like aliases and functions along with description
 function help {
   echo "# cheat sheet"
-  echo "^e            - wrap cli input in 'vim $()'"
+  echo "^e            - prefix line with 'vim', e.g: ^e^g would create 'vim $()'"
   echo "^g            - wrap cli input in '$()' (group command)"
   echo "^p            - open vim +:CtrlP"
   echo "vp <dir>      - open vim +:CtrlP in specified dir"
@@ -112,7 +112,7 @@ bindkey -M viins '^g' wrap-cli-input
 
 # wrap cli input in 'vim '$()' (edit)
 function wrap-cli-input-vim () {
-  BUFFER="vim \$($BUFFER)"
+  BUFFER="vim $BUFFER"
 }
 zle -N wrap-cli-input-vim
 bindkey -M viins '^e' wrap-cli-input-vim
