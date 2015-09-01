@@ -161,7 +161,7 @@ let &t_Co=256
 syntax enable
 
 " FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
-"hi Normal ctermfg=252 ctermbg=none
+hi Normal ctermfg=252 ctermbg=none
 
 " me settins
 set matchpairs+=<:>,{:},(:),[:]
