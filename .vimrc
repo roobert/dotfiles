@@ -57,7 +57,6 @@ if version > 701
     \'rhysd/clever-f.vim',
     \'vim-scripts/ruby-matchit',
     \'roobert/robs.vim',
-    \'kien/ctrlp.vim',
   \]
 
   if filereadable('/usr/bin/go')
