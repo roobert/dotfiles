@@ -23,3 +23,5 @@ source =(cat /etc/inputrc |
 bindkey "^[." insert-last-word
 
 autoload -U zmv
+
+fpath=(~/.zsh/fpath $fpath)
