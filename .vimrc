@@ -57,6 +57,7 @@ if version > 701
     \'rhysd/clever-f.vim',
     \'vim-scripts/ruby-matchit',
     \'roobert/robs.vim',
+    \'endel/vim-github-colorscheme',
   \]
 
   if filereadable('/usr/bin/go')
@@ -141,7 +142,13 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 "let xterm16_brightness = 'default'
 "colorscheme xterm16
 
+set rtp+=~/.vim/plugged/robs.vim/output/vim
+set background=dark
+"let base16colorspace=256
+"let g:base16_shell_path='~/.vim/plugged/robs.vim/output/shell/'
+"colorscheme base16-robs
 colorscheme robs
+
 
 " molokai 256 colour
 "let g:rehash256 = 1
