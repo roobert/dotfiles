@@ -190,6 +190,7 @@ function du_sort {
   fi
 }
 alias dus=du_sort
+alias dss=du_sort
 
 # zsh man pages are missing from ubuntu 14.04: https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/1242108
 function install_zsh_docs {
@@ -227,3 +228,5 @@ function install_gnome_terminal_bitmap_fonts {
   sudo ln -s /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-yes-bitmaps.conf
   sudo dpkg-reconfigure fontconfig fontconfig-config
 }
+
+
