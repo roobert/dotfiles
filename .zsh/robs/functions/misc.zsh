@@ -190,7 +190,7 @@ function du_sort {
   fi
 }
 alias dus=du_sort
-alias dss=du_sort
+alias ds=du_sort
 
 # zsh man pages are missing from ubuntu 14.04: https://bugs.launchpad.net/ubuntu/+source/zsh/+bug/1242108
 function install_zsh_docs {
