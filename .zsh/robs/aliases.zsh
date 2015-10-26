@@ -72,7 +72,6 @@ alias lsbdc="facter lsb lsbdistcodename | tail -n 1 | COL3"
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
-export GREP_OPTIONS='--color=always'
 export GREP_COLOR='1;32'
 
 # camera
