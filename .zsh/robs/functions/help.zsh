@@ -13,11 +13,13 @@ cat <<- EOF
 	mhi           - make html index for images
 	
 	# FZF
-	^f            - vim fzf
-	vf            - vim <path> (fzf)
-	<cmd> @<tab>  - fzf generic
-	^r            - reverse-i-search fzf
-	fgrep         - fzf grep
-	kill <tab>    - fzf kill
+	^r                 - reverse-i-search fzf
+	^f                 - fzf find
+	<cmd> <path>@<tab> - fzf find from path
+	fgrep              - fzf grep
+	kill <tab>         - fzf kill
+
+  # vim
+  ^f                 - fzf (open C-{T,X,V} - tab, horizontal, vertical)
 EOF
 }
