@@ -37,12 +37,11 @@ if randr_screen_change_notify_hook ~= nil then
     randr_screen_change_notify_hook:add(screenlayoutupdated)
 end
 
-XTERM="gnome-terminal"
+XTERM="gnome-terminal -e tmux -- -f ~/.tmux_no_status.conf"
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"
-SCREENSAVER="gnome-screensaver-command --lock"
-SCREENBLANK="bash -c 'sleep 1; xset dpms force off'"
+SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; gnome-screensaver-command --lock"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
@@ -88,10 +87,7 @@ defbindings("WScreen", {
     kpress(META.."F12", "mod_query.query_menu(_, _sub, 'mainmenu', 'Main menu:')"),
 
     bdoc("Lock screen"),
-    kpress(META.."F7", "notioncore.exec_on(_, SCREENSAVER)"),
-
-    bdoc("Blank screen"),
-    kpress(META.."F8", "notioncore.exec_on(_, SCREENBLANK)"),
+    kpress(META.."F7", "notioncore.exec_on(_, SCREENLOCK)"),
 
     kpress("XF86AudioPlay", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause')"),
     kpress("XF86AudioNext", "notioncore.exec('dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next')"),
