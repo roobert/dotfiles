@@ -16,26 +16,28 @@ function get_stuff_from_oh_my_zsh () {
 
 # list useful stuff like aliases and functions along with description
 function help {
-  echo "# cheat sheet"
-  echo "^e            - prefix line with 'vim', e.g: ^e^g would create 'vim $()'"
-  echo "^g            - wrap cli input in '$()' (group command)"
-  echo "^p            - open vim +:CtrlP"
-  echo "vp <dir>      - open vim +:CtrlP in specified dir"
-  echo "hl            - highlight <string>"
-  echo "g             - grep (ignore .git)"
-  echo "f             - find . -name '<string>'   (find)"
-  echo "fw            - find . -name '*<string>*' (find wild)"
-  echo "mcd           - make and cd into (nested) dir"
-  echo "dus           - du sorted by size"
-  echo "mhi           - make html index for images"
-  echo
-  echo "# FZF"
-  echo "^f            - vim fzf"
-  echo "vf            - vim <path> (fzf)"
-  echo "<cmd> ~~<tab> - fzf generic"
-  echo "^r            - reverse-i-search fzf"
-  echo "fgrep         - fzf grep"
-  echo "kill <tab>    - fzf kill"
+cat <<- EOF
+	# cheat sheet
+	^e            - prefix line with 'vim', e.g: ^e^g would create 'vim $()'
+	^g            - wrap cli input in '$()' (group command)
+	^p            - open vim +:CtrlP
+	vp <dir>      - open vim +:CtrlP in specified dir
+	hl            - highlight <string>
+	g             - grep (ignore .git)
+	f             - find . -name '<string>'   (find)
+	fw            - find . -name '*<string>*' (find wild)
+	mcd           - make and cd into (nested) dir
+	dus           - du sorted by size
+	mhi           - make html index for images
+	
+	# FZF
+	^f            - vim fzf
+	vf            - vim <path> (fzf)
+	<cmd> ~~<tab> - fzf generic
+	^r            - reverse-i-search fzf
+	fgrep         - fzf grep
+	kill <tab>    - fzf kill
+EOF
 }
 
 # install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
@@ -228,5 +230,3 @@ function install_gnome_terminal_bitmap_fonts {
   sudo ln -s /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-yes-bitmaps.conf
   sudo dpkg-reconfigure fontconfig fontconfig-config
 }
-
-
