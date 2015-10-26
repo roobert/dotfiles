@@ -18,8 +18,8 @@ function get_stuff_from_oh_my_zsh () {
 function help {
 cat <<- EOF
 	# cheat sheet
-	^e            - prefix line with 'vim', e.g: ^e^g would create 'vim $()'
-	^g            - wrap cli input in '$()' (group command)
+	^e            - prefix line with 'vim', e.g: ^e^g would create 'vim \$()'
+	^g            - wrap cli input in '\$()' (group command)
 	^p            - open vim +:CtrlP
 	vp <dir>      - open vim +:CtrlP in specified dir
 	hl            - highlight <string>
@@ -33,7 +33,7 @@ cat <<- EOF
 	# FZF
 	^f            - vim fzf
 	vf            - vim <path> (fzf)
-	<cmd> ~~<tab> - fzf generic
+	<cmd> @<tab>  - fzf generic
 	^r            - reverse-i-search fzf
 	fgrep         - fzf grep
 	kill <tab>    - fzf kill
