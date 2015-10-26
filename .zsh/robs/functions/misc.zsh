@@ -55,27 +55,6 @@ function g {
    egrep --exclude-dir=\.svn $*
 }
 
-# Map control-p to the vim ctrlp command. Will open vim and run ctrlp. (from mattf)
-function vim-ctrlp () {
-    if [ $#BUFFER -ne 0 ]
-    then
-        zle push-line
-    fi
-    BUFFER='vim +:CtrlP'
-    zle accept-line
-}
-zle -N                vim-ctrlp
-bindkey -M viins '^P' vim-ctrlp
-
-# this works well with CDPATH to do things like vimp ~project
-function vp {
-  ( cd $* && vim +:CtrlP )
-}
-
-function vf {
-  ( cd $* && vim +:FZF )
-}
-
 zle      -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 
