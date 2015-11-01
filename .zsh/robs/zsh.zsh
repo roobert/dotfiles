@@ -25,3 +25,6 @@ bindkey "^[." insert-last-word
 autoload -U zmv
 
 fpath=(~/.zsh/fpath $fpath)
+
+# tmux+zsh/vi-mode paste fix
+(( $+TMUX  )) && unset zle_bracketed_paste
