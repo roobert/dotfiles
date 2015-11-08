@@ -18,7 +18,9 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-PHOST="%{$FG[240]%}%m"
+HOST=$(echo -n $(hostname -f) | tac -s.|sed 's/\.$//')
+
+PHOST="%{$FG[240]%}${HOST}"
 PWHERE="%{$FG[250]%}%d"
 
 MODE_CMD="%{$FG[088]%}"
