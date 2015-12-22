@@ -60,7 +60,7 @@ if version > 701
     \'endel/vim-github-colorscheme',
   \]
 
-  if filereadable('/usr/bin/go')
+  if filereadable('/usr/bin/go') || filereadable('/home/rw/opt/go/bin/go')
     call add(plugins, 'fatih/vim-go')
   endif
 
