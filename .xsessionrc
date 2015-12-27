@@ -38,6 +38,8 @@ fi
 if which trayion > /dev/null 2>&1; then
   killall trayion; trayion &
   killall nm-applet; nm-applet &
+  killall nm-applet; nm-applet &
+  sudo killall blueman-applet; sudo blueman-applet &
 fi
 
 if hostname | grep mbp0 ; then
