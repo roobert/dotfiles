@@ -36,10 +36,10 @@ alias vpm="ssh rpro -t 'cd vagrant-puppetmaster; vagrant ssh'"
 alias vpa="ssh rpro -t 'cd vagrant-puppet-client; vagrant ssh'"
 
 # ps stuff
-export PS_FORMAT="user,pid,args"
+export PS_FORMAT="user,pid,etime,args"
 alias ps='ps ww'                     # ps - always assume unlimited width
 alias p='ps axcwwf'                  # p  - display all, 
-alias pu='ps -o user,pid,command ww' # pu
+alias pu='ps -o user,pid,etime,command ww' # pu
 
 # ask_kill shortcuts
 alias ak='$HOME/bin/ask_kill.rb'
