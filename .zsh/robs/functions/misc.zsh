@@ -101,7 +101,7 @@ function hl {
 
   if [[ $# -eq 0 ]]; then
     echo "not enough arguments!"
-    exit 1
+    return 1
   elif [[ $# -eq 1 ]]; then
     FILES="-"
   else
@@ -182,4 +182,12 @@ function install_gnome_terminal_bitmap_fonts {
   sudo rm /etc/fonts/conf.d/70-no-bitmaps.conf
   sudo ln -s /etc/fonts/conf.avail/70-yes-bitmaps.conf /etc/fonts/conf.d/70-yes-bitmaps.conf
   sudo dpkg-reconfigure fontconfig fontconfig-config
+}
+
+function keygen {
+  if [[ -z $name ]]; then
+    echo "specify key name!"
+    return 1
+  fi
+  ssh-keygen -t rsa -b 4096 -C 'id_rsa-$name' -f ~/.ssh/id_rsa-$name -q -N ""
 }
