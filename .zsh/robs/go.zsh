@@ -1,2 +1,2 @@
-export GOPATH="$HOME/git/go/bin"
+export GOPATH="$HOME/git/go"
 export PATH="$PATH:$GOPATH/bin"
