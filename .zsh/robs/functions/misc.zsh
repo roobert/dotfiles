@@ -185,9 +185,10 @@ function install_gnome_terminal_bitmap_fonts {
 }
 
 function keygen {
-  if [[ -z $name ]]; then
+  NAME=$1
+  if [[ -z $NAME ]]; then
     echo "specify key name!"
     return 1
   fi
-  ssh-keygen -t rsa -b 4096 -C 'id_rsa-$name' -f ~/.ssh/id_rsa-$name -q -N ""
+  ssh-keygen -t rsa -b 4096 -C "id_rsa-$NAME" -f ~/.ssh/id_rsa-$NAME -q -N ""
 }
