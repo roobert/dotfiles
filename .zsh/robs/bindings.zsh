@@ -18,6 +18,9 @@ bindkey -M viins "^H" backward-delete-char
 bindkey -M vicmd "^H" backward-delete-char
 bindkey -M viins "^?" backward-delete-char
 bindkey -M vicmd "^?" backward-delete-char
+# fix backspace key
+bindkey -M viins "^w" backward-delete-word
+bindkey -M vicmd "^w" backward-delete-word
 # fix insert key
 bindkey -M viins "^[[2~" overwrite-mode
 bindkey -M vicmd "^[[2~" overwrite-mode
