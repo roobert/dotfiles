@@ -265,9 +265,9 @@ command Q q
 " NO. THANK. YOU.
 map Q <Nop>
 
-autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'   | normal G
-autocmd BufNewFile *.sh 0put = '#!/usr/bin/env bash'   | normal G
-autocmd BufNewFile *.py 0put = '#!/usr/bin/env python' | normal G
+autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'                      | normal G
+autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefail\" | normal G
+autocmd BufNewFile *.py 0put = '#!/usr/bin/env python'                    | normal G
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " spellcheck for .txt and .md
