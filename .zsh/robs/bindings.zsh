@@ -48,10 +48,12 @@ bindkey -M vicmd "$" end-of-line
 bindkey -M viins "^[[7~" beginning-of-line # home
 bindkey -M viins "^[[8~" end-of-line # end
 
+bindkey -M viins "^[[1;5A" insert-last-word
+bindkey -M vicmd "^[[1;5A" insert-last-word
+
 #changing mode clobbers the keybinds, so store the keybinds before and execute 
 #them after
 binds=`bindkey -L`
 bindkey -v
 for bind in ${(@f)binds}; do eval $bind; done
 unset binds
-
