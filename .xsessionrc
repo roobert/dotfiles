@@ -43,6 +43,7 @@ if which trayion > /dev/null 2>&1; then
 fi
 
 if hostname | grep mbp0 ; then
+  unity-settings-daemon &
   synclient MaxTapTime=0
   synclient HorizTwoFingerScroll=1
   synclient PalmDetect=1
