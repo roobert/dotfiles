@@ -50,7 +50,7 @@
     "ratio-limit-enabled": false, 
     "recent-download-dir-1": "/mnt/data", 
     "recent-download-dir-2": "/home/rw/Downloads", 
-    "recent-download-dir-2": "/home/rw/Downloads", 
+    "recent-download-dir-3": "/home/rw/Downloads", 
     "rename-partial-files": true, 
     "rpc-authentication-required": false, 
     "rpc-bind-address": "0.0.0.0", 
