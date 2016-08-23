@@ -58,6 +58,7 @@ if version > 701
     \'vim-scripts/ruby-matchit',
     \'roobert/robs.vim',
     \'endel/vim-github-colorscheme',
+    \'ntpeters/vim-better-whitespace',
   \]
 
   if filereadable('/usr/bin/go') || filereadable('/home/rw/opt/go/bin/go') || filereadable('/home/rw/git/go/bin/go')
@@ -102,8 +103,8 @@ filetype plugin indent on
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 let g:indent_guides_start_level = 2
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_guide_size  = 1
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_guide_size  = 2
 let g:indent_guides_enable_on_vim_startup = 1
 
 " syntastic
@@ -315,7 +316,7 @@ map <S-l> :tabnext<CR>
 map <Leader>/ :noh<CR>
 
 " tmux
-autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%")) 
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%"))
 
 " remap leader-ru to leader-r
 "let g:vimrubocop_keymap = 0
