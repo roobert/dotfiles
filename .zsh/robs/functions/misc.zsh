@@ -58,19 +58,17 @@ function g {
 zle      -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 
-# wrap cli input in '$()' group
 function wrap-cli-input () {
   BUFFER="\$($BUFFER)"
 }
 zle -N wrap-cli-input
 bindkey -M viins '^g' wrap-cli-input
 
-# wrap cli input in 'vim '$()' (edit)
-function wrap-cli-input-vim () {
+function prepend-cli-input-vim () {
   BUFFER="vim $BUFFER"
 }
-zle -N wrap-cli-input-vim
-bindkey -M viins '^e' wrap-cli-input-vim
+zle -N prepend-cli-input-vim
+bindkey -M viins '^e' prepend-cli-input-vim
 
 # easily search zsh man pages
 function zman {
