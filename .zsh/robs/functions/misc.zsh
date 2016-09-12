@@ -170,8 +170,8 @@ function mcd {
 }
 
 function install_jq {
-  mkdir -v ~/bin
-  curl http://stedolan.github.io/jq/download/linux64/jq > ~/bin/jq
+  test ! -d ~/bin && mkdir -v ~/bin
+  curl http://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 > ~/bin/jq
   chmod +x ~/bin/jq
 }
 
