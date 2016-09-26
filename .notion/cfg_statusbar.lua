@@ -11,8 +11,12 @@ mod_statusbar.create{
     pos='bl',
     fullsize=true,
     systray=true,
-    template="  %load%filler%systray  %date  ",
+    template="  %load%filler%systray  %date  %systray_stalone",
 }
+
+defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
+defwinprop{instance="stalonetray",statusbar="systray_stalone"}
+defwinprop{class="stalonetray",statusbar="systray_stalone"}
 
 ---- Create a statusbar
 --mod_statusbar.create{
