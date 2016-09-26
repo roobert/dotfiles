@@ -13,7 +13,7 @@ if test -d $HOME/.screenlayout/; then
     bash $HOME/.screenlayout/work-laptop.sh
   else
     bash $HOME/.screenlayout/default.sh
-  fi 
+  fi
 fi
 
 if which feh > /dev/null 2>&1; then
@@ -48,6 +48,7 @@ if hostname | grep -E 'mbp0|acros'; then
   synclient HorizTwoFingerScroll=1
   synclient PalmDetect=1
   sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
+  xmodmap ~/.Xmodmap
 fi
 
 if hostname | grep grindelwald; then
