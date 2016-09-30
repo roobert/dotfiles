@@ -16,6 +16,6 @@
   lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
 
 [core]
-  excludesfile = $HOME/.gitignore
+	excludesfile = ~/.gitignore
 [push]
 	default = simple
