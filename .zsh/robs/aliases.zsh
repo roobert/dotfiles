@@ -15,8 +15,8 @@ alias rubygems_login="curl -u roobert https://rubygems.org/api/v1/api_key.yaml >
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
 # vim
-alias vi="vim"
 alias vim="vim -T xterm-256color -p"
+alias vi="vim"
 
 # git
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
@@ -24,7 +24,8 @@ alias gdl="gl -p"
 alias gup='git commit -am "updated" && git push'
 
 alias gi='git commit -m'
-alias gs='git status'
+alias gs='git status --short --branch'
+alias gpoh='git push origin HEAD'
 alias gp='git push'
 alias ga='git add'
 alias gd='git diff'
@@ -38,7 +39,7 @@ alias vpa="ssh rpro -t 'cd vagrant-puppet-client; vagrant ssh'"
 # ps stuff
 export PS_FORMAT="user,pid,etime,args"
 alias ps='ps ww'                     # ps - always assume unlimited width
-alias p='ps axcwwf'                  # p  - display all, 
+alias p='ps axcwwf'                  # p  - display all
 alias pu='ps -o user,pid,etime,command ww' # pu
 
 # ask_kill shortcuts
@@ -52,9 +53,6 @@ alias -g PUPPET_FILTER="sed -e 's/\(.*\(notice:\|info:\|err:\|warning:\).*\)/\1\
 alias puppet_alltags="puppet_alltags -f  | PUPPET_FILTER"
 alias puppet_autoapply="puppet_autoapply | PUPPET_FILTER"
 alias puppet_noop="puppet_noop           | PUPPET_FILTER"
-
-# ffs
-alias ffs="sudo !!"
 
 # reload zshrc
 alias rzsh="exec zsh -l"

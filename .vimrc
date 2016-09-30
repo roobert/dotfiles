@@ -38,7 +38,7 @@ if version > 701
     \'vim-scripts/nginx.vim',
     \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
-    \'jamessan/gnupg.vim',
+    \'jamessan/vim-gnupg',
     \'vim-scripts/gundo',
     \'vim-scripts/SyntaxAttr.vim',
     \'vim-scripts/ZoomWin',
