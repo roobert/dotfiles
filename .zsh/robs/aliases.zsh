@@ -23,13 +23,14 @@ alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%
 alias gdl="gl -p"
 alias gup='git commit -am "updated" && git push'
 
-alias gi='git commit -m'
+alias gm='git commit -m'
+alias gc='git commit -m'
 alias gs='git status --short --branch'
-alias gpoh='git push origin HEAD'
+alias gpo='git push origin HEAD'
 alias gp='git push'
-alias ga='git add'
-alias gd='git diff'
 alias gdh='git diff HEAD'
+alias gd='git diff'
+alias ga='git add'
 alias gaa='git add .'
 
 # connect to os X and login to vagrant instances
