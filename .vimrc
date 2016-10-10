@@ -165,6 +165,14 @@ syntax enable
 " FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
 hi Normal ctermfg=252 ctermbg=none
 
+function! StatusLine()
+  let padded_line_no = "%=%0".len(line("$"))."l"
+  return "%=\ %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
+endfunction
+
+set laststatus=2
+set statusline=%!StatusLine()
+
 " me settins
 set matchpairs+=<:>,{:},(:),[:]
 set tabstop=2
@@ -188,8 +196,6 @@ set t_ut=           " make tmux/screen display properly for vim themes with colo
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
 set nrformats=      " treat numbers as decimal when using <C-a> and <C-x>
-set laststatus=2
-set statusline=%=\ %F\ \-\ %l/%L\ %03.c\ 
 " zsh style tab completion for
 set wildmenu
 set wildmode=full
