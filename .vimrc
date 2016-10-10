@@ -188,7 +188,8 @@ set t_ut=           " make tmux/screen display properly for vim themes with colo
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
 set nrformats=      " treat numbers as decimal when using <C-a> and <C-x>
-
+set laststatus=2
+set statusline=%=\ %F\ \-\ %l/%L\ %03.c\ 
 " zsh style tab completion for
 set wildmenu
 set wildmode=full
