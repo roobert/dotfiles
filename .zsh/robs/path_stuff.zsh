@@ -4,11 +4,11 @@ if [ -d "$HOME/work/systems/pm" ]; then
 fi
 
 # include my paths in path
-MY_PATHS=($HOME/bin $HOME/opt/notion/bin)
+MY_PATHS=($HOME/bin $HOME/opt/vim/bin)
 
 for my_path in $MY_PATHS; do
   if [ -d "$my_path" ]; then
-    export PATH="$PATH:$my_path"
+    export PATH="$my_path:$PATH"
   fi
 done
 
