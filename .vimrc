@@ -166,8 +166,18 @@ syntax enable
 hi Normal ctermfg=252 ctermbg=none
 
 function! StatusLine()
+  "let separator_length = 100
+  "let c = 0
+  "let s = "─"
+  "while c != separator_length
+  "  let s += "─"
+  "  let c += 1
+  "endwhile
+  "echo s
+
   let padded_line_no = "%=%0".len(line("$"))."l"
-  return "%=\ %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
+  " FIXME
+  return "%=--- ---  -- -   -     \ %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
 endfunction
 
 set laststatus=2
@@ -201,7 +211,7 @@ set wildmenu
 set wildmode=full
 
 " get rid of ugly vertical split char | for split windows, note the space after \
-set fillchars+=vert:\ 
+set fillchars+=vert:\ ,stlnc:─,stl:─
 
 " Show trailing whitepace and spaces before a tab:
 highlight ExtraWhitespace ctermbg=red guibg=red
