@@ -177,7 +177,7 @@ function! StatusLine()
 
   let padded_line_no = "%=%0".len(line("$"))."l"
   " FIXME
-  return "%=--- ---  -- -   -     \ %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
+  return "%=____ ___  __ _   _     %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
 endfunction
 
 set laststatus=2
@@ -211,7 +211,8 @@ set wildmenu
 set wildmode=full
 
 " get rid of ugly vertical split char | for split windows, note the space after \
-set fillchars+=vert:\ ,stlnc:─,stl:─
+"set fillchars+=vert:\ ,stlnc:─,stl:─
+set fillchars+=vert:\ ,stlnc:_,stl:_
 
 " Show trailing whitepace and spaces before a tab:
 highlight ExtraWhitespace ctermbg=red guibg=red
