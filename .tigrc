@@ -1,0 +1,42 @@
+ee: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+# See: http://jonas.nitro.dk/tig/tigrc.5.html
+#
+# Area                  Foreground      Background         Options
+# ==============================================================================
+
+# Main UI
+# ==============================================================================
+color default           250             default
+color 'Author '         15              default
+color 'Commit: '        242             default
+color 'Merge: '         45              default
+color id                167             default
+color date              242             default
+color graph-commit      161             default
+color status            15              default
+color delimiter         90              default
+
+# Help Page
+# ==============================================================================
+color help-group        161             default
+
+# Current Line
+# ==============================================================================
+color main-tracked      105             default             bold
+
+# Current Line
+# ==============================================================================
+color cursor            default         233
+
+# Bottom Statusbar
+# ==============================================================================
+color title-focus       234             250
+color title-blur        234             250
+
+# File Diffs
+# ==============================================================================
+color diff-stat         45              default
+color diff-index        14              default
+color diff-add          40              default
+color diff-del          161             default
+color diff-chunk        190             default
