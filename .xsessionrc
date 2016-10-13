@@ -33,7 +33,7 @@ fi
 if which stalonetray > /dev/null 2>&1; then
   killall stalonetray; stalonetray -i 16 --background '#222' --icon-gravity W --grow-gravity E --geometry 1-150 --kludges="force_icons_size,fix_window_pos" &
   #stalonetray --background '#101010' --icon-gravity W --grow-gravity E --dockapp-mode wmaker --geometry 1x1 --no-shrink --kludges force_icons_size -i 24
-  #sudo killall nm-applet; sudo nm-applet &
+  sudo killall nm-applet; sudo nm-applet &
   #sudo killall blueman-applet; sudo blueman-applet &
 fi
 
