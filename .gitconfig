@@ -3,19 +3,26 @@
 	email = roobert@gmail.com
 [color]
 	ui = always
-
 [color "diff"]
 [alias]
-  co = checkout
-  ci = commit
-  s = status
-  st = status
-  b = branch
-  br = branch
-  l = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
-  lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
-
+	co = checkout
+	ci = commit
+	s = status
+	st = status
+	b = branch
+	br = branch
+	l = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
+	lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
+	hub = repo github
 [core]
 	excludesfile = ~/.gitignore
 [push]
 	default = simple
+
+[include]
+	path = ~/.gitconfig.gitrepo
+
+# set this in .gitconfig.gitrepo to avoid being commited to github..
+# tokens: https://github.com/settings/tokens
+#[gitrepo "github"]
+#	token = 
