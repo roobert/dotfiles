@@ -4,7 +4,7 @@ if [ -d "$HOME/work/systems/pm" ]; then
 fi
 
 # include my paths in path
-MY_PATHS=($HOME/bin $HOME/opt/vim/bin $HOME/.local/bin/git-repo)
+MY_PATHS=($HOME/bin $HOME/opt/vim/bin $HOME/.local/bin/)
 
 for my_path in $MY_PATHS; do
   if [ -d "$my_path" ]; then
