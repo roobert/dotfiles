@@ -1,7 +1,7 @@
 new_window "network"
 
 # top left (0)
-run_cmd "sudo nethogs"
+run_cmd "sudo nethogs wlx00c0ca8fe5b8"
 
 # bottom left (2)1
 split_h 50
