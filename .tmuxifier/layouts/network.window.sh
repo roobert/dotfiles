@@ -12,14 +12,14 @@ run_cmd "sudo wavemon"
 
 split_v 50
 run_cmd "sudo wavemon"
-send_keys "<F2>"
+send_keys "F2"
 
-# pane 2
+# top right
 select_pane 3
 run_cmd "sudo iftop -i wlx00c0ca8fe5b8 -b"
 send_keys "t"
 
-# pane 3
+# bottom right
 split_v 50
 run_cmd "watch -n1 'nmcli d wifi'"
 
