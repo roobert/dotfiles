@@ -18,6 +18,9 @@ send_keys "F2"
 select_pane 3
 run_cmd "sudo iftop -i wlx00c0ca8fe5b8 -b"
 send_keys "t"
+split_v 50
+run_cmd "sudo bmon -p 'wlx*'"
+send_keys "di"
 
 # bottom right
 split_v 50
