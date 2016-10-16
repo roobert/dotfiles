@@ -20,6 +20,13 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
 HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
 
+if which kubectl >/dev/null 2>&1; then
+  CONTEXT=$(kubectl config current-context)
+  PROJECT=$(echo $CONTEXT | cut -d_ -f2)
+  CLUSTER=$(echo $CONTEXT | cut -d_ -f3)
+  KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
+fi
+
 PHOST="%{$FG[240]%}${HOST}"
 PWHERE="%{$FG[250]%}%d"
 
@@ -37,7 +44,7 @@ function zle-line-init zle-keymap-select {
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
-  export PS1='$PHOST $PWHERE$(git_super_status) $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  export PS1='$PHOST $PWHERE$(git_super_status) $KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
 }
 
