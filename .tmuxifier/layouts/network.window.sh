@@ -28,4 +28,4 @@ split_v 50
 run_cmd "watch -n1 'nmcli d wifi'"
 
 split_h 50
-run_cmd "ping 8.8.8.8"
+run_cmd "while sleep 0.5; do ping 8.8.8.8; done"
