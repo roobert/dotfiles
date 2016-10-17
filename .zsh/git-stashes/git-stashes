@@ -8,7 +8,7 @@ function main () {
         return
     fi
 
-    printf "${(j/, /)stashes}"
+    printf "${(j/, /)stashes} "
 }
 
 function read_and_format () {
