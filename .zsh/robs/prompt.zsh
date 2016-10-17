@@ -43,9 +43,11 @@ function zle-line-init zle-keymap-select {
     (*)          VI_MODE="$MODE_INS" ;;
   esac
 
+  GIT_STASHES=$(git stashes)
+
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
-  export PS1='$PHOST $PWHERE$(git_super_status) $KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  export PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
 }
 
