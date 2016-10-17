@@ -18,14 +18,6 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-# FIXME
-if kubectl config current-context >/dev/null 2>&1; then
-  CONTEXT=$(kubectl config current-context)
-  PROJECT=$(echo $CONTEXT | cut -d_ -f2)
-  CLUSTER=$(echo $CONTEXT | cut -d_ -f4)
-  KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
-fi
-
 HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
 
 PHOST="%{$FG[240]%}${HOST}"
@@ -43,7 +35,14 @@ function zle-line-init zle-keymap-select {
     (*)          VI_MODE="$MODE_INS" ;;
   esac
 
-  GIT_STASHES=$(git stashes)
+  if kubectl config current-context >/dev/null 2>&1; then
+    CONTEXT=$(kubectl config current-context)
+    PROJECT=$(echo $CONTEXT | cut -d_ -f2)
+    CLUSTER=$(echo $CONTEXT | cut -d_ -f4)
+    KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
+  fi
+
+  GIT_STASHES="%{$FG[013]%}$(git stashes)%{$FX[reset]%}"
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
