@@ -22,7 +22,7 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 if kubectl config current-context >/dev/null 2>&1; then
   CONTEXT=$(kubectl config current-context)
   PROJECT=$(echo $CONTEXT | cut -d_ -f2)
-  CLUSTER=$(echo $CONTEXT | cut -d_ -f3)
+  CLUSTER=$(echo $CONTEXT | cut -d_ -f4)
   KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
 fi
 
