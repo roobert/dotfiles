@@ -26,7 +26,7 @@ PWHERE="%{$FG[250]%}%d"
 MODE_CMD="%{$FG[088]%}"
 MODE_INS="%{$FG[156]%}"
 
-export RPS1=''
+RPS1=''
 
 function zle-line-init zle-keymap-select {
   case ${KEYMAP} in
@@ -36,17 +36,22 @@ function zle-line-init zle-keymap-select {
   esac
 
   if kubectl config current-context >/dev/null 2>&1; then
-    CONTEXT=$(kubectl config current-context)
-    PROJECT=$(echo $CONTEXT | cut -d_ -f2)
-    CLUSTER=$(echo $CONTEXT | cut -d_ -f4)
+    K8_CONTEXT=$(kubectl config current-context)
+    PROJECT=$(echo $K8_CONTEXT | cut -d_ -f2)
+    CLUSTER=$(echo $K8_CONTEXT | cut -d_ -f4)
     KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
   fi
 
-  GIT_STASHES="%{$FG[013]%}$(git stashes)%{$FX[reset]%}"
+  unset GIT_STASHES
+  STASHES="$(git stashes)"
+
+  if [[ ! -z ${STASHES} ]]; then
+    GIT_STASHES="(%{$FG[013]%}${STASHES}%{$FX[reset]%}) "
+  fi
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
-  export PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
 }
 
