@@ -15,6 +15,7 @@
 	lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
 	hub = repo github
   ss = stash save
+  sp = stash pop
 [core]
 	excludesfile = ~/.gitignore
 [push]
