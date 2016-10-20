@@ -14,6 +14,7 @@
 	l = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
 	lo = log --pretty=format:\"%ad [%an] %s%d\" --graph --date=short
 	hub = repo github
+  ss = stash save
 [core]
 	excludesfile = ~/.gitignore
 [push]
