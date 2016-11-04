@@ -1,5 +1,12 @@
 ".vimrc
 
+for f in argv()
+  if isdirectory(f)
+    echomsg "vim: cowardly refusing to edit directory" . f
+    quit
+  endif
+endfor
+
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
