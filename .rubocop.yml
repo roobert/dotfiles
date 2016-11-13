@@ -26,3 +26,6 @@ Style/SingleLineBlockParams:
 
 Style/Documentation:
   Enabled: false
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
