@@ -173,15 +173,6 @@ syntax enable
 hi Normal ctermfg=252 ctermbg=none
 
 function! StatusLine()
-  "let separator_length = 100
-  "let c = 0
-  "let s = "─"
-  "while c != separator_length
-  "  let s += "─"
-  "  let c += 1
-  "endwhile
-  "echo s
-
   let padded_line_no = "%=%0".len(line("$"))."l"
   " FIXME
   return "%=____ ___  __ _   _     %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
@@ -307,7 +298,7 @@ noremap <Left>  <NOP>
 noremap <Right> <NOP>
 
 " toggle paste mode (!)
-set pastetoggle=<F1>
+set pastetoggle=<Leader><Space>
 
 " window / buffer stuff
 set splitbelow
