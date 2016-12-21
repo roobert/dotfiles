@@ -181,7 +181,11 @@ endfunction
 set laststatus=2
 set statusline=%!StatusLine()
 
+" leader
+let mapleader = "\<Space>"
+
 " me settins
+set showcmd
 set matchpairs+=<:>,{:},(:),[:]
 set tabstop=2
 set shiftwidth=2
