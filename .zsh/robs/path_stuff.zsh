@@ -4,7 +4,7 @@ if [ -d "$HOME/work/systems/pm" ]; then
 fi
 
 # include my paths in path
-MY_PATHS=($HOME/bin $HOME/opt/vim/bin $HOME/.local/bin/ $HOME/.tmuxifier/bin $HOME/.zsh/git-stashes $HOME/bin/blackbox)
+MY_PATHS=($HOME/bin $HOME/opt/vim/bin $HOME/.local/bin/ $HOME/.tmuxifier/bin $HOME/.zsh/git-stashes $HOME/opt/blackbox)
 
 for my_path in $MY_PATHS; do
   if [ -d "$my_path" ]; then
