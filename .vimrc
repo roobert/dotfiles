@@ -76,7 +76,7 @@ if version > 701
 
   call plug#begin('~/.vim/plugged')
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
   " if a plugin isn't installed, install it!
   for plugin in plugins
@@ -137,7 +137,7 @@ let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
 " make it colourful..
 
-" For windows, the colors directory is: c:\Users\<user>\vimfiles\colors 
+" For windows, the colors directory is: c:\Users\<user>\vimfiles\colors
 
 " dont set TERM=xterm-256color since this will break the terminal when
 " connecting to
@@ -260,21 +260,21 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
 " Default fzf layout
-let g:fzf_layout = { 'down': '40%' }
-map <C-F> :FZF<CR>
+"let g:fzf_layout = { 'down': '40%' }
+"map <C-F> :FZF<CR>
 
 " change surround bindings
 "nmap <Leader>' 
 
 " run shortcuts..
-nmap <Leader>r :!!<CR>
-vmap <Leader>r :!!<CR>
-nmap <Leader>R :!./%<CR>
-vmap <Leader>R :!./%<CR>
-nmap <Leader>x :!chmod +x ./%<CR>
-vmap <Leader>x :!chmod +x ./%<CR>
-nmap <Leader>X :!chmod +x ./%<CR>
-vmap <Leader>X :!chmod +x ./%<CR>
+"nmap <Leader>r :!!<CR>
+"vmap <Leader>r :!!<CR>
+"nmap <Leader>R :!./%<CR>
+"vmap <Leader>R :!./%<CR>
+"nmap <Leader>x :!chmod +x ./%<CR>
+"vmap <Leader>x :!chmod +x ./%<CR>
+"nmap <Leader>X :!chmod +x ./%<CR>
+"vmap <Leader>X :!chmod +x ./%<CR>
 
 " write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -297,7 +297,6 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.txt setlocal spell
 
-
 " expert difficulty!!!
 noremap <Up>    <NOP>
 noremap <Down>  <NOP>
@@ -305,7 +304,7 @@ noremap <Left>  <NOP>
 noremap <Right> <NOP>
 
 " toggle paste mode (!)
-set pastetoggle=<Leader><Space>
+set pastetoggle=<Leader>p
 
 " window / buffer stuff
 set splitbelow
