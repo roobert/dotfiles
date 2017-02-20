@@ -16,7 +16,7 @@
 	hub = repo github
   ss = stash save
   sp = stash pop
-  upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+  upstream-set = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 [core]
 	excludesfile = ~/.gitignore
 	pager = less -F -X
