@@ -16,12 +16,14 @@
 	hub = repo github
   ss = stash save
   sp = stash pop
+  upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
 [core]
 	excludesfile = ~/.gitignore
 	pager = less -F -X
 [push]
 	default = simple
-
+[branch]
+	autosetupmerge = always
 [include]
 	path = ~/.gitconfig.gitrepo
 
