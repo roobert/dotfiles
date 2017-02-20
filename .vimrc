@@ -172,10 +172,12 @@ syntax enable
 " FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
 hi Normal ctermfg=252 ctermbg=none
 
+highlight User1 ctermfg=red
+
 function! StatusLine()
   let padded_line_no = "%=%0".len(line("$"))."l"
   " FIXME
-  return "%=____ ___  __ _   _     %F\ \-\ " . padded_line_no . "/%L\ %03c\ "
+  return "%=____ ___  __ _   _     %1*%F%*\ \-\ " . padded_line_no . "/%L\ %03c\ "
 endfunction
 
 set laststatus=2
