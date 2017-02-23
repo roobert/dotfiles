@@ -38,35 +38,35 @@ if version > 701
   let plugins = [
     \'junegunn/vim-plug',
     \'tpope/vim-surround',
-    \'tpope/vim-commentary',
-    \'tpope/vim-repeat',
     \'tpope/vim-unimpaired',
-    \'vim-scripts/tlib',
-    \'vim-scripts/nginx.vim',
-    \'vim-scripts/xterm16.vim',
     \'vim-scripts/YankRing.vim',
     \'jamessan/vim-gnupg',
-    \'vim-scripts/gundo',
-    \'vim-scripts/SyntaxAttr.vim',
-    \'vim-scripts/ZoomWin',
-    \'MarcWeber/vim-addon-mw-utils',
-    \'garbas/vim-snipmate',
-    \'honza/vim-snippets',
-    \'puppetlabs/puppet-syntax-vim',
-    \'rodjek/vim-puppet',
-    \'scrooloose/syntastic',
-    \'jiangmiao/auto-pairs',
-    \'ngmy/vim-rubocop',
-    \'nathanaelkane/vim-indent-guides',
     \'junegunn/vim-easy-align',
-    \'wellle/targets.vim',
-    \'easymotion/vim-easymotion',
-    \'rhysd/clever-f.vim',
-    \'vim-scripts/ruby-matchit',
-    \'roobert/robs.vim',
-    \'endel/vim-github-colorscheme',
-    \'ntpeters/vim-better-whitespace',
+    \'jiangmiao/auto-pairs',
+    \'roobert/robs.vim'
   \]
+    "\'tpope/vim-commentary',
+    "\'tpope/vim-repeat',
+    "\'vim-scripts/tlib',
+    "\'vim-scripts/nginx.vim',
+    "\'vim-scripts/xterm16.vim',
+    "\'vim-scripts/gundo',
+    "\'vim-scripts/SyntaxAttr.vim',
+    "\'vim-scripts/ZoomWin',
+    "\'MarcWeber/vim-addon-mw-utils',
+    "\'garbas/vim-snipmate',
+    "\'honza/vim-snippets',
+    "\'puppetlabs/puppet-syntax-vim',
+    "\'rodjek/vim-puppet',
+    "\'scrooloose/syntastic',
+    "\'ngmy/vim-rubocop',
+    "\'nathanaelkane/vim-indent-guides',
+    "\'wellle/targets.vim',
+    "\'easymotion/vim-easymotion',
+    "\'rhysd/clever-f.vim',
+    "\'vim-scripts/ruby-matchit',
+    "\'endel/vim-github-colorscheme',
+    "\'ntpeters/vim-better-whitespace',
 
   if filereadable('/usr/bin/go') || filereadable('/home/rw/opt/go/bin/go') || filereadable('/home/rw/git/go/bin/go')
     call add(plugins, 'fatih/vim-go')
@@ -185,7 +185,7 @@ set laststatus=2
 set statusline=%!StatusLine()
 
 " leader
-let mapleader = "\<Space>"
+"let mapleader = "\<Space>"
 
 " me settins
 set showcmd
