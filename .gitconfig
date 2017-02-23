@@ -21,9 +21,7 @@
 	excludesfile = ~/.gitignore
 	pager = less -F -X
 [push]
-	default = simple
-[branch]
-	autosetupmerge = always
+	default = current
 [include]
 	path = ~/.gitconfig.gitrepo
 
