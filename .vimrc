@@ -178,7 +178,7 @@ highlight User2 ctermfg=blue
 function! StatusLine()
   let padded_line_no = "%=%0".len(line("$"))."l"
   " FIXME
-  return "%=____ ___  __ _   _     %{expand('%:h')}/%1*%t%*\ \-\ " . padded_line_no . "/%L\ %03c\ "
+  return "%=____ ___  __ _   _     %{expand('%:p:h')}/%1*%t%*\ \-\ " . padded_line_no . "/%L\ %03c\ "
 endfunction
 
 set laststatus=2
