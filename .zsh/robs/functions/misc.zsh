@@ -41,6 +41,8 @@ function install_ruby_tools {
 
   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+  mkdir -p "$(rbenv root)/plugins"
+  git clone https://github.com/rkh/rbenv-update.git "$(rbenv root)/plugins/rbenv-update"
   sudo gem install awesome_print net-http-spy wirble bond boson looksee
 }
 
