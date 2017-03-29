@@ -12,7 +12,9 @@ if hostname | grep -E 'mbp0|acros'; then
   synclient HorizTwoFingerScroll=1
   synclient PalmDetect=1
   sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
-  xmodmap $HOME/.xmodmaprc
+
+  # stupid hack becuase kbd overrides these if they're set too quickly (!)
+  bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
 fi
 
 if which autocutsel > /dev/null 2>&1; then
@@ -31,6 +33,8 @@ if which stalonetray > /dev/null 2>&1; then
 
   #stalonetray --background '#101010' --icon-gravity W --grow-gravity E --dockapp-mode wmaker \
     --geometry 1x1 --no-shrink --kludges force_icons_size -i 24
+
+  gnome-keyring-daemon &
 
   sudo killall nm-applet
   sudo nm-applet &

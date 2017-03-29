@@ -74,14 +74,13 @@ mod_statusbar.launch_statusd{
         -- Locale date format (usually shows seconds, which would require
         -- updating rather often and can be distracting)
         --date_format='%c',
-        
         -- Additional date formats. 
         --[[ 
         formats={ 
             time = '%H:%M', -- %date_time
         }
         --]]
-    },      
+    },
 
     -- Load meter
     load={
