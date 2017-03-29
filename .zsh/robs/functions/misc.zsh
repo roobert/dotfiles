@@ -192,3 +192,13 @@ function keygen {
   fi
   ssh-keygen -t rsa -b 4096 -C "id_rsa-$NAME" -f ~/.ssh/id_rsa-$NAME -q -N ""
 }
+
+function install_custom_login_screen {
+cat << EOF | sudo tee -a /usr/share/glib-2.0/schemas/10_unity_greeter_background.gschema.override
+[com.canonical.unity-greeter]
+draw-user-backgrounds=false
+background='/usr/share/backgrounds/Yak_Wallpaper_Grey_4096x2304.png'
+EOF
+
+  sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+}
