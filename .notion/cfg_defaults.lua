@@ -41,7 +41,7 @@ XTERM="gnome-terminal -e \"tmux -f $HOME/.tmux_no_status.conf\""
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"
-SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; gnome-screensaver-command --lock"
+SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dm-tool switch-to-greeter"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
