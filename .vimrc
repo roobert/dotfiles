@@ -398,3 +398,5 @@ map <Leader>k <Plug>(easymotion-k)
 
 " show syntax highlighting information about attribute under cursor
 map -c :call SyntaxAttr()<CR>
+
+map <Leader>v :r !xsel -p<CR>
