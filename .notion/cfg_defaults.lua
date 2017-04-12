@@ -37,7 +37,7 @@ if randr_screen_change_notify_hook ~= nil then
     randr_screen_change_notify_hook:add(screenlayoutupdated)
 end
 
-XTERM="gnome-terminal -e \"tmux -f $HOME/.tmux_no_status.conf\""
+XTERM="gnome-terminal"
 BROWSER="google-chrome"
 BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
 MUSIC="spotify"

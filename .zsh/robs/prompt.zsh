@@ -68,7 +68,12 @@ PS1='$PHOST $PWHERE >%{$FX[reset]%} '
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# tmux
+prmptcmd() { eval "$PROMPT_COMMAND" }
+precmd_functions=(prmptcmd)
+
 # prevent 2*ESC-i insert-mode switch failure
 noop () { }
 zle -N noop
 bindkey -M vicmd '\e' noop
+
