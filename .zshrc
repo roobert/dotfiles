@@ -62,3 +62,7 @@ if [ -r $HOME/.zsh/local ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ -z $SSH_TTY && -z $TMUX ]]; then
+  exec tmux
+fi
