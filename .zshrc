@@ -66,5 +66,6 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ -z $SSH_TTY && -z $TMUX ]]; then
-  exec tmux new -s "tmux$(echo $TTY | tr '/' '-')"
+  #exec tmux new -s "tmux$(echo $TTY | tr '/' '-')"
+  exec tmux
 fi
