@@ -8,6 +8,6 @@ if [[ -z ${repo} ]]; then
   exit
 fi
 
-branch=$(git rev-parse --abbrev-ref HEAD)
+branch=$(git -C $current_path rev-parse --abbrev-ref HEAD)
 
 echo "${repo}/${branch} •"
