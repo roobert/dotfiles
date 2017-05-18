@@ -65,7 +65,7 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ -z $SSH_TTY && -z $TMUX ]]; then
-  exec tmux new -s $(date +%s )
-  #exec tmux
-fi
+#if [[ -z $SSH_TTY && -z $TMUX ]]; then
+#  exec tmux new -s $(date +%s )
+#  #exec tmux
+#fi
