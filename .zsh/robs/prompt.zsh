@@ -8,24 +8,24 @@ autoload -U colors
 colors
 setopt PROMPT_SUBST
 
-#source $HOME/.zsh/zsh-git-prompt/zshrc.sh
-#
-#ZSH_THEME_GIT_PROMPT_PREFIX=""
-#ZSH_THEME_GIT_PROMPT_SUFFIX=""
-#ZSH_THEME_GIT_PROMPT_SEPARATOR=""
-#ZSH_THEME_GIT_PROMPT_BRANCH=" %{$FG[060]%}"
-#ZSH_THEME_GIT_PROMPT_STAGED=" %{$fg[yellow]%}%{\u26ab%G%}"
-#ZSH_THEME_GIT_PROMPT_CONFLICTS=" %{$fg[red]%}%{\u2716%G%}"
-#ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}%{\u271a%G%}"
-#ZSH_THEME_GIT_PROMPT_BEHIND=" %{\u2193%G%}"
-#ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
-#ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
-#ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 
-#HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
-#PHOST="%{$FG[240]%}${HOST}"
+ZSH_THEME_GIT_PROMPT_PREFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_BRANCH=" %{$FG[060]%}"
+ZSH_THEME_GIT_PROMPT_STAGED=" %{$fg[yellow]%}%{\u26ab%G%}"
+ZSH_THEME_GIT_PROMPT_CONFLICTS=" %{$fg[red]%}%{\u2716%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}%{\u271a%G%}"
+ZSH_THEME_GIT_PROMPT_BEHIND=" %{\u2193%G%}"
+ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-PHOST="%{$FG[240]%}%m"
+HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
+PHOST="%{$FG[240]%}${HOST}"
+
+#PHOST="%{$FG[240]%}%m"
 
 PWHERE="%{$FG[250]%}%d"
 
@@ -34,34 +34,34 @@ MODE_INS="%{$FG[156]%}"
 
 RPS1=''
 
-#function zle-line-init zle-keymap-select {
-#  case ${KEYMAP} in
-#    (vicmd)      VI_MODE="$MODE_CMD" ;;
-#    (main|viins) VI_MODE="$MODE_INS" ;;
-#    (*)          VI_MODE="$MODE_INS" ;;
-#  esac
-#
-#  if kubectl config current-context >/dev/null 2>&1; then
-#    K8_CONTEXT=$(kubectl config current-context)
-#    PROJECT=$(echo $K8_CONTEXT | cut -d_ -f2)
-#    CLUSTER=$(echo $K8_CONTEXT | cut -d_ -f4)
-#    KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
-#  fi
-#
-#  KUBERNETES_CONTEXT=""
-#
-#  unset GIT_STASHES
-#  STASHES="$(git stashes)"
-#
-#  if [[ ! -z ${STASHES} ]]; then
-#    GIT_STASHES="(%{$FG[013]%}${STASHES}%{$FX[reset]%}) "
-#  fi
-#
-#  EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
-#
-#  PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
-#  zle reset-prompt
-#}
+function zle-line-init zle-keymap-select {
+  case ${KEYMAP} in
+    (vicmd)      VI_MODE="$MODE_CMD" ;;
+    (main|viins) VI_MODE="$MODE_INS" ;;
+    (*)          VI_MODE="$MODE_INS" ;;
+  esac
+
+  #if kubectl config current-context >/dev/null 2>&1; then
+  #  K8_CONTEXT=$(kubectl config current-context)
+  #  PROJECT=$(echo $K8_CONTEXT | cut -d_ -f2)
+  #  CLUSTER=$(echo $K8_CONTEXT | cut -d_ -f4)
+  #  KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
+  #fi
+
+  #KUBERNETES_CONTEXT=""
+
+  unset GIT_STASHES
+  STASHES="$(git stashes)"
+
+  if [[ ! -z ${STASHES} ]]; then
+    GIT_STASHES="(%{$FG[013]%}${STASHES}%{$FX[reset]%}) "
+  fi
+
+  EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
+
+  PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  zle reset-prompt
+}
 
 PS1='$PHOST $PWHERE >%{$FX[reset]%} '
 
