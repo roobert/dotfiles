@@ -11,7 +11,7 @@ function git_dir? () {
   fi
 }
 
-function branch_for () {
+function branch () {
   dir=$1
   (cd $dir && git rev-parse --abbrev-ref HEAD)
 }
@@ -28,7 +28,7 @@ if [[ $(git_dir? $dir) != "true" ]]; then
   exit
 fi
 
-branch="$(branch_for $dir)"
+branch="$(branch $dir)"
 
 cat << EOF > ${git_file}
 GIT_CURRENT_BRANCH=${branch}
