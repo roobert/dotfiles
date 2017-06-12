@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# kill self if last shell exits
-
-# start self from .zshrc on new shell
-
 while :; do
+  if [[ "$(pgrep -U${USER} zsh | wc -l)" -eq 0 ]]; then
+    break
+  fi
+
   sleep 1
   clear
 
@@ -17,3 +17,5 @@ while :; do
   ~/.zsh/robs/shelld/shells.rb
   echo
 done
+
+rm -v ~/.shelld/pid.lock
