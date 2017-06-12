@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-current_context_file=~/.k8s-current-context
+[[ ! -d $HOME/.shelld/global ]] && mkdir -pv "${HOME}/.shelld/global"
+
+current_context_file=~/.shelld/global/k8s-current-context
 current_context=$(kubectl config current-context)
 
 project=$(echo ${current_context} | cut -d_ -f2)
