@@ -8,7 +8,7 @@ autoload -U colors
 colors
 setopt PROMPT_SUBST
 
-source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+#source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -48,6 +48,15 @@ function zle-line-init zle-keymap-select {
     KUBERNETES_CONTEXT=""
   fi
 
+  SHELLD="${HOME}/.shelld/shells/$$"
+
+  if [[ -f "$SHELLD/git" ]]; then
+    . "$SHELLD/git"
+    GIT_STATUS=" ${GIT_CURRENT_BRANCH}"
+  else
+    GIT_STATUS=""
+  fi
+
   unset GIT_STASHES
   STASHES="$(git stashes)"
 
@@ -57,7 +66,8 @@ function zle-line-init zle-keymap-select {
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
-  PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  #PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
 }
 
