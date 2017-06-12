@@ -43,7 +43,7 @@ function zle-line-init zle-keymap-select {
 
   if [[ -f ~/.shelld/global/k8s-current-context ]]; then
     . ~/.shelld/global/k8s-current-context
-    KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%} "
+    KUBERNETES_CONTEXT="%{$FG[248]%}:%{$FX[reset]%}%{$FG[004]%}${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%} "
   else
     KUBERNETES_CONTEXT=""
   fi
@@ -57,7 +57,7 @@ function zle-line-init zle-keymap-select {
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
-  PS1='$PHOST $PWHERE$(git_super_status) ${GIT_STASHES}$KUBERNETES_CONTEXT$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
 }
 
