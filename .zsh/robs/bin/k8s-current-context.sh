@@ -14,6 +14,4 @@ K8S_CURRENT_CONTEXT_ZONE=${zone}
 K8S_CURRENT_CONTEXT_CLUSTER=${cluster}
 EOF
 
-cat ${current_context_file}
-
 mv -v ${current_context_file}.new ${current_context_file}
