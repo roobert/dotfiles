@@ -69,3 +69,5 @@ fi
 #  exec tmux new -s $(date +%s )
 #  #exec tmux
 #fi
+
+[ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
