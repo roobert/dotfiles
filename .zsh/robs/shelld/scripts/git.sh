@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SHELLD_DIR="${HOME}/.shelld/shells"
+
 function repo? () {
   dir=$1
 
@@ -19,9 +21,9 @@ function branch () {
 PID=${1}
 
 # race condition
-dir=$(cat ${HOME}/.shelld/${PID}/cwd)
+dir=$(cat ${SHELLD_DIR}/${PID}/cwd)
 
-git_file=${HOME}/.shelld/${PID}/git
+git_file=${SHELLD_DIR}/${PID}/git
 
 if [[ $(repo? $dir) != "true" ]]; then
   echo -n > ${git_file}
@@ -30,6 +32,8 @@ fi
 
 branch="$(branch $dir)"
 
-cat << EOF > ${git_file}
+cat << EOF > ${git_file}.new
 GIT_CURRENT_BRANCH=${branch}
 EOF
+
+mv -v ${git_file}.new ${git_file}

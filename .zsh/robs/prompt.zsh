@@ -48,8 +48,8 @@ function zle-line-init zle-keymap-select {
   #  KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
   #fi
 
-  if [[ -f ~/.shelld/k8s-current-context ]]; then
-    . ~/.shelld/k8s-current-context
+  if [[ -f ~/.shelld/global/k8s-current-context ]]; then
+    . ~/.shelld/global/k8s-current-context
     KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%} "
   else
     KUBERNETES_CONTEXT=""
