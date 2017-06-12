@@ -41,13 +41,6 @@ function zle-line-init zle-keymap-select {
     (*)          VI_MODE="$MODE_INS" ;;
   esac
 
-  #if kubectl config current-context >/dev/null 2>&1; then
-  #  K8_CONTEXT=$(kubectl config current-context)
-  #  PROJECT=$(echo $K8_CONTEXT | cut -d_ -f2)
-  #  CLUSTER=$(echo $K8_CONTEXT | cut -d_ -f4)
-  #  KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${PROJECT}/${CLUSTER}%{$FX[reset]%} "
-  #fi
-
   if [[ -f ~/.shelld/global/k8s-current-context ]]; then
     . ~/.shelld/global/k8s-current-context
     KUBERNETES_CONTEXT="%{$FG[111]%}k8s%{$FX[reset]%}:%{$FG[097]%}${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%} "
