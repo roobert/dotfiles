@@ -32,13 +32,22 @@ dir=$(cat ${SHELLD_DIR}/${PID}/cwd)
 git_file=${SHELLD_DIR}/${PID}/git
 
 if [[ $(repo? $dir) != "true" ]]; then
-  echo -n > ${git_file}
+  rm ${git_file}
   exit
 fi
 
+#BRANCH=" %{$FG[060]%}"
+#STAGED=" %{$fg[yellow]%}%{\u26ab%G%}"
+#CONFLICTS=" %{$fg[red]%}%{\u2716%G%}"
+#CHANGED=" %{$fg[blue]%}%{\u271a%G%}"
+#BEHIND=" %{\u2193%G%}"
+#AHEAD=" %{$FG[166]%}%{\u2191%G%}"
+#UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
+#CLEAN=" %{$FG[028]%}%{\u2713%G%}"
+
+
 branch="$(branch $dir)"
 repo="$(repository $dir)"
-
 
 cat << EOF > ${git_file}.new
 GIT_CURRENT_BRANCH=${branch}
