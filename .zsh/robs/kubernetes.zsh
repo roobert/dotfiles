@@ -11,7 +11,16 @@ function kpodname () {
   fi
 }
 
-#$(kubectl get pods --namespace monitoring -l app=influxdb-influxdb -o jsonpath='{ .items[0].metadata.name  }')
+function kpods () {
+  namespace=${1:=default}
+
+  kubectl get pods --namespace $1
+}
+
+function knamespaces () {
+  kubectl get namespaces
+}
+
 
 function klog () {
   namespace=${1:-default}
