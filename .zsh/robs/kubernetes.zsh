@@ -26,7 +26,7 @@ function klog () {
   namespace=${1:-default}
   pod=$2
 
-  kubectl logs -f --namespace $namespace $(kpodname $namespace $pod)
+  kubectl logs -f --namespace $namespace $(kpodname "$namespace" "$pod")
 }
 
 function kexec () {
@@ -34,7 +34,7 @@ function kexec () {
   pod=$2
   command=${3:-/bin/bash}
 
-  kubectl exec --namespace $namespace $(kpodname $namespace $pod) -ti -- $command
+  kubectl exec --namespace $namespace $(kpodname "$namespace" "$pod") -ti -- $command
 }
 
 function kcluster () {
