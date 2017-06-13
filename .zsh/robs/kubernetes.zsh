@@ -27,3 +27,30 @@ function kexec () {
 
   kubectl exec --namespace $namespace $(podname $pod $namespace) -ti -- $command
 }
+
+function kcluster () {
+  project=$(echo $1 | awk -F\/ '{ print $1 }')
+  cluster=$(echo $1 | awk -F\/ '{ print $2 }')
+
+  zone=${2:-europe-west1-b}
+
+  if [[ -z $cluster ]]; then
+    kcluster-list $project
+    return
+  fi
+
+  gcloud container clusters get-credentials $cluster \
+    --zone $zone --project $project
+
+  if [[ $? -ne 0 ]]; then
+    echo
+    kcluster-list $project
+    return
+  fi
+}
+
+function kcluster-list () {
+  project=$1
+
+  gcloud container clusters list --project $project --format json | jq -r '.[].name'
+}
