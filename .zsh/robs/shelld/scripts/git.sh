@@ -24,6 +24,11 @@ function repository () {
   (cd $dir && basename `git rev-parse --show-toplevel`)
 }
 
+function stashes () {
+  dir=$1
+  (cd $dir && git stashes)
+}
+
 PID=${1}
 
 # race condition
@@ -48,10 +53,12 @@ fi
 
 branch="$(branch $dir)"
 repo="$(repository $dir)"
+repo_stashes="$(stashes $dir)"
 
 cat << EOF > ${git_file}.new
 GIT_CURRENT_BRANCH=${branch}
-GIT_CURRENT_REPOSITORY=${branch}
+GIT_CURRENT_REPOSITORY=${repo}
+GIT_CURRENT_STASHES="${repo_stashes}"
 EOF
 
 mv -v ${git_file}.new ${git_file}

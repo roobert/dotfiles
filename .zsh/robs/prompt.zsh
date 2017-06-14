@@ -58,7 +58,7 @@ function zle-line-init zle-keymap-select {
   fi
 
   unset GIT_STASHES
-  STASHES="$(git stashes)"
+  STASHES="${GIT_CURRENT_STASHES}"
 
   if [[ ! -z ${STASHES} ]]; then
     GIT_STASHES="(%{$FG[003]%}${STASHES}%{$FX[reset]%})"
