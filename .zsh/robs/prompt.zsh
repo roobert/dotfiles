@@ -52,17 +52,16 @@ function zle-line-init zle-keymap-select {
 
   if [[ -f "$SHELLD/git" ]]; then
     . "$SHELLD/git"
+
     GIT_STATUS=" %{$FG[013]%}${GIT_CURRENT_BRANCH}%{$FX[reset]%}"
+
+    if [[ ! -z "${GIT_CURRENT_STASHES}" ]]; then
+      GIT_STASHES="(%{$FG[003]%}${GIT_CURRENT_STASHES}%{$FX[reset]%})"
+    else
+      GIT_STASHES=""
+    fi
   else
     GIT_STATUS=""
-  fi
-
-  unset GIT_STASHES
-  STASHES="${GIT_CURRENT_STASHES}"
-
-  if [[ ! -z ${STASHES} ]]; then
-    GIT_STASHES="(%{$FG[003]%}${STASHES}%{$FX[reset]%})"
-  else
     GIT_STASHES=""
   fi
 
