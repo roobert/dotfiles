@@ -6,7 +6,6 @@ while :; do
     break
   fi
 
-  sleep 1
   clear
 
   echo '# global'

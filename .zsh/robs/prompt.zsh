@@ -62,6 +62,8 @@ function zle-line-init zle-keymap-select {
 
   if [[ ! -z ${STASHES} ]]; then
     GIT_STASHES="(%{$FG[003]%}${STASHES}%{$FX[reset]%})"
+  else
+    GIT_STASHES=""
   fi
 
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
