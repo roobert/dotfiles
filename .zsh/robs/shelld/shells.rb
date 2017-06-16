@@ -28,7 +28,7 @@ def update_pid_dirs(pids, dir)
   end
 end
 
-scripts = Dir.glob("/home/rw/.zsh/robs/shelld/scripts/*")
+scripts = Dir.glob("#{ENV['HOME']}/.zsh/robs/shelld/scripts/*")
 
 def run_scripts(pids, scripts, dir)
   pids.each do |pid|
