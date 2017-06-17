@@ -27,7 +27,7 @@ PHOST="%{$FG[240]%}${HOST}"
 
 #PHOST="%{$FG[240]%}%m"
 
-PWHERE="%{$FG[250]%}%~"
+PWHERE=" %{$FG[250]%}%~"
 
 MODE_CMD="%{$FG[088]%}"
 MODE_INS="%{$FG[156]%}"
