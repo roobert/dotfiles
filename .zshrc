@@ -4,7 +4,7 @@
 # * ping test or fail?
 #
 
-export TERM=xterm-256color
+export TERM=screen-256color
 
 # stop here if not a shell
 if [ ! -n "$PS1" ]; then return; fi

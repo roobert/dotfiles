@@ -8,6 +8,6 @@ case $TERM in
       print -Pn "\e]0;$1\a"
     }
 
-    TERM="xterm-256color"
+    TERM="screen-256color"
   ;;
 esac
