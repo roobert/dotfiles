@@ -1,5 +1,7 @@
 xsetroot -bg black
 
+$HOME/.zsh/robs/bin/user-xmodmap-reload-hack
+
 if hostname | grep acros ; then
   bash $HOME/.screenlayout/work-laptop.sh
 else
@@ -41,3 +43,4 @@ if which stalonetray > /dev/null 2>&1; then
   sudo killall blueman-applet
   sudo blueman-applet &
 fi
+
