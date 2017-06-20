@@ -2,9 +2,10 @@
 [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
 [[ -z "$terminfo[kend]" ]] || bindkey -M emacs "$terminfo[kend]" end-of-line
 
+# FIXME: this breaks paste when not using TMUX!
 # all taken from: https://github.com/tureba/myconfigfiles/blob/master/zshrc
 # this fixes switching between vi-modes
-bindkey -rpM viins '^['
+#bindkey -rpM viins '^['
 
 bindkey -M vicmd k vi-up-line-or-history
 bindkey -M vicmd j vi-down-line-or-history
