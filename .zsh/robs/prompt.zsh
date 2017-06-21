@@ -70,11 +70,19 @@ function zle-line-init zle-keymap-select {
   #PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
+  echoti smkx
 }
 
 PS1='$PHOST $PWHERE >%{$FX[reset]%} '
 
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-finish () {
+        echoti rmkx
+    }
+fi
+
 zle -N zle-line-init
+zle -N zle-line-finish
 zle -N zle-keymap-select
 
 # tmux

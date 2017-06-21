@@ -66,3 +66,4 @@ binds=`bindkey -L`
 bindkey -v
 for bind in ${(@f)binds}; do eval $bind; done
 unset binds
+
