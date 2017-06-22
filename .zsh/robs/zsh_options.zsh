@@ -4,7 +4,7 @@ setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt EXTENDED_HISTORY
 unsetopt correct_all
-unsetopt share_history
+setopt share_history
 setopt inc_append_history
 setopt extended_history
 setopt hist_no_store
