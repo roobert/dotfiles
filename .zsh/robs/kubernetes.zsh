@@ -1,3 +1,7 @@
+if which kubectl > /dev/null 2>&1; then
+  source <(kubectl completion zsh | sed -e '/flaghash.*true/s/# pad/2>\/dev\/null # pad/')
+fi
+
 function kpodname () {
   namespace=${1}
   pod=$2
