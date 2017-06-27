@@ -50,6 +50,17 @@ function zle-line-init zle-keymap-select {
 
   SHELLD="${HOME}/.shelld/shells/$$"
 
+
+  if kill -0 $(cat ${HOME}/.shelld/pid.lock) > /dev/null 2>&1; then
+    SHELLD_PROMPT=""
+  else
+    rm -r ${HOME}/.shelld/global/*(N)
+    rm -r ${HOME}/.shelld/shells/*(N)
+    rm -f ${HOME}/.shelld/pid.lock
+    SHELLD_PROMPT=" %{$FG[003]%}☠%{$FX[reset]%}"
+    [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
+  fi
+
   if [[ -f "$SHELLD/git" ]]; then
     . "$SHELLD/git"
 
@@ -68,7 +79,7 @@ function zle-line-init zle-keymap-select {
   EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
 
   #PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
-  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES}${SHELLD_PROMPT} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
   echoti smkx
 }

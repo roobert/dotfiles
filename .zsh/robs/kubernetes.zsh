@@ -43,8 +43,19 @@ function kexec () {
 }
 
 function kcluster () {
-  project=$(echo $1 | awk -F\/ '{ print $1 }')
-  cluster=$(echo $1 | awk -F\/ '{ print $2 }')
+
+  if [[ $1 == "." ]]; then
+    project=$(echo $PWD | sed 's/.*conf\///' | cut -d\/ -f 1)
+    cluster=$(echo $PWD | sed 's/.*conf\///' | cut -d\/ -f 2)
+  elif [[ $1 == "-" ]]; then
+    project=$(cat ~/.kcluster | cut -d\/ -f1)
+    cluster=$(cat ~/.kcluster | cut -d\/ -f2)
+  else
+    project=$(echo $1 | awk -F\/ '{ print $1 }')
+    cluster=$(echo $1 | awk -F\/ '{ print $2 }')
+  fi
+
+  echo "${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}" > ~/.kcluster
 
   zone=${2:-europe-west1-b}
 
