@@ -29,6 +29,16 @@ function stashes () {
   (cd $dir && git stashes)
 }
 
+#function untracked () {
+#  dir=$1
+#  output=(cd $dir && git status --porcelain)
+#  untracked=( echo $output | grep -E '^?? ' | wc -l )
+#
+#  if [[ $untracked -gt 0 ]]; then
+#    # red dot + number
+#  fi
+#}
+
 PID=${1}
 
 # race condition
@@ -54,6 +64,7 @@ fi
 branch="$(branch $dir)"
 repo="$(repository $dir)"
 repo_stashes="$(stashes $dir)"
+#repo_untracked="$(untracked $dir)"
 
 cat << EOF > ${git_file}.new
 GIT_CURRENT_BRANCH=${branch}
