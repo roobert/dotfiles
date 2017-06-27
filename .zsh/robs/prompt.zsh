@@ -43,7 +43,26 @@ function zle-line-init zle-keymap-select {
 
   if [[ -f ~/.shelld/global/k8s-current-context ]]; then
     . ~/.shelld/global/k8s-current-context
-    KUBERNETES_CONTEXT="%{$FG[248]%}:%{$FX[reset]%}%{$FG[004]%}${K8S_CURRENT_CONTEXT_PROJECT}%{$FG[248]%}/%{$FX[reset]%}%{$FG[004]%}${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%}"
+
+    # good
+    if [[ ${PWD} =~ "kuber\/conf\/${K8S_CURRENT_CONTEXT_PROJECT}" ]]; then
+      # kuber context dir matches k8s context
+      #K8S_CONTEXT_COLOUR="002"
+      K8S_CONTEXT_COLOUR="004"
+
+    # bad
+    elif [[ "${PWD}" =~ "kuber/conf" ]]; then
+      # kuber context dir differs from k8s context
+      K8S_CONTEXT_COLOUR="125"
+
+    # ok
+    else
+      # outside of kuber dir structure
+      K8S_CONTEXT_COLOUR="004"
+    fi
+
+    KUBERNETES_CONTEXT="%{$FG[248]%}:%{$FX[reset]%}%{$FG[${K8S_CONTEXT_COLOUR}]%}${K8S_CURRENT_CONTEXT_PROJECT}%{$FG[248]%}/%{$FX[reset]%}%{$FG[${K8S_CONTEXT_COLOUR}]%}${K8S_CURRENT_CONTEXT_CLUSTER}%{$FX[reset]%}"
+
   else
     KUBERNETES_CONTEXT=""
   fi
