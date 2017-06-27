@@ -71,3 +71,8 @@ fi
 #fi
 
 [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
+
+uptime
+echo
+ps f -o cmd
+echo
