@@ -7,7 +7,7 @@ function kpodname () {
   pod=$2
 
   # FIXME: only return one id
-  pod_id=$(kubectl get pods -n $namespace -o name | cut -d\/ -f2- | grep $pod | head -n1)
+  pod_id=$(kubectl get pods -a -n $namespace -o name | cut -d\/ -f2- | grep $pod | head -n1)
 
   if [[ -z "$pod_id" ]]; then
     echo "pod not found: ${namespace}/${pod}"
@@ -19,7 +19,7 @@ function kpodname () {
 function kpods () {
   namespace=${1:=default}
 
-  kubectl get pods --namespace $1
+  kubectl get pods -a --namespace $1
 }
 
 function knamespaces () {
