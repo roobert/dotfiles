@@ -207,3 +207,8 @@ EOF
 
   sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
 }
+
+# grep edit - edit files which match some grep pattern
+function gred {
+  vi $(grep $* | cut -d: -f1 | sort | uniq)
+}
