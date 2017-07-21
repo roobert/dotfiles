@@ -70,30 +70,35 @@ function zle-line-init zle-keymap-select {
     KUBERNETES_CONTEXT=""
   fi
 
-  SHELLD="${HOME}/.shelld/shells/$$"
+  if [[ -f ${HOME}/.shelld/pid.lock ]]; then
+    SHELLD="${HOME}/.shelld/shells/$$"
 
-
-  if kill -0 $(cat ${HOME}/.shelld/pid.lock) > /dev/null 2>&1; then
-    SHELLD_PROMPT=""
-  else
-    rm -r ${HOME}/.shelld/global/*(N)
-    rm -r ${HOME}/.shelld/shells/*(N)
-    rm -f ${HOME}/.shelld/pid.lock
-    SHELLD_PROMPT=" %{$FG[003]%}☠%{$FX[reset]%}"
-    [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
-  fi
-
-  if [[ -f "$SHELLD/git" ]]; then
-    . "$SHELLD/git"
-
-    GIT_STATUS=" %{$FG[013]%}${GIT_CURRENT_BRANCH}%{$FX[reset]%}"
-
-    if [[ ! -z "${GIT_CURRENT_STASHES}" ]]; then
-      GIT_STASHES="(%{$FG[003]%}${GIT_CURRENT_STASHES}%{$FX[reset]%})"
+    if kill -0 $(cat ${HOME}/.shelld/pid.lock) > /dev/null 2>&1; then
+      SHELLD_PROMPT=""
     else
+      rm -r ${HOME}/.shelld/global/*(N)
+      rm -r ${HOME}/.shelld/shells/*(N)
+      rm -f ${HOME}/.shelld/pid.lock
+      SHELLD_PROMPT=" %{$FG[003]%}☠%{$FX[reset]%}"
+      [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
+    fi
+
+    if [[ -f "$SHELLD/git" ]]; then
+      . "$SHELLD/git"
+
+      GIT_STATUS=" %{$FG[013]%}${GIT_CURRENT_BRANCH}%{$FX[reset]%}"
+
+      if [[ ! -z "${GIT_CURRENT_STASHES}" ]]; then
+        GIT_STASHES="(%{$FG[003]%}${GIT_CURRENT_STASHES}%{$FX[reset]%})"
+      else
+        GIT_STASHES=""
+      fi
+    else
+      GIT_STATUS=""
       GIT_STASHES=""
     fi
   else
+    SHELLD_PROMPT=""
     GIT_STATUS=""
     GIT_STASHES=""
   fi
