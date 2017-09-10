@@ -5,7 +5,9 @@
 # git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 #
 # # on a new machine
-# git clone git@github.com:roobert/dotfiles .dotfiles
+# git clone git@github.com:roobert/dotfiles .dotfiles --bare
+# git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias dfs=dotfiles
+alias dfs="dotfiles"
+alias dfss="dotfiles status"
