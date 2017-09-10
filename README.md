@@ -1,5 +1,4 @@
 ```
-# install!
-curl -sL https://github.com/roobert/dotfiles/tarball/master \
-  | tar -xzv --strip-components 1 --exclude=README.md -C $HOME
+git clone --bare git@github.com:roobert/dotfiles $HOME/.dotfiles
+git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 ```
