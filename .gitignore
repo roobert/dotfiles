@@ -3,3 +3,4 @@
 .offlineimaprc.work
 *.swp
 *.swo
+.zsh/local
