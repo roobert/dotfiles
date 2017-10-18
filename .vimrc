@@ -70,6 +70,8 @@ if version > 701
 
   if filereadable('/usr/bin/go') || filereadable('/usr/local/go/bin/go') || filereadable('/home/rw/opt/go/bin/go') || filereadable('/home/rw/git/go/bin/go')
     call add(plugins, 'fatih/vim-go')
+    " go get golang.org/x/tools/cmd/goimports
+    let g:go_fmt_command = "/home/rw/go/bin/goimports"
   endif
 
   let new_plugins = 1
