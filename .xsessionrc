@@ -1,46 +1,46 @@
 xsetroot -bg black
-
-$HOME/.zsh/robs/bin/user-xmodmap-reload-hack
-
-if hostname | grep acros ; then
-  bash $HOME/.screenlayout/work-laptop.sh
-else
-  bash $HOME/.screenlayout/default.sh
-fi
-
-if hostname | grep -E 'mbp0|acros'; then
-  unity-settings-daemon &
-  synclient MaxTapTime=0
-  synclient HorizTwoFingerScroll=1
-  synclient PalmDetect=1
-  sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
-
-  # stupid hack becuase kbd overrides these if they're set too quickly (!)
-  bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
-fi
-
-if which autocutsel > /dev/null 2>&1; then
-  autocutsel &
-  autocutsel -s PRIMARY &
-fi
-
-if which vmware-user > /dev/null 2>&1; then
-  vmware-user &
-fi
-
-if which stalonetray > /dev/null 2>&1; then
-  killall stalonetray
-  stalonetray -i 16 --background '#222' --icon-gravity W --grow-gravity E \
-    --geometry 1-150 --kludges="force_icons_size,fix_window_pos" &
-
-  #stalonetray --background '#101010' --icon-gravity W --grow-gravity E --dockapp-mode wmaker \
-    --geometry 1x1 --no-shrink --kludges force_icons_size -i 24
-
-  gnome-keyring-daemon &
-
-  sudo killall nm-applet
-  sudo nm-applet &
-  sudo killall blueman-applet
-  sudo blueman-applet &
-fi
-
+#
+#$HOME/.zsh/robs/bin/user-xmodmap-reload-hack
+#
+#if hostname | grep acros ; then
+#  bash $HOME/.screenlayout/work-laptop.sh
+#else
+#  bash $HOME/.screenlayout/default.sh
+#fi
+#
+#if hostname | grep -E 'mbp0|acros'; then
+#  unity-settings-daemon &
+#  synclient MaxTapTime=0
+#  synclient HorizTwoFingerScroll=1
+#  synclient PalmDetect=1
+#  sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
+#
+#  # stupid hack becuase kbd overrides these if they're set too quickly (!)
+#  bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
+#fi
+#
+#if which autocutsel > /dev/null 2>&1; then
+#  autocutsel &
+#  autocutsel -s PRIMARY &
+#fi
+#
+#if which vmware-user > /dev/null 2>&1; then
+#  vmware-user &
+#fi
+#
+#if which stalonetray > /dev/null 2>&1; then
+#  killall stalonetray
+#  stalonetray -i 16 --background '#222' --icon-gravity W --grow-gravity E \
+#    --geometry 1-150 --kludges="force_icons_size,fix_window_pos" &
+#
+#  #stalonetray --background '#101010' --icon-gravity W --grow-gravity E --dockapp-mode wmaker \
+#    --geometry 1x1 --no-shrink --kludges force_icons_size -i 24
+#
+#  gnome-keyring-daemon &
+#
+#  sudo killall nm-applet
+#  sudo nm-applet &
+#  sudo killall blueman-applet
+#  sudo blueman-applet &
+#fi
+#
