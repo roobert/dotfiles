@@ -1,3 +1,10 @@
+--mod_statusbar.create{
+--    screen=0,
+--    pos='tl',
+--    fullsize=true,
+--    systray=false,
+--    template=" %filler%date ",
+--}
 --
 -- Notion statusbar module configuration file
 -- 
@@ -8,15 +15,17 @@
 -- Create a statusbar
 mod_statusbar.create{
     screen=0,
-    pos='bl',
+    pos='tl',
     fullsize=true,
     systray=true,
-    template="  %load%filler%systray  %date  %systray_stalone",
+--    template="  %load%filler%systray  %date  %systray_stalone",
+    template=" %filler%date %systray_stalone",
 }
 
-defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{class="stalonetray",statusbar="systray_stalone"}
+
+--defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
+--defwinprop{instance="stalonetray",statusbar="systray_stalone"}
+--defwinprop{class="stalonetray",statusbar="systray_stalone"}
 
 ---- Create a statusbar
 --mod_statusbar.create{
@@ -68,7 +77,7 @@ mod_statusbar.launch_statusd{
     -- Date meter
     date={
         -- ISO-8601 date format with additional abbreviated day name
-        date_format='%H:%M %Y-%m-%d',
+        date_format='%Y-%m-%d %H:%M',
         -- Finnish etc. date format
         --date_format='%a %d.%m.%Y %H:%M',
         -- Locale date format (usually shows seconds, which would require

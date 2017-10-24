@@ -108,7 +108,7 @@ de.defstyle("*", {
 	highlight_pixels  = 0,
 	padding_pixels    = 0,
 	spacing           = 0,
-  --font              = "-*-lucidia-*-r-*--13-*-*-*-*-*-*-*",
+  font              = "-*-helvetica-*-r-*--32-*-*-*-*-*-*-*",
 	text_align        = "center",
 })
 
