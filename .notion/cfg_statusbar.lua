@@ -19,7 +19,7 @@ mod_statusbar.create{
     fullsize=true,
     systray=true,
 --    template="  %load%filler%systray  %date  %systray_stalone",
-    template=" %filler%date %systray_stalone",
+    template=" %filler%systray_stalone%date ",
 }
 
 
@@ -77,7 +77,7 @@ mod_statusbar.launch_statusd{
     -- Date meter
     date={
         -- ISO-8601 date format with additional abbreviated day name
-        date_format='%Y-%m-%d %H:%M',
+        date_format='%H:%M %Y-%m-%d',
         -- Finnish etc. date format
         --date_format='%a %d.%m.%Y %H:%M',
         -- Locale date format (usually shows seconds, which would require
