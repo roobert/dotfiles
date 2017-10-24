@@ -10,17 +10,18 @@ setxkbmap -option caps:swapescape
 #  bash $HOME/.screenlayout/default.sh
 #fi
 #
-#if hostname | grep -E 'mbp0|acros'; then
-#  unity-settings-daemon &
-#  synclient MaxTapTime=0
-#  synclient HorizTwoFingerScroll=1
-#  synclient PalmDetect=1
-#  sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
-#
-#  # stupid hack becuase kbd overrides these if they're set too quickly (!)
-#  bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
-#fi
-#
+
+if hostname | grep -E 'mbp0|acros'; then
+  #unity-settings-daemon &
+  synclient MaxTapTime=0
+  synclient HorizTwoFingerScroll=1
+  synclient PalmDetect=1
+  sudo su -c 'echo 0 > /sys/class/leds/smc::kbd_backlight/brightness'
+
+  # stupid hack becuase kbd overrides these if they're set too quickly (!)
+  #bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
+fi
+
 #if which autocutsel > /dev/null 2>&1; then
 #  autocutsel &
 #  autocutsel -s PRIMARY &
