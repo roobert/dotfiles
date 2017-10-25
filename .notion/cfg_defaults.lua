@@ -103,12 +103,12 @@ de.reset()
 
 de.defstyle("*", {
 	background_colour = "#222",
-	foreground_colour = "#777",
+	foreground_colour = "#999",
 	shadow_pixels     = 0,
 	highlight_pixels  = 0,
 	padding_pixels    = 0,
 	spacing           = 0,
-  --font              = "-*-lucidia-*-r-*--13-*-*-*-*-*-*-*",
+  font              = "-*-lucidia-*-r-*--20-*-*-*-*-*-*-*",
 	text_align        = "center",
 })
 
@@ -148,18 +148,25 @@ de.defstyle("frame", {
 	}),
 })
 
+de.defstyle("stdisp-statusbar", {
+  font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
+})
+
 -- statusbar stuff
 de.defstyle("stdisp", {
     de.substyle("normal", {
-        foreground_colour = "#777",
+        foreground_colour = "#999",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
     }),
 
     de.substyle("important", {
         foreground_colour = "green",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
     }),
 
     de.substyle("critical", {
         foreground_colour = "red",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
     }),
 })
 

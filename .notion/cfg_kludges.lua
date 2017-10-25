@@ -17,4 +17,6 @@
 --defwinprop{instance="stalonetray",target="*dock*"}
 --defwinprop{class="stalonetray",target="*dock*"}
 --defwinprop{is_dockapp=true,target="*dock*"}
+
+--- this was enabled
 defwinprop {class="stalonetray", statusbar="systray_dock"}
