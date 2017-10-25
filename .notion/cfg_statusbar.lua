@@ -1,3 +1,10 @@
+--mod_statusbar.create{
+--    screen=0,
+--    pos='tl',
+--    fullsize=true,
+--    systray=false,
+--    template=" %filler%date ",
+--}
 --
 -- Notion statusbar module configuration file
 -- 
@@ -8,15 +15,17 @@
 -- Create a statusbar
 mod_statusbar.create{
     screen=0,
-    pos='bl',
+    pos='tl',
     fullsize=true,
     systray=true,
-    template="  %load%filler%systray  %date  %systray_stalone",
+--    template="  %load%filler%systray  %date  %systray_stalone",
+    template=" %filler%systray_stalone%date ",
 }
 
-defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{instance="stalonetray",statusbar="systray_stalone"}
-defwinprop{class="stalonetray",statusbar="systray_stalone"}
+
+--defwinprop{class="stalonetray",instance="stalonetray",statusbar="systray_stalone"}
+--defwinprop{instance="stalonetray",statusbar="systray_stalone"}
+--defwinprop{class="stalonetray",statusbar="systray_stalone"}
 
 ---- Create a statusbar
 --mod_statusbar.create{
