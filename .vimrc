@@ -43,7 +43,7 @@ if version > 701
     \'jamessan/vim-gnupg',
     \'junegunn/vim-easy-align',
     \'jiangmiao/auto-pairs',
-    \'briandoll/change-inside-surroundings',
+    \'briandoll/change-inside-surroundings.vim',
     \'roobert/robs.vim'
   \]
     "\'tpope/vim-commentary',
