@@ -43,6 +43,7 @@ if version > 701
     \'jamessan/vim-gnupg',
     \'junegunn/vim-easy-align',
     \'jiangmiao/auto-pairs',
+    \'briandoll/change-inside-surroundings',
     \'roobert/robs.vim'
   \]
     "\'tpope/vim-commentary',
@@ -402,3 +403,4 @@ map <Leader>k <Plug>(easymotion-k)
 map -c :call SyntaxAttr()<CR>
 
 map <Leader>v :r !xsel -p<CR>
+
