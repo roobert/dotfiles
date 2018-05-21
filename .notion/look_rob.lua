@@ -11,19 +11,17 @@
 
 --META="Mod1+"
 
---ALTMETA="Mod1+"
-
 --dopath("cfg_notioncore")
 --dopath("cfg_kludges")
 --dopath("cfg_layouts")
---
+----
 --dopath("mod_query")
 --dopath("mod_menu")
 --dopath("mod_tiling")
---dopath("mod_statusbar")
---dopath("mod_sp")
---dopath("mod_xrandr")
-dopath('min_tabs')
+----dopath("mod_statusbar")
+----dopath("mod_sp")
+----dopath("mod_xrandr")
+--dopath('min_tabs')
 --dopath('statusd_iwinfo')
 
 -- refresh xinerama on screen layout updates
@@ -39,27 +37,27 @@ dopath('min_tabs')
 
 XTERM="kitty"
 BROWSER="firefox"
---BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
---MUSIC="spotify"
---SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock"
+SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
-    kpress(ALTMETA.."F12", nil),
+    kpress(META.."F12", nil),
 })
 
+--defbindings("WFrame", {
+--    submap(META.."'", {
+--        kpress("Right", "_:switch_next()"),
+--        kpress("1", "_:switch_nth(1)"),
+--   }),
+--})
+
+--defbindings("WFrame", {
+--    kpress(META..",", "_:switch_prev()"),
+--    kpress(META..".", "_:switch_next()"),
+--  })
+
+
 defbindings("WMPlex.toplevel", {
-    kpress(ALTMETA.."F1", nil),
-    kpress(ALTMETA.."F2", nil),
-    kpress(ALTMETA.."F3", nil),
-    kpress(ALTMETA.."F4", nil),
-    kpress(ALTMETA.."F5", nil),
-    kpress(ALTMETA.."F6", nil),
-    kpress(ALTMETA.."F7", nil),
-    kpress(ALTMETA.."F8", nil),
-    kpress(ALTMETA.."F9", nil),
-    kpress(ALTMETA.."F10", nil),
-    kpress(ALTMETA.."F11", nil),
     kpress(META.."F1", nil),
     kpress(META.."F2", nil),
     kpress(META.."F3", nil),
@@ -72,7 +70,6 @@ defbindings("WMPlex.toplevel", {
     kpress(META.."F10", nil),
     kpress(META.."F11", nil),
     kpress(META.."F12", nil),
-    kpress(ALTMETA.."L", nil),
     kpress(META.."L", nil),
 })
 
@@ -148,27 +145,27 @@ de.defstyle("frame", {
 	}),
 })
 
---de.defstyle("stdisp-statusbar", {
---  font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
---})
+de.defstyle("stdisp-statusbar", {
+  font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
+})
 
 -- statusbar stuff
---de.defstyle("stdisp", {
---    de.substyle("normal", {
---        foreground_colour = "#999",
---        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
---    }),
---
---    de.substyle("important", {
---        foreground_colour = "green",
---        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
---    }),
---
---    de.substyle("critical", {
---        foreground_colour = "red",
---        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
---    }),
---})
+de.defstyle("stdisp", {
+    de.substyle("normal", {
+        foreground_colour = "#999",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
+    }),
+
+    de.substyle("important", {
+        foreground_colour = "green",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
+    }),
+
+    de.substyle("critical", {
+        foreground_colour = "red",
+        font = "-*-lucidia-*-r-*--32-*-*-*-*-*-*-*",
+    }),
+})
 
 -- Define some additional title shortening rules to use when the full
 -- title doesn't fit in the available space. The first-defined matching
