@@ -35,7 +35,7 @@
 --    randr_screen_change_notify_hook:add(screenlayoutupdated)
 --end
 
-XTERM="kitty"
+XTERM="$HOME/bin/kitty"
 BROWSER="firefox"
 SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock"
 
