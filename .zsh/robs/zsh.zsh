@@ -13,11 +13,13 @@ bindkey  -M vicmd v edit-command-line
 # characters. Thanks to Michael Francis for this fix!
 # (Amazingly these bindings vary, so this may not work for you. inputrc is
 # supposed to be the source for this sort of thing)
-source =(cat /etc/inputrc |
-            sed -ne '/^#/d'    \
-            -e 's/://'         \
-            -e 's/^/bindkey /' \
-            -e '/\(delete-char\|beginning-of-line\|end-of-line\)/p')
+if [[ -r /etc/inputrc ]]; then
+  source =(cat /etc/inputrc |
+              sed -ne '/^#/d'    \
+              -e 's/://'         \
+              -e 's/^/bindkey /' \
+              -e '/\(delete-char\|beginning-of-line\|end-of-line\)/p')
+fi
 
 # This allows alt-. to insert the last word of the last command (i.e. !$)
 bindkey "^[." insert-last-word
