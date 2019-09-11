@@ -22,7 +22,7 @@ ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
+HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$//')
 PHOST="%{$FG[240]%}${HOST}"
 
 #PHOST="%{$FG[240]%}%m"
