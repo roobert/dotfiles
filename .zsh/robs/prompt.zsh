@@ -29,10 +29,20 @@ PHOST="%{$FG[240]%}${HOST}"
 
 PWHERE=" %{$FG[250]%}%~"
 
-MODE_CMD="%{$FG[088]%}"
+MODE_CMD="%{$FG[128]%}"
 MODE_INS="%{$FG[156]%}"
 
 RPS1=''
+
+function exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    EXIT_STATUS="%(?..%{$FG[009]%}${LAST_EXIT_CODE}%{$FX[reset]%}) "
+    echo "${EXIT_STATUS}"
+  else
+    echo ""
+  fi
+}
 
 function zle-line-init zle-keymap-select {
   case ${KEYMAP} in
@@ -103,10 +113,8 @@ function zle-line-init zle-keymap-select {
     GIT_STASHES=""
   fi
 
-  EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
-
   #PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
-  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES}${SHELLD_PROMPT} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES}${SHELLD_PROMPT} $(exit_code)${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
   echoti smkx
 }
