@@ -29,3 +29,9 @@
 # tokens: https://github.com/settings/tokens
 #[gitrepo "github"]
 #	token = 
+
+[color "diff"]
+  meta = white bold
+  frag = blue bold
+  old = red bold
+  new = green bold
