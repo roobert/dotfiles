@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+test -d ~/.shelld/global/ || mkdir -vp ~/.shelld/global
+test -d ~/.shelld/shells/ || mkdir -vp ~/.shelld/shells
+
 while :; do
   if [[ "$(pgrep -U${USER} zsh | wc -l)" -eq 0 ]]; then
     break

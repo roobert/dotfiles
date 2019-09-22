@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-
 dir = "#{ENV['HOME']}/.shelld/shells"
 
 pids = `pgrep -U${USER} zsh`.split.sort
