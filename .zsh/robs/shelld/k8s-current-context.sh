@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
-set -euo pipefail
+#set -euo pipefail
 
 [[ ! -d $HOME/.shelld/global ]] && mkdir -pv "${HOME}/.shelld/global"
+
+which kubectl > /dev/null 2>&1
+
+if [[ $? -ne 0 ]]; then
+  echo "# shelld: kubectl not found!"
+  exit
+fi
 
 current_context_file=~/.shelld/global/k8s-current-context
 current_context=$(kubectl config current-context)

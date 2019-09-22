@@ -1,5 +1,4 @@
---local f = io.popen ("/bin/hostname")
---local hostname = f:read("*a") or ""
+--local f = io.popen ("/bin/hostname") --local hostname = f:read("*a") or ""
 --f:close()
 --hostname =string.gsub(hostname, "\n$", "")
 --print(hostname)
@@ -10,56 +9,55 @@
 --  META="Mod1+"
 --end
 
-META="Mod1+"
+--META="Mod1+"
 
---ALTMETA="Mod1+"
-
-dopath("cfg_notioncore")
-dopath("cfg_kludges")
-dopath("cfg_layouts")
-
-dopath("mod_query")
-dopath("mod_menu")
-dopath("mod_tiling")
-dopath("mod_statusbar")
-dopath("mod_sp")
-dopath("mod_xrandr")
-dopath('min_tabs')
+--dopath("cfg_notioncore")
+--dopath("cfg_kludges")
+--dopath("cfg_layouts")
+----
+--dopath("mod_query")
+--dopath("mod_menu")
+--dopath("mod_tiling")
+----dopath("mod_statusbar")
+----dopath("mod_sp")
+----dopath("mod_xrandr")
+--dopath('min_tabs')
+--dopath('statusd_iwinfo')
 
 -- refresh xinerama on screen layout updates
-function screenlayoutupdated()
-    mod_xinerama.refresh()
-end
+--function screenlayoutupdated()
+--    mod_xinerama.refresh()
+--end
+--
+--randr_screen_change_notify_hook = ioncore.get_hook('randr_screen_change_notify')
 
-randr_screen_change_notify_hook = ioncore.get_hook('randr_screen_change_notify')
+--if randr_screen_change_notify_hook ~= nil then
+--    randr_screen_change_notify_hook:add(screenlayoutupdated)
+--end
 
-if randr_screen_change_notify_hook ~= nil then
-    randr_screen_change_notify_hook:add(screenlayoutupdated)
-end
-
-XTERM="gnome-terminal"
-BROWSER="google-chrome"
-BROWSER_SECRET="google-chrome --user-data-dir=$HOME/.chromium-noproxy --incognito"
-MUSIC="spotify"
-SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dm-tool switch-to-greeter"
+XTERM="$HOME/bin/kitty"
+BROWSER="firefox"
+SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock"
 
 -- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
-    kpress(ALTMETA.."F12", nil),
+    kpress(META.."F12", nil),
 })
 
+--defbindings("WFrame", {
+--    submap(META.."'", {
+--        kpress("Right", "_:switch_next()"),
+--        kpress("1", "_:switch_nth(1)"),
+--   }),
+--})
+
+--defbindings("WFrame", {
+--    kpress(META..",", "_:switch_prev()"),
+--    kpress(META..".", "_:switch_next()"),
+--  })
+
+
 defbindings("WMPlex.toplevel", {
-    kpress(ALTMETA.."F1", nil),
-    kpress(ALTMETA.."F2", nil),
-    kpress(ALTMETA.."F3", nil),
-    kpress(ALTMETA.."F4", nil),
-    kpress(ALTMETA.."F5", nil),
-    kpress(ALTMETA.."F6", nil),
-    kpress(ALTMETA.."F7", nil),
-    kpress(ALTMETA.."F8", nil),
-    kpress(ALTMETA.."F9", nil),
-    kpress(ALTMETA.."F10", nil),
-    kpress(ALTMETA.."F11", nil),
     kpress(META.."F1", nil),
     kpress(META.."F2", nil),
     kpress(META.."F3", nil),
@@ -72,7 +70,6 @@ defbindings("WMPlex.toplevel", {
     kpress(META.."F10", nil),
     kpress(META.."F11", nil),
     kpress(META.."F12", nil),
-    kpress(ALTMETA.."L", nil),
     kpress(META.."L", nil),
 })
 
@@ -131,7 +128,7 @@ de.defstyle("tab", {
 })
 
 de.defstyle("frame", {
-	transparent_background = true,
+	transparent_background = false,
 
 	padding_pixels   = 0,
 	shadow_pixels    = 1,
@@ -173,10 +170,12 @@ de.defstyle("stdisp", {
 -- Define some additional title shortening rules to use when the full
 -- title doesn't fit in the available space. The first-defined matching
 -- rule that succeeds in making the title short enough is used.
-ioncore.defshortening("[^:]+: (.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
-ioncore.defshortening("[^:]+: (.*)", "$1$|$1$<...")
-ioncore.defshortening("(.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
-ioncore.defshortening("(.*)", "$1$|$1$<...")
+
+--ioncore.defshortening("[^:]+: (.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
+--ioncore.defshortening("[^:]+: (.*)", "$1$|$1$<...")
+--ioncore.defshortening("(.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
+--ioncore.defshortening("(.*)", "$1$|$1$<...")
 
 -- Refresh objects' brushes.
+
 gr.refresh()
