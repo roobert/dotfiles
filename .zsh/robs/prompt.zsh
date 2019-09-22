@@ -8,7 +8,7 @@ autoload -U colors
 colors
 setopt PROMPT_SUBST
 
-#source $HOME/.zsh/zsh-git-prompt/zshrc.sh
+source $HOME/.zsh/zsh-git-prompt/zshrc.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -16,23 +16,33 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR=""
 ZSH_THEME_GIT_PROMPT_BRANCH=" %{$FG[060]%}"
 ZSH_THEME_GIT_PROMPT_STAGED=" %{$fg[yellow]%}%{\u26ab%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS=" %{$fg[red]%}%{\u2716%G%}"
-ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}%{\u271a%G%}"
+ZSH_THEME_GIT_PROMPT_CHANGED=" %{$fg[blue]%}+"
 ZSH_THEME_GIT_PROMPT_BEHIND=" %{\u2193%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD=" %{$FG[166]%}%{\u2191%G%}"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[red]%}%{\u2717%G%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$FG[028]%}%{\u2713%G%}"
 
-HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$/\n/')
+HOST=$(hostname -f | tr '.' '\n' | tac | tr '\n' '.' | sed 's/\.$//')
 PHOST="%{$FG[240]%}${HOST}"
 
 #PHOST="%{$FG[240]%}%m"
 
 PWHERE=" %{$FG[250]%}%~"
 
-MODE_CMD="%{$FG[088]%}"
+MODE_CMD="%{$FG[128]%}"
 MODE_INS="%{$FG[156]%}"
 
 RPS1=''
+
+function exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    EXIT_STATUS="%(?..%{$FG[009]%}${LAST_EXIT_CODE}%{$FX[reset]%}) "
+    echo "${EXIT_STATUS}"
+  else
+    echo ""
+  fi
+}
 
 function zle-line-init zle-keymap-select {
   case ${KEYMAP} in
@@ -70,6 +80,7 @@ function zle-line-init zle-keymap-select {
     KUBERNETES_CONTEXT=""
   fi
 
+
   if [[ -f ${HOME}/.shelld/pid.lock ]]; then
     SHELLD="${HOME}/.shelld/shells/$$"
 
@@ -103,10 +114,9 @@ function zle-line-init zle-keymap-select {
     GIT_STASHES=""
   fi
 
-  EXIT_STATUS="%(?..%{$fg[red]%}%?%{$FX[reset]%})"
-
   #PS1='$PHOST$KUBERNETES_CONTEXT$PWHERE$(git_super_status) ${GIT_STASHES}$EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
-  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES}${SHELLD_PROMPT} $EXIT_STATUS${VI_MODE}>%{$FX[reset]%} '
+  #PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}${GIT_STATUS}${GIT_STASHES}${SHELLD_PROMPT} $(exit_code)${VI_MODE}>%{$FX[reset]%} '
+  PS1='${PHOST}${KUBERNETES_CONTEXT}${PWHERE}$(git_super_status)${GIT_STASHES}${SHELLD_PROMPT} $(exit_code)${VI_MODE}>%{$FX[reset]%} '
   zle reset-prompt
   echoti smkx
 }

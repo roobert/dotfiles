@@ -71,3 +71,4 @@ fi
 #fi
 
 [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
+#eval "$(chef shell-init zsh)"
