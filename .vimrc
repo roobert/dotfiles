@@ -35,6 +35,9 @@ if version > 701
   set runtimepath+=~/.vim/plugged/vim-plug
   source ~/.vim/plugged/vim-plug/plug.vim
 
+  let g:terraform_align=1
+  let g:terraform_fmt_on_save=1
+
   let plugins = [
     \'junegunn/vim-plug',
     \'tpope/vim-surround',
@@ -45,6 +48,8 @@ if version > 701
     \'jiangmiao/auto-pairs',
     \'briandoll/change-inside-surroundings.vim',
     \'posva/vim-vue',
+    \'hashivim/vim-terraform',
+    \'godlygeek/tabular',
     \'roobert/robs.vim'
   \]
     "\'tpope/vim-commentary',
