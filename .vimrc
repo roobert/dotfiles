@@ -45,6 +45,8 @@ if version > 701
     \'jiangmiao/auto-pairs',
     \'briandoll/change-inside-surroundings.vim',
     \'posva/vim-vue',
+    \'psf/black',
+    \'scrooloose/syntastic',
     \'roobert/robs.vim'
   \]
     "\'tpope/vim-commentary',
@@ -60,7 +62,6 @@ if version > 701
     "\'honza/vim-snippets',
     "\'puppetlabs/puppet-syntax-vim',
     "\'rodjek/vim-puppet',
-    "\'scrooloose/syntastic',
     "\'ngmy/vim-rubocop',
     "\'nathanaelkane/vim-indent-guides',
     "\'wellle/targets.vim',
@@ -121,6 +122,30 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
+let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8', 'pylint']
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
+
+function! <SID>LocationPrevious()
+  try
+    lprev
+  catch /^Vim\%((\a\+)\)\=:E553/
+    llast
+  endtry
+endfunction
+
+function! <SID>LocationNext()
+  try
+    lnext
+  catch /^Vim\%((\a\+)\)\=:E553/
+    lfirst
+  endtry
+endfunction
+
+nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
+nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
+nmap <silent> ,,    <Plug>LocationPrevious
+nmap <silent> ..    <Plug>LocationNext
 
 function! ToggleErrors()
   let old_last_winnr = winnr('$')
@@ -136,8 +161,6 @@ nmap <Leader>e :<C-u>call ToggleErrors()<CR>
 
 " toggle yankring
 nnoremap <Leader>p :YRShow<CR>
-
-let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
 " make it colourful..
 
