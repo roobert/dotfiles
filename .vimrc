@@ -51,11 +51,12 @@ if version > 701
     \'dense-analysis/ale',
     \'hashivim/vim-terraform',
     \'godlygeek/tabular',
-    \'zxqfl/tabnine-vim',
     \'nvie/vim-flake8',
+    \'ycm-core/YouCompleteMe',
     \'roobert/robs.vim'
   \]
     "\'gryf/pylint-vim',
+    "\'zxqfl/tabnine-vim',
     "\'tpope/vim-commentary',
     "\'tpope/vim-repeat',
     "\'vim-scripts/tlib',
@@ -105,6 +106,8 @@ if version > 701
     Plug plugin
   endfor
 
+  let g:ycm_autoclose_preview_window_after_insertion = 1
+  let g:ycm_autoclose_preview_window_after_completion = 1
 
   call plug#end()
 
