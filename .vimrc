@@ -48,12 +48,14 @@ if version > 701
     \'jiangmiao/auto-pairs',
     \'briandoll/change-inside-surroundings.vim',
     \'posva/vim-vue',
-    \'psf/black',
-    \'scrooloose/syntastic',
+    \'dense-analysis/ale',
     \'hashivim/vim-terraform',
     \'godlygeek/tabular',
+    \'zxqfl/tabnine-vim',
+    \'nvie/vim-flake8',
     \'roobert/robs.vim'
   \]
+    "\'gryf/pylint-vim',
     "\'tpope/vim-commentary',
     "\'tpope/vim-repeat',
     "\'vim-scripts/tlib',
