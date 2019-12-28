@@ -1,7 +1,7 @@
 setlocal autoread
 
-silent let g:black_virtualenv = substitute(system('pipenv --venv'), '\n\+$', '', '')
-silent let s:black_command = "~/.vim/black/bin/black"
+silent let g:black_virtualenv = substitute(system('poetry env info -p'), '\n\+$', '', '')
+silent let s:black_command = substitute(system('which black'), '\n\+$', '', '')
 
 if g:black_virtualenv == ""
     echom 'Skipping black formatting, unable to find virtualenv'
