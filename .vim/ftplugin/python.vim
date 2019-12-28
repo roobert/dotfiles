@@ -1,5 +1,8 @@
 setlocal autoread
 
+autocmd BufWritePost *.py call flake8#Flake8()
+let g:flake8_show_quickfix=0 
+
 silent let g:black_virtualenv = substitute(system('poetry env info -p'), '\n\+$', '', '')
 silent let s:black_command = substitute(system('which black'), '\n\+$', '', '')
 
