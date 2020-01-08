@@ -1,8 +1,10 @@
-".vimrc
+"/.vimrc
+
+set pyxversion=3
 
 for f in argv()
   if isdirectory(f)
-    echomsg "vim: cowardly refusing to edit directory" . f
+    echomsg "vim: cowardly refusing to edit directory: " . f
     quit
   endif
 endfor
@@ -52,10 +54,17 @@ if version > 701
     \'hashivim/vim-terraform',
     \'godlygeek/tabular',
     \'nvie/vim-flake8',
-    \'ycm-core/YouCompleteMe',
+    \'ap/vim-buftabline',
+    \'Shougo/deoplete.nvim',
+    \'roxma/nvim-yarp',
+    \'deoplete-plugins/deoplete-jedi',
+    \'roxma/vim-hug-neovim-rpc',
+    \'sheerun/vim-polyglot',
     \'roobert/robs.vim'
   \]
+
     "\'gryf/pylint-vim',
+    "\'ycm-core/YouCompleteMe',
     "\'zxqfl/tabnine-vim',
     "\'tpope/vim-commentary',
     "\'tpope/vim-repeat',
@@ -118,6 +127,29 @@ if version > 701
     bdelete
   endif
 endif
+
+if !has('nvim')
+	pythonx import pynvim
+endif
+
+let g:deoplete#enable_at_startup = 1
+
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+
+set completeopt-=preview
+
+" use <tab> / <s-tab> to cycle through completions
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
+
+inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 filetype plugin indent on
 
@@ -369,6 +401,10 @@ nmap <C-B><K> :rightbelow new<CR>
 " tab navigation
 map <S-h> :tabprev<CR>
 map <S-l> :tabnext<CR>
+
+set hidden
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
 
 " un-highlight last search
 map <Leader>/ :noh<CR>
