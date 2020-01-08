@@ -53,6 +53,7 @@ if version > 701
     \'dense-analysis/ale',
     \'hashivim/vim-terraform',
     \'godlygeek/tabular',
+    \'itspriddle/vim-shellcheck',
     \'nvie/vim-flake8',
     \'ap/vim-buftabline',
     \'Shougo/deoplete.nvim',
