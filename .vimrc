@@ -1,4 +1,18 @@
 "/.vimrc
+"
+" OSX VIM 8:
+" sudo su -
+" cd /usr/local/bin
+" ln -s python3 python
+" brew uninstall vim
+" brew cleanup -s
+" make sure /usr/local/bin has priority in $PATH
+" 
+" /usr/local/bin/pip3 install isort pynvim
+"
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 set pyxversion=3
 
@@ -57,6 +71,8 @@ if version > 701
     \'nvie/vim-flake8',
     \'ap/vim-buftabline',
     \'Shougo/deoplete.nvim',
+    \'Shougo/context_filetype.vim',
+    \'fisadev/vim-isort',
     \'roxma/nvim-yarp',
     \'deoplete-plugins/deoplete-jedi',
     \'roxma/vim-hug-neovim-rpc',
