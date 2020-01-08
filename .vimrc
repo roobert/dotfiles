@@ -7,12 +7,9 @@
 " brew uninstall vim
 " brew cleanup -s
 " make sure /usr/local/bin has priority in $PATH
-" 
+"
 " /usr/local/bin/pip3 install isort pynvim
 "
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
 
 set pyxversion=3
 
@@ -77,6 +74,7 @@ if version > 701
     \'deoplete-plugins/deoplete-jedi',
     \'roxma/vim-hug-neovim-rpc',
     \'sheerun/vim-polyglot',
+    \'ntpeters/vim-better-whitespace',
     \'roobert/robs.vim'
   \]
 
@@ -148,6 +146,8 @@ endif
 if !has('nvim')
 	pythonx import pynvim
 endif
+
+let g:current_line_whitespace_disabled_hard=1
 
 let g:deoplete#enable_at_startup = 1
 
