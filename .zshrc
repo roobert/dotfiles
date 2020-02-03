@@ -72,3 +72,9 @@ fi
 
 [ -f ~/.zsh/robs/shelld/shelld.zsh ] && source ~/.zsh/robs/shelld/shelld.zsh
 #eval "$(chef shell-init zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rw/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rw/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rw/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rw/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
