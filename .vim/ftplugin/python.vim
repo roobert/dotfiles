@@ -1,7 +1,7 @@
 setlocal autoread
 
 autocmd BufWritePost *.py call flake8#Flake8()
-let g:flake8_show_quickfix=0 
+let g:flake8_show_quickfix=0
 
 silent let g:black_virtualenv = substitute(system('poetry env info -p'), '\n\+$', '', '')
 silent let s:black_command = substitute(system('which black'), '\n\+$', '', '')
@@ -17,5 +17,6 @@ endif
 function s:PythonAutoformat() abort
     let cursor_pos = getpos('.')
     execute ':%!black -q - 2>/dev/null'
+    execute ':%!isort - 2>/dev/null'
     call cursor(cursor_pos[1], cursor_pos[2])
 endfunction
