@@ -29,6 +29,8 @@ set nocompatible
 " the yankring_history file is created in ~/
 let g:yankring_history_dir = '~/.vim'
 
+
+
 if !filewritable(expand('~/.viminfo'))
   echo "~/.viminfo is not writable!"
 endif
@@ -155,7 +157,6 @@ let g:syntastic_terraform_tffilter_plan = 1
 let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 0
 
-
 let g:current_line_whitespace_disabled_hard=1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni_patterns = {}
@@ -201,7 +202,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
-let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8', 'pylint']
+" permit 120 line length which is the black formatters default
+let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_python_checker_args='--ignore=E501'
+
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
