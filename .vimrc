@@ -12,10 +12,17 @@
 "
 " /usr/local/bin/pip3 install isort pynvim
 "
-" /usr/local/opt/python@3.8//libexec/bin/python -m pip install pynvim
+" /usr/local/opt/python@3.8//libexec/bin/python -m pip install pynvim isort
 
 set pyxversion=3
-let g:python3_host_prog = '/Volumes/home/rw/.pyenv/shims/python'
+
+"if filereadable('/Volumes/home/rw/.pyenv/shims/python')
+"  let g:python3_host_prog = '/Volumes/home/rw/.pyenv/shims/python'
+"endif
+"
+"if filereadable('/Users/rw/.pyenv/shims/python')
+"  let g:python3_host_prog = '/Users/rw/.pyenv/shims/python'
+"endif
 
 for f in argv()
   if isdirectory(f)
