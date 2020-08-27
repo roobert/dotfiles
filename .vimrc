@@ -1,5 +1,7 @@
 "/.vimrc
 "
+" gem install json neovim
+"
 " OSX VIM 8:
 " sudo su -
 " cd /usr/local/bin
@@ -65,6 +67,8 @@ if version > 701
     \'posva/vim-vue',
     \'dense-analysis/ale',
     \'hashivim/vim-terraform',
+    \'vim-syntastic/syntastic',
+    \'juliosueiras/vim-terraform-completion',
     \'godlygeek/tabular',
     \'itspriddle/vim-shellcheck',
     \'nvie/vim-flake8',
@@ -108,7 +112,7 @@ if version > 701
 
   if filereadable('/usr/bin/go') || filereadable('/usr/local/go/bin/go') || filereadable('/home/rw/opt/go/bin/go') || filereadable('/home/rw/git/go/bin/go')
     call add(plugins, 'fatih/vim-go')
-    " go get golang.org/x/tools/cmd/goimports
+    " NOTE: go get golang.org/x/tools/cmd/goimports
     let g:go_fmt_command = "/home/rw/go/bin/goimports"
   endif
 
@@ -150,9 +154,25 @@ if !has('nvim')
 	pythonx import pynvim
 endif
 
-let g:current_line_whitespace_disabled_hard=1
+let g:syntastic_terraform_tffilter_plan = 1
+let g:terraform_completion_keys = 1
+let g:terraform_registry_module_completion = 0
 
+
+let g:current_line_whitespace_disabled_hard=1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
+
+let g:deoplete#omni_patterns = {}
+
+"call deoplete#custom#option('omni_patterns', {
+"\ 'complete_method': 'omnifunc',
+"\ 'terraform': '[^ *\t"{=$]\w*',
+"\})
+
+call deoplete#initialize()
+
 
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
 
