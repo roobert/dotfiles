@@ -12,8 +12,10 @@
 "
 " /usr/local/bin/pip3 install isort pynvim
 "
+" /usr/local/opt/python@3.8//libexec/bin/python -m pip install pynvim
 
 set pyxversion=3
+let g:python3_host_prog = '/Volumes/home/rw/.pyenv/shims/python'
 
 for f in argv()
   if isdirectory(f)
@@ -81,6 +83,7 @@ if version > 701
     \'roxma/vim-hug-neovim-rpc',
     \'sheerun/vim-polyglot',
     \'ntpeters/vim-better-whitespace',
+    \'fisadev/vim-isort',
     \'roobert/robs.vim'
   \]
 
@@ -202,9 +205,11 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
+
 " permit 120 line length which is the black formatters default
 let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_python_checker_args='--ignore=E501'
+let g:syntastic_python_checker_args='--ignore=E501'
+"let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8', 'pylint']
 
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
@@ -227,8 +232,8 @@ endfunction
 
 nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
 nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
-nmap <silent> ,,    <Plug>LocationPrevious
-nmap <silent> ..    <Plug>LocationNext
+"nmap <silent> ,,    <Plug>LocationPrevious
+"nmap <silent> ..    <Plug>LocationNext
 
 function! ToggleErrors()
   let old_last_winnr = winnr('$')
@@ -514,4 +519,8 @@ map <Leader>k <Plug>(easymotion-k)
 map -c :call SyntaxAttr()<CR>
 
 map <Leader>v :r !xsel -p<CR>
+
+
+call deoplete#custom#option('num_processes', 1)
+
 
