@@ -10,9 +10,10 @@
 " brew cleanup -s
 " make sure /usr/local/bin has priority in $PATH
 "
-" /usr/local/bin/pip3 install isort pynvim
+" /usr/local/bin/pip3 install isort pynvim jedi
+" pip install isort pynvim jedi
 "
-" /usr/local/opt/python@3.8//libexec/bin/python -m pip install pynvim isort
+" /usr/local/opt/python@3.8/libexec/bin/python -m pip install pynvim isort jedi
 
 set pyxversion=3
 
@@ -20,9 +21,13 @@ set pyxversion=3
 "  let g:python3_host_prog = '/Volumes/home/rw/.pyenv/shims/python'
 "endif
 "
-"if filereadable('/Users/rw/.pyenv/shims/python')
-"  let g:python3_host_prog = '/Users/rw/.pyenv/shims/python'
-"endif
+
+" this seems to get ignored.. try finding bin/python under /usr
+" and randomly installing depends with .../bin/python -m pip install ...
+" because computers 
+if filereadable('/Users/rw/.pyenv/shims/python')
+  let g:python3_host_prog = '/Users/rw/.pyenv/shims/python'
+endif
 
 for f in argv()
   if isdirectory(f)
@@ -86,8 +91,8 @@ if version > 701
     \'Shougo/context_filetype.vim',
     \'fisadev/vim-isort',
     \'roxma/nvim-yarp',
-    \'deoplete-plugins/deoplete-jedi',
     \'roxma/vim-hug-neovim-rpc',
+    \'deoplete-plugins/deoplete-jedi',
     \'sheerun/vim-polyglot',
     \'ntpeters/vim-better-whitespace',
     \'fisadev/vim-isort',
@@ -412,7 +417,7 @@ map Q <Nop>
 
 autocmd BufNewFile *.rb 0put = '#!/usr/bin/env ruby'                      | normal G
 autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefail\" | normal G
-autocmd BufNewFile *.py 0put = '#!/usr/bin/env python'                    | normal G
+autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\n\n\ndef main():\n    pass\n\n\nif __name__ == \\"__main__\\":\n    main()\" | normal G
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " spellcheck for .txt and .md
