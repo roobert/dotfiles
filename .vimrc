@@ -1,30 +1,14 @@
 "/.vimrc
 "
-" gem install json neovim
+" intall dependencies:
+" > pip install isort pynvim jedi
 "
-" OSX VIM 8:
-" sudo su -
-" cd /usr/local/bin
-" ln -s python3 python
-" brew uninstall vim
-" brew cleanup -s
-" make sure /usr/local/bin has priority in $PATH
-"
-" /usr/local/bin/pip3 install isort pynvim jedi
-" pip install isort pynvim jedi
-"
-" /usr/local/opt/python@3.8/libexec/bin/python -m pip install pynvim isort jedi
 
 set pyxversion=3
 
-"if filereadable('/Volumes/home/rw/.pyenv/shims/python')
-"  let g:python3_host_prog = '/Volumes/home/rw/.pyenv/shims/python'
-"endif
-"
-
 " this seems to get ignored.. try finding bin/python under /usr
 " and randomly installing depends with .../bin/python -m pip install ...
-" because computers 
+" because computers
 if filereadable('/Users/rw/.pyenv/shims/python')
   let g:python3_host_prog = '/Users/rw/.pyenv/shims/python'
 endif
@@ -39,18 +23,11 @@ endfor
 " backwards compatibility is limiting so turn it off
 set nocompatible
 
-" annoyingly, this needs to be set before yankring is installed otherwise
-" the yankring_history file is created in ~/
-let g:yankring_history_dir = '~/.vim'
-
-
-
 if !filewritable(expand('~/.viminfo'))
   echo "~/.viminfo is not writable!"
 endif
 
 if version > 701
-
   " inspired by: http://www.erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
   if has('vim_starting')
     if !filereadable(expand('~/.vim/plugged/vim-plug/README.md'))
@@ -74,7 +51,6 @@ if version > 701
     \'tpope/vim-surround',
     \'tpope/vim-unimpaired',
     \'vim-scripts/YankRing.vim',
-    \'jamessan/vim-gnupg',
     \'junegunn/vim-easy-align',
     \'jiangmiao/auto-pairs',
     \'briandoll/change-inside-surroundings.vim',
@@ -82,7 +58,7 @@ if version > 701
     \'dense-analysis/ale',
     \'hashivim/vim-terraform',
     \'vim-syntastic/syntastic',
-    \'juliosueiras/vim-terraform-completion',
+    \'preservim/nerdcommenter',
     \'godlygeek/tabular',
     \'itspriddle/vim-shellcheck',
     \'nvie/vim-flake8',
@@ -99,31 +75,6 @@ if version > 701
     \'roobert/robs.vim'
   \]
 
-    "\'gryf/pylint-vim',
-    "\'ycm-core/YouCompleteMe',
-    "\'zxqfl/tabnine-vim',
-    "\'tpope/vim-commentary',
-    "\'tpope/vim-repeat',
-    "\'vim-scripts/tlib',
-    "\'vim-scripts/nginx.vim',
-    "\'vim-scripts/xterm16.vim',
-    "\'vim-scripts/gundo',
-    "\'vim-scripts/SyntaxAttr.vim',
-    "\'vim-scripts/ZoomWin',
-    "\'MarcWeber/vim-addon-mw-utils',
-    "\'garbas/vim-snipmate',
-    "\'honza/vim-snippets',
-    "\'puppetlabs/puppet-syntax-vim',
-    "\'rodjek/vim-puppet',
-    "\'ngmy/vim-rubocop',
-    "\'nathanaelkane/vim-indent-guides',
-    "\'wellle/targets.vim',
-    "\'easymotion/vim-easymotion',
-    "\'rhysd/clever-f.vim',
-    "\'vim-scripts/ruby-matchit',
-    "\'endel/vim-github-colorscheme',
-    "\'ntpeters/vim-better-whitespace',
-
   if filereadable('/usr/bin/go') || filereadable('/usr/local/go/bin/go') || filereadable('/home/rw/opt/go/bin/go') || filereadable('/home/rw/git/go/bin/go')
     call add(plugins, 'fatih/vim-go')
     " NOTE: go get golang.org/x/tools/cmd/goimports
@@ -134,11 +85,8 @@ if version > 701
 
   call plug#begin('~/.vim/plugged')
 
-  "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-
   " if a plugin isn't installed, install it!
   for plugin in plugins
-
     let plugin_name = split(plugin, '/')[1]
     let plugin_dir  = expand('~') . '/.vim/plugged/' . plugin_name
 
@@ -150,9 +98,6 @@ if version > 701
     " register all plugin paths, even those not installed
     Plug plugin
   endfor
-
-  let g:ycm_autoclose_preview_window_after_insertion = 1
-  let g:ycm_autoclose_preview_window_after_completion = 1
 
   call plug#end()
 
@@ -168,7 +113,7 @@ if !has('nvim')
 	pythonx import pynvim
 endif
 
-let g:syntastic_terraform_tffilter_plan = 1
+let g:syntastic_terraform_tffilter_plan = 0
 let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 0
 
@@ -177,15 +122,7 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 
-let g:deoplete#omni_patterns = {}
-
-"call deoplete#custom#option('omni_patterns', {
-"\ 'complete_method': 'omnifunc',
-"\ 'terraform': '[^ *\t"{=$]\w*',
-"\})
-
 call deoplete#initialize()
-
 
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
 
@@ -218,11 +155,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_aggregate_errors = 1
 "autocmd BufWritePost * :Errors
 
-" permit 120 line length which is the black formatters default
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_checker_args='--ignore=E501'
-"let g:syntastic_python_checkers = ['python', 'pyflakes', 'pep8', 'pylint']
-
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
 
@@ -242,11 +175,6 @@ function! <SID>LocationNext()
   endtry
 endfunction
 
-nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
-nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
-"nmap <silent> ,,    <Plug>LocationPrevious
-"nmap <silent> ..    <Plug>LocationNext
-
 function! ToggleErrors()
   let old_last_winnr = winnr('$')
   lclose
@@ -257,39 +185,22 @@ function! ToggleErrors()
   endif
 endfunction
 
+nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
+nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
+nmap <silent><leader>[ <Plug>LocationPrevious
+nmap <silent><leader>] <Plug>LocationNext
 nmap <Leader>e :<C-u>call ToggleErrors()<CR>
+
+" annoyingly, this needs to be set before yankring is installed otherwise
+" the yankring_history file is created in ~/
+let g:yankring_history_dir = '~/.vim'
 
 " toggle yankring
 nnoremap <Leader>p :YRShow<CR>
 
-" make it colourful..
-
-" For windows, the colors directory is: c:\Users\<user>\vimfiles\colors
-
-" dont set TERM=xterm-256color since this will break the terminal when
-" connecting to
-" other systems, instead add an entry to .bashrc:
-" alias vi="vim -T xterm-256color"
-
-" xterm16 color scheme settings
-"let xterm16_colormap   = 'allblue'
-"let xterm16_brightness = 'default'
-"colorscheme xterm16
-
 set rtp+=~/.vim/plugged/robs.vim/output/vim
 set background=dark
-"let base16colorspace=256
-"let g:base16_shell_path='~/.vim/plugged/robs.vim/output/shell/'
-"colorscheme base16-robs
 colorscheme robs
-
-
-" molokai 256 colour
-"let g:rehash256 = 1
-
-"colorscheme molokai
-"colorscheme apprentice
-"colorscheme iceberg
 
 " this allows 256 colours in non xterm-256 terminals that support 256
 let &t_Co=256
@@ -311,9 +222,6 @@ endfunction
 set laststatus=2
 set statusline=%!StatusLine()
 
-" leader
-"let mapleader = "\<Space>"
-
 " me settins
 set showcmd
 set matchpairs+=<:>,{:},(:),[:]
@@ -324,7 +232,6 @@ set expandtab       " make tabs spaces
 set showmatch       " show matching brackets
 set noautoindent
 set nocindent
-set esckeys         " cursor keys in insert mode
 set hls             " highlight search
 set incsearch
 set nonumber        " display line numbers
@@ -338,7 +245,6 @@ set t_ut=           " make tmux/screen display properly for vim themes with colo
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lowercase
 set nrformats=      " treat numbers as decimal when using <C-a> and <C-x>
-" zsh style tab completion for
 set wildmenu
 set wildmode=full
 
@@ -346,62 +252,15 @@ set wildmode=full
 "set fillchars+=vert:\ ,stlnc:─,stl:─
 set fillchars+=vert:\ ,stlnc:_,stl:_
 
-" Show trailing whitepace and spaces before a tab:
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
-
-" Show tabs that are not at the start of a line:
-autocmd Syntax * syn match ExtraWhitespace /[^\t]\zs\t\+/
-
-"disable autocomment stuff
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" commentary settings..
-autocmd FileType apache set commentstring=#\ %s
-autocmd FileType sh     set commentstring=#\ %s
-autocmd FileType zsh    set commentstring=#\ %s
-autocmd FileType ruby   set commentstring=#\ %s
-
-" highlight text after 80th column, maybe make this toggleable?
-"highlight OverLength ctermbg=red guibg=#FFD9D9
-"match OverLength /\%81v.*/
-
 " disable help since sometimes i accidently hit it when aiming for Esc.
 nmap <F1> <nop>
 
-" Tabularize plugin bindings
-"nmap <Leader>> :Ta /=><CR>
-"vmap <Leader>> :Ta /=><CR>
-"nmap <Leader>. :Ta /=><CR>
-"vmap <Leader>. :Ta /=><CR>
-"nmap <Leader>= :Ta /=<CR>
-"vmap <Leader>= :Ta /=<CR>
-""nmap <Leader>p :Ta /\s"[^ ]*"/<CR>
-""vmap <Leader>p :Ta /\s"[^ ]*"/<CR>
-
 " vim easy align
-" start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+" start interactive EasyAlign in visual mode (e.g. <visual select><Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
-
-" Default fzf layout
-"let g:fzf_layout = { 'down': '40%' }
-"map <C-F> :FZF<CR>
-
-" change surround bindings
-"nmap <Leader>' 
-
-" run shortcuts..
-"nmap <Leader>r :!!<CR>
-"vmap <Leader>r :!!<CR>
-"nmap <Leader>R :!./%<CR>
-"vmap <Leader>R :!./%<CR>
-"nmap <Leader>x :!chmod +x ./%<CR>
-"vmap <Leader>x :!chmod +x ./%<CR>
-"nmap <Leader>X :!chmod +x ./%<CR>
-"vmap <Leader>X :!chmod +x ./%<CR>
 
 " write file using sudo don't prompt to re-open file
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -470,30 +329,6 @@ map <Leader>/ :noh<CR>
 " tmux
 autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%"))
 
-" remap leader-ru to leader-r
-"let g:vimrubocop_keymap = 0
-"nmap <Leader>r :RuboCop<CR>
-
-nnoremap <silent> <F4> :call <SID>SearchMode()<CR>
-function s:SearchMode()
-  if !exists('s:searchmode') || s:searchmode == 0
-    echo 'Search next: scroll hit to middle if not on same page'
-    nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>
-    nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>
-    let s:searchmode = 1
-  elseif s:searchmode == 1
-    echo 'Search next: scroll hit to middle'
-    nnoremap n nzz
-    nnoremap N Nzz
-    let s:searchmode = 2
-  else
-    echo 'Search next: normal'
-    nunmap n
-    nunmap N
-    let s:searchmode = 0
-  endif
-endfunction
-
 " If cursor is in first or last line of window, scroll to middle line.
 function s:MaybeMiddle()
   if winline() == 1 || winline() == winheight(0)
@@ -520,19 +355,26 @@ let g:netrw_liststyle=3
 let g:clever_f_smart_case=1
 let g:clever_f_chars_match_any_signs=';'
 
-" easymotion
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-nmap s <Plug>(easymotion-s2)
-let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-
 " show syntax highlighting information about attribute under cursor
 map -c :call SyntaxAttr()<CR>
 
-map <Leader>v :r !xsel -p<CR>
+" disable autocompletion, because we use deoplete for completion
+let g:jedi#completions_enabled = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#documentation_command = "D"
 
+let g:NERDSpaceDelims = 0
+let g:NERDCompactSexyComs = 0
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 0
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+nmap <Leader>\ <Plug>NERDCommenterToggle
+vmap <Leader>\ <Plug>NERDCommenterToggle<CR>gv
 
 call deoplete#custom#option('num_processes', 1)
 
-
+set colorcolumn=80
+set textwidth=80
+highlight ColorColumn ctermbg=black guibg=black
