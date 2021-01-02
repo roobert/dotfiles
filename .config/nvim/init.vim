@@ -57,21 +57,15 @@ if version > 701
     \'posva/vim-vue',
     \'dense-analysis/ale',
     \'hashivim/vim-terraform',
-    \'vim-syntastic/syntastic',
     \'preservim/nerdcommenter',
     \'godlygeek/tabular',
     \'itspriddle/vim-shellcheck',
-    \'nvie/vim-flake8',
     \'ap/vim-buftabline',
     \'Shougo/deoplete.nvim',
     \'Shougo/context_filetype.vim',
-    \'fisadev/vim-isort',
     \'roxma/nvim-yarp',
     \'roxma/vim-hug-neovim-rpc',
-    \'deoplete-plugins/deoplete-jedi',
-    \'sheerun/vim-polyglot',
     \'ntpeters/vim-better-whitespace',
-    \'fisadev/vim-isort',
     \'roobert/robs.vim'
   \]
 
@@ -113,7 +107,10 @@ if !has('nvim')
 	pythonx import pynvim
 endif
 
-let g:syntastic_terraform_tffilter_plan = 0
+let g:ale_fix_on_save = 1
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_autoimport = 1
+
 let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 0
 
@@ -150,14 +147,8 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size  = 2
 let g:indent_guides_enable_on_vim_startup = 1
 
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_aggregate_errors = 1
-"autocmd BufWritePost * :Errors
 
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_ruby_checkers = [ 'mri', 'rubocop' ]
+""autocmd BufWritePost * :Errors
 
 function! <SID>LocationPrevious()
   try
@@ -378,3 +369,10 @@ call deoplete#custom#option('num_processes', 1)
 set colorcolumn=80
 set textwidth=80
 highlight ColorColumn ctermbg=black guibg=black
+
+filetype plugin on
+
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+packloadall
+silent! helptags ALL
