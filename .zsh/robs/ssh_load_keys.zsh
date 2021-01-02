@@ -5,4 +5,3 @@ if [[ $? = 0 ]]; then
   for id in `find $HOME/.ssh/ -name "id_rsa*" | grep -v 'id_rsa.pub'`; ssh-add $id
   ssh-add -l
 fi
-

@@ -1,4 +1,3 @@
-
 BOOKMARKS="$HOME/.bookmarks-zsh"
 
 function bookmarks {

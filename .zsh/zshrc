@@ -1,30 +1,12 @@
-# stuff to research: auto-fu.sh  zsh-fuzzy-match  zsh-history-substring-search
-
-# configure some stuff
-export LESS="-R" # allow escape sequences to be interpreted properly
-export EDITOR="vim"
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;32'
-
 ZSH_ROOT="$HOME/.zsh"
-
-# broken stuff in zsh 4.2.0:
-# * git.plugin.zsh - compdef
-# * vi-mode.zsh    - reset-prompt
-
-# vim
-# * Tabularize
-# * -p
 
 autoload -U compinit && compinit
 autoload -U is-at-least
 
 for f in $ZSH_ROOT/**/*.zsh; do
-
   if is-at-least 4.4.0; then
     source $f
   else
-    # don't load these things
     case $f in
       "$ZSH_ROOT/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
       "$ZSH_ROOT/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
@@ -35,5 +17,5 @@ for f in $ZSH_ROOT/**/*.zsh; do
   fi
 done
 
+# reload bookmarks
 b > /dev/null 2>&1
-

@@ -48,11 +48,9 @@ bindkey -M vicmd "$" end-of-line
 # line movements in insert mode
 bindkey -M viins "^[[7~" beginning-of-line # home
 bindkey -M viins "^[[8~" end-of-line # end
-
 # rebind esc-.
 bindkey -M viins "^[[1;5A" insert-last-word
 bindkey -M vicmd "^[[1;5A" insert-last-word
-
 # reverse esc-.
 insert-next-word() { zle .insert-last-word 1 -1 }
 zle -N insert-next-word; bindkey keys $_
@@ -60,10 +58,9 @@ zle -N insert-next-word; bindkey keys $_
 bindkey -M viins "^[[1;5B" insert-next-word
 bindkey -M vicmd "^[[1;5B" insert-next-word
 
-#changing mode clobbers the keybinds, so store the keybinds before and execute 
-#them after
+# changing mode clobbers the keybinds, so store the keybinds before and execute
+# them after
 binds=`bindkey -L`
 bindkey -v
 for bind in ${(@f)binds}; do eval $bind; done
 unset binds
-

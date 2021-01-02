@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# useful for checking access logs for requests per minute.. yay awk!
+# useful for checking access logs for requests per minute..
 
 # usage: $0 access_log*~*.gz
 
