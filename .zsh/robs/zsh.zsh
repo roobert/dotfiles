@@ -30,5 +30,3 @@ fpath=(~/.zsh/fpath $fpath)
 
 # tmux+zsh/vi-mode paste fix
 (( $+TMUX  )) && unset zle_bracketed_paste
-#eval "$(tmuxifier init -)"
-

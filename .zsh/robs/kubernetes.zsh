@@ -79,7 +79,3 @@ function kcluster-list () {
 
   gcloud container clusters list --project $project --format json | jq -r '.[].name'
 }
-
-function kdir () {
-  cd ${HOME}/git/kuber/conf/${K8S_CURRENT_CONTEXT_PROJECT}/${K8S_CURRENT_CONTEXT_CLUSTER}
-}

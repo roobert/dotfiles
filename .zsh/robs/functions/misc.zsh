@@ -14,14 +14,11 @@ function get_stuff_from_oh_my_zsh () {
 # shortcuts to install some useful tools..
 #
 
-# install: subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color
 function install_common_tools {
-  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop ack-grep apt-file notion rxvt-unicode-256color autocutsel tcpdump
+  sudo apt-get install git subversion vim zsh tree colordiff ncdu htop \
+    ack-grep apt-file notion rxvt-unicode-256color autocutsel tcpdump
 }
 
-alias install_flash='sudo apt-get install ubuntu-restricted-extras'
-
-# install some ruby tools and gems: rbenv, ruby-build, awesome_print net-http-spy wirble bond boson looksee
 function install_ruby_tools {
   if ! dpkg -l git > /dev/null 2>&1; then
     sudo apt-get install git
@@ -46,7 +43,6 @@ function install_ruby_tools {
   sudo gem install awesome_print net-http-spy wirble bond boson looksee
 }
 
-# install zsh, coreutils, wget and homebrew
 function install_common_tools_osx {
   ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
   brew install zsh coreutils wget
@@ -63,12 +59,14 @@ bindkey '^F' fzf-file-widget
 function wrap-cli-input () {
   BUFFER="\$($BUFFER)"
 }
+
 zle -N wrap-cli-input
 bindkey -M viins '^g' wrap-cli-input
 
 function prepend-cli-input-vim () {
   BUFFER="vim $BUFFER"
 }
+
 zle -N prepend-cli-input-vim
 bindkey -M viins '^e' prepend-cli-input-vim
 
@@ -109,21 +107,6 @@ function hl {
   fi
 
   egrep "${SEARCH_STRING}|^" $FILES
-}
-
-# merge any local ssh configs into main config - for stuff that would be silly to store in github
-function ssh_merge_config {
-  if ls $HOME/.ssh-* > /dev/null 2>&1; then
-    echo "merging ssh configs.."
-    cat $HOME/.ssh-* >> $HOME/.ssh/config
-  else
-    echo "no ssh configs to merge"
-  fi
-}
-
-function ssh_unmerge_config {
-  gh_pull dotfiles
-  cp -v ~/tmp/dotfiles/.ssh/config ~/.ssh/config
 }
 
 # create an html file containing images

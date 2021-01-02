@@ -1,9 +1,8 @@
-# thanks mattf for implimenting stuff so i dont have to :)
+# thanks to mattf
 
-# this lovely stuff means you can cd to directories that are further up the directory tree for $CWD
-
+# this lovely stuff means you can cd to directories that are further up the
+# directory tree for $CWD
 function up {
-
   if [[ $# == 0 ]]; then
     if [[ -z "${UP_PATHS}" ]]; then
       echo "no up paths, boo"
