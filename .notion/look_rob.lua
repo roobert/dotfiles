@@ -1,61 +1,10 @@
---local f = io.popen ("/bin/hostname") --local hostname = f:read("*a") or ""
---f:close()
---hostname =string.gsub(hostname, "\n$", "")
---print(hostname)
---
---if hostname == "mbp0" then
---  META="Mod4+"
---else
---  META="Mod1+"
---end
-
---META="Mod1+"
-
---dopath("cfg_notioncore")
---dopath("cfg_kludges")
---dopath("cfg_layouts")
-----
---dopath("mod_query")
---dopath("mod_menu")
---dopath("mod_tiling")
-----dopath("mod_statusbar")
-----dopath("mod_sp")
-----dopath("mod_xrandr")
---dopath('min_tabs')
---dopath('statusd_iwinfo')
-
--- refresh xinerama on screen layout updates
---function screenlayoutupdated()
---    mod_xinerama.refresh()
---end
---
---randr_screen_change_notify_hook = ioncore.get_hook('randr_screen_change_notify')
-
---if randr_screen_change_notify_hook ~= nil then
---    randr_screen_change_notify_hook:add(screenlayoutupdated)
---end
-
 XTERM="$HOME/bin/kitty"
 BROWSER="firefox"
 SCREENLOCK="bash -c 'sleep 1; xset dpms force off'; dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock"
 
--- for some reason need this as well as the stuff below to disable F12..
 defbindings("WScreen", {
     kpress(META.."F12", nil),
 })
-
---defbindings("WFrame", {
---    submap(META.."'", {
---        kpress("Right", "_:switch_next()"),
---        kpress("1", "_:switch_nth(1)"),
---   }),
---})
-
---defbindings("WFrame", {
---    kpress(META..",", "_:switch_prev()"),
---    kpress(META..".", "_:switch_next()"),
---  })
-
 
 defbindings("WMPlex.toplevel", {
     kpress(META.."F1", nil),
@@ -170,12 +119,10 @@ de.defstyle("stdisp", {
 -- Define some additional title shortening rules to use when the full
 -- title doesn't fit in the available space. The first-defined matching
 -- rule that succeeds in making the title short enough is used.
-
---ioncore.defshortening("[^:]+: (.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
---ioncore.defshortening("[^:]+: (.*)", "$1$|$1$<...")
---ioncore.defshortening("(.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
---ioncore.defshortening("(.*)", "$1$|$1$<...")
+ioncore.defshortening("[^:]+: (.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
+ioncore.defshortening("[^:]+: (.*)", "$1$|$1$<...")
+ioncore.defshortening("(.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
+ioncore.defshortening("(.*)", "$1$|$1$<...")
 
 -- Refresh objects' brushes.
-
 gr.refresh()
