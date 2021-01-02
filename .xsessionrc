@@ -1,16 +1,6 @@
 xsetroot -solid "#000000"
 setxkbmap -option caps:swapescape
 
-#
-#$HOME/.zsh/robs/bin/user-xmodmap-reload-hack
-#
-#if hostname | grep acros ; then
-#  bash $HOME/.screenlayout/work-laptop.sh
-#else
-#  bash $HOME/.screenlayout/default.sh
-#fi
-#
-
 if hostname | grep -E 'mbp0|acros'; then
   #unity-settings-daemon &
   synclient MaxTapTime=0
@@ -21,16 +11,6 @@ if hostname | grep -E 'mbp0|acros'; then
   # stupid hack becuase kbd overrides these if they're set too quickly (!)
   #bash -c 'sleep 4; xmodmap $HOME/.xmodmaprc ' &
 fi
-
-#if which autocutsel > /dev/null 2>&1; then
-#  autocutsel &
-#  autocutsel -s PRIMARY &
-#fi
-#
-#if which vmware-user > /dev/null 2>&1; then
-#  vmware-user &
-#fi
-#
 
 if which stalonetray > /dev/null 2>&1; then
   killall stalonetray
@@ -47,10 +27,6 @@ if which stalonetray > /dev/null 2>&1; then
   sudo killall nm-applet
   sudo nm-applet &
 
-  #sudo killall blueman-applet
-  #sudo blueman-applet &
-
   sudo killall pnmixer
   sudo pnmixer &
 fi
-#
