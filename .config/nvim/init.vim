@@ -103,7 +103,7 @@ if version > 701
 endif
 
 if !has('nvim')
-	pythonx import pynvim
+  pythonx import pynvim
 endif
 
 " list of additional language servers:
