@@ -244,21 +244,6 @@ set pastetoggle=<Leader>p
 " window / buffer stuff
 set splitbelow
 set splitright
-" window move
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-" window create
-nmap <C-W><J> :topleft  vnew<CR>
-nmap <C-W><K> :botright vnew<CR>
-nmap <C-W><H> :topleft  new<CR>
-nmap <C-W><L> :botright new<CR>
-" buffer create
-nmap <C-B><H> :leftabove  vnew<CR>
-nmap <C-B><L> :rightbelow vnew<CR>
-nmap <C-B><J> :leftabove  new<CR>
-nmap <C-B><K> :rightbelow new<CR>
 
 "ctrl + w _ "Max out the height of the current split
 "ctrl + w | "Max out the width of the current split
