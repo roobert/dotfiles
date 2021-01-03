@@ -54,18 +54,17 @@ if version > 701
     \'junegunn/vim-easy-align',
     \'jiangmiao/auto-pairs',
     \'briandoll/change-inside-surroundings.vim',
-    \'posva/vim-vue',
-    \'dense-analysis/ale',
-    \'hashivim/vim-terraform',
     \'preservim/nerdcommenter',
     \'godlygeek/tabular',
-    \'itspriddle/vim-shellcheck',
+    \'dense-analysis/ale',
     \'ap/vim-buftabline',
-    \'Shougo/deoplete.nvim',
+    \'posva/vim-vue',
+    \'hashivim/vim-terraform',
+    \'itspriddle/vim-shellcheck',
     \'Shougo/context_filetype.vim',
-    \'roxma/nvim-yarp',
-    \'roxma/vim-hug-neovim-rpc',
     \'ntpeters/vim-better-whitespace',
+    \'neovim/nvim-lspconfig',
+    \'nvim-lua/completion-nvim',
     \'roobert/robs.vim'
   \]
 
@@ -107,83 +106,32 @@ if !has('nvim')
 	pythonx import pynvim
 endif
 
+:lua << END
+require'lspconfig'.jedi_language_server.setup{on_attach=require'completion'.on_attach}
+END
+
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
+imap <Down> <Plug>(completion_smart_tab)
+imap <Up> <Plug>(completion_smart_s_tab)
+
+"set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect
+
+let g:completion_enable_auto_popup = 1
+
 let g:ale_fix_on_save = 1
-set omnifunc=ale#completion#OmniFunc
-let g:ale_completion_autoimport = 1
+let g:ale_disable_lsp = 1
 
 let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 0
 
-let g:current_line_whitespace_disabled_hard=1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-
-call deoplete#initialize()
-
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-
-set completeopt-=preview
-
-" use <tab> / <s-tab> to cycle through completions
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
-
-inoremap <silent><expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+let g:current_line_whitespace_disabled_hard = 1
 
 filetype plugin indent on
 
-" indent colours
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size  = 2
-let g:indent_guides_enable_on_vim_startup = 1
-
-
-""autocmd BufWritePost * :Errors
-
-function! <SID>LocationPrevious()
-  try
-    lprev
-  catch /^Vim\%((\a\+)\)\=:E553/
-    llast
-  endtry
-endfunction
-
-function! <SID>LocationNext()
-  try
-    lnext
-  catch /^Vim\%((\a\+)\)\=:E553/
-    lfirst
-  endtry
-endfunction
-
-function! ToggleErrors()
-  let old_last_winnr = winnr('$')
-  lclose
-
-  " Nothing was closed, open syntastic error location panel
-  if old_last_winnr == winnr('$')
-    Errors
-  endif
-endfunction
-
-nnoremap <silent> <Plug>LocationPrevious    :<C-u>exe 'call <SID>LocationPrevious()'<CR>
-nnoremap <silent> <Plug>LocationNext        :<C-u>exe 'call <SID>LocationNext()'<CR>
-nmap <silent><leader>[ <Plug>LocationPrevious
-nmap <silent><leader>] <Plug>LocationNext
-nmap <Leader>e :<C-u>call ToggleErrors()<CR>
-
-" annoyingly, this needs to be set before yankring is installed otherwise
-" the yankring_history file is created in ~/
+" annoyingly, this needs to be set before yankring is installed otherwise the
+" yankring_history file is created in ~/
 let g:yankring_history_dir = '~/.vim'
 
 " toggle yankring
@@ -198,7 +146,8 @@ let &t_Co=256
 
 syntax enable
 
-" FIXME: coloured background breaks copy and paste (make sure this is after 'syntax enable')
+" FIXME: coloured background breaks copy and paste (make sure this is after
+" 'syntax enable')
 hi Normal ctermfg=252 ctermbg=none
 
 highlight User1 ctermfg=red
@@ -212,6 +161,9 @@ endfunction
 
 set laststatus=2
 set statusline=%!StatusLine()
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " me settins
 set showcmd
@@ -364,7 +316,15 @@ let g:NERDToggleCheckAllLines = 1
 nmap <Leader>\ <Plug>NERDCommenterToggle
 vmap <Leader>\ <Plug>NERDCommenterToggle<CR>gv
 
-call deoplete#custom#option('num_processes', 1)
+
+if !isdirectory($HOME."/.vim")
+    call mkdir($HOME."/.vim", "", 0770)
+endif
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
 
 set colorcolumn=80
 set textwidth=80
