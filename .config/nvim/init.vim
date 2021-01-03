@@ -158,11 +158,13 @@ highlight User1 ctermfg=red
 highlight User2 ctermfg=blue
 
 function!StatusLine()
-  let padded_line_no = "%=%0".len(line("$"))."l"
-  " FIXME
-  return "%=_______________________________________________________________________________________ ___  __ _   _     %{expand('%:p:h')}/%1*%t%*\ \-\ " . padded_line_no . "/%L\ %03c\ "
+  let leftside ="_______________ ___  __ _   _ "
+  let padded_line_no = "%0".len(line("$"))."l"
+  return leftside . "%= _  __%{expand('%:p:h')}/%1*%t%*\ \-\ " . padded_line_no . "/%L\ %03c\ "
 endfunction
 
+" NOTE: trailing space
+set fillchars= 
 set laststatus=2
 set statusline=%!StatusLine()
 
@@ -197,7 +199,7 @@ set wildmode=full
 
 " get rid of ugly vertical split char | for split windows, note the space after \
 "set fillchars+=vert:\ ,stlnc:─,stl:─
-set fillchars+=vert:\ ,stlnc:_,stl:_
+set fillchars+=vert:\ ,stlnc:_,
 
 " disable help since sometimes i accidently hit it when aiming for Esc.
 nmap <F1> <nop>
