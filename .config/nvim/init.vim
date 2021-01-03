@@ -58,13 +58,14 @@ if version > 701
     \'godlygeek/tabular',
     \'dense-analysis/ale',
     \'ap/vim-buftabline',
+    \'Shougo/context_filetype.vim',
     \'posva/vim-vue',
     \'hashivim/vim-terraform',
     \'itspriddle/vim-shellcheck',
-    \'Shougo/context_filetype.vim',
     \'ntpeters/vim-better-whitespace',
     \'neovim/nvim-lspconfig',
     \'nvim-lua/completion-nvim',
+    \'sheerun/vim-polyglot',
     \'roobert/robs.vim'
   \]
 
@@ -127,12 +128,11 @@ let g:completion_enable_auto_popup = 1
 let g:ale_fix_on_save = 1
 let g:ale_disable_lsp = 1
 
-let g:terraform_completion_keys = 1
-let g:terraform_registry_module_completion = 0
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" disable highlight warning for currently selected line
 let g:current_line_whitespace_disabled_hard = 1
-
-filetype plugin indent on
 
 " annoyingly, this needs to be set before yankring is installed otherwise the
 " yankring_history file is created in ~/
@@ -168,10 +168,6 @@ set fillchars=
 set laststatus=2
 set statusline=%!StatusLine()
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" me settins
 set showcmd
 set matchpairs+=<:>,{:},(:),[:]
 set tabstop=2
@@ -245,10 +241,6 @@ set pastetoggle=<Leader>p
 set splitbelow
 set splitright
 
-"ctrl + w _ "Max out the height of the current split
-"ctrl + w | "Max out the width of the current split
-"ctrl + w = "Normalize all split sizes, which is very handy when resizing terminal
-
 " tab navigation
 map <S-h> :tabprev<CR>
 map <S-l> :tabnext<CR>
@@ -283,6 +275,7 @@ function! HelpInNewTab ()
   endif
 endfunction
 
+" formatting for netrw
 let g:netrw_liststyle=3
 
 " smart f
@@ -292,7 +285,6 @@ let g:clever_f_chars_match_any_signs=';'
 " show syntax highlighting information about attribute under cursor
 map -c :call SyntaxAttr()<CR>
 
-" disable autocompletion, because we use deoplete for completion
 let g:jedi#completions_enabled = 0
 let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#documentation_command = "D"
@@ -307,21 +299,20 @@ let g:NERDToggleCheckAllLines = 1
 nmap <Leader>\ <Plug>NERDCommenterToggle
 vmap <Leader>\ <Plug>NERDCommenterToggle<CR>gv
 
-
 if !isdirectory($HOME."/.vim")
     call mkdir($HOME."/.vim", "", 0770)
 endif
-if !isdirectory($HOME."/.vim/undo-dir")
-    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+if !isdirectory($HOME."/.vim/undodir")
+    call mkdir($HOME."/.vim/undodir", "", 0700)
 endif
-set undodir=~/.vim/undo-dir
+set undodir=~/.vim/undodir
 set undofile
 
 set colorcolumn=80
 set textwidth=80
 highlight ColorColumn ctermbg=black guibg=black
 
-filetype plugin on
+filetype plugin indent on
 
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
