@@ -106,9 +106,13 @@ if !has('nvim')
 	pythonx import pynvim
 endif
 
+" list of additional language servers:
+" * https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 :lua << END
 require'lspconfig'.jedi_language_server.setup{on_attach=require'completion'.on_attach}
 END
+
+autocmd BufEnter * lua require'completion'.on_attach()
 
 imap <tab> <Plug>(completion_smart_tab)
 imap <s-tab> <Plug>(completion_smart_s_tab)
