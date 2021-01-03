@@ -7,6 +7,7 @@ alias empty_trash="rm -rf ~/.local/share/Trash"
 
 # vim
 #alias vim="vim -T xterm-256color -p"
+alias vim="nvim"
 alias vi="nvim"
 
 # git
