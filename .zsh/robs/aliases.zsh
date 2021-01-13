@@ -7,8 +7,8 @@ alias empty_trash="rm -rf ~/.local/share/Trash"
 
 # vim
 #alias vim="vim -T xterm-256color -p"
-alias vim="nvim"
-alias vi="nvim"
+alias vim="nvim -p"
+alias vi="nvim -p"
 
 # git
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"

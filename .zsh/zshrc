@@ -3,6 +3,8 @@ ZSH_ROOT="$HOME/.zsh"
 autoload -U compinit && compinit
 autoload -U is-at-least
 
+PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+
 for f in $ZSH_ROOT/**/*.zsh; do
   if is-at-least 4.4.0; then
     source $f
