@@ -106,7 +106,7 @@ function hl {
     FILES="$@"
   fi
 
-  egrep "${SEARCH_STRING}|^" $FILES
+  egrep "${SEARCH_STRING}" $FILES
 }
 
 # create an html file containing images

@@ -2,7 +2,7 @@ FILE                  38;5;247
 NORMAL                38;5;247
 DIR                   38;5;061
 EXEC                  38;5;002
-LINK                  38;5;013
+LINK                  38;5;147
 
 SETGID                38;5;137;1
 SETUID                38;5;137
