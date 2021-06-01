@@ -13,6 +13,8 @@ local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local opt, wo = vim.opt, vim.wo
 local fmt = string.format
 
+g['python3_host_prog'] = '/Users/robwilson/.pyenv/versions/3.9.5/bin/python'
+
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
@@ -63,7 +65,7 @@ map('n', '<leader>bs', '<cmd>BuildMeStop<CR>')
 -- deoplete
 -- if this fails with an error, run: :UpdateRemotePlugin
 g['deoplete#enable_at_startup'] = 1
-fn['deoplete#custom#option']('ignore_case', false)
+fn['deoplete#custom#option']('ignore_case', true)
 fn['deoplete#custom#option']('max_list', 10)
 
 -- dirvish
