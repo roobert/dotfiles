@@ -1,4 +1,12 @@
 -- inspired by github.com/ojroques
+--
+-- requires:
+-- git clone https://github.com/savq/paq-nvim.git \
+--    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
+-- then run:
+-- PaqInstall
+-- UpdateRemotePlugin
+
 
 -------------------- HELPERS -------------------------------
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
