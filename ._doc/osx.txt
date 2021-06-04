@@ -1,0 +1,51 @@
+## Keyboard
+switch § and ` keys:
+* https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus-%C2%B1-in-wrong-place-on-keyboard
+
+switch escape key:
+* https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x/40254864#40254864
+
+## Programmes
+* iterm2
+* slack
+* signal
+* whatsapp
+* homebrew
+* docker
+* istatmenus
+* bitwarden
+* gcloud sdk
+```
+curl https://sdk.cloud.google.com | bash
+gcloud components update --version=...
+```
+
+## Configure iTerm2
+* enable icons (search icons)
+* left tabs
+* adjust colour to blue
+* enable git hint thing
+* line cursor
+* tab order, remap control-tab to next tab: https://gitlab.com/gnachman/iterm2/-/issues/8219
+
+
+## Shell
+add dotfiles
+```
+brew tap vmware-tanzu/carvel
+brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep
+```
+
+## Configure FZF
+...
+
+
+## Python
+pyenv install 3.9.5
+pyenv global 3.9.5
+
+## Neovim
+pip install neovim
+brew install neovim --HEAD
+nvim (follow instructions in init.lua)
+
