@@ -21,6 +21,9 @@ curl https://sdk.cloud.google.com | bash
 gcloud components update --version=...
 ```
 
+brew install gh
+gh auth login
+
 ## Configure iTerm2
 * enable icons (search icons)
 * left tabs
@@ -28,13 +31,22 @@ gcloud components update --version=...
 * enable git hint thing
 * line cursor
 * tab order, remap control-tab to next tab: https://gitlab.com/gnachman/iterm2/-/issues/8219
-
+```
+brew tap caskroom/fonts
+brew cask install font-hack-nerd-font
+```
+select DroidSansMono Nerd Font from iterm2
 
 ## Shell
 add dotfiles
 ```
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep
+brew install hashicorp/tap/terraform-ls
+
+# language servers and linters for neovim
+sudo npm install -g pyright bash-language-server
+brew install efm-langserver shellcheck
 ```
 
 ## Configure FZF

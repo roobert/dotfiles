@@ -1,0 +1,33 @@
+local opt = vim.opt
+-- Completion options
+opt.completeopt = {'menuone', 'noinsert', 'noselect'}
+opt.colorcolumn = '80'              -- Line length marker
+opt.cursorline = false              -- Highlight cursor line
+opt.expandtab = true                -- Use spaces instead of tabs
+opt.formatoptions = 'crqnj'         -- Automatic formatting options
+opt.hidden = true                   -- Enable background buffers
+opt.ignorecase = true               -- Ignore case
+opt.joinspaces = false              -- No double spaces with join
+opt.list = true                     -- Show some invisible characters
+opt.number = false                  -- Show line numbers
+opt.pastetoggle = '<F2>'            -- Paste mode
+opt.relativenumber = false          -- Relative line numbers
+opt.scrolloff = 4                   -- Lines of context
+opt.shiftround = true               -- Round indent
+opt.shiftwidth = 2                  -- Size of an indent
+opt.sidescrolloff = 8               -- Columns of context
+opt.signcolumn = 'auto'             -- Show sign column
+opt.smartcase = true                -- Do not ignore case with capitals
+opt.smartindent = true              -- Insert indents automatically
+opt.splitbelow = true               -- Put new windows below current
+opt.splitright = true               -- Put new windows right of current
+opt.tabstop = 2                     -- Number of spaces tabs count for
+opt.textwidth = 80                  -- Maximum width of text
+opt.updatetime = 100                -- Delay before swap file is saved
+opt.wildmode = {'list', 'longest'}  -- Command-line completion mode
+opt.wrap = true                     -- Disable line wrap
+opt.incsearch = true
+opt.termguicolors = false
+opt.iskeyword = "@,48-57,_,192-255" -- added _ as keyword separator
+opt.encoding = "utf8"
+
