@@ -1,3 +1,6 @@
+-- Note
+-- to debug, run :LspInfo and check ~/.cache/nvim/lsp.log
+
 require "lspconfig".efm.setup {
     init_options = {documentFormatting = true},
     filetypes = {"python", "tf", "sh"},
@@ -12,7 +15,7 @@ require "lspconfig".efm.setup {
             tf = {
                 {formatCommand = "terraform fmt -", formatStdin = true}
             },
-            -- this doesn't work..
+            -- FIXME: this doesn't work..
             sh = {
                   lintCommand = "shellcheck -f gcc -x -",
                   lintStdin = true,
@@ -24,11 +27,11 @@ require "lspconfig".efm.setup {
 }
 
 vim.cmd "autocmd BufRead,BufNewFile *.tf set filetype=tf"
-vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
 
--- shellcheck
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.pyright.setup{}
+
+vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
 
 -- multiple lsps dont play well together..
 --require 'lspconfig'.terraformls.setup {
