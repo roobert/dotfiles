@@ -20,15 +20,4 @@ if fn.empty(fn.glob(install_path)) > 0 then
   -- FIXME: what is the point of compile?
   --cmd 'PackerCompile'
   cmd 'PackerInstall'
-else
-  require('plugins')
-  require('mappings')
-  require('colorscheme')
-  require('options')
-  require('bars')
-  require('lsp')
-  require('commenting')
-  require('highlighting')
-  require('nvim-compe')
-  require('signature')
 end
