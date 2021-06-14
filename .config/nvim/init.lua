@@ -9,7 +9,7 @@ local function map(mode, lhs, rhs, opts)
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-g['python3_host_prog'] = os.getenv('HOME')../.pyenv/versions/3.9.5/bin/python'
+g['python3_host_prog'] = os.getenv('HOME')..'/.pyenv/versions/3.9.5/bin/python'
 
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
