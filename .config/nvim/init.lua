@@ -22,7 +22,5 @@ if fn.empty(fn.glob(install_path)) > 0 then
   cmd 'PackerInstall'
 end
 
-vim.cmd [[set guifont=Hack\ Nerd\ Font\ Mono]]
-
 require('plugins')
 require('colorscheme')
