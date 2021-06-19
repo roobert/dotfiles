@@ -26,7 +26,7 @@ require "lspconfig".efm.setup {
     }
 }
 
-vim.cmd "autocmd BufRead,BufNewFile *.tf set filetype=tf"
+vim.cmd [[autocmd BufRead,BufNewFile *.tf set filetype=tf | set commentstring=#\ %s]]
 
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.pyright.setup{}
