@@ -9,19 +9,23 @@ local function map(mode, lhs, rhs, opts)
   api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- set leader as spacebar
+-- Set leader as spacebar
 api.nvim_set_keymap('n', '<space>', '<NOP>',
   { noremap = true, silent = true }
 )
 g.mapleader = " "
 
--- window navigation
-map('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-map('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-map('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-map('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+-- Hop navigation
+map('n', '<leader>j', '<cmd>HopWord<CR>')
+map('n', '<leader>l', '<cmd>HopLine<CR>')
 
--- tab navigation
+-- Window navigation
+map('n', '<C-h>', '<C-w>h')
+map('n', '<C-j>', '<C-w>j')
+map('n', '<C-k>', '<C-w>k')
+map('n', '<C-l>', '<C-w>l')
+
+-- Tab navigation
 map('n', '<Tab>', '<cmd>bnext<CR>', { noremap = true, silent = true })
 map('n', '<S-Tab>', '<cmd>bprev<CR>', { noremap = true, silent = true })
 
@@ -29,16 +33,16 @@ map('n', '<S-Tab>', '<cmd>bprev<CR>', { noremap = true, silent = true })
 map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', { silent = true })
 map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', { silent = true })
 
--- unset highlight
-map('n', '<leader>h', ':set noh<CR>', { noremap = true, silent = true })
+-- Unset highlight
+map('n', '<leader>h', ':noh<CR>', { noremap = true, silent = true })
 
--- search for word under cursor
+-- Search for word under cursor
 map('n', '<leader>/', '*N', { noremap = true, silent = true })
 
--- explore
+-- Explore
 map('n', '<leader>e', ':Telescope find_files<CR>', { noremap = true, silent = true })
 
--- Toggle diagnostics
+-- FIXME: Toggle diagnostics
 local virtual_text = {}
 virtual_text.show = true
 
@@ -52,4 +56,4 @@ virtual_text.toggle = function()
     )
 end
 
-map('n', '<Leader>d', '<Cmd>lua virtual_text.toggle()<CR>')
+map('n', '<Leader>d', '<Cmd>lua virtual_text.toggle()<CR>', { noremap = true, silent = true })

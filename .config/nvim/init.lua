@@ -23,4 +23,16 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 require('plugins')
+require('options')
 require('colorscheme')
+require('bars')
+require('commenting')
+require('font')
+require('highlighting')
+require('lsp')
+require('mappings')
+require('nvim-compe')
+require('signature')
+
+-- FIXME this fails if it's in lua/colorize.lua, why?
+require'colorizer'.setup()

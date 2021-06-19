@@ -35,13 +35,15 @@ return require('packer').startup(function()
     'ray-x/lsp_signature.nvim'
   }
 
-  use {
-    'roobert/robs.vim'
-  }
 
   -- Autopairs but only on CR
   use {
     '9mm/vim-closer'
+  }
+
+  -- text objects for paranthesis, brackets, quotes, etc.
+  use {
+    'tpope/vim-surround'
   }
 
   -- Comment toggling
@@ -151,6 +153,10 @@ return require('packer').startup(function()
 
   use {
     'folke/tokyonight.nvim',
+  }
+
+  use {
+    'norcalli/nvim-colorizer.lua'
   }
 
   -- TODO

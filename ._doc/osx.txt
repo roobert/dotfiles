@@ -27,10 +27,12 @@ gh auth login
 ## Configure iTerm2
 * enable icons (search icons)
 * left tabs
+* mouse follow focus
 * adjust colour to blue
 * enable git hint thing
 * line cursor
 * tab order, remap control-tab to next tab: https://gitlab.com/gnachman/iterm2/-/issues/8219
+* disable beep
 ```
 brew tap caskroom/fonts
 brew cask install font-hack-nerd-font
@@ -40,6 +42,7 @@ select DroidSansMono Nerd Font from iterm2
 ## Shell
 add dotfiles
 ```
+brew install zplug
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep
 brew install hashicorp/tap/terraform-ls
@@ -62,3 +65,14 @@ pip install neovim
 brew install neovim --HEAD
 nvim (follow instructions in init.lua)
 
+
+## Neovide
+
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+brew install cmake
+git clone https://github.com/Kethku/neovide
+cd neovide
+cargo build --release
+```
