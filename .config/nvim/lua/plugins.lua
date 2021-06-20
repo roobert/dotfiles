@@ -46,6 +46,11 @@ return require('packer').startup(function()
     'tpope/vim-surround'
   }
 
+  -- more text objects - allow changing values in next thing
+  use {
+    'wellle/targets.vim'
+  }
+
   -- Comment toggling
   use {
     'terrortylor/nvim-comment'
@@ -67,6 +72,9 @@ return require('packer').startup(function()
   --use {
   --  'ojroques/nvim-bufbar'
   --}
+  use {
+    'romgrk/barbar.nvim'
+  }
 
   -- Status bar
   --use {
@@ -152,11 +160,20 @@ return require('packer').startup(function()
   }
 
   use {
+    'roobert/robs.vim',
+  }
+
+  use {
     'folke/tokyonight.nvim',
   }
 
   use {
     'norcalli/nvim-colorizer.lua'
+  }
+
+  -- visual block+enter to align stuff
+  use {
+    'junegunn/vim-easy-align'
   }
 
   -- TODO

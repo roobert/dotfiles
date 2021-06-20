@@ -15,6 +15,37 @@ api.nvim_set_keymap('n', '<space>', '<NOP>',
 )
 g.mapleader = " "
 
+-- window management:
+-- * :sf = split find open file
+-- * :vert sf = vertical split find open file..
+-- * window only? maximise current window
+-- * vimgrep to search across buffers and add to quickfix
+--
+-- surround:
+-- * ys prefix mnemomic: you surround
+-- * cst" can change an html tag
+-- * cs"' (or whatever) changes quotes and parens
+-- * cs) include space around word
+-- * ds) delete surround
+-- * visual block mode can surround line with html tag
+-- * 2cs" - change outer quotes
+-- 
+-- spellcheck:
+--
+-- commenting:
+--
+-- movement:
+-- HopWord = <leader>h
+-- HopLine = <leader>l
+--
+-- searching:
+-- * f<letter> - ; and , for next/prev
+--
+-- change targets:
+-- * c2ina - change second inside brackets
+-- * c2in" - change second inside quote
+-- * cli" - change last inside "
+
 -- Hop navigation
 map('n', '<leader>j', '<cmd>HopWord<CR>')
 map('n', '<leader>l', '<cmd>HopLine<CR>')
