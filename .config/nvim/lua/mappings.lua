@@ -15,6 +15,8 @@ api.nvim_set_keymap('n', '<space>', '<NOP>',
 )
 g.mapleader = " "
 
+-- FIXME: make this available via a popup
+--
 -- window management:
 -- * :sf = split find open file
 -- * :vert sf = vertical split find open file..
