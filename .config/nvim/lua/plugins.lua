@@ -82,7 +82,7 @@ return require('packer').startup(function()
   --}
   use {
     'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
   }
 
   -- Spell checking
