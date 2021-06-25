@@ -25,6 +25,14 @@ brew install gh
 gh auth login
 
 ## Configure iTerm2
+* tabs -> show tab bar even when there is one tab
+* disable show tab numbers
+* disable tab close
+* appearance -> panes -> disable show per-pane titlebar
+* profiles -> session -> status bar enabled
+* configure status bar -> git, rainbow, set background as same as left panel
+  (color picker)
+* apperance -> status bar location -> bottom
 * enable icons (search icons)
 * left tabs
 * mouse follow focus

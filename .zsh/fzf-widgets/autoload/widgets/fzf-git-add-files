@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  __fzf::widget::print 'fzf-git-add-files: Not a git repository'
+  return 1
+fi
+
+__fzf::widget::init 'git add --' || return 1
+
+git status --short | \
+  grep '^.[MD?]' | \
+  __fzf::widget::select $FZF_WIDGET_OPTS[git-add-files] -m | \
+  awk '{print $2}' | \
+  __fzf::widget::insert -q
+
+__fzf::widget::exec

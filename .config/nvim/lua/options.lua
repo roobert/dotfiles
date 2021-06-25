@@ -31,4 +31,4 @@ opt.termguicolors = false
 opt.iskeyword = "@,48-57,_,192-255" -- added _ as keyword separator
 opt.encoding = "utf8"
 opt.showmode = false                -- disable showing INSERT etc. in prompt
-i
+
