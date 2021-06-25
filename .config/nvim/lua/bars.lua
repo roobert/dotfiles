@@ -5,19 +5,20 @@
 --}
 require('lualine').setup {
   options = {
+    section_separators = {'', ''},
+    component_separators = {'', ''},
     theme = 'tokyonight'
   },
   sections = {
-    lualine_a = {"mode"},
-    lualine_b = {"branch", "diff"},
-    lualine_c = {"filename"},
-    lualine_x = {
-      {"diagnostics", sources = {"nvim_lsp"}},
-      "encoding",
+    --lualine_a = {{"mode", lower = true}},
+    lualine_a = {},
+    lualine_c = {"diff"},
+    lualine_b = {{"filename", file_status = true, path = 1}},
+    lualine_x = {{"diagnostics", sources = {"nvim_lsp"}},
       "fileformat",
-      "filetype"
     },
     lualine_y = {},
-    lualine_z = {"location"}
+    -- FIXME: how to make right side not colored..
+    lualine_z = {{"location", color = nil}}
   }
 }

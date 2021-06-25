@@ -52,6 +52,9 @@ g.mapleader = " "
 map('n', '<leader>j', '<cmd>HopWord<CR>')
 map('n', '<leader>l', '<cmd>HopLine<CR>')
 
+-- Clumziness..
+--map('n', ':Q', ':)
+
 -- Window navigation
 map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
@@ -63,8 +66,8 @@ map('n', '<Tab>', '<cmd>bnext<CR>', { noremap = true, silent = true })
 map('n', '<S-Tab>', '<cmd>bprev<CR>', { noremap = true, silent = true })
 
 -- s/// shortcut
-map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', { silent = true })
-map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', { silent = true })
+map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', { silent = false })
+map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', { silent = false })
 
 -- Unset highlight
 map('n', '<leader>h', ':noh<CR>', { noremap = true, silent = true })

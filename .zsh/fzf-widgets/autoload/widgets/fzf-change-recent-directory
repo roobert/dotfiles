@@ -14,7 +14,8 @@ fi
 
 __fzf::widget::init 'cd --' || return 1
 
-cdr -l | \
+cdr -l | tac | \
+  sed 's/^[^ ][^ ]*  *//' | \
   __fzf::widget::select $FZF_WIDGET_OPTS[change-recent-dir] +m \
   --layout reverse-list \
   --height 19 | \

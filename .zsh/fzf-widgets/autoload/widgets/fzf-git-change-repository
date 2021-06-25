@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+if ! __fzf::widget::check 'ghq'; then
+  local msg='fzf-git-change-repository: commnad not found: ghq
+
+  Please install ghq (https://github.com/motemen/ghq).
+  '
+  __fzf::widget::print "$msg"
+  return 1
+fi
+
+__fzf::widget::init 'cd --' || return 1
+
+ghq list -p | \
+  sort | \
+  sed "s|$HOME|~|g" | \
+  __fzf::widget::select $FZF_WIDGET_OPTS[change-repository] +m | \
+  __fzf::widget::insert -q
+
+__fzf::widget::exec

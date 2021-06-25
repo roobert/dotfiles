@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+if [[ $1 = -q ]]; then
+  # execute a command quietly
+  IFS=$'\n' local cmd="`cat`"
+  if [[ -n $cmd ]]; then
+    $=cmd
+  else
+    __fzf::widget::clear
+  fi
+elif [[ -n $BUFFER ]]; then
+  zle accept-line
+fi

@@ -19,7 +19,7 @@ return require('packer').startup(function()
   -- install language servers..
   -- https://github.com/kabouzeid/nvim-lspinstall
 
-  -- linter / format executor chained off neovim LSP
+  -- linter / format executor chained off neovim LSP use {
   use {
     'mattn/efm-langserver'
   }
@@ -34,7 +34,6 @@ return require('packer').startup(function()
   use {
     'ray-x/lsp_signature.nvim'
   }
-
 
   -- Autopairs but only on CR
   use {
@@ -72,8 +71,11 @@ return require('packer').startup(function()
   --use {
   --  'ojroques/nvim-bufbar'
   --}
+  --use {
+  --  'romgrk/barbar.nvim'
+  --}
   use {
-    'romgrk/barbar.nvim'
+    'pacha/vem-tabline'
   }
 
   -- Status bar
@@ -135,12 +137,15 @@ return require('packer').startup(function()
   }
 
   -- Highlight TODO, FIXME, NOTE, etc.
+  -- use {
+  --   "folke/todo-comments.nvim",
+  --   requires = "nvim-lua/plenary.nvim",
+  --   config = function()
+  --     require("todo-comments").setup {}
+  --   end
+  -- }
   use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup {}
-    end
+    'tpope/vim-commentary'
   }
 
   --use {
@@ -186,9 +191,10 @@ return require('packer').startup(function()
   --    config = function() require 'plugins.nvim-lsputils' end
   --}
 
-  --use {
-  --'sheerun/vim-polyglot'
-  --}
+  -- adjust shiftwidth and expandtab based on filetype
+   use {
+    'tpope/vim-sleuth'
+  }
 
   --use {
   --  'kosayoda/nvim-lightbulb'
