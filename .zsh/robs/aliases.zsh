@@ -10,28 +10,37 @@ alias empty_trash="rm -rf ~/.local/share/Trash"
 alias vim="nvim -p"
 alias vi="nvim -p"
 
+function gcm () {
+  git commit -m "$*"  
+}
+
 # git
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdl="gl -p"
 alias gdt="git diff-tree --no-commit-id --name-only -r HEAD"
-alias gup='git commit -am "updated" && git push'
-alias gm='git commit -m'
-alias gc='git commit -m'
 alias gs='git status --short --branch'
 alias gpo='git push origin HEAD'
-alias gp='git push'
+alias gp='git pull'
 alias gdh='git diff HEAD'
 alias gdc='git diff --cached'
+alias gb='git checkout -b'
+alias gc='git checkout'
 alias gd='git diff'
 alias ga='git add'
 alias gaa='git add .'
+alias grh='git reset HEAD'
+alias gm='git checkout master'
 
-# ps stuff
-export PS_FORMAT="user,pid,etime,args"
-alias ps='ps ww'                     # ps - always assume unlimited width
-alias pa='ps axcwwf'                  # p  - display all
-alias pu='ps -o user,pid,etime,command ww' # pu
-alias p='ps f -o cmd'
+# linux ps stuff
+#export PS_FORMAT="user,pid,etime,args"
+#alias ps='ps ww'                     # ps - always assume unlimited width
+#alias pa='ps axcwwf'                  # p  - display all
+#alias pu='ps -o user,pid,etime,command ww' # pu
+#alias p='ps f -o cmd'
+alias p="ps ww -u"
+alias pu="ps ww -u"
+alias px="ps ww -axu"
+alias pa="ps ww -axu"
 
 # reload zshrc
 alias rzsh="exec zsh -l"
@@ -40,7 +49,7 @@ alias zr="rz"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
-export EDITOR="vim"
+export EDITOR="nvim"
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 
