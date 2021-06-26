@@ -1,4 +1,3 @@
--- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
@@ -88,9 +87,9 @@ return require('packer').startup(function()
   }
 
   -- Spell checking
-  use {
-    'kamykn/spelunker.vim'
-  }
+  --use {
+  --  'kamykn/spelunker.vim'
+  --}
 
   -- NvimTree explorer
   -- FIXME: Switch to telescope?
@@ -117,12 +116,21 @@ return require('packer').startup(function()
     end
   }
 
-
   -- press leader-esc to see keybindings
   use {
     "folke/which-key.nvim",
     config = function()
-      require("which-key").setup {}
+      require('which-key').setup {
+        plugins = {
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
+        },
+        presets = {
+          z = true
+        },
+      }
     end
   }
 
@@ -136,24 +144,28 @@ return require('packer').startup(function()
     end
   }
 
+  -- FIXME - TodoTrouble does not work
   -- Highlight TODO, FIXME, NOTE, etc.
-  -- use {
-  --   "folke/todo-comments.nvim",
-  --   requires = "nvim-lua/plenary.nvim",
-  --   config = function()
-  --     require("todo-comments").setup {}
-  --   end
-  -- }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {}
+    end
+  }
+
   use {
     'tpope/vim-commentary'
   }
 
-  --use {
-  --  "lukas-reineke/indent-blankline.nvim",
-  --  config = function()
-  --    require("indent-blankline").setup {}
-  --  end
-  --}
+  -- use this with some other plugin to have nice indent guides..
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    branch = "lua",
+    config = function()
+      require("indent-blankline").setup {}
+    end
+  }
 
   -- https://github.com/folke/trouble.nvim
   use {

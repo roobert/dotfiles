@@ -1,22 +1,17 @@
-ZSH_ROOT="$HOME/.zsh"
-
-autoload -U compinit && compinit
-autoload -U is-at-least
+ZSH_ROOT="${HOME}/.zsh"
 
 PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
-for f in $ZSH_ROOT/**/*.zsh; do
-  if is-at-least 4.4.0; then
-    source $f
-  else
-    case $f in
-      "$ZSH_ROOT/oh-my-zsh-stripped/vi-mode/vi-mode.plugin.zsh") continue ;;
-      "$ZSH_ROOT/oh-my-zsh-stripped/git/git.plugin.zsh")         continue ;;
-      "$ZSH_ROOT/robs/cdr.zsh")                                  continue ;;
-      "$ZSH_ROOT/robs/functions/cdr.zsh")                        continue ;;
-      *) source $f ;;
-    esac
-  fi
+autoload -U compinit && compinit
+
+function zshrc-compile () {
+  for f in ${ZSH_ROOT}/**/*.zsh; do
+    zcompile $f
+  done
+}
+
+for f in ${ZSH_ROOT}/**/*.zsh; do
+  source $f
 done
 
 # reload bookmarks
