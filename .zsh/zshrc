@@ -4,13 +4,18 @@ PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 autoload -U compinit && compinit
 
+source ${ZSH_ROOT}/spectrum.zsh
+source ${ZSH_ROOT}/fzf-widgets/init.zsh
+source ${ZSH_ROOT}/vi-mode/vi-mode.plugin.zsh
+source ${ZSH_ROOT}/zsh-autoenv/init.zsh
+
 function zshrc-compile () {
   for f in ${ZSH_ROOT}/**/*.zsh; do
     zcompile $f
   done
 }
 
-for f in ${ZSH_ROOT}/**/*.zsh; do
+for f in ${ZSH_ROOT}/robs/**/*.zsh; do
   source $f
 done
 
