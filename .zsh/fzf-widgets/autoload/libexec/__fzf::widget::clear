@@ -1,5 +1,0 @@
-#!/bin/zsh
-
-BUFFER=""
-CURSOR=$#BUFFER
-zle redisplay
