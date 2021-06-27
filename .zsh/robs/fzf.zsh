@@ -14,14 +14,14 @@ export FZF_DEFAULT_OPTS='
 zle      -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 
-# fuzzy jump to cd history..
-# function fzf-cdr () {
-#   local selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --query "$LBUFFER")
-#   if [ -n "$selected_dir" ]; then
-#     BUFFER="cd ${selected_dir}"
-#     zle accept-line
-#   fi
-#   zle reset-prompt
-# }
-# zle -N fzf-cdr
-# bindkey "^J" fzf-cdr
+function fzf-cdr () {
+  local selected_dir=$(cdr -l | awk '{ print $2 }' | fzf --layout reverse-list --height 21 --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
+zle -N fzf-cdr
+bindkey "^J" fzf-cdr
