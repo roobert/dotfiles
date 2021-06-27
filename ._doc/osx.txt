@@ -5,6 +5,8 @@ switch § and ` keys:
 switch escape key:
 * https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x/40254864#40254864
 
+Switch to Australian keyboard layout to remap shift-3 to '#'
+
 ## Programmes
 * iterm2
 * slack
