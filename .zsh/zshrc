@@ -1,18 +1,13 @@
 ZSH_ROOT="${HOME}/.zsh"
 
-PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+export TERM=screen-256color
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
 autoload -U compinit && compinit
 
 source ${ZSH_ROOT}/spectrum.zsh
 source ${ZSH_ROOT}/vi-mode/vi-mode.plugin.zsh
 source ${ZSH_ROOT}/zsh-autoenv/init.zsh
-
-function zshrc-compile () {
-  for f in ${ZSH_ROOT}/**/*.zsh; do
-    zcompile $f
-  done
-}
 
 for f in ${ZSH_ROOT}/robs/**/*.zsh; do
   source $f
