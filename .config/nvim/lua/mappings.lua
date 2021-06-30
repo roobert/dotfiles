@@ -52,6 +52,12 @@ g.mapleader = " "
 map('n', '<leader>j', '<cmd>HopWord<CR>')
 map('n', '<leader>l', '<cmd>HopLine<CR>')
 
+-- Easy align stuff
+map('v', '<enter>', '<cmd>EasyAlign<CR>')
+
+-- Paste last yank, nb: pressing '"' allows which-key to show register yank history
+map('n', '<leader>p', '"0p')
+
 -- Clumziness..
 --map('n', ':Q', ':)
 

@@ -13,6 +13,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=9999999
 SAVEHIST=9999999
 
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
 # test out this ignore cd command yo
 setopt AUTOCD
 # auto expand ~ vars
