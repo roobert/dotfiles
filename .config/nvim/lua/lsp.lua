@@ -4,9 +4,12 @@
 
 require "lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"python", "tf", "sh"},
+    filetypes = {"python", "tf", "sh", "asm"},
     settings = {
         languages = {
+            asm = {
+                {formatCommand = "asmfmt", formatStdin = true}
+            },
             python = {
                 {formatCommand = "black -q -", formatStdin = true}
             },

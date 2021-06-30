@@ -7,6 +7,10 @@ switch escape key:
 
 Switch to Australian keyboard layout to remap shift-3 to '#'
 
+Under Keyboard -> Text disable double spacebar full-stop
+
+Disable smart quotes
+
 ## Programmes
 * iterm2
 * slack
@@ -55,7 +59,7 @@ add dotfiles
 ```
 brew install zplug
 brew tap vmware-tanzu/carvel
-brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep
+brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep graphviz qemu
 brew install hashicorp/tap/terraform-ls
 
 # language servers and linters for neovim
