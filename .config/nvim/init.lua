@@ -33,6 +33,9 @@ require('lsp')
 require('mappings')
 require('nvim-compe')
 require('signature')
+require('lightbulb')
+require('tags')
+require('linenumbers')
 
 -- FIXME this fails if it's in lua/colorize.lua, why?
 require'colorizer'.setup()

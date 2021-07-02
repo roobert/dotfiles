@@ -1,7 +1,7 @@
 ZSH_ROOT="${HOME}/.zsh"
 
 export TERM=screen-256color
-export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
+export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin"
 
 autoload -U compinit && compinit
 

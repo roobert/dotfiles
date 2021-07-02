@@ -1,6 +1,7 @@
 vim.cmd [[packadd packer.nvim]]
 
-return require('packer').startup(function()
+
+return require('packer').startup(function(use)
   -- packer manage itself
   use {
     'wbthomason/packer.nvim'
@@ -12,6 +13,10 @@ return require('packer').startup(function()
   use {
     'neovim/nvim-lspconfig',
     config = function() require 'plugins.nvim-lspconfig' end
+  }
+
+  use {
+    'kabouzeid/nvim-lspinstall'
   }
 
   -- This is a companion to lspconfig and will automatically
@@ -193,6 +198,21 @@ return require('packer').startup(function()
     'junegunn/vim-easy-align'
   }
 
+  -- auto handle tags..
+  use {
+    'ludovicchabant/vim-gutentags'
+  }
+
+  -- sidebar to show ctags
+  use {
+    'majutsushi/tagbar'
+  }
+
+  -- hints about code actions
+  use {
+    'kosayoda/nvim-lightbulb'
+  }
+
   -- TODO
   -- Decide what to do with this stuff..
 
@@ -204,10 +224,14 @@ return require('packer').startup(function()
   --}
 
   -- adjust shiftwidth and expandtab based on filetype
-   use {
+  use {
     'tpope/vim-sleuth'
   }
 
+  -- auto switch between relative and normal line numbers
+  use {
+    'jeffkreeftmeijer/vim-numbertoggle'
+  }
   --use {
   --  'kosayoda/nvim-lightbulb'
   --}
