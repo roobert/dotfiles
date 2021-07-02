@@ -2,7 +2,6 @@
 local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
 local opt, wo = vim.opt, vim.wo
 local fmt = string.format
-
 local function map(mode, lhs, rhs, opts)
   local options = {noremap = true, silent = true}
   if opts then options = vim.tbl_extend('force', options, opts) end
@@ -22,6 +21,7 @@ g.mapleader = " "
 -- * :vert sf = vertical split find open file..
 -- * window only? maximise current window
 -- * vimgrep to search across buffers and add to quickfix
+-- * ctrl+hjkl to move between windows. Note: tabbar and Trouble are windows!
 --
 -- surround:
 -- * ys prefix mnemomic: you surround
@@ -31,14 +31,28 @@ g.mapleader = " "
 -- * ds) delete surround
 -- * visual block mode can surround line with html tag
 -- * 2cs" - change outer quotes
--- 
+--
 -- spellcheck:
+-- z= - bring up spellcheck list (FIXME: use which-key)
 --
 -- commenting:
+-- gc - go comment
 --
 -- movement:
--- HopWord = <leader>h
--- HopLine = <leader>l
+-- HopWord - <leader>h
+-- HopLine - <leader>l
+-- ]m      - move to next function
+-- [m      - move to last function
+-- {{      - next gap/section
+-- }}      - last gap/section
+-- ctrl-]  - jump to definition
+-- shift-k - jump to man page of keyword
+--
+-- display:
+-- leader-n - toggle numbers
+-- leader-c - toggle ctags bar
+-- leader-t - toggle Trouble
+-- leader-h - toggle highlight
 --
 -- searching:
 -- * f<letter> - ; and , for next/prev
@@ -47,6 +61,8 @@ g.mapleader = " "
 -- * c2ina - change second inside brackets
 -- * c2in" - change second inside quote
 -- * cli" - change last inside "
+--
+--
 
 -- Hop navigation
 map('n', '<leader>j', '<cmd>HopWord<CR>')
@@ -96,7 +112,7 @@ map('n', '<leader>/', '*N', { noremap = true, silent = true })
 -- Explore
 map('n', '<leader>e', ':Telescope find_files<CR>', { noremap = true, silent = true })
 
--- FIXME: Toggle diagnostics
+-- FIXME: Toggle diagnostics - this can toggle off but not on!
 vim.g.diagnostics_active = true
 
 function _G.toggle_diagnostics()

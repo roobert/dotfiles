@@ -39,6 +39,11 @@ return require('packer').startup(function(use)
     'ray-x/lsp_signature.nvim'
   }
 
+  -- icons for signatures
+  use {
+    'onsails/lspkind-nvim'
+  }
+
   -- Autopairs but only on CR
   use {
     '9mm/vim-closer'

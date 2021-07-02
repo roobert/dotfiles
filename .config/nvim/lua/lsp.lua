@@ -46,7 +46,8 @@ vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.pyright.setup{}
 
-
+-- FIXME: need some way to toggle diagnostics
+--
 -- multiple lsps dont play well together..
 --require 'lspconfig'.terraformls.setup {
 --    cmd = {"terraform-ls", "serve"},
@@ -64,3 +65,22 @@ require'lspconfig'.pyright.setup{}
 --        }
 --    }
 --}
+
+--vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--    vim.lsp.diagnostic.on_publish_diagnostics, {
+--      -- disable virtual text
+--      virtual_text = false;
+--
+--      -- disable underline
+--      underline = false,
+--
+--      -- disable signs
+--       signs = false,
+-- 
+--      --display_diagnostics = false,
+--    }
+--  )
+--
+---- shows on BufWrite for all clients attached to current buffer, where virtual_text is false, but underline and signs default true
+--vim.cmd[[autocmd BufWrite <buffer> lua vim.lsp.diagnostic.show_buffer_diagnostics({virtual_text = true})]]
+
