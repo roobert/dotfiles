@@ -11,6 +11,8 @@ Under Keyboard -> Text disable double spacebar full-stop
 
 Disable smart quotes
 
+Set key repeat to fastest/shortest
+
 ## Programmes
 * iterm2
 * slack
@@ -61,6 +63,7 @@ brew install zplug
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep graphviz qemu
 brew install hashicorp/tap/terraform-ls
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 
 # language servers and linters for neovim
 sudo npm install -g pyright bash-language-server

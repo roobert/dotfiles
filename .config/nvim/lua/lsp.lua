@@ -2,6 +2,14 @@
 -- * to debug, run :LspInfo and check ~/.cache/nvim/lsp.log
 -- * if anything in this file doesn't work, it breaks everything else..
 
+-- This helps install language servers
+require'lspinstall'.setup()
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+
 require "lspconfig".efm.setup {
     init_options = {documentFormatting = true},
     filetypes = {"python", "tf", "sh", "asm"},
@@ -45,3 +53,14 @@ require'lspconfig'.pyright.setup{}
 --    filetypes = {"tf"}
 --}
 
+-- FIXME: tell lsp to not complain about vim keyword..
+--require'lspconfig'.sumneko_lua.setup {
+--    -- ... other configs
+--    settings = {
+--        Lua = {
+--            diagnostics = {
+--                globals = { 'vim' }
+--            }
+--        }
+--    }
+--}

@@ -58,8 +58,17 @@ map('v', '<enter>', '<cmd>EasyAlign<CR>')
 -- Paste last yank, nb: pressing '"' allows which-key to show register yank history
 map('n', '<leader>p', '"0p')
 
+-- Execute code action
+map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+
+-- toggle line numbers
+map('n', '<leader>n', '<cmd>set nonumber!|set norelativenumber!<CR>')
+
 -- Clumziness..
 --map('n', ':Q', ':)
+
+-- Toggle CTags sidebar..
+map('n', '<leader>c', '<cmd>TagbarToggle<CR>')
 
 -- Window navigation
 map('n', '<C-h>', '<C-w>h')
@@ -88,17 +97,24 @@ map('n', '<leader>/', '*N', { noremap = true, silent = true })
 map('n', '<leader>e', ':Telescope find_files<CR>', { noremap = true, silent = true })
 
 -- FIXME: Toggle diagnostics
-local virtual_text = {}
-virtual_text.show = true
+vim.g.diagnostics_active = true
 
-virtual_text.toggle = function()
-    virtual_text.show = not virtual_text.show
-    vim.lsp.diagnostic.display(
-        vim.lsp.diagnostic.get(0, 1),
-        0,
-        1,
-        {virtual_text = virtual_text.show}
+function _G.toggle_diagnostics()
+  if vim.g.diagnostics_active then
+    vim.lsp.diagnostic.clear(0)
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
+    vim.g.diagnostics_active = false
+  else
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+      }
     )
+    vim.g.diagnostics_active = true
+  end
 end
 
-map('n', '<Leader>d', '<Cmd>lua virtual_text.toggle()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>d', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
