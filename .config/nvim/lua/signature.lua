@@ -9,6 +9,7 @@ require'lsp_signature'.on_attach({
     floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
     hint_enable = true, -- virtual hint enable
     hint_prefix = " 👉 ",  -- Panda for parameter
+    fix_pos = true,
     hint_scheme = "String",
     use_lspsaga = false,  -- set to true if you want to use lspsaga popup
     hi_parameter = "Search", -- how your parameter will be highlight
