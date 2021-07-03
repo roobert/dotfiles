@@ -62,11 +62,12 @@ add dotfiles
 brew install zplug
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp util-linux ripgrep graphviz qemu
+
+
+# language servers and linters for neovim - also install with LspInfo
 brew install hashicorp/tap/terraform-ls
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-
-# language servers and linters for neovim
-sudo npm install -g pyright bash-language-server
+luarocks install --server=https://luarocks.org/dev luaformatter
 brew install efm-langserver shellcheck
 ```
 
