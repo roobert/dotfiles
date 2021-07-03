@@ -1,4 +1,4 @@
-### Workstation Config
+# Workstation Config
 
 ## Keyboard
 * Switch § and ` keys:
