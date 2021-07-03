@@ -35,7 +35,7 @@ local terraformFormat = {formatCommand = "terraform fmt -", formatStdin = true}
 
 local shellcheck = {
     LintCommand = 'shellcheck -f gcc -x',
-    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote  : %m'}
+    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
 }
 
 local luaFormat = {
