@@ -6,7 +6,6 @@ alias ssh="ssh -t"
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
 # vim
-#alias vim="vim -T xterm-256color -p"
 alias vim="nvim -p"
 alias vi="nvim -p"
 
@@ -32,11 +31,6 @@ alias grh='git reset HEAD'
 alias gm='git checkout master'
 
 # linux ps stuff
-#export PS_FORMAT="user,pid,etime,args"
-#alias ps='ps ww'                     # ps - always assume unlimited width
-#alias pa='ps axcwwf'                  # p  - display all
-#alias pu='ps -o user,pid,etime,command ww' # pu
-#alias p='ps f -o cmd'
 alias p="ps ww -u"
 alias pu="ps ww -u"
 alias px="ps ww -axu"
@@ -44,12 +38,11 @@ alias pa="ps ww -axu"
 
 # reload zshrc
 alias rzsh="exec zsh -l"
-alias rz="rzsh"
-alias zr="rz"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="nvim"
+
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
 

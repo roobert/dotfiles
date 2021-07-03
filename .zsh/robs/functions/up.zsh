@@ -35,13 +35,3 @@ function up {
 
   return 1
 }
-
-#function cd {
-#  if [[ $# == 0 ]]; then
-#    builtin cd
-#  fi
-#
-#  if ! builtin cd "$*" &>/dev/null; then
-#    up "$*" || builtin cd "$*"
-#  fi
-#}

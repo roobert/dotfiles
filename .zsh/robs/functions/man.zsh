@@ -1,6 +1,5 @@
 # add some extra stuff to man
 function man {
-
   # list all man pages
   if [[ $# -eq 0 ]]; then
     command man -k .
