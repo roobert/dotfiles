@@ -1,3 +1,9 @@
+-- Run:
+-- * PackerInstall
+-- * LspInstall lua
+-- * LspInstall ...
+-- * PackerCompile
+--
 require("globals")
 require("python")
 require('spelling')

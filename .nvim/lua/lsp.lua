@@ -15,6 +15,7 @@ for _, server in pairs(servers) do
     require'lspconfig'[server].setup {}
 end
 
+-- this will fail until `:LspInstall lua` has been run
 require'lspconfig'.lua.setup({
     settings = {
         Lua = {
