@@ -38,6 +38,8 @@ local shellcheck = {
     lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote: %m'}
 }
 
+local shfmt = {formatCommand = 'shfmt -ci -s -bn', formatStdin = true}
+
 local luaFormat = {
     formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-keep-simple-control-block-one-line --column-limit 120",
     formatStdin = true
@@ -52,7 +54,7 @@ require"lspconfig".efm.setup {
             python = {pythonBlack, pythonISort},
             tf = {terraformFormat},
             lua = {luaFormat},
-            sh = {shellcheck}
+            sh = {shellcheck, shfmt}
         }
     }
 }

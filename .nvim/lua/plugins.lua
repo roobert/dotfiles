@@ -146,7 +146,7 @@ return require('packer').startup(function(use)
     use {'roobert/robs.vim'}
 
     -- Fork of folke/tokyonight..
-    use {'roobert/tokyonight.nvim'}
+    use {'roobert/tokyoshade.nvim'}
 
     -- Colorize hex colours
     use {'norcalli/nvim-colorizer.lua'}
@@ -166,6 +166,6 @@ return require('packer').startup(function(use)
     -- auto switch between relative and normal line numbers
     use {'jeffkreeftmeijer/vim-numbertoggle'}
 
-    -- Autopairs but only on CR
+    -- FIXME: Autopairs but only on CR
     use {'9mm/vim-closer'}
 end)
