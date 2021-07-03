@@ -1,19 +1,3 @@
--- FIXME: DRY this up
-local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
-local opt, wo = vim.opt, vim.wo
-local fmt = string.format
-local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true, silent = true}
-  if opts then options = vim.tbl_extend('force', options, opts) end
-  api.nvim_set_keymap(mode, lhs, rhs, options)
-end
-
--- Set leader as spacebar
-api.nvim_set_keymap('n', '<space>', '<NOP>',
-  { noremap = true, silent = true }
-)
-g.mapleader = " "
-
 -- FIXME: make this available via a popup
 --
 -- window management:
@@ -63,6 +47,9 @@ g.mapleader = " "
 -- * cli" - change last inside "
 --
 --
+-- Set leader as spacebar
+vim.api.nvim_set_keymap('n', '<space>', '<NOP>', {noremap = true, silent = true})
+vim.g.mapleader = " "
 
 -- Hop navigation
 map('n', '<leader>j', '<cmd>HopWord<CR>')
@@ -81,7 +68,7 @@ map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 map('n', '<leader>n', '<cmd>set nonumber!|set norelativenumber!<CR>')
 
 -- Clumziness..
---map('n', ':Q', ':)
+-- map('n', ':Q', ':)
 
 -- Toggle CTags sidebar..
 map('n', '<leader>c', '<cmd>TagbarToggle<CR>')
@@ -93,44 +80,41 @@ map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 
 -- Tab navigation
-map('n', '<Tab>', '<cmd>bnext<CR>', { noremap = true, silent = true })
-map('n', '<S-Tab>', '<cmd>bprev<CR>', { noremap = true, silent = true })
+map('n', '<C-t>', '<cmd>tabnew<CR>', {noremap = true, silent = true})
+map('n', '<Tab>', '<cmd>tabnext<CR>', {noremap = true, silent = true})
+map('n', '<S-Tab>', '<cmd>tabprev<CR>', {noremap = true, silent = true})
 
 -- s/// shortcut
-map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', { silent = false })
-map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', { silent = false })
+map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', {silent = false})
+map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', {silent = false})
 
 -- toggle Trouble diagnostics viewer
 map('n', '<leader>t', '<cmd>TroubleToggle lsp_document_diagnostics<CR>')
 
 -- Unset highlight
-map('n', '<leader>h', ':noh<CR>', { noremap = true, silent = true })
+map('n', '<leader>h', ':noh<CR>', {noremap = true, silent = true})
 
 -- Search for word under cursor
-map('n', '<leader>/', '*N', { noremap = true, silent = true })
+map('n', '<leader>/', '*N', {noremap = true, silent = true})
 
 -- Explore
-map('n', '<leader>e', ':Telescope find_files<CR>', { noremap = true, silent = true })
+map('n', '<leader>e', ':Telescope find_files<CR>', {noremap = true, silent = true})
 
 -- FIXME: Toggle diagnostics - this can toggle off but not on!
 vim.g.diagnostics_active = true
 
 function _G.toggle_diagnostics()
-  if vim.g.diagnostics_active then
-    vim.lsp.diagnostic.clear(0)
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = function() end
-    vim.g.diagnostics_active = false
-  else
-    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-      }
-    )
-    vim.g.diagnostics_active = true
-  end
+    if vim.g.diagnostics_active then
+        vim.lsp.diagnostic.clear(0)
+        vim.lsp.handlers["textDocument/publishDiagnostics"] = function()
+        end
+        vim.g.diagnostics_active = false
+    else
+        vim.lsp.handlers["textDocument/publishDiagnostics"] =
+            vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                         {virtual_text = true, signs = true, underline = true, update_in_insert = false})
+        vim.g.diagnostics_active = true
+    end
 end
 
-vim.api.nvim_set_keymap('n', '<leader>d', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>d', ':call v:lua.toggle_diagnostics()<CR>', {noremap = true, silent = true})

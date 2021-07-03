@@ -1,86 +1,74 @@
 -- NOTE
 -- * to debug, run :LspInfo and check ~/.cache/nvim/lsp.log
--- * if anything in this file doesn't work, it breaks everything else..
-
--- This helps install language servers
+-- * to print installed language servers:
+--    :lua vim.inspect(require'lspinstall'.installed_servers()))
+--
+-- install language servers
 require'lspinstall'.setup()
 
+-- setup all installed language servers
 local servers = require'lspinstall'.installed_servers()
 for _, server in pairs(servers) do
-  require'lspconfig'[server].setup{}
+    require'lspconfig'[server].setup {}
 end
 
-require "lspconfig".efm.setup {
+require'lspconfig'.lua.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = {'vim', 'api', 'cmd', 'fn', 'map', 'opt', 'wo', 'fmt'},
+                disable = {"lowercase-global"}
+            }
+        }
+    }
+})
+
+local asmFormat = {formatCommand = "asmfmt", formatStdin = true}
+
+local pythonBlack = {formatCommand = "black -q -", formatStdin = true}
+local pythonISort = {formatCommand = "isort -q -", formatStdin = true}
+
+local terraformFormat = {formatCommand = "terraform fmt -", formatStdin = true}
+
+local shellcheck = {
+    LintCommand = 'shellcheck -f gcc -x',
+    lintFormats = {'%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m', '%f:%l:%c: %tote  : %m'}
+}
+
+local luaFormat = {
+    formatCommand = "lua-format -i --no-keep-simple-function-one-line --no-keep-simple-control-block-one-line --column-limit 120",
+    formatStdin = true
+}
+
+require"lspconfig".efm.setup {
     init_options = {documentFormatting = true},
-    filetypes = {"python", "tf", "sh", "asm"},
+    filetypes = {"python", "tf", "asm", "sh", "lua"},
     settings = {
         languages = {
-            asm = {
-                {formatCommand = "asmfmt", formatStdin = true}
-            },
-            python = {
-                {formatCommand = "black -q -", formatStdin = true}
-            },
-            python = {
-                {formatCommand = "isort -q -", formatStdin = true}
-            },
-            tf = {
-                {formatCommand = "terraform fmt -", formatStdin = true}
-            },
-            -- FIXME: this doesn't work..
-            --sh = {
-            --      lintCommand = "shellcheck -f gcc -x -",
-            --      lintStdin = true,
-            --      lintFormats = {"%f=%l:%c: %trror: %m", "%f=%l:%c: %tarning: %m", "%f=%l:%c: %tote: %m"},
-            --      lintSource = "shellcheck"
-            --}
+            asm = {asmFormat},
+            python = {pythonBlack, pythonISort},
+            tf = {terraformFormat},
+            lua = {luaFormat},
+            sh = {shellcheck}
         }
     }
 }
 
+--  Correct filetype for Terraform files..
 vim.cmd [[autocmd BufRead,BufNewFile *.tf set filetype=tf | set commentstring=#\ %s]]
 
--- FIXME this seems to be ignored, sometimes??
-vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()"
+-- Format-on-write
+vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
 
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.pyright.setup{}
-
--- FIXME: need some way to toggle diagnostics
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+--    -- disable virtual text
+--    virtual_text = false,
 --
--- multiple lsps dont play well together..
---require 'lspconfig'.terraformls.setup {
---    cmd = {"terraform-ls", "serve"},
---    filetypes = {"tf"}
---}
-
--- FIXME: tell lsp to not complain about vim keyword..
---require'lspconfig'.sumneko_lua.setup {
---    -- ... other configs
---    settings = {
---        Lua = {
---            diagnostics = {
---                globals = { 'vim' }
---            }
---        }
---    }
---}
-
---vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---    vim.lsp.diagnostic.on_publish_diagnostics, {
---      -- disable virtual text
---      virtual_text = false;
+--    -- disable underline
+--    underline = false,
 --
---      -- disable underline
---      underline = false,
+--    -- disable signs
+--    signs = false
 --
---      -- disable signs
---       signs = false,
--- 
---      --display_diagnostics = false,
---    }
---  )
---
----- shows on BufWrite for all clients attached to current buffer, where virtual_text is false, but underline and signs default true
---vim.cmd[[autocmd BufWrite <buffer> lua vim.lsp.diagnostic.show_buffer_diagnostics({virtual_text = true})]]
-
+--    -- display_diagnostics = false,
+-- })
