@@ -1,4 +1,7 @@
 -- NOTE
+-- * run:
+--    :LspInstall bash css dockerfile go html java json lua  \
+--      python ruby rust terraform typescript vim vue yaml
 -- * to debug, run :LspInfo and check ~/.cache/nvim/lsp.log
 -- * to print installed language servers:
 --    :lua vim.inspect(require'lspinstall'.installed_servers()))
