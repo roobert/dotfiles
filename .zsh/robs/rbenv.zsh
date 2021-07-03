@@ -1,10 +1,8 @@
-# initialize rbenv
-if [[ -d "$HOME/.rbenv/bin" ]]; then
-  PATH="$HOME/.rbenv/bin:$PATH"
-fi
-
-type rbenv > /dev/null 2>&1
-if [[ $? -eq 0 ]]; then
-  eval "$(rbenv init -)"
-fi
-
+function install_rbenv {
+  if type -f git 2>&1 >/dev/null; then
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+  else
+    echo "git is not installed!"
+  fi
+}
