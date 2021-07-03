@@ -1,8 +1,0 @@
-@binding-set NoKeyboardNavigation {
-  unbind "F1";
-  unbind "F11";
-}
-
-* {
-  gtk-key-bindings: NoKeyboardNavigation;
-}
