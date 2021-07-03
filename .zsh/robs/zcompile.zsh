@@ -9,4 +9,3 @@ function z () {
   zshrc-compile
   exec zsh
 }
-
