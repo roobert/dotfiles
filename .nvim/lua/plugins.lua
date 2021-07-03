@@ -13,17 +13,11 @@ return require('packer').startup(function(use)
     -- packer manage itself
     use {'wbthomason/packer.nvim'}
 
-    -- improves syntax highlighting, amongst other things..
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
-
     -- LSP configurations for builtin LSP client
     -- this handles starting language servers for the built-in
     -- neovim LSP client to attach to
     use {
-        'neovim/nvim-lspconfig',
-        config = function()
-            require 'plugins.nvim-lspconfig'
-        end
+        'neovim/nvim-lspconfig'
     }
 
     -- language server installation management with LspInstall
@@ -38,12 +32,12 @@ return require('packer').startup(function(use)
     -- things like shellcheck, terraform fmt, and black/isort, etc.
     use {'mattn/efm-langserver'}
 
+    -- improves syntax highlighting, amongst other things..
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
     -- fancy vs-code-like completion
     use {
         'hrsh7th/nvim-compe',
-        config = function()
-            require 'plugins.nvim-compe'
-        end
     }
 
     -- signatures for functions
@@ -126,11 +120,10 @@ return require('packer').startup(function(use)
 
     -- Provide useful indent guides
     use {
-        "lukas-reineke/indent-blankline.nvim",
-        branch = "lua",
-        config = function()
-            require("indent-blankline").setup {}
-        end
+        "lukas-reineke/indent-blankline.nvim"
+        -- config = function()
+        --    require("indent-blankline").setup {}
+        -- end
     }
 
     -- Nice interface for displaying nvim diagnostics
