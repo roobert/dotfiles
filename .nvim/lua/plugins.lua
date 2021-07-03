@@ -5,6 +5,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     api.nvim_command 'packadd packer.nvim'
     require('plugins')
     cmd 'PackerInstall'
+    cmd 'autocmd PackerComplete * PackerCompile'
 end
 
 vim.cmd [[packadd packer.nvim]]
@@ -16,9 +17,7 @@ return require('packer').startup(function(use)
     -- LSP configurations for builtin LSP client
     -- this handles starting language servers for the built-in
     -- neovim LSP client to attach to
-    use {
-        'neovim/nvim-lspconfig'
-    }
+    use {'neovim/nvim-lspconfig'}
 
     -- language server installation management with LspInstall
     use {'kabouzeid/nvim-lspinstall'}
@@ -36,9 +35,7 @@ return require('packer').startup(function(use)
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- fancy vs-code-like completion
-    use {
-        'hrsh7th/nvim-compe',
-    }
+    use {'hrsh7th/nvim-compe'}
 
     -- signatures for functions
     use {'ray-x/lsp_signature.nvim'}
@@ -119,12 +116,7 @@ return require('packer').startup(function(use)
     }
 
     -- Provide useful indent guides
-    use {
-        "lukas-reineke/indent-blankline.nvim"
-        -- config = function()
-        --    require("indent-blankline").setup {}
-        -- end
-    }
+    use {"lukas-reineke/indent-blankline.nvim"}
 
     -- Nice interface for displaying nvim diagnostics
     use {
@@ -159,6 +151,6 @@ return require('packer').startup(function(use)
     -- auto switch between relative and normal line numbers
     use {'jeffkreeftmeijer/vim-numbertoggle'}
 
-    -- FIXME: Autopairs but only on CR
+    -- Autopairs but only on CR
     use {'9mm/vim-closer'}
 end)
