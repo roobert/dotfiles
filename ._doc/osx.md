@@ -1,20 +1,13 @@
 # Workstation Config
 
 ## Keyboard
-* Switch § and ` keys:
-
+* Switch `§` and `\`` keys:
 * * https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus-%C2%B1-in-wrong-place-on-keyboard
-
 * Switch escape key:
-
 * * https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x/40254864#40254864
-
 * Switch to Australian keyboard layout to remap shift-3 to '#'
-
 * Under Keyboard -> Text disable double spacebar full-stop
-
 * Disable smart quotes
-
 * Set key repeat to fastest/shortest
 
 ## Programs
@@ -26,14 +19,11 @@
 * docker
 * istatmenus
 * bitwarden
-* fzf
 * gcloud sdk:
-
 ```
 curl https://sdk.cloud.google.com | bash
 gcloud components update --version=...
 ```
-
 * gist:
 ```
 brew install gh
