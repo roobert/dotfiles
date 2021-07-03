@@ -66,7 +66,7 @@ brew install coreutils wget pyenv fzf jq tfenv kapp \
 # language servers and linters for neovim - also install with LspInfo
 brew install hashicorp/tap/terraform-ls
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-brew install efm-langserver shellcheck
+brew install efm-langserver shellcheck shfmt
 luarocks install --server=https://luarocks.org/dev luaformatter
 ```
 

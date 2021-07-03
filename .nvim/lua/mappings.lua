@@ -89,7 +89,7 @@ map('n', '<leader>s', ':%s//gcI<Left><Left><Left><Left>', {silent = false})
 map('v', '<leader>s', ':s//gcI<Left><Left><Left><Left>', {silent = false})
 
 -- toggle Trouble diagnostics viewer
-map('n', '<leader>t', '<cmd>TroubleToggle lsp_document_diagnostics<CR>')
+map('n', '<leader>d', '<cmd>TroubleToggle lsp_document_diagnostics<CR>')
 
 -- Unset highlight
 map('n', '<leader>h', ':noh<CR>', {noremap = true, silent = true})
@@ -98,7 +98,10 @@ map('n', '<leader>h', ':noh<CR>', {noremap = true, silent = true})
 map('n', '<leader>/', '*N', {noremap = true, silent = true})
 
 -- Explore
-map('n', '<leader>e', ':Telescope find_files<CR>', {noremap = true, silent = true})
+map('n', '<leader>e', '<CMD>Telescope find_files<CR>', {noremap = true, silent = true})
+
+-- Explore
+map('n', '<leader>t', '<CMD>NvimTreeToggle<CR>', {noremap = true, silent = true})
 
 -- FIXME: Toggle diagnostics - this can toggle off but not on!
 vim.g.diagnostics_active = true
