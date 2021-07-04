@@ -61,6 +61,9 @@ map('v', '<enter>', '<cmd>EasyAlign<CR>')
 -- Paste last yank, nb: pressing '"' allows which-key to show register yank history
 map('n', '<leader>p', '"0p')
 
+-- Easily escape out of Terminal mode
+map('t', '<leader><escape>', '<C-\\><C-n>')
+
 -- Execute code action
 map('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 
