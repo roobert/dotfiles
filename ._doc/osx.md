@@ -1,5 +1,8 @@
 # Workstation Config
 
+## Display
+* Accessibility -> Reduce motion (no animation on desktop switch)
+
 ## Keyboard
 * Switch `§` and `\`` keys:
 * * https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus-%C2%B1-in-wrong-place-on-keyboard
@@ -52,6 +55,11 @@ gh auth login
 ```
 brew tap caskroom/fonts
 brew cask install font-hack-nerd-font
+```
+
+* Keybindings
+```
+{"Key Mappings":{"0xf72d-0x20000":{"Action":8,"Text":""},"0xf72b-0x100000":{"Action":4,"Text":""},"0xf700-0x300000-0x7e":{"Label":"","Action":20,"Text":""},"0xf701-0x300000-0x7d":{"Label":"","Action":21,"Text":""},"0xf72d-0x100000":{"Action":8,"Text":""},"0x9-0x40000-0x0":{"Label":"","Action":0,"Text":""},"0xf702-0x300000-0x7b":{"Label":"","Action":18,"Text":""},"0xf700-0x320000-0x7e":{"Label":"","Action":55,"Text":""},"0x19-0x60000-0x0":{"Label":"","Action":2,"Text":""},"0xf703-0x320000-0x7c":{"Label":"","Action":29,"Text":"88C029F2-350F-49CC-96D1-24912313B78C"},"0xf702-0x320000-0x7b":{"Label":"","Action":53,"Text":""},"0xf72c-0x100000":{"Action":9,"Text":""},"0xf729-0x100000":{"Action":5,"Text":""},"0xf701-0x320000-0x7d":{"Label":"","Action":28,"Text":"88C029F2-350F-49CC-96D1-24912313B78C"},"0xf72c-0x20000":{"Action":9,"Text":""},"0xf703-0x300000-0x7c":{"Label":"","Action":19,"Text":""}},"Touch Bar Items":{}}
 ```
 
 ## Shell
