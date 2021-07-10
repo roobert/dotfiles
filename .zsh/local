@@ -1,0 +1,12 @@
+VAULT_TOKEN=""
+VAULT_HOST=""
+VAULT_ROLE=""
+
+export GITHUB_OWNER=Inshur
+export GITHUB_TOKEN="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"
+export TF_VARS_github_token="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"
+export TF_VARS_GITHUB_TOKEN="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"
+export TF_VAR_github_token="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"
+export TF_VAR_GITHUB_TOKEN="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"
+
+export BW_SESSION="xnqLm37UGrTr8t5/0SfrBl6UsMCJfvF/62ItHf4gFEXLg1s4xNxc6S6OT2NWzeSAgVu7smpwbOPkM5ch9MyMFg=="
