@@ -30,17 +30,9 @@ O.lang.sh.linter = "shellcheck"
 -- javascript
 O.lang.tsserver.linter = nil
 
--- Rob..
-
--- Install instructions
--- LspInstall python
--- DapInstall ..
--- install formatters:
-
 O.lang.sh.linter = "shellcheck"
 
 -- FIXME - make telescope use fzf
--- FIXME - patch lunarvim to use which-key for spelling
 
 O.user_plugins = {
     {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}, -- improved fuzzy search
