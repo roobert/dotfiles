@@ -5,7 +5,6 @@ O.timeoutlen = 200
 O.transparent_window = false
 
 O.plugin.dap.active = true
-O.treesitter.ignore_install = { "haskell" }
 O.plugin.ts_hintobjects.active = true
 O.plugin.ts_textobjects.active = true
 O.plugin.ts_textsubjects.active = true
@@ -13,11 +12,11 @@ O.plugin.indent_line.active = true
 O.plugin.lush.active = true
 
 O.treesitter.ensure_installed = "all"
+O.treesitter.ignore_install = { "haskell" }
 
 O.lang.clang.diagnostics.virtual_text = true
 O.lang.clang.diagnostics.signs = true
 O.lang.clang.diagnostics.underline = true
-
 O.lang.python.isort = true
 O.lang.python.diagnostics.virtual_text = true
 O.lang.python.diagnostics.signs = true
@@ -26,11 +25,7 @@ O.lang.python.analysis.type_checking = "off"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
 O.lang.sh.linter = "shellcheck"
-
--- javascript
 O.lang.tsserver.linter = nil
-
-O.lang.sh.linter = "shellcheck"
 
 -- FIXME - make telescope use fzf
 
