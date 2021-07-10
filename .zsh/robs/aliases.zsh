@@ -9,8 +9,8 @@ alias empty_trash="rm -rf ~/.local/share/Trash"
 alias vim="nvim -p"
 alias vi="nvim -p"
 
-function gcm () {
-  git commit -m "$*"  
+function gcm() {
+    git commit -m "$*"
 }
 
 # git
@@ -59,3 +59,7 @@ alias -g COL6="awk '{ print \$6 }'"
 alias -g COL7="awk '{ print \$7 }'"
 alias -g COL8="awk '{ print \$8 }'"
 alias -g COL9="awk '{ print \$9 }'"
+
+alias visox="vi ~/._doc/osx.md"
+
+alias kdebug="kubectl run --rm -it --image alpine kdebug /bin/sh"
