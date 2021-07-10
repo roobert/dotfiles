@@ -107,16 +107,21 @@ O.user_which_key = {
 	x = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Display Trouble document diagnostics" },
 }
 
-O.plugin.telescope.extensions = {
-	fzf = {
-		fuzzy = true, -- false will only do exact matching
-		override_generic_sorter = true, -- override the generic sorter
-		override_file_sorter = true, -- override the file sorter
-		case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-		-- the default case_mode is "smart_case"
-	},
-	fzy_native = {
-		override_generic_sorter = false,
-		override_file_sorter = false,
-	},
-}
+-- FIXME
+-- * this doesn't work!
+--O.plugin.telescope.active = true
+--O.plugin.telescope.extensions = {
+--	fzf = {
+--		fuzzy = true, -- false will only do exact matching
+--		override_generic_sorter = true, -- override the generic sorter
+--		override_file_sorter = true, -- override the file sorter
+--		case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+--		-- the default case_mode is "smart_case"
+--	},
+--	fzy_native = {
+--		override_generic_sorter = false,
+--		override_file_sorter = false,
+--	},
+--}
+--
+--require("telescope").load_extension("fzf")
