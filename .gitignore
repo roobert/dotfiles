@@ -1,0 +1,8 @@
+export GITHUB_OWNER=Inshur
+.msmtprc
+.offlineimaprc
+.offlineimaprc.work
+*.swp
+*.swo
+.zsh/local
+.notion/default-session--0
