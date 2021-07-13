@@ -3,9 +3,9 @@ O.timeoutlen = 200
 O.transparent_window = false
 O.line_wrap_cursor_movement = false
 -- this apparently does nothing..
-O.auto_close_tree = 0
+--O.auto_close_tree = 1
 
---O.colorscheme = "nightshift"
+O.colorscheme = "nightshift"
 O.plugin.galaxyline.colors.bg = "#000000"
 
 -- NOTE: DIinstall python_dbg
@@ -13,15 +13,13 @@ O.plugin.dap.active = true
 --O.plugin.ts_hintobjects.active = true
 --O.plugin.ts_textobjects.active = true
 --O.plugin.ts_textsubjects.active = true
---O.plugin.indent_line.active = true
---O.plugin.lush.active = true
 
+-- don't include spellings in autocomplete suggestions since it pollutes the list
 O.completion.spell = false
 O.completion.autocomplete = true
 
 -- Lots of errors if haskell isn't ignored
 O.treesitter.ignore_install = { "haskell" }
-
 O.treesitter.ensure_installed = "maintained"
 O.treesitter.highlight.enabled = true
 
@@ -125,8 +123,10 @@ O.user_plugins = {
 	{ "can3p/incbool.vim" }, -- toggle booleans with c-x
   {'karb94/neoscroll.nvim'}, -- smooth scrolling
   {'chaoren/vim-wordmotion'}, -- set useful word boundaries for camel case and snake case
-  {'rktjmp/lush.nvim'} -- colorscheme creator
+  {'rktjmp/lush.nvim'}, -- colorscheme creator
+  {'nvim-treesitter/playground'}, -- Add playground until it's re-enabled in core
 }
+
 
 O.user_which_key = {
 	x = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Display Trouble document diagnostics" },
@@ -152,3 +152,24 @@ O.user_which_key = {
 --require("telescope").load_extension("fzf")
 
 require('neoscroll').setup()
+
+require "nvim-treesitter.configs".setup {
+  playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
+  }
+}

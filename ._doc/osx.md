@@ -56,6 +56,9 @@ gh auth login
 ```
 
 ## Configure iTerm2
+* dim interactive split panes
+* dimming affects text ~100%
+* background colour: #1c2240
 * Unlimited scrollback
 * Tabs -> show tab bar even when there is one tab
 * Disable show tab numbers
