@@ -1,2 +1,3 @@
-vim.cmd[[colorscheme tokyonight]]
-vim.g.tokyonight_transparent = '1'
+--vim.cmd[[colorscheme tokyonight]]
+--vim.g.tokyonight_transparent = '1'
+
