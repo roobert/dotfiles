@@ -1,24 +1,27 @@
-O.format_on_save = true
-O.colorscheme = "tokyonight"
-O.auto_close_tree = 1
+O.format_on_save = false
 O.timeoutlen = 200
 O.transparent_window = false
+O.line_wrap_cursor_movement = false
+-- this apparently does nothing..
+O.auto_close_tree = 0
 
---O.galaxyline.colors.bg = "black"
---O.plugin.floatterm = true
+--O.colorscheme = "nightshift"
+O.plugin.galaxyline.colors.bg = "#000000"
 
 -- NOTE: DIinstall python_dbg
 O.plugin.dap.active = true
-O.plugin.ts_hintobjects.active = true
-O.plugin.ts_textobjects.active = true
-O.plugin.ts_textsubjects.active = true
-O.plugin.indent_line.active = true
-O.plugin.lush.active = true
+--O.plugin.ts_hintobjects.active = true
+--O.plugin.ts_textobjects.active = true
+--O.plugin.ts_textsubjects.active = true
+--O.plugin.indent_line.active = true
+--O.plugin.lush.active = true
 
 O.completion.spell = false
 O.completion.autocomplete = true
 
+-- Lots of errors if haskell isn't ignored
 O.treesitter.ignore_install = { "haskell" }
+
 O.treesitter.ensure_installed = "maintained"
 O.treesitter.highlight.enabled = true
 
@@ -33,9 +36,28 @@ O.lang.python.analysis.type_checking = "on"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
 O.lang.sh.linter = "shellcheck"
-O.lang.tsserver.linter = nil
+--O.lang.tsserver.linter = nil
+
+-- install formatters: black, isort, shfmt, terraform fmt, stylua
+-- install linters:
 
 O.user_plugins = {
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    setup = function()
+      vim.g.indentLine_enabled = 1
+      vim.g.indent_blankline_char = "▏"
+      vim.g.indent_blankline_buftype_exclude = { "terminal" }
+      vim.g.indent_blankline_show_trailing_blankline_indent = false
+      vim.g.indent_blankline_show_first_indent_level = true
+      vim.g.indent_blankline_filetype_exclude = {
+        "help",
+        "terminal",
+        "dashboard",
+      }
+    end
+  }, -- indent blank lines for nice indent guides
+  { "roobert/nightshift.vim" }, -- my new cool theme!
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- improved fuzzy search
 	{ "ray-x/lsp_signature.nvim" }, -- signatures for functions
 	{ "tpope/vim-commentary" }, -- toggle commenting
@@ -83,7 +105,7 @@ O.user_plugins = {
 		end,
 	}, -- improved debug
 	{ "roobert/robs.vim" }, -- Nice interface for displaying nvim diagnostics
-	{ "roobert/tokyoshade.nvim" }, -- Fork of folke/tokyonight..
+	--{ "roobert/tokyoshade.nvim" }, -- Fork of folke/tokyonight..
 	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
 	{ "ludovicchabant/vim-gutentags" }, -- Auto handle ctags to allow jumping to definitions
 	--{'majutsushi/tagbar'}, -- Sidebar to show ctags
@@ -101,6 +123,9 @@ O.user_plugins = {
 	}, -- pwd changes to project
 	{ "kevinhwang91/nvim-bqf" }, -- better quick fix
 	{ "can3p/incbool.vim" }, -- toggle booleans with c-x
+  {'karb94/neoscroll.nvim'}, -- smooth scrolling
+  {'chaoren/vim-wordmotion'}, -- set useful word boundaries for camel case and snake case
+  {'rktjmp/lush.nvim'} -- colorscheme creator
 }
 
 O.user_which_key = {
@@ -125,3 +150,5 @@ O.user_which_key = {
 --}
 --
 --require("telescope").load_extension("fzf")
+
+require('neoscroll').setup()
