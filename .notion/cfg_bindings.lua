@@ -241,19 +241,10 @@ defbindings("WFrame", {
 -- Frames for transient windows ignore this bindmap
 
 defbindings("WFrame.toplevel", {
-    bdoc("Attach tagged objects to this frame.", "nick"),
-    kpress(META.."N", "ioncore.tagged_attach(_)"),
-    bdoc("Query for a client window to attach ('nick').", "qnick"),
-    kpress(ALTMETA.."N", "mod_query.query_attachclient(_)"),
-
-    bdoc("Switch to tab 0 in this frame.", "tab 0"),
-    kpress(META.."A", "WFrame.switch_nth(_, 0)"),
-    bdoc("Switch to tab 1 in this frame.", "tab 1"),
-    kpress(META.."S", "WFrame.switch_nth(_, 1)"),
-    bdoc("Switch to tab 2 in this frame.", "tab 2"),
-    kpress(META.."D", "WFrame.switch_nth(_, 2)"),
-    bdoc("Switch to tab 3 in this frame.", "tab 3"),
-    kpress(META.."F", "WFrame.switch_nth(_, 3)"),
+    submap(META.."K", {
+      bdoc("Attach tagged objects to this frame.", "nick"),
+      kpress("A", "ioncore.tagged_attach(_)"),
+    }),
 
     bdoc("Move current tab to the right within the frame.", "tab->"),
     kpress(META.."comma", "WFrame.dec_index(_, _sub)", "_sub:non-nil"),
@@ -302,30 +293,18 @@ defbindings("WMoveresMode", {
     kpress("Right", "WMoveresMode.resize(_, 0, 1, 0, 0)"),
     kpress("Up",    "WMoveresMode.resize(_, 0, 0, 1, 0)"),
     kpress("Down",  "WMoveresMode.resize(_, 0, 0, 0, 1)"),
-    kpress("F",     "WMoveresMode.resize(_, 1, 0, 0, 0)"),
-    kpress("B",     "WMoveresMode.resize(_, 0, 1, 0, 0)"),
-    kpress("P",     "WMoveresMode.resize(_, 0, 0, 1, 0)"),
-    kpress("N",     "WMoveresMode.resize(_, 0, 0, 0, 1)"),
 
     bdoc("Shrink in specified direction."),
     kpress("Shift+Left",  "WMoveresMode.resize(_,-1, 0, 0, 0)"),
     kpress("Shift+Right", "WMoveresMode.resize(_, 0,-1, 0, 0)"),
     kpress("Shift+Up",    "WMoveresMode.resize(_, 0, 0,-1, 0)"),
     kpress("Shift+Down",  "WMoveresMode.resize(_, 0, 0, 0,-1)"),
-    kpress("Shift+F",     "WMoveresMode.resize(_,-1, 0, 0, 0)"),
-    kpress("Shift+B",     "WMoveresMode.resize(_, 0,-1, 0, 0)"),
-    kpress("Shift+P",     "WMoveresMode.resize(_, 0, 0,-1, 0)"),
-    kpress("Shift+N",     "WMoveresMode.resize(_, 0, 0, 0,-1)"),
 
     bdoc("Move in specified direction."),
     kpress(META.."Left",  "WMoveresMode.move(_,-1, 0)"),
     kpress(META.."Right", "WMoveresMode.move(_, 1, 0)"),
     kpress(META.."Up",    "WMoveresMode.move(_, 0,-1)"),
     kpress(META.."Down",  "WMoveresMode.move(_, 0, 1)"),
-    kpress(META.."F",     "WMoveresMode.move(_,-1, 0)"),
-    kpress(META.."B",     "WMoveresMode.move(_, 1, 0)"),
-    kpress(META.."P",     "WMoveresMode.move(_, 0,-1)"),
-    kpress(META.."N",     "WMoveresMode.move(_, 0, 1)"),
 })
 
 
