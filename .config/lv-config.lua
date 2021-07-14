@@ -1,6 +1,6 @@
 O.format_on_save = false
 O.timeoutlen = 200
-O.transparent_window = false
+O.transparent_window = true
 O.line_wrap_cursor_movement = false
 -- this apparently does nothing..
 --O.auto_close_tree = 1
