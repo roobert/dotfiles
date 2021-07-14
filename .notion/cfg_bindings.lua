@@ -118,9 +118,9 @@ defbindings("WScreen", {
     kpress(ALTMETA.."Tab", "ioncore.goto_next(_chld, 'left')",
            "_chld:non-nil"),
 
-    bdoc("Raise focused object, if possible.", "raise"),
-    kpress(ALTMETA.."R", "WRegion.rqorder(_chld, 'front')",
-           "_chld:non-nil"),
+    --bdoc("Raise focused object, if possible.", "raise"),
+    --kpress(ALTMETA.."R", "WRegion.rqorder(_chld, 'front')",
+    --       "_chld:non-nil"),
 })
 
 
@@ -138,7 +138,7 @@ defbindings("WClientWin", {
 
     bdoc("Send next key press to the client window. "..
          "Some programs may not allow this by default.", "quote"),
-    kpress(ALTMETA.."Q", "WClientWin.quote_next(_)"),
+    kpress(META.."Q", "WClientWin.quote_next(_)"),
 })
 
 
@@ -146,7 +146,7 @@ defbindings("WClientWin", {
 
 defbindings("WGroupCW", {
     bdoc("Toggle client window group full-screen mode", "fullscr"),
-    kpress_wait(META.."Q", "WGroup.set_fullscreen(_, 'toggle')"),
+    kpress_wait(META.."Return", "WGroup.set_fullscreen(_, 'toggle')"),
 })
 
 
@@ -176,16 +176,14 @@ defbindings("WMPlex.toplevel", {
     bdoc("Clear all tags.", "-tags"),
     kpress(ALTMETA.."T", "ioncore.clear_tags()"),
 
-    bdoc("Lock screen", "lock"),
-    kpress(META.."L", "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
+    --bdoc("Lock screen", "lock"),
+    --kpress(META.."L", "notioncore.exec_on(_, notioncore.lookup_script('notion-lock'))"),
 
     bdoc("Run a terminal emulator.", "x-terminal-emulator"),
-    kpress(META.."Return", "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
-    kpress("F2", "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
-
-    -- FIXME
-    --kpress(META.."", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
-    --kpress(META.."", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
+    kpress(META.."space", "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
+    kpress(META.."F2", "mod_query.exec_on_merr(_, XTERM or 'x-terminal-emulator')"),
+    kpress(META.."F3", "notioncore.exec_on(_, BROWSER or 'x-browser')"),
+    kpress(META.."F4", "notioncore.exec_on(_, BROWSER_SECRET or 'x-browser-secret')"),
 
     bdoc("Query for command line to execute.", "run"),
     kpress(META.."J", "mod_query.query_exec(_)"),
