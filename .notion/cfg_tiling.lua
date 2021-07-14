@@ -5,6 +5,14 @@
 -- Bindings for the tilings.
 defbindings("WTiling", {
     bdoc("Split current into columns.", "hsplit"),
+    kpress(META.."S", "WTiling.split_at(_, _sub, 'bottom', true)"),
+
+    submap(META.."K", {
+      bdoc("Split current into columns.", "hsplit"),
+      kpress(META.."S", "WTiling.split_at(_, _sub, 'right', true)"),
+    }),
+
+    bdoc("Split current into columns.", "hsplit"),
     kpress(META.."I", "WTiling.split_at(_, _sub, 'right', true)"),
 
     bdoc("Split current into rows.", "vsplit"),
