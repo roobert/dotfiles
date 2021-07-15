@@ -1,4 +1,4 @@
-O.format_on_save = false
+O.format_on_save = true
 O.timeoutlen = 200
 O.transparent_window = false
 O.line_wrap_cursor_movement = false
@@ -33,6 +33,10 @@ O.lang.python.diagnostics.underline = true
 O.lang.python.analysis.type_checking = "on"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
+O.lang.python.formatter.exe = "black"
+O.lang.python.formatter.args = {"-q"}
+O.lang.python.formatter.stdin = true
+
 O.lang.sh.linter = "shellcheck"
 --O.lang.tsserver.linter = nil
 
@@ -110,7 +114,6 @@ O.user_plugins = {
 	{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
 	{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
 	{ "jeffkreeftmeijer/vim-numbertoggle" }, -- auto switch between relative and normal line numbers
-	{ "9mm/vim-closer" }, -- Autopairs but only on CR
 	{ "f-person/git-blame.nvim" }, -- git blame support
 	{
 		"ahmedkhalf/lsp-rooter.nvim",
@@ -125,6 +128,11 @@ O.user_plugins = {
   {'chaoren/vim-wordmotion'}, -- set useful word boundaries for camel case and snake case
   {'rktjmp/lush.nvim'}, -- colorscheme creator
   {'nvim-treesitter/playground'}, -- Add playground until it's re-enabled in core
+  { 'ibhagwan/fzf-lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional for icons
+      'vijaymarupudi/nvim-fzf' }
+  }, -- fzf instead of telescope
 }
 
 
@@ -173,3 +181,7 @@ require "nvim-treesitter.configs".setup {
     },
   }
 }
+
+vim.api.nvim_set_keymap("n", "<leader>F", '<CMD>silent Format<CR>', { noremap = true, silent = true })
+
+vim.cmd [[nnoremap <c-f> <cmd>lua require('fzf-lua').files()<CR>]]
