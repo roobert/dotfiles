@@ -1,6 +1,6 @@
 O.format_on_save = true
 O.timeoutlen = 200
-O.transparent_window = false
+O.transparent_window = true
 O.line_wrap_cursor_movement = false
 -- this apparently does nothing..
 --O.auto_close_tree = 1
@@ -107,9 +107,16 @@ O.user_plugins = {
 		end,
 	}, -- improved debug
 	{ "roobert/robs.vim" }, -- Nice interface for displaying nvim diagnostics
-	--{ "roobert/tokyoshade.nvim" }, -- Fork of folke/tokyonight..
 	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
-	{ "ludovicchabant/vim-gutentags" }, -- Auto handle ctags to allow jumping to definitions
+	{ "ludovicchabant/vim-gutentags",
+    setup = function()
+      vim.g.gutentags_modules = {'ctags'}
+      vim.g.gutentags_project_root = {'.git'}
+      vim.g.gutentags_add_default_project_roots = 0
+      vim.g.gutentags_define_advanced_commands = 1
+      vim.g.gutentags_cache_dir = os.getenv('HOME') .. '/.cache/tags'
+    end
+  }, -- Auto handle ctags to allow jumping to definitions
 	--{'majutsushi/tagbar'}, -- Sidebar to show ctags
 	{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
 	{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable

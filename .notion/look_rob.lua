@@ -99,9 +99,13 @@ if not gr.select_engine("de") then return end
 
 de.reset()
 
+local bg_active = "#1f304d"
+local bg = "#1f304d"
+local fg = "#999999"
+
 de.defstyle("*", {
-	background_colour = "#222",
-	foreground_colour = "#999",
+	background_colour = bg,
+	foreground_colour = fg,
 	shadow_pixels     = 0,
 	highlight_pixels  = 0,
 	padding_pixels    = 0,
@@ -112,37 +116,37 @@ de.defstyle("*", {
 
 de.defstyle("tab", {
     de.substyle("inactive-selected", {
-		background_colour = "#222",
+		background_colour = bg,
     }),
     de.substyle("inactive-unselected", {
-		background_colour = "#222",
+		background_colour = bg,
     }),
     de.substyle("active-unselected", {
-		background_colour = "#222",
+		background_colour = bg,
     }),
 
 	de.substyle("active-selected", {
 		foreground_colour = "#fff",
-		background_colour = "#333",
+		background_colour = bg_active,
 	}),
     text_align = "center",
 })
 
 de.defstyle("frame", {
-	transparent_background = false,
+	transparent_background = true,
 
 	padding_pixels   = 0,
 	shadow_pixels    = 1,
 	highlight_pixels = 1,
 
 	de.substyle("inactive", {
-		highlight_colour = "#222",
-		shadow_colour    = "#222",
+		highlight_colour = bg,
+		shadow_colour    = bg,
 	}),
 
 	de.substyle("active", {
-		highlight_colour = "#333",
-		shadow_colour    = "#333",
+		highlight_colour = bg_active,
+		shadow_colour    = bg_active,
 	}),
 })
 
@@ -176,5 +180,23 @@ ioncore.defshortening("[^:]+: (.*)", "$1$|$1$<...")
 ioncore.defshortening("(.*)(<[0-9]+>)", "$1$2$|$1$<...$2")
 ioncore.defshortening("(.*)", "$1$|$1$<...")
 
+-- to improve hide_tabs
+de.defstyle("frame-tiled-alt", {
+    bar = "none",
+})
+
+de.defstyle("frame-unknown-alt", {
+    bar = "none",
+})
+
+de.defstyle("frame-floating-alt", {
+    bar = "none",
+})
+
+de.defstyle("frame-transient-alt", {
+    bar = "none",
+})
+
 -- Refresh objects' brushes.
 gr.refresh()
+
