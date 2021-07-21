@@ -1,3 +1,9 @@
+-- NOTE
+-- * See :PackerStatus for loaded plugins..
+-- * Install LSP Servers with LspInstall ...
+-- * Install DSP servers with DIinstall ...
+-- * Install formatters and linters into global context, or project env
+
 --[[
 O is the global options object
 
@@ -72,7 +78,7 @@ O.treesitter.highlight.enabled = true
 
 -- To change enabled linters
 -- https://github.com/mfussenegger/nvim-lint#available-linters
-O.lang.python.linters = { "flake8", "pylint", "mypy", ... }
+--O.lang.python.linters = { "flake8", "pylint", "mypy" }
 
 -- go
 -- To change default formatter from gofmt to goimports
@@ -136,6 +142,7 @@ O.lang.latex.latexindent.modify_line_breaks = false
 --O.auto_close_tree = 1
 
 O.plugin.galaxyline.colors.bg = "#000000"
+O.plugin.galaxyline.colors.alt_bg = "#000000"
 
 -- NOTE: DIinstall python_dbg
 O.plugin.dap.active = true
@@ -173,6 +180,9 @@ O.lang.sh.linter = "shellcheck"
 -- install linters:
 
 O.user_plugins = {
+	{
+		"windwp/nvim-ts-autotag",
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		setup = function()
@@ -318,6 +328,9 @@ require("nvim-treesitter.configs").setup({
 			show_help = "?",
 		},
 	},
+	autotag = {
+		enable = true,
+	},
 })
 
 --vim.api.nvim_set_keymap("n", "<leader>F", '<CMD>silent Format<CR>', { noremap = true, silent = true })
@@ -365,7 +378,7 @@ require("nvim-treesitter.configs").setup({
 --    }
 --}
 
---vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 -- automatically switch between relative and absolute line numbers
 vim.cmd([[set number relativenumber]])
@@ -411,11 +424,8 @@ map("n", "<leader>P", '"0p')
 --}
 
 -- Undo setting from lunarvim - wrapping cursor movement across lines
-vim.cmd("set whichwrap=b,s")
-vim.cmd("set iskeyword+=_")
-
--- NOTE
--- * See :PackerStatus for loaded plugins..
+--vim.cmd("set whichwrap=b,s")
+--vim.cmd("set iskeyword+=_")
 
 -- FIXME: part of lvim now?
 -- Disable some in built plugins completely
@@ -428,84 +438,6 @@ vim.cmd("set iskeyword+=_")
 --}
 --
 --for _, plugin in pairs(disabled_built_ins) do vim.g['loaded_' .. plugin] = 1 end
-
--- return require('packer').setup(function(use)
---    use {'ray-x/lsp_signature.nvim'}
---
---    -- icons for signatures
---    use {'onsails/lspkind-nvim'}
---
---    -- text objects for paranthesis, brackets, quotes, etc.
---    use {'tpope/vim-surround'}
---
---    -- toggle commenting
---    use {'tpope/vim-commentary'}
---
---    -- more text objects - allow changing values in next object without being
---    -- inside it
---    use {'wellle/targets.vim'}
---
---    -- use '%' to jump between if/end/else, etc.
---    use {'andymass/vim-matchup', event = 'VimEnter'}
---
---    -- Highlight FIXME, TODO, NOTE, etc.
---    use {
---        "folke/todo-comments.nvim",
---        requires = "nvim-lua/plenary.nvim",
---        config = function()
---            require("todo-comments").setup {
---                highlight = {
---                    before = "", -- "fg" or "bg" or empty
---                    keyword = "wide", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
---                    after = "fg", -- "fg" or "bg" or empty
---                    pattern = [[.*<(KEYWORDS)\s*]], -- pattern used for highlightng (vim regex)
---                    comments_only = true, -- uses treesitter to match keywords in comments only
---                    max_line_len = 400, -- ignore lines longer than this
---                    exclude = {} -- list of file types to exclude highlighting
---                },
---                search = {
---                    command = "rg",
---                    args = {
---                        "--color=never", "--no-heading", "--with-filename",
---                        "--line-number", "--column"
---                    },
---                    pattern = [[\b(KEYWORDS)\b]]
---                }
---            }
---        end
---    }
---
---    -- Nice interface for displaying nvim diagnostics
---    use {
---        "folke/trouble.nvim",
---        requires = "kyazdani42/nvim-web-devicons",
---        config = function() require("trouble").setup {} end
---    }
---
---    -- Old theme
---    use {'roobert/robs.vim'}
---
---    -- Fork of folke/tokyonight..
---    use {'roobert/tokyoshade.nvim'}
---
---    -- Visual-block+enter to align stuff
---    use {'junegunn/vim-easy-align'}
---
---    -- Auto handle ctags to allow jumping to definitions
---    use {'ludovicchabant/vim-gutentags'}
---
---    -- Sidebar to show ctags
---    use {'majutsushi/tagbar'}
---
---    -- Hint about code actions to make them discoverable
---    use {'kosayoda/nvim-lightbulb'}
---
---    -- auto switch between relative and normal line numbers
---    use {'jeffkreeftmeijer/vim-numbertoggle'}
---
---    -- Autopairs but only on CR
---    use {'9mm/vim-closer'}
--- end)
 
 require("lsp_signature").on_attach({
 	bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -576,9 +508,9 @@ require("lspkind").init({
 
 vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
 
-vim.api.nvim_set_keymap(
-	"n",
-	"<leader>dD",
-	"<cmd>Trouble lsp_document_diagnostics<cr>",
-	{ silent = true, noremap = true }
-)
+--vim.api.nvim_set_keymap(
+--	"n",
+--	"<leader>dD",
+--	"<cmd>Trouble lsp_document_diagnostics<cr>",
+--	{ silent = true, noremap = true }
+--)
