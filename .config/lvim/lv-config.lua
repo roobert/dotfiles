@@ -24,6 +24,9 @@ O.transparent_window = true
 O.line_wrap_cursor_movement = false
 O.colorscheme = "nightshift"
 
+O.plugin.galaxyline.colors.bg = "#001040"
+O.plugin.galaxyline.colors.alt_bg = "#001040"
+
 -- keymappings
 O.keys.leader_key = "space"
 -- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
@@ -141,9 +144,6 @@ O.lang.latex.latexindent.modify_line_breaks = false
 -- this apparently does nothing..
 --O.auto_close_tree = 1
 
-O.plugin.galaxyline.colors.bg = "#000000"
-O.plugin.galaxyline.colors.alt_bg = "#000000"
-
 -- NOTE: DIinstall python_dbg
 O.plugin.dap.active = true
 --O.plugin.ts_hintobjects.active = true
@@ -180,6 +180,7 @@ O.lang.sh.linter = "shellcheck"
 -- install linters:
 
 O.user_plugins = {
+	{ "edluffy/specs.nvim" },
 	{
 		"windwp/nvim-ts-autotag",
 	},
@@ -378,7 +379,7 @@ require("nvim-treesitter.configs").setup({
 --    }
 --}
 
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 -- automatically switch between relative and absolute line numbers
 vim.cmd([[set number relativenumber]])
@@ -514,3 +515,21 @@ vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
 --	"<cmd>Trouble lsp_document_diagnostics<cr>",
 --	{ silent = true, noremap = true }
 --)
+
+require('specs').setup{
+    show_jumps  = true,
+    min_jump = 2,
+    popup = {
+        delay_ms = 100, -- delay before popup displays
+        inc_ms = 30, -- time increments used for fade/resize effects
+        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
+    winhl = "Cursor",
+        width = 10,
+        fader = require('specs').empty_fader,
+        resizer = require('specs').shrink_resizer
+    },
+    ignore_filetypes = {},
+    ignore_buftypes = {
+        nofile = true,
+    },
+}
