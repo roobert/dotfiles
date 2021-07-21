@@ -164,7 +164,7 @@ O.lang.python.analysis.type_checking = "on"
 O.lang.python.analysis.auto_search_paths = true
 O.lang.python.analysis.use_library_code_types = true
 O.lang.python.formatter.exe = "black"
-O.lang.python.formatter.args = {"-q"}
+O.lang.python.formatter.args = {"-q -"}
 O.lang.python.formatter.stdin = true
 
 O.lang.sh.linter = "shellcheck"
