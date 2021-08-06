@@ -67,3 +67,9 @@ xmodmap -e "keycode 9 = Escape NoSymbol Escape"
 xmodmap -e "keycode 66 = Caps_Lock NoSymbol Caps_Lock"
 
 
+
+enable running hypervisor stuff (for docker?)
+
+install nvm and npm
+install exuberant-ctags
+
