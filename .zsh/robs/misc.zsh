@@ -29,3 +29,7 @@ function keygen {
 function gred {
   vi $(grep $* | cut -d: -f1 | sort | uniq)
 }
+
+function rged {
+  vi $(rg $* | cut -d: -f1 | sort | uniq)
+}

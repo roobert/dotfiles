@@ -1,6 +1,6 @@
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+eval "$(pyenv init --path -)"
 
 function auto_active_env() {
   DEFAULT_ENV_PATH="venv"
