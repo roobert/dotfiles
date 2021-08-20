@@ -56,6 +56,11 @@ gh auth login
 ```
 
 ## Configure iTerm2
+```
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font
+```
+* Select Mono Nerd Font from iterm2
 * dim interactive split panes
 * dimming affects text ~100%
 * background colour: #1c2240
@@ -73,14 +78,9 @@ gh auth login
 * Mouse follow focus
 * Adjust colour to blue
 * Enable git hint thing
-* Select DroidSansMono Nerd Font from iterm2
 * Line cursor
 * Tab order, remap control-tab to next tab: https://gitlab.com/gnachman/iterm2/-/issues/8219
 * Disable beep
-```
-brew tap caskroom/fonts
-brew cask install font-hack-nerd-font
-```
 
 * Keybindings
 ```
