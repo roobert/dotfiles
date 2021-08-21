@@ -4,6 +4,7 @@
 -- LSPInstall python
 -- PackerSync
 -- PackerCompile
+-- install formatters: black, isort, shfmt, terraform fmt, stylua
 
 -- lvim.debug = true
 -- lvim.log.level = "debug"
@@ -15,6 +16,7 @@ lvim.colorscheme = "nightshift"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
@@ -63,7 +65,7 @@ lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {}
+lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
@@ -94,13 +96,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- end
 
 -- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---     args = {"-q -"},
---     stdin = true
---   }
--- }
 lvim.lang.python.formatters = {
 	{
 		exe = "black",
@@ -170,31 +165,8 @@ vim.cmd("set linebreak")
 --lvim.completion.spell = false
 --lvim.completion.autocomplete = true
 
---lvim.lang.clang.diagnostics.virtual_text = true
---lvim.lang.clang.diagnostics.signs = true
---lvim.lang.clang.diagnostics.underline = true
---lvim.lang.python.isort = true
---lvim.lang.python.diagnostics.virtual_text = true
---lvim.lang.python.diagnostics.signs = true
---lvim.lang.python.diagnostics.underline = true
---lvim.lang.python.analysis.type_checking = "on"
---lvim.lang.python.analysis.auto_search_paths = true
---lvim.lang.python.analysis.use_library_code_types = true
---lvim.lang.python.formatter.exe = "black"
---lvim.lang.python.formatter.args = { "-q -" }
---lvim.lang.python.formatter.stdin = true
---
---lvim.lang.sh.linter = "shellcheck"
---lvim.lang.tsserver.linter = nil
-
--- install formatters: black, isort, shfmt, terraform fmt, stylua
--- install linters:
-
 lvim.plugins = {
-	--{ "edluffy/specs.nvim" },
-	{
-		"windwp/nvim-ts-autotag",
-	},
+	{ "windwp/nvim-ts-autotag" },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		setup = function()
@@ -212,7 +184,37 @@ lvim.plugins = {
 	}, -- indent blank lines for nice indent guides
 	{ "roobert/nightshift.vim" }, -- my new cool theme!
 	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- improved fuzzy search
-	{ "ray-x/lsp_signature.nvim" }, -- signatures for functions
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").on_attach({
+				bind = true, -- This is mandatory, otherwise border config won't get registered.
+				-- If you want to hook lspsaga or other signature handler, pls set to false
+				doc_lines = 2, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
+				-- set to 0 if you DO NOT want any API comments be shown
+				-- This setting only take effect in insert mode, it does not affect signature help in normal
+				-- mode, 10 by default
+
+				floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+				hint_enable = true, -- virtual hint enable
+				hint_prefix = " 👉 ", -- Panda for parameter
+				fix_pos = true,
+				hint_scheme = "String",
+				use_lspsaga = false, -- set to true if you want to use lspsaga popup
+				hi_parameter = "Search", -- how your parameter will be highlight
+				max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
+				-- to view the hiding contents
+				max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+				handler_opts = {
+					border = "single", -- double, single, shadow, none
+				},
+				extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+				-- deprecate !!
+				-- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
+			})
+		end,
+		event = "InsertEnter",
+	}, -- signatures for functions
 	{ "tpope/vim-commentary" }, -- toggle commenting
 	{ "onsails/lspkind-nvim" }, -- text objects for parenthesis, brackets, quotes, etc.
 	{ "tpope/vim-surround" }, -- add around objects
@@ -274,7 +276,7 @@ lvim.plugins = {
 	{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
 	{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
 	{ "jeffkreeftmeijer/vim-numbertoggle" }, -- auto switch between relative and normal line numbers
-	{ "f-person/git-blame.nvim" }, -- git blame support
+	--{ "f-person/git-blame.nvim" }, -- git blame support
 	{
 		"ahmedkhalf/lsp-rooter.nvim",
 		event = "BufRead",
@@ -298,13 +300,8 @@ lvim.plugins = {
 	{ "ntpeters/vim-better-whitespace" }, -- highlight whitespace at EOL
 }
 
-lvim.user_which_key = {
-	x = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Display Trouble document diagnostics" },
-}
-
 -- FIXME
 -- * this doesn't work!
---lvim.plugin.telescope.active = true
 --lvim.plugin.telescope.extensions = {
 --  fzf = {
 --    fuzzy = true, -- false will only do exact matching
@@ -321,6 +318,7 @@ lvim.user_which_key = {
 --
 --require("telescope").load_extension("fzf")
 
+-- FIXME
 --require("neoscroll").setup()
 
 --require("nvim-treesitter.configs").setup({
@@ -346,10 +344,6 @@ lvim.user_which_key = {
 --		enable = true,
 --	},
 --})
-
---vim.api.nvim_set_keymap("n", "<leader>F", '<CMD>silent Format<CR>', { noremap = true, silent = true })
---vim.cmd [[nnoremap <c-f> <cmd>lua require('fzf-lua').files()<CR>]]
---nnoremap <leader>ta :ToggleAlternate<CR>
 
 -- make code actions discoverable!
 require("nvim-lightbulb").update_lightbulb({
@@ -397,6 +391,10 @@ vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 -- automatically switch between relative and absolute line numbers
 vim.cmd([[set number relativenumber]])
 
+-- Undo setting from lunarvim - wrapping cursor movement across lines
+vim.cmd("set whichwrap=b,s")
+vim.cmd("set iskeyword+=_")
+
 -- FIXME: none of these work
 --function map(mode, lhs, rhs, opts)
 --	local options = { noremap = true }
@@ -426,58 +424,6 @@ vim.cmd([[set number relativenumber]])
 --map("n", "<leader>P", '"0p')
 
 -- FIXME: these are ignored
-
---vim.opt.listchars = {
---  tab = "→ ",
---  eol = "↲",
---  nbsp = "␣",
---  trail = "•",
---  extends = "⟩",
---  precedes = "⟨",
---  space = "␣",
---}
-
--- Undo setting from lunarvim - wrapping cursor movement across lines
-vim.cmd("set whichwrap=b,s")
-vim.cmd("set iskeyword+=_")
-
--- FIXME: part of lvim now?
--- Disable some in built plugins completely
---local disabled_built_ins = {
---    'netrw', 'netrwPlugin', 'netrwSettings', 'netrwFileHandlers', 'gzip', 'zip',
---    'zipPlugin', 'tar', 'tarPlugin', -- 'man',
---    'getscript', 'getscriptPlugin', 'vimball', 'vimballPlugin', '2html_plugin',
---    'logipat', 'rrhelper', 'spellfile_plugin'
---    -- 'matchit', 'matchparen', 'shada_plugin',
---}
---
---for _, plugin in pairs(disabled_built_ins) do vim.g['loaded_' .. plugin] = 1 end
-
---require("lsp_signature").on_attach({
---	bind = true, -- This is mandatory, otherwise border config won't get registered.
---	-- If you want to hook lspsaga or other signature handler, pls set to false
---	doc_lines = 2, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
---	-- set to 0 if you DO NOT want any API comments be shown
---	-- This setting only take effect in insert mode, it does not affect signature help in normal
---	-- mode, 10 by default
---
---	floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
---	hint_enable = true, -- virtual hint enable
---	hint_prefix = " 👉 ", -- Panda for parameter
---	fix_pos = true,
---	hint_scheme = "String",
---	use_lspsaga = false, -- set to true if you want to use lspsaga popup
---	hi_parameter = "Search", -- how your parameter will be highlight
---	max_height = 12, -- max height of signature floating_window, if content is more than max_height, you can scroll down
---	-- to view the hiding contents
---	max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
---	handler_opts = {
---		border = "single", -- double, single, shadow, none
---	},
---	extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
---	-- deprecate !!
---	-- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
---})
 
 -- icons for signatures
 --require("lspkind").init({
@@ -520,22 +466,14 @@ vim.cmd("set iskeyword+=_")
 --	},
 --})
 
-vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
-
---require('specs').setup{
---    show_jumps  = true,
---    min_jump = 2,
---    popup = {
---        delay_ms = 100, -- delay before popup displays
---        inc_ms = 30, -- time increments used for fade/resize effects
---        blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
---    winhl = "Cursor",
---        width = 10,
---        fader = require('specs').empty_fader,
---        resizer = require('specs').shrink_resizer
---    },
---    ignore_filetypes = {},
---    ignore_buftypes = {
---        nofile = true,
---    },
+--vim.opt.listchars = {
+--  tab = "→ ",
+--  eol = "↲",
+--  nbsp = "␣",
+--  trail = "•",
+--  extends = "⟩",
+--  precedes = "⟨",
+--  space = "␣",
 --}
+
+vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
