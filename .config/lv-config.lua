@@ -6,6 +6,12 @@
 -- PackerCompile
 -- install formatters: black, isort, shfmt, terraform fmt, stylua
 
+--NOTE
+-- * See :PackerStatus for loaded plugins..
+-- * Install LSP Servers with LspInstall ...
+-- * Install DSP servers with DIinstall ...
+-- * Install formatters and linters into global context, or project env
+
 -- lvim.debug = true
 -- lvim.log.level = "debug"
 
@@ -118,52 +124,13 @@ lvim.lang.python.linters = {
 	},
 }
 
--- Additional Plugins
--- lvim.plugins = {
---     {"folke/tokyonight.nvim"}, {
---         "ray-x/lsp_signature.nvim",
---         config = function() require"lsp_signature".on_attach() end,
---         event = "InsertEnter"
---     }
--- }
-
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
---NOTE
--- * See :PackerStatus for loaded plugins..
--- * Install LSP Servers with LspInstall ...
--- * Install DSP servers with DIinstall ...
--- * Install formatters and linters into global context, or project env
-
 --lvim.completion.autocomplete = true
 lvim.transparent_window = true
 lvim.line_wrap_cursor_movement = false
 --lvim.colorscheme = "nightshift"
 
-vim.cmd("set timeoutlen=500")
-vim.cmd("set wrap")
-vim.cmd("set linebreak")
-
 --lvim.builtin.galaxyline.colors.bg = "#001040"
 --lvim.builtin.galaxyline.colors.alt_bg = "#001040"
-
--- python
---lvim.lang.python.diagnostics.virtual_text = true
---lvim.lang.python.analysis.use_library_code_types = true
--- To change default formatter from yapf to black
---lvim.lang.python.formatter.exe = "black"
---lvim.lang.python.formatter.args = {"-"}
-
--- To change enabled linters
--- https://github.com/mfussenegger/nvim-lint#available-linters
---lvim.lang.python.linters = { "flake8", "pylint", "mypy" }
-
--- don't include spellings in autocomplete suggestions since it pollutes the list
---lvim.completion.spell = false
---lvim.completion.autocomplete = true
 
 lvim.plugins = {
 	{ "windwp/nvim-ts-autotag" },
@@ -386,6 +353,10 @@ require("nvim-lightbulb").update_lightbulb({
 	},
 })
 
+vim.cmd("set timeoutlen=500")
+vim.cmd("set wrap")
+vim.cmd("set linebreak")
+
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 -- automatically switch between relative and absolute line numbers
@@ -394,6 +365,12 @@ vim.cmd([[set number relativenumber]])
 -- Undo setting from lunarvim - wrapping cursor movement across lines
 vim.cmd("set whichwrap=b,s")
 vim.cmd("set iskeyword+=_")
+
+vim.cmd("autocmd FileType text,latex,tex,md,markdown setlocal spell")
+
+vim.opt.colorcolumn = "80"
+vim.opt.textwidth = 80
+vim.opt.formatoptions = "tcorqnjv"
 
 -- FIXME: none of these work
 --function map(mode, lhs, rhs, opts)
@@ -475,5 +452,3 @@ vim.cmd("set iskeyword+=_")
 --  precedes = "⟨",
 --  space = "␣",
 --}
-
-vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
