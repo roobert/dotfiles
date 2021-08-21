@@ -101,6 +101,9 @@ brew install hashicorp/tap/terraform-ls
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 brew install efm-langserver shellcheck shfmt
 luarocks install --server=https://luarocks.org/dev luaformatter
+brew install rust
+cargo install stylua
+luarocks install luacheck
 ```
 
 ## Python

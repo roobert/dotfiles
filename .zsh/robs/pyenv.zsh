@@ -17,7 +17,7 @@ function auto_active_env() {
     PARENT_DIR="$(dirname ${VIRTUAL_ENV})"
 
     if [[ "$PWD"/ != "${PARENT_DIR}"/* ]]; then
-      deactivate
+      #deactivate
       activate_venv
     fi
   fi
