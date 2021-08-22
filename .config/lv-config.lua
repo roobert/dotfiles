@@ -20,6 +20,9 @@ lvim.colorscheme = "nightshift"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 
+lvim.keys.normal_mode["[d"] = "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>"
+lvim.keys.normal_mode["]d"] = "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>"
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
