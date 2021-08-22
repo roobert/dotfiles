@@ -1,5 +1,3 @@
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
---
 -- DIInstall python_dbg
 -- TSInstall python bash lua
 -- LSPInstall python bash lua
@@ -7,12 +5,9 @@
 -- * black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck
 -- PackerSync
 -- PackerCompile
-
---NOTE
--- * See :PackerStatus for loaded plugins..
--- * Install LSP Servers with LspInstall ...
--- * Install DSP servers with DIinstall ...
--- * Install formatters and linters into global context, or project env
+-- PackerStatus for loaded plugins..
+-- LvimInfo
+-- LspInfo
 
 -- lvim.debug = true
 -- lvim.log.level = "debug"
