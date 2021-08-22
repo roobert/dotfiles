@@ -9,7 +9,8 @@
 -- LvimInfo
 -- LspInfo
 
--- lvim.debug = true
+-- debug
+-- lvim.debug = false
 -- lvim.log.level = "debug"
 
 -- general
@@ -25,8 +26,10 @@ lvim.keys.normal_mode["]d"] = "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>"
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+
 -- unmap a default keymapping
 -- lvim.keys.normal_mode["<C-Up>"] = ""
+
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
@@ -42,11 +45,16 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   lvim.builtin.telescope.defaults.mappings.n["<C-j>"] = actions.move_selection_next
 --   lvim.builtin.telescope.defaults.mappings.n["<C-k>"] = actions.move_selection_previous
 -- end
---
+
+-- Trouble Toggles..
+lvim.keys.normal_mode["<C-d>"] = "<cmd>TroubleToggle lsp_document_diagnostics<cr>"
 lvim.builtin.which_key.mappings["D"] = {
 	"<cmd>TroubleToggle lsp_document_diagnostics<cr>",
 	"Document Diagnostics",
 }
+
+-- Tagbar toggle
+lvim.keys.normal_mode["<C-b>"] = "<cmd>TagbarToggle<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", "Projects" }
@@ -62,13 +70,14 @@ lvim.builtin.which_key.mappings["t"] = {
 }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.dashboard.active = false
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
 lvim.builtin.dap.active = true
+
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
@@ -229,18 +238,17 @@ lvim.plugins = {
 	}, -- improved debug
 	{ "roobert/robs.vim" }, -- Nice interface for displaying nvim diagnostics
 	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
-	-- FIXME: broken
-	--{
-	--	"ludovicchabant/vim-gutentags",
-	--	setup = function()
-	--		vim.g.gutentags_modules = { "ctags" }
-	--		vim.g.gutentags_project_root = { ".git" }
-	--		vim.g.gutentags_add_default_project_roots = 0
-	--		vim.g.gutentags_define_advanced_commands = 1
-	--		vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
-	--	end,
-	--}, -- Auto handle ctags to allow jumping to definitions
-	--{'majutsushi/tagbar'}, -- Sidebar to show ctags
+	{
+		"ludovicchabant/vim-gutentags",
+		setup = function()
+			vim.g.gutentags_modules = { "ctags" }
+			vim.g.gutentags_project_root = { ".git" }
+			vim.g.gutentags_add_default_project_roots = 0
+			vim.g.gutentags_define_advanced_commands = 1
+			vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
+		end,
+	}, -- Auto handle ctags to allow jumping to definitions
+	{ "majutsushi/tagbar" }, -- Sidebar to show ctags
 	{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
 	{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
 	{ "jeffkreeftmeijer/vim-numbertoggle" }, -- auto switch between relative and normal line numbers
@@ -258,28 +266,33 @@ lvim.plugins = {
 	{ "chaoren/vim-wordmotion" }, -- set useful word boundaries for camel case and snake case
 	{ "rktjmp/lush.nvim" }, -- colorscheme creator
 	{ "nvim-treesitter/playground" }, -- Add playground until it's re-enabled in core
-	{
-		"ibhagwan/fzf-lua",
-		requires = {
-			"kyazdani42/nvim-web-devicons", -- optional for icons
-			"vijaymarupudi/nvim-fzf",
-		},
-	}, -- fzf instead of telescope
+	--{
+	--	"ibhagwan/fzf-lua",
+	--	requires = {
+	--		"kyazdani42/nvim-web-devicons", -- optional for icons
+	--		"vijaymarupudi/nvim-fzf",
+	--	},
+	--}, -- fzf instead of telescope
 	{ "ntpeters/vim-better-whitespace" }, -- highlight whitespace at EOL
 }
 
-require("telescope").load_extension("fzf")
-lvim.builtin.telescope.extensions = {
-	fzf = {
-		fuzzy = true, -- false will only do exact matching
-		override_generic_sorter = true, -- override the generic sorter
-		override_file_sorter = true, -- override the file sorter
-		case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-	},
-	fzy_native = {
-		override_generic_sorter = false,
-		override_file_sorter = false,
-	},
+--lvim.builtin.telescope.extensions.fzy = {
+--	fuzzy = true, -- false will only do exact matching
+--	override_generic_sorter = false, -- override the generic sorter
+--	override_file_sorter = true, -- override the file sorter
+--	case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+--	-- the default case_mode is "smart_case"
+--}
+
+lvim.builtin.telescope.on_config_done = function()
+	require("telescope").load_extension("fzf")
+end
+
+lvim.builtin.telescope.extensions.fzf = {
+	fuzzy = true, -- false will only do exact matching
+	override_generic_sorter = true, -- override the generic sorter
+	override_file_sorter = true, -- override the file sorter
+	case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 }
 
 -- FIXME
@@ -350,9 +363,9 @@ require("nvim-lightbulb").update_lightbulb({
 	},
 })
 
-vim.cmd("set timeoutlen=500")
-vim.cmd("set wrap")
-vim.cmd("set linebreak")
+vim.cmd([[set timeoutlen=500]])
+vim.cmd([[set wrap]])
+vim.cmd([[set linebreak]])
 
 vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
@@ -360,10 +373,10 @@ vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 vim.cmd([[set number relativenumber]])
 
 -- Undo setting from lunarvim - wrapping cursor movement across lines
-vim.cmd("set whichwrap=b,s")
-vim.cmd("set iskeyword+=_")
+vim.cmd([[set whichwrap=b,s]])
+vim.cmd([[set iskeyword+=_]])
 
-vim.cmd("autocmd FileType text,latex,tex,md,markdown setlocal spell")
+vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
 
 vim.cmd([[autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefail\" | normal G]])
 vim.cmd(
