@@ -69,6 +69,7 @@ lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
+lvim.builtin.dap.active = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
@@ -267,23 +268,19 @@ lvim.plugins = {
 	{ "ntpeters/vim-better-whitespace" }, -- highlight whitespace at EOL
 }
 
--- FIXME
--- * this doesn't work!
---lvim.plugin.telescope.extensions = {
---  fzf = {
---    fuzzy = true, -- false will only do exact matching
---    override_generic_sorter = true, -- override the generic sorter
---    override_file_sorter = true, -- override the file sorter
---    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
---    -- the default case_mode is "smart_case"
---  },
---  fzy_native = {
---    override_generic_sorter = false,
---    override_file_sorter = false,
---  },
---}
---
---require("telescope").load_extension("fzf")
+require("telescope").load_extension("fzf")
+lvim.builtin.telescope.extensions = {
+	fzf = {
+		fuzzy = true, -- false will only do exact matching
+		override_generic_sorter = true, -- override the generic sorter
+		override_file_sorter = true, -- override the file sorter
+		case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+	},
+	fzy_native = {
+		override_generic_sorter = false,
+		override_file_sorter = false,
+	},
+}
 
 -- FIXME
 --require("neoscroll").setup()
@@ -375,7 +372,7 @@ vim.cmd(
 
 vim.opt.colorcolumn = "80"
 vim.opt.textwidth = 80
-vim.opt.formatoptions = "tcorqnjv"
+vim.opt.formatoptions = "tcrqnjv"
 
 -- FIXME: none of these work
 --function map(mode, lhs, rhs, opts)
