@@ -1,10 +1,12 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 --
--- TSInstall python
--- LSPInstall python
+-- DIInstall python_dbg
+-- TSInstall python bash lua
+-- LSPInstall python bash lua
+-- install formatters and linters:
+-- * black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck
 -- PackerSync
 -- PackerCompile
--- install formatters: black, isort, shfmt, terraform fmt, stylua
 
 --NOTE
 -- * See :PackerStatus for loaded plugins..
@@ -61,7 +63,6 @@ lvim.builtin.which_key.mappings["t"] = {
 	w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
@@ -113,17 +114,18 @@ lvim.lang.python.formatters = {
 		args = { "--profile", "black" },
 	},
 }
-
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-lvim.lang.lua.linters = { { exe = "luacheck" } }
-
--- set an additional linter
 lvim.lang.python.linters = {
 	{
 		exe = "flake8",
 		args = {},
 	},
 }
+
+lvim.lang.lua.formatters = { { exe = "stylua" } }
+lvim.lang.lua.linters = { { exe = "luacheck" } }
+
+lvim.lang.sh.formatters = { { exe = "shfmt" } }
+lvim.lang.sh.linters = { { exe = "shellcheck" } }
 
 --lvim.completion.autocomplete = true
 lvim.transparent_window = true
