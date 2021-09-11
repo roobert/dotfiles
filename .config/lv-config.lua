@@ -383,8 +383,8 @@ vim.cmd(
 	[[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n  pass\nif __name__ == '__main__':\n  main()\n\" | normal G]]
 )
 
-vim.opt.colorcolumn = "80"
-vim.opt.textwidth = 80
+vim.opt.colorcolumn = "88"
+vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
 
 -- FIXME: none of these work
