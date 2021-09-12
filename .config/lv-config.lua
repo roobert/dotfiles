@@ -1,4 +1,3 @@
---
 -- DIInstall python_dbg
 -- TSInstall python bash lua
 -- LSPInstall python bash lua terraform
@@ -220,17 +219,18 @@ lvim.plugins = {
 			})
 		end,
 	}, -- Highlight FIXME, TODO, NOTE, etc.
-	--{
-	--	"folke/trouble.nvim",
-	--	requires = "kyazdani42/nvim-web-devicons",
-	--	config = function()
-	--		require("trouble").setup({
-	--			-- your configuration comes here
-	--			-- or leave it empty to use the default settings
-	--			-- refer to the configuration section below
-	--		})
-	--	end,
-	--}, -- Nice interface for displaying nvim diagnostics
+
+	{
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	}, -- Nice interface for displaying nvim diagnostics
 	--{ "roobert/robs.vim" },
 	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
 	{
@@ -362,6 +362,8 @@ vim.cmd(
 vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
+
+vim.opt.undofile = false
 
 -- FIXME
 --function map(mode, lhs, rhs, opts)
