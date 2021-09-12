@@ -1,11 +1,14 @@
+--
 -- DIInstall python_dbg
 -- TSInstall python bash lua
--- LSPInstall python bash lua
+-- LSPInstall python bash lua terraform
+--
 -- install formatters and linters:
 -- * black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck
 -- PackerSync
 -- PackerCompile
 -- PackerStatus for loaded plugins..
+--
 -- LvimInfo
 -- LspInfo
 
@@ -13,7 +16,20 @@
 -- lvim.debug = false
 -- lvim.log.level = "debug"
 
--- general
+lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.show_icons.git = 0
+
+-- if you don't want all the parsers change this to a table of the ones you want
+lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.highlight.enabled = true
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- lvim.autocommands.custom_groups = {
+--   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+-- }
+--
+
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "nightshift"
@@ -84,32 +100,6 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
--- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
-
 -- set a formatter if you want to override the default lsp one (if it exists)
 lvim.lang.python.formatters = {
 	{
@@ -121,10 +111,17 @@ lvim.lang.python.formatters = {
 		args = { "--profile", "black" },
 	},
 }
+
 lvim.lang.python.linters = {
 	{
 		exe = "flake8",
 		args = {},
+	},
+}
+
+lvim.lang.terraform.formatters = {
+	{
+		exe = "terraform_fmt",
 	},
 }
 
@@ -137,7 +134,6 @@ lvim.lang.sh.linters = { { exe = "shellcheck" } }
 --lvim.completion.autocomplete = true
 lvim.transparent_window = true
 lvim.line_wrap_cursor_movement = false
---lvim.colorscheme = "nightshift"
 
 --lvim.builtin.galaxyline.colors.bg = "#001040"
 --lvim.builtin.galaxyline.colors.alt_bg = "#001040"
@@ -160,7 +156,6 @@ lvim.plugins = {
 		end,
 	}, -- indent blank lines for nice indent guides
 	{ "roobert/nightshift.vim" }, -- my new cool theme!
-	{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }, -- improved fuzzy search
 	{
 		"ray-x/lsp_signature.nvim",
 		config = function()
@@ -192,11 +187,11 @@ lvim.plugins = {
 		end,
 		event = "InsertEnter",
 	}, -- signatures for functions
-	{ "tpope/vim-commentary" }, -- toggle commenting
-	{ "onsails/lspkind-nvim" }, -- text objects for parenthesis, brackets, quotes, etc.
-	{ "tpope/vim-surround" }, -- add around objects
-	{ "andymass/vim-matchup", event = "VimEnter" }, -- more text objects - allow changing values in next object without being inside it
-	{ "wellle/targets.vim" }, -- use '%' to jump between if/end/else, etc.
+	--{ "tpope/vim-commentary" }, -- toggle commenting
+	--{ "onsails/lspkind-nvim" }, -- text objects for parenthesis, brackets, quotes, etc.
+	--{ "tpope/vim-surround" }, -- add around objects
+	--{ "andymass/vim-matchup", event = "VimEnter" }, -- more text objects - allow changing values in next object without being inside it
+	--{ "wellle/targets.vim" }, -- use '%' to jump between if/end/else, etc.
 	{
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -206,7 +201,7 @@ lvim.plugins = {
 					before = "", -- "fg" or "bg" or empty
 					keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
 					after = "fg", -- "fg" or "bg" or empty
-					pattern = [[.*<(KEYWORDS)\s*]], -- pattern used for highlightng (vim regex)
+					pattern = [[.*<(KEYWORDS)\s*:]], -- pattern used for highlightng (vim regex)
 					comments_only = true, -- uses treesitter to match keywords in comments only
 					max_line_len = 400, -- ignore lines longer than this
 					exclude = {}, -- list of file types to exclude highlighting
@@ -220,23 +215,23 @@ lvim.plugins = {
 						"--line-number",
 						"--column",
 					},
-					pattern = [[\b(KEYWORDS)\b]],
+					pattern = [[\b(KEYWORDS):]],
 				},
 			})
 		end,
 	}, -- Highlight FIXME, TODO, NOTE, etc.
-	{
-		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
-		end,
-	}, -- improved debug
-	{ "roobert/robs.vim" }, -- Nice interface for displaying nvim diagnostics
+	--{
+	--	"folke/trouble.nvim",
+	--	requires = "kyazdani42/nvim-web-devicons",
+	--	config = function()
+	--		require("trouble").setup({
+	--			-- your configuration comes here
+	--			-- or leave it empty to use the default settings
+	--			-- refer to the configuration section below
+	--		})
+	--	end,
+	--}, -- Nice interface for displaying nvim diagnostics
+	--{ "roobert/robs.vim" },
 	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
 	{
 		"ludovicchabant/vim-gutentags",
@@ -248,24 +243,24 @@ lvim.plugins = {
 			vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
 		end,
 	}, -- Auto handle ctags to allow jumping to definitions
-	{ "majutsushi/tagbar" }, -- Sidebar to show ctags
-	{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
-	{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
+	--{ "majutsushi/tagbar" }, -- Sidebar to show ctags
+	--{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
+	--{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
 	{ "jeffkreeftmeijer/vim-numbertoggle" }, -- auto switch between relative and normal line numbers
 	--{ "f-person/git-blame.nvim" }, -- git blame support
-	{
-		"ahmedkhalf/lsp-rooter.nvim",
-		event = "BufRead",
-		config = function()
-			require("lsp-rooter").setup()
-		end,
-	}, -- pwd changes to project
-	{ "kevinhwang91/nvim-bqf" }, -- better quick fix
-	{ "can3p/incbool.vim" }, -- toggle booleans with c-x
-	{ "karb94/neoscroll.nvim" }, -- smooth scrolling
-	{ "chaoren/vim-wordmotion" }, -- set useful word boundaries for camel case and snake case
+	--{
+	--	"ahmedkhalf/lsp-rooter.nvim",
+	--	event = "BufRead",
+	--	config = function()
+	--		require("lsp-rooter").setup()
+	--	end,
+	--}, -- pwd changes to project
+	--{ "kevinhwang91/nvim-bqf" }, -- better quick fix
+	--{ "can3p/incbool.vim" }, -- toggle booleans with c-x
+	--{ "karb94/neoscroll.nvim" }, -- smooth scrolling
+	--{ "chaoren/vim-wordmotion" }, -- set useful word boundaries for camel case and snake case
 	{ "rktjmp/lush.nvim" }, -- colorscheme creator
-	{ "nvim-treesitter/playground" }, -- Add playground until it's re-enabled in core
+	--{ "nvim-treesitter/playground" }, -- Add playground until it's re-enabled in core
 	--{
 	--	"ibhagwan/fzf-lua",
 	--	requires = {
@@ -274,25 +269,6 @@ lvim.plugins = {
 	--	},
 	--}, -- fzf instead of telescope
 	{ "ntpeters/vim-better-whitespace" }, -- highlight whitespace at EOL
-}
-
---lvim.builtin.telescope.extensions.fzy = {
---	fuzzy = true, -- false will only do exact matching
---	override_generic_sorter = false, -- override the generic sorter
---	override_file_sorter = true, -- override the file sorter
---	case_mode = "smart_case", -- or "ignore_case" or "respect_case"
---	-- the default case_mode is "smart_case"
---}
-
-lvim.builtin.telescope.on_config_done = function()
-	require("telescope").load_extension("fzf")
-end
-
-lvim.builtin.telescope.extensions.fzf = {
-	fuzzy = true, -- false will only do exact matching
-	override_generic_sorter = true, -- override the generic sorter
-	override_file_sorter = true, -- override the file sorter
-	case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 }
 
 -- FIXME
@@ -323,51 +299,51 @@ lvim.builtin.telescope.extensions.fzf = {
 --})
 
 -- make code actions discoverable!
-require("nvim-lightbulb").update_lightbulb({
-	sign = {
-		enabled = true,
-		-- Priority of the gutter sign
-		priority = 10,
-	},
-	float = {
-		enabled = false,
-		-- Text to show in the popup float
-		text = "💡",
-		-- Available keys for window options:
-		-- - height     of floating window
-		-- - width      of floating window
-		-- - wrap_at    character to wrap at for computing height
-		-- - max_width  maximal width of floating window
-		-- - max_height maximal height of floating window
-		-- - pad_left   number of columns to pad contents at left
-		-- - pad_right  number of columns to pad contents at right
-		-- - pad_top    number of lines to pad contents at top
-		-- - pad_bottom number of lines to pad contents at bottom
-		-- - offset_x   x-axis offset of the floating window
-		-- - offset_y   y-axis offset of the floating window
-		-- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
-		-- - winblend   transparency of the window (0-100)
-		win_opts = {},
-	},
-	virtual_text = {
-		enabled = false,
-		-- Text to show at virtual text
-		text = "💡",
-	},
-	status_text = {
-		enabled = false,
-		-- Text to provide when code actions are available
-		text = "💡",
-		-- Text to provide when no actions are available
-		text_unavailable = "",
-	},
-})
+--require("nvim-lightbulb").update_lightbulb({
+--	sign = {
+--		enabled = true,
+--		-- Priority of the gutter sign
+--		priority = 10,
+--	},
+--	float = {
+--		enabled = false,
+--		-- Text to show in the popup float
+--		text = "💡",
+--		-- Available keys for window options:
+--		-- - height     of floating window
+--		-- - width      of floating window
+--		-- - wrap_at    character to wrap at for computing height
+--		-- - max_width  maximal width of floating window
+--		-- - max_height maximal height of floating window
+--		-- - pad_left   number of columns to pad contents at left
+--		-- - pad_right  number of columns to pad contents at right
+--		-- - pad_top    number of lines to pad contents at top
+--		-- - pad_bottom number of lines to pad contents at bottom
+--		-- - offset_x   x-axis offset of the floating window
+--		-- - offset_y   y-axis offset of the floating window
+--		-- - anchor     corner of float to place at the cursor (NW, NE, SW, SE)
+--		-- - winblend   transparency of the window (0-100)
+--		win_opts = {},
+--	},
+--	virtual_text = {
+--		enabled = false,
+--		-- Text to show at virtual text
+--		text = "💡",
+--	},
+--	status_text = {
+--		enabled = false,
+--		-- Text to provide when code actions are available
+--		text = "💡",
+--		-- Text to provide when no actions are available
+--		text_unavailable = "",
+--	},
+--})
 
 vim.cmd([[set timeoutlen=500]])
 vim.cmd([[set wrap]])
 vim.cmd([[set linebreak]])
 
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+--vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 
 -- automatically switch between relative and absolute line numbers
 vim.cmd([[set number relativenumber]])
@@ -387,7 +363,7 @@ vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
 
--- FIXME: none of these work
+-- FIXME
 --function map(mode, lhs, rhs, opts)
 --	local options = { noremap = true }
 --	if opts then
