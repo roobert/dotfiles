@@ -1,4 +1,4 @@
--- DIInstall python_dbg
+-- DIInstall python
 -- TSInstall python bash lua
 -- LSPInstall python bash lua terraform
 --
@@ -17,6 +17,21 @@
 
 lvim.builtin.nvimtree.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
+
+-- if you don't want all the parsers change this to a table of the ones you want
+lvim.builtin.treesitter.ensure_installed = {
+	"bash",
+	"c",
+	"javascript",
+	"json",
+	"lua",
+	"python",
+	"typescript",
+	"css",
+	"rust",
+	"java",
+	"yaml",
+}
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = "maintained"
@@ -138,22 +153,22 @@ lvim.line_wrap_cursor_movement = false
 --lvim.builtin.galaxyline.colors.alt_bg = "#001040"
 
 lvim.plugins = {
-	{ "windwp/nvim-ts-autotag" },
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		setup = function()
-			vim.g.indentLine_enabled = 1
-			vim.g.indent_blankline_char = "▏"
-			vim.g.indent_blankline_buftype_exclude = { "terminal" }
-			vim.g.indent_blankline_show_trailing_blankline_indent = false
-			vim.g.indent_blankline_show_first_indent_level = true
-			vim.g.indent_blankline_filetype_exclude = {
-				"help",
-				"terminal",
-				"dashboard",
-			}
-		end,
-	}, -- indent blank lines for nice indent guides
+	--  { "windwp/nvim-ts-autotag" },
+	--  {
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	setup = function()
+	-- 		vim.g.indentLine_enabled = 1
+	-- 		vim.g.indent_blankline_char = "▏"
+	-- 		vim.g.indent_blankline_buftype_exclude = { "terminal" }
+	-- 		vim.g.indent_blankline_show_trailing_blankline_indent = false
+	-- 		vim.g.indent_blankline_show_first_indent_level = true
+	-- 		vim.g.indent_blankline_filetype_exclude = {
+	-- 			"help",
+	-- 			"terminal",
+	-- 			"dashboard",
+	-- 		}
+	-- 	end,
+	-- }, -- indent blank lines for nice indent guides
 	{ "roobert/nightshift.vim" }, -- my new cool theme!
 	{
 		"ray-x/lsp_signature.nvim",
@@ -191,34 +206,34 @@ lvim.plugins = {
 	--{ "tpope/vim-surround" }, -- add around objects
 	--{ "andymass/vim-matchup", event = "VimEnter" }, -- more text objects - allow changing values in next object without being inside it
 	--{ "wellle/targets.vim" }, -- use '%' to jump between if/end/else, etc.
-	{
-		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-		config = function()
-			require("todo-comments").setup({
-				highlight = {
-					before = "", -- "fg" or "bg" or empty
-					keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
-					after = "fg", -- "fg" or "bg" or empty
-					pattern = [[.*<(KEYWORDS)\s*:]], -- pattern used for highlightng (vim regex)
-					comments_only = true, -- uses treesitter to match keywords in comments only
-					max_line_len = 400, -- ignore lines longer than this
-					exclude = {}, -- list of file types to exclude highlighting
-				},
-				search = {
-					command = "rg",
-					args = {
-						"--color=never",
-						"--no-heading",
-						"--with-filename",
-						"--line-number",
-						"--column",
-					},
-					pattern = [[\b(KEYWORDS):]],
-				},
-			})
-		end,
-	}, -- Highlight FIXME, TODO, NOTE, etc.
+	--{
+	--	"folke/todo-comments.nvim",
+	--	requires = "nvim-lua/plenary.nvim",
+	--	config = function()
+	--		require("todo-comments").setup({
+	--			highlight = {
+	--				before = "", -- "fg" or "bg" or empty
+	--				keyword = "bg", -- "fg", "bg", "wide" or empty. (wide is the same as bg, but will also highlight surrounding characters)
+	--				after = "fg", -- "fg" or "bg" or empty
+	--				pattern = [[.*<(KEYWORDS)\s*:]], -- pattern used for highlightng (vim regex)
+	--				comments_only = true, -- uses treesitter to match keywords in comments only
+	--				max_line_len = 400, -- ignore lines longer than this
+	--				exclude = {}, -- list of file types to exclude highlighting
+	--			},
+	--			search = {
+	--				command = "rg",
+	--				args = {
+	--					"--color=never",
+	--					"--no-heading",
+	--					"--with-filename",
+	--					"--line-number",
+	--					"--column",
+	--				},
+	--				pattern = [[\b(KEYWORDS):]],
+	--			},
+	--		})
+	--	end,
+	--}, -- Highlight FIXME, TODO, NOTE, etc.
 
 	{
 		"folke/trouble.nvim",
@@ -232,17 +247,17 @@ lvim.plugins = {
 		end,
 	}, -- Nice interface for displaying nvim diagnostics
 	--{ "roobert/robs.vim" },
-	{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
-	{
-		"ludovicchabant/vim-gutentags",
-		setup = function()
-			vim.g.gutentags_modules = { "ctags" }
-			vim.g.gutentags_project_root = { ".git" }
-			vim.g.gutentags_add_default_project_roots = 0
-			vim.g.gutentags_define_advanced_commands = 1
-			vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
-		end,
-	}, -- Auto handle ctags to allow jumping to definitions
+	--{ "junegunn/vim-easy-align" }, -- Visual-block+enter to align stuff
+	--{
+	--	"ludovicchabant/vim-gutentags",
+	--	setup = function()
+	--		vim.g.gutentags_modules = { "ctags" }
+	--		vim.g.gutentags_project_root = { ".git" }
+	--		vim.g.gutentags_add_default_project_roots = 0
+	--		vim.g.gutentags_define_advanced_commands = 1
+	--		vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
+	--	end,
+	--}, -- Auto handle ctags to allow jumping to definitions
 	--{ "majutsushi/tagbar" }, -- Sidebar to show ctags
 	--{ "simrat39/symbols-outline.nvim" }, -- Sidebar to show symbols
 	--{ "kosayoda/nvim-lightbulb" }, -- Hint about code actions to make them discoverable
