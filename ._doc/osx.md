@@ -5,7 +5,8 @@
 
 ## Keyboard
 * Switch `§` and `\`` keys:
-* * https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus````
+* -> https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus
+```
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 cat << 'EOF' > ~/.tilde-switch && chmod +x ~/.tilde-switch
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
@@ -28,8 +29,9 @@ sudo /usr/bin/env bash -c "cat > /Library/LaunchDaemons/org.custom.tilde-switch.
 EOF
 sudo launchctl load -w -- /Library/LaunchDaemons/org.custom.tilde-switch.plist
 ```
+
 * Switch escape key:
-* * https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x/40254864#40254864
+* * https://stackoverflow.com/a/40254864
 * Switch to Australian keyboard layout to remap shift-3 to '#'
 * Under Keyboard -> Text disable double spacebar full-stop
 * Disable smart quotes
@@ -53,6 +55,11 @@ gcloud components update --version=...
 ```
 brew install gh
 gh auth login
+```
+
+gnu tools
+```
+brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
 ```
 
 ## Configure iTerm2
@@ -89,42 +96,33 @@ brew install font-hack-nerd-font
 
 ## Shell
 * Add dotfiles
-* Install FZF
+* Install fzf
+```
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --key-bindings --completion --no-update-rc
+```
+* Add other stuff..
 ```
 brew install zplug
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp \
-  util-linux ripgrep graphviz qemu
+  util-linux ripgrep graphviz qemu npm neovim
 
 # language servers and linters for neovim - also install with LspInfo
 brew install hashicorp/tap/terraform-ls
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 brew install efm-langserver shellcheck shfmt
+brew install luarocks
+
 luarocks install --server=https://luarocks.org/dev luaformatter
+luarocks install luacheck
+
 brew install rust
 cargo install stylua
-luarocks install luacheck
 ```
 
 ## Python
 ```
-pyenv install 3.9.5
-pyenv global 3.9.5
-```
-
-## Neovim
-```
-pip install neovim
-brew install neovim --HEAD
-```
-
-## Neovide
-A fancy NeoVIM client in Rust
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-brew install cmake
-git clone https://github.com/Kethku/neovide
-cd neovide
-cargo build --release
+pyenv install 3.10.0
+pyenv global 3.10.0
 ```
