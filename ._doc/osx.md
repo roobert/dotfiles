@@ -123,6 +123,7 @@ cargo install stylua
 
 ## Python
 ```
+# NOTE: gnutools must not be in path when compiling python on m1 macs..
 pyenv install 3.10.0
 pyenv global 3.10.0
 ```
