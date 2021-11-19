@@ -68,6 +68,10 @@ brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
 ```
 * Select Mono Nerd Font from iterm2
+* Applications in terminal may access clipboard?
+* Apperance -> theme -> minimal
+* seprate status bar per pane
+* status bar location: bottom
 * dim interactive split panes
 * dimming affects text ~100%
 * background colour: #1c2240
