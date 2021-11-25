@@ -106,7 +106,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 brew install zplug
 brew tap vmware-tanzu/carvel
 brew install coreutils wget pyenv fzf jq tfenv kapp \
-  util-linux ripgrep graphviz qemu npm neovim
+  util-linux ripgrep graphviz qemu npm neovim libgit2 libgit2-dev
 
 # language servers and linters for neovim - also install with LspInfo
 brew install hashicorp/tap/terraform-ls
