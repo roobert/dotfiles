@@ -1,6 +1,7 @@
 -- DIInstall python
 -- TSInstall python bash lua
 -- LSPInstall python bash lua terraform
+-- LspInstallInfo
 --
 -- install formatters and linters:
 -- * black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck
@@ -114,36 +115,70 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	--{ exe = "black" },
+	{ exe = "black", filetypes = { "python" }, args = { "--fast" } },
+	{ exe = "isort", filetypes = { "python" } },
+	--{ exe = "prettier", filetypes = { "markdown" } },
+	{ exe = "stylua" },
+	--{ exe = "terraform", filetypes = { "terraform" }, args = { "fmt -" } },
+	--{
+	--	exe = "prettier",
+	--	---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+	--	filetypes = { "typescript", "typescriptreact" },
+	--},
+})
+
+-- set additional linters
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	--{
+	--  exe = "eslint_d",
+	--  ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+	--  filetypes = { "javascript", "javascriptreact" },
+	--},
+	--{ exe = "flake8" },
+	--{
+	--	exe = "shellcheck",
+	--	args = { "--severity", "warning" },
+	--},
+	--{
+	--	exe = "codespell",
+	--	filetypes = { "javascript", "python" },
+	--},
+})
+
 -- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lang.python.formatters = {
-	{
-		exe = "black",
-		args = { "--fast" },
-	},
-	{
-		exe = "isort",
-		args = { "--profile", "black" },
-	},
-}
-
-lvim.lang.python.linters = {
-	{
-		exe = "flake8",
-		args = {},
-	},
-}
-
-lvim.lang.terraform.formatters = {
-	{
-		exe = "terraform_fmt",
-	},
-}
-
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-lvim.lang.lua.linters = { { exe = "luacheck" } }
-
-lvim.lang.sh.formatters = { { exe = "shfmt" } }
-lvim.lang.sh.linters = { { exe = "shellcheck" } }
+--lvim.lang.python.formatters = {
+--	{
+--		exe = "black",
+--		args = { "--fast" },
+--	},
+--	{
+--		exe = "isort",
+--		args = { "--profile", "black" },
+--	},
+--}
+--
+--lvim.lang.python.linters = {
+--	{
+--		exe = "flake8",
+--		args = {},
+--	},
+--}
+--
+--lvim.lang.terraform.formatters = {
+--	{
+--		exe = "terraform_fmt",
+--	},
+--}
+--
+--lvim.lang.lua.formatters = { { exe = "stylua" } }
+--lvim.lang.lua.linters = { { exe = "luacheck" } }
+--
+--lvim.lang.sh.formatters = { { exe = "shfmt" } }
+--lvim.lang.sh.linters = { { exe = "shellcheck" } }
 
 --lvim.completion.autocomplete = true
 lvim.transparent_window = true
@@ -357,6 +392,7 @@ lvim.plugins = {
 vim.cmd([[set timeoutlen=500]])
 vim.cmd([[set wrap]])
 vim.cmd([[set linebreak]])
+vim.cmd([[set cmdheight=1]])
 
 --vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
 

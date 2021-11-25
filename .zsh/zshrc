@@ -9,7 +9,7 @@ source ${ZSH_ROOT}/spectrum.zsh
 source ${ZSH_ROOT}/vi-mode/vi-mode.plugin.zsh
 source ${ZSH_ROOT}/zsh-autoenv/init.zsh
 
-for f in ${ZSH_ROOT}/robs/**/*.zsh; do
+for f in ${ZSH_ROOT}/robs/*.zsh; do
   source $f
 done
 
