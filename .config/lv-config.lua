@@ -77,9 +77,9 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- end
 
 -- Trouble Toggles..
-lvim.keys.normal_mode["<C-d>"] = "<cmd>TroubleToggle lsp_document_diagnostics<cr>"
+lvim.keys.normal_mode["<C-d>"] = "<cmd>TroubleToggle document_diagnostics<cr>"
 lvim.builtin.which_key.mappings["D"] = {
-	"<cmd>TroubleToggle lsp_document_diagnostics<cr>",
+	"<cmd>TroubleToggle document_diagnostics<cr>",
 	"Document Diagnostics",
 }
 
@@ -93,14 +93,14 @@ lvim.builtin.which_key.mappings["t"] = {
 	name = "+Trouble",
 	r = { "<cmd>TroubleToggle lsp_references<cr>", "References" },
 	f = { "<cmd>TroubleToggle lsp_definitions<cr>", "Definitions" },
-	d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Document Diagnostics" },
+	d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
 	q = { "<cmd>TroubleToggle quickfix<cr>", "QuickFix" },
 	l = { "<cmd>TroubleToggle loclist<cr>", "LocationList" },
 	w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
 }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = false
+lvim.builtin.alpha.active = false
 lvim.builtin.terminal.active = true
 lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
