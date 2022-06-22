@@ -203,6 +203,7 @@ lvim.plugins = {
 	-- 	end,
 	-- }, -- indent blank lines for nice indent guides
 	{ "roobert/nightshift.vim" }, -- my new cool theme!
+	{ "folke/tokyonight.nvim" },
 	{
 		"ray-x/lsp_signature.nvim",
 		config = function()
@@ -232,8 +233,8 @@ lvim.plugins = {
 				-- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
 			})
 		end,
-		event = "InsertEnter",
-	}, -- signatures for functions
+		event = "BufRead",
+	},
 	--{ "tpope/vim-commentary" }, -- toggle commenting
 	--{ "onsails/lspkind-nvim" }, -- text objects for parenthesis, brackets, quotes, etc.
 	--{ "tpope/vim-surround" }, -- add around objects
@@ -267,7 +268,6 @@ lvim.plugins = {
 	--		})
 	--	end,
 	--}, -- Highlight FIXME, TODO, NOTE, etc.
-
 	{
 		"folke/trouble.nvim",
 		requires = "kyazdani42/nvim-web-devicons",
