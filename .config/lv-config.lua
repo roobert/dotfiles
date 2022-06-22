@@ -1,6 +1,6 @@
 -- DIInstall python
--- TSInstall python bash lua
--- LSPInstall python bash lua terraform
+-- TSInstall all
+-- LspInstall psyright pylsp sumneko_lua bashls terraformls yamlls
 -- LspInstallInfo
 --
 -- install formatters and linters:
@@ -16,9 +16,6 @@
 -- lvim.debug = false
 -- lvim.log.level = "debug"
 
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
-
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
 	"bash",
@@ -28,14 +25,16 @@ lvim.builtin.treesitter.ensure_installed = {
 	"lua",
 	"python",
 	"typescript",
+	"tsx",
 	"css",
 	"rust",
 	"java",
 	"yaml",
 }
 
+lvim.lsp.automatic_servers_installation = true
+
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
@@ -107,11 +106,10 @@ lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
 lvim.builtin.dap.active = true
 
-lvim.builtin.nvimtree.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.setup.renderer.icons.show.git = fa
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
