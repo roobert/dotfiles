@@ -72,7 +72,9 @@ sudo docker network create network0
 # data is stored in /var/lib/docker/volumes/
 
 # Once services are running, configure a new backend with:
-influxdb-plugs:18086
+name: influxdb-plugs
+address: influxdb-plugs:18086
+database: plugs
 
 # configure the localbytes/tasmota plugs
 * write traffic to rpi address
@@ -112,3 +114,13 @@ page by IP
 
 # login to router and reserve the leases to addresses for the various devices don't
 change..
+
+# change the influxdb retention period.. through the Venus UI - for cerbo data, and
+through ??? for plug data? 30 years: 10950d
+# mount the data volume on external SSD
+
+# change dashboard colour to light
+
+
+docker ps
+docker exec <grafana container id> grafana-cli plugins install pr0ps-trackmap-panel
