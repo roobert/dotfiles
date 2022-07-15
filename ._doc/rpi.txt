@@ -122,5 +122,15 @@ through ??? for plug data? 30 years: 10950d
 # change dashboard colour to light
 
 
+# add these plugins, or add them to the Dockerfile for grafana
 docker ps
 docker exec <grafana container id> grafana-cli plugins install pr0ps-trackmap-panel
+grafana-cli plugins install briangann-gauge-panel
+
+# Rebuild docker image, update docker-compose with new image/version
+
+
+
+
+get rpi to scrape ruuvi
+get GPS through RPI USB

@@ -36,6 +36,10 @@ sudo launchctl load -w -- /Library/LaunchDaemons/org.custom.tilde-switch.plist
 * Under Keyboard -> Text disable double spacebar full-stop
 * Disable smart quotes
 * Set key repeat to fastest/shortest
+* disable swipe to go back in chrome:
+```
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
+```
 
 ## Programs
 * iterm2
