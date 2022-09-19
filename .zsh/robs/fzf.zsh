@@ -30,7 +30,7 @@ bindkey "^J" fzf-cdr
 function fzf-kubectl-ctx () {
   local selected_context=$(kubectl ctx | awk '{ print $1 }' | fzf --layout reverse-list --height 12 --query "$LBUFFER")
   if [ -n "$selected_context" ]; then
-    BUFFER="kubectl config set-cluster ${selected_context}"
+    BUFFER="kubectl config use-context ${selected_context}"
     zle accept-line
   fi
   zle reset-prompt

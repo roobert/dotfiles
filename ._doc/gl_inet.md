@@ -14,13 +14,21 @@ uci commit fstab
 from: https://blog.patshead.com/2020/10/tailscale-on-my-gl-dot-inet-mango-openwrt-router.html
 
 ```
-cd /mnt/sdb1
+cd /tmp/mountd/disk1_part1
 # see: https://pkgs.tailscale.com/unstable/
+# for gl-inet
 wget https://pkgs.tailscale.com/unstable/tailscale_1.29.125_mips.tgz
-ln -s tailscale_1.29.125_mips tailscale
+# for slate
+wget https://pkgs.tailscale.com/unstable/tailscale_1.29.125_arm.tgz
+ln -s tailscale_1.29.125_* tailscale
 cat >> /etc/rc.local << EOF
-(sleep 10; /mnt/sdb1/tailscale/tailscaled -state /mnt/sdb1/tailscale/tailscale.state > /dev/null 2>&1) &
+(sleep 10; /tmp/mountd/disk1_part1/tailscale/tailscaled -state /tmp/mountd/disk1_part1/tailscale/tailscale.state > /dev/null 2>&1) &
 EOF
 ```
 
 Probably a better method: https://willangley.org/how-i-set-up-tailscale-on-my-wifi-router/
+
+```
+tailscale up
+tailscale up --advertise-routes=192.168.8.0/24
+```
