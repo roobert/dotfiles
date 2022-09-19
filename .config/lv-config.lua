@@ -32,7 +32,7 @@ lvim.builtin.treesitter.ensure_installed = {
 	"yaml",
 }
 
-lvim.lsp.automatic_servers_installation = true
+lvim.lsp.installer.setup.automatic_installation = true
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -102,6 +102,7 @@ lvim.builtin.which_key.mappings["t"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = false
 lvim.builtin.terminal.active = true
+lvim.builtin.notify.active = true
 lvim.builtin.telescope.active = true
 lvim.builtin.nvimtree.active = true
 lvim.builtin.dap.active = true
@@ -408,7 +409,7 @@ vim.cmd(
 	[[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n  pass\nif __name__ == '__main__':\n  main()\n\" | normal G]]
 )
 
-vim.opt.colorcolumn = "88"
+--vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
 
