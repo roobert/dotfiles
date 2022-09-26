@@ -33,6 +33,15 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.lsp.installer.setup.automatic_installation = true
+lvim.lsp.installer.setup.ensure_installed = {
+	"sumeko_lua",
+	"jsonls",
+	"pyright",
+	"pylsp",
+	"bashls",
+	"terraformls",
+	"yamlls",
+}
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ignore_install = { "haskell" }
