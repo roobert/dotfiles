@@ -1,5 +1,5 @@
 #system tools
-alias ls="ls --group-directories-first --color=auto"
+alias ls="gls --group-directories-first --color=auto"
 alias screen="TERM=xterm screen"
 alias ssh="ssh -t"
 
