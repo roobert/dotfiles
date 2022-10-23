@@ -24,7 +24,6 @@ LvimInfo
 LspInfo
 ]]
 
-
 --
 -- Plugins
 --
@@ -204,8 +203,6 @@ vim.cmd [[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n 
 lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.installer.setup.check_outdated_servers_on_open = true
 
---vim.cmd [[ lua require('leap').add_default_mappings() ]]
---vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
 
@@ -213,6 +210,8 @@ vim.opt.undofile = false
 
 -- remove inline diagnostic text
 vim.diagnostic.config({ virtual_text = false })
+
+--vim.cmd [[ lua require('leap').add_default_mappings() ]]
 
 -- allow toggling of diagnostic text
 vim.g.diagnostics_visible = true
