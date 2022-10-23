@@ -150,11 +150,11 @@ lvim.plugins = {
   --{ "simrat39/symbols-outline.nvim" },
 
   -- On-screen jump via labels <s><two characters>
-  { "ggandor/leap.nvim",
-    setup = function()
-      require("leap").add_default_mappings()
-    end,
-  },
+  -- { "ggandor/leap.nvim",
+  --   setup = function()
+  --     require("leap").add_default_mappings()
+  --   end,
+  -- },
 
   -- Prevent overwriting yank buffer when deleting
   -- {
@@ -229,6 +229,8 @@ end
 -- Bindings
 --
 
+-- goto definition with gd
+--
 -- close a buffer leader-c
 --
 -- toggle buffer list leader-f
