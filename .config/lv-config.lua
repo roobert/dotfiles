@@ -1,6 +1,6 @@
 --[[
 install formatters and linters:
-* black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck
+* black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck, flake8, codespell
 
 rm -rf ~/.local/share/lunarvim
 
@@ -191,9 +191,11 @@ function _G.toggle_diagnostics()
   end
 end
 
-lvim.keys.normal_mode["<leader>-"] = ":call v:lua.toggle_diagnostics()<CR>"
+lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 
--- toggle buffer list shift-f
+-- close a buffer leader-c
+--
+-- toggle buffer list leader-f
 --
 -- toggle trouble with leader-t
 --
@@ -204,12 +206,11 @@ lvim.keys.normal_mode["<leader>-"] = ":call v:lua.toggle_diagnostics()<CR>"
 -- switch panes with ctrl-hjkl
 --
 -- switch buffers with shift-l/h
-lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
-lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrev<CR>"
 
-lvim.keys.normal_mode["<S-f>"] = ":Telescope buffers<CR>"
-
-lvim.keys.normal_mode["<leader>t"] = "<CMD>TroubleToggle document_diagnostics<CR>"
+lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
+lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
