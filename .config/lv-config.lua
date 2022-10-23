@@ -1,14 +1,19 @@
 --[[
-install formatters and linters:
-
+# Reset the state
 rm -rf ~/.local/share/lunarvim
 
+# Install Diagnostics
 DIInstall python
+
+# Install Treesitter configs (highlighting, etc.)
 TSInstall all
+
+# Install language servers (formatting, linting, etc.)
 Mason
 LspInstall psyright pylsp sumneko_lua bashls terraformls tflint yamlls
 LspInstallInfo
 
+# Install plugins
 PackerSync
 
 # Show loaded plugins
@@ -168,12 +173,14 @@ lvim.plugins = {
 --
 
 lvim.log.level = "info"
-lvim.format_on_save = true
 
 lvim.leader = "space"
 
 lvim.colorscheme = "nightshift"
+
+lvim.format_on_save = true
 lvim.lint_on_save = true
+
 lvim.builtin.gitsigns.active = true
 lvim.builtin.bufferline.active = true
 lvim.builtin.breadcrumbs.active = true
@@ -193,7 +200,6 @@ vim.cmd [[autocmd FileType text,latex,tex,md,markdown setlocal spell]]
 vim.cmd [[autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefail\" | normal G]]
 
 vim.cmd [[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n  pass\nif __name__ == '__main__':\n  main()\n\" | normal G]]
-
 
 lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.installer.setup.check_outdated_servers_on_open = true
@@ -218,7 +224,6 @@ function _G.toggle_diagnostics()
     vim.g.diagnostics_visible = true
     vim.diagnostic.config({ virtual_text = true })
   end
-
 end
 
 --
@@ -266,7 +271,6 @@ formatters.setup {
     filetypes = { "typescript", "typescriptreact" },
   },
 }
-
 
 --
 -- Linting
