@@ -1,6 +1,5 @@
 --[[
 install formatters and linters:
-* black, isort, shfmt, shellcheck, terraform fmt, stylua, luacheck, flake8, codespell
 
 rm -rf ~/.local/share/lunarvim
 
@@ -20,12 +19,11 @@ LvimInfo
 LspInfo
 ]]
 
--- general
-lvim.log.level = "info"
-lvim.format_on_save = true
 
--- keymappings [view all the defaults by pressing <leader>Lk]
-lvim.leader = "space"
+--
+-- Plugins
+--
+
 lvim.plugins = {
   -- my new cool theme!
   { "roobert/nightshift.vim" },
@@ -46,8 +44,8 @@ lvim.plugins = {
         use_lspsaga = false,
         hi_parameter = "Search",
         max_height = 12,
-        max_width = 120,
         handler_opts = {
+          max_width = 120,
           border = "single",
         },
         extra_trigger_chars = {}
@@ -146,7 +144,33 @@ lvim.plugins = {
 
   -- Sidebar to show symbols
   --{ "simrat39/symbols-outline.nvim" },
+
+  -- On-screen jump via labels <s><two characters>
+  { "ggandor/leap.nvim",
+    setup = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+
+  -- Prevent overwriting yank buffer when deleting
+  -- {
+  --   "gbprod/cutlass.nvim",
+  --   config = function()
+  --     require("cutlass").setup({
+  --       cut_key = 'x'
+  --     })
+  --   end
+  -- }
 }
+
+--
+-- Settings
+--
+
+lvim.log.level = "info"
+lvim.format_on_save = true
+
+lvim.leader = "space"
 
 lvim.colorscheme = "nightshift"
 lvim.lint_on_save = true
@@ -170,6 +194,11 @@ vim.cmd [[autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefai
 
 vim.cmd [[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n  pass\nif __name__ == '__main__':\n  main()\n\" | normal G]]
 
+
+lvim.lsp.installer.setup.automatic_installation = true
+lvim.lsp.installer.setup.check_outdated_servers_on_open = true
+
+--vim.cmd [[ lua require('leap').add_default_mappings() ]]
 --vim.opt.colorcolumn = "88"
 vim.opt.textwidth = 88
 vim.opt.formatoptions = "tcrqnjv"
@@ -189,9 +218,12 @@ function _G.toggle_diagnostics()
     vim.g.diagnostics_visible = true
     vim.diagnostic.config({ virtual_text = true })
   end
+
 end
 
-lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
+--
+-- Bindings
+--
 
 -- close a buffer leader-c
 --
@@ -204,15 +236,24 @@ lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<C
 -- shift-k = show description / show full line in Trouble
 --
 -- switch panes with ctrl-hjkl
---
+
 -- switch buffers with shift-l/h
 lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
 lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrev<CR>"
 
+-- navigate between errors with [/]-d
+lvim.keys.normal_mode["[d"] = ":lua vim.diagnostic.goto_prev()<CR>"
+lvim.keys.normal_mode["]d"] = ":lua vim.diagnostic.goto_next()<CR>"
+
 lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
+lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 
--- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+--
+-- Formatting
+--
+
+-- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
   { command = "shfmt", filetypes = { "sh" } },
@@ -226,7 +267,11 @@ formatters.setup {
   },
 }
 
--- -- set additional linters
+
+--
+-- Linting
+--
+
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { command = "flake8", filetypes = { "python" } },
@@ -243,6 +288,10 @@ linters.setup {
     filetypes = { "javascript", "python" },
   },
 }
+
+--
+-- Treesitter
+--
 
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -262,9 +311,4 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
-lvim.lsp.installer.setup.automatic_installation = true
-lvim.lsp.installer.setup.check_outdated_servers_on_open = true
-
-lvim.log.level = "info"
-lvim.format_on_save = true
-lvim.leader = "space"
+--vim.cmd [[ lua require('leap').leap { target_windows = { vim.fn.win_getid() } } ]]
