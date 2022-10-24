@@ -28,11 +28,11 @@
 #   where .dircolors is this file.
 
 
+DIR                   38;5;61
 BLK                   38;5;68
 CAPABILITY            38;5;17
-CHR                   38;5;113;1
-DIR                   38;5;30
 DOOR                  38;5;127
+CHR                   38;5;113;1
 EXEC                  38;5;166;1
 FIFO                  38;5;126
 FILE                  38;5;253
@@ -129,7 +129,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;1
 .tfm                  38;5;64
 .tfnt                 38;5;140
 .theme                38;5;109
-.txt                  38;5;192
+.txt                  38;5;254
 .urlview              38;5;85
 .vim                  1
 .viminfo              38;5;240;1
@@ -146,9 +146,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;1
 .old                  38;5;242
 .out                  38;5;46;1
 
-
-
-
 #}}}
 # pictures, icons                                                            {{{
 .bmp                  38;5;62
@@ -158,8 +155,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;1
 .jpeg                 38;5;66
 .jpg                  38;5;66
 .JPG                  38;5;66
-.png                  38;5;68;1
-.svg                  38;5;24;1
+.png                  38;5;68
+.svg                  38;5;24
 .xpm                  38;5;36
 #}}}
 # Emulator roms, emulator savegames                                          {{{
