@@ -61,10 +61,30 @@ lvim.plugins = {
   -- text objects for parenthesis, brackets, quotes, etc.
   { "onsails/lspkind-nvim" },
 
+  --     Old text                    Command         New text
+  -- --------------------------------------------------------------------------------
+  --     surr*ound_words             ysiw)           (surround_words)       you surround in ord
+  --     *make strings               ys$"            "make strings"         you sround to end of line
+  --     [delete ar*ound me!]        ds]             delete around me!      delete surround
+  --     remove <b>HTML t*ags</b>    dst             remove HTML tags       delete surround tags
+  --     'change quot*es'            cs'"            "change quotes"        change surround source target
+  --     <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>  change surround tag
+  --     delete(functi*on calls)     dsf             function calls         delete surround function
+  --     par*am                      yssffunc        func(param)            you surround some function
   -- add around objects
-  { "tpope/vim-surround" },
+  {
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  },
+  -- { "tpope/vim-surround" },
 
-  -- more text objects - allow changing values in next object without being inside it
+  -- more text objects - allo changing values in next object without being inside it,
+  -- i.e: ci"" from outside the quotes
   { "andymass/vim-matchup", event = "VimEnter" },
 
   -- use '%' to jump between if/end/else, etc.
@@ -148,7 +168,6 @@ lvim.plugins = {
     end,
   },
 
-
   -- Nice interface for displaying nvim diagnostics
   {
     "folke/trouble.nvim",
@@ -158,7 +177,7 @@ lvim.plugins = {
     end,
   },
 
-  -- Visual-block+enter to align stuff
+  -- Visual-block+enter to align stuff, ctrl-x to switch to regexp
   { "junegunn/vim-easy-align" },
 
   -- Hint about code actions to make them discoverable
@@ -261,7 +280,7 @@ vim.cmd [[autocmd BufNewFile *.sh 0put = \"#!/usr/bin/env bash\nset -euo pipefai
 
 vim.cmd [[autocmd BufNewFile *.py 0put = \"#!/usr/bin/env python\ndef main():\n  pass\nif __name__ == '__main__':\n  main()\n\" | normal G]]
 
-lvim.lsp.installer.setup.automatic_installation = true
+--lvim.lsp.installer.setup.automatic_installation = true
 lvim.lsp.installer.setup.check_outdated_servers_on_open = true
 
 vim.opt.textwidth = 88
@@ -316,6 +335,9 @@ lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer l
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 
+-- highlight code and press Enter then write a character to align on
+lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
 --
 -- Formatting
 --
@@ -341,17 +363,8 @@ formatters.setup {
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { command = "flake8", filetypes = { "python" } },
-  {
-    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-    command = "shellcheck",
-    ---@usage arguments to pass to the formatter
-    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-    extra_args = { "--severity", "warning" },
-  },
-  {
-    command = "codespell",
-    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-    filetypes = { "javascript", "python" },
+  { command = "shellcheck", extra_args = { "--severity", "warning" }, },
+  { command = "codespell", filetypes = { "javascript", "python" },
   },
 }
 
@@ -372,6 +385,8 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "go",
+  "hcl",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
