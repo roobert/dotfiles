@@ -111,14 +111,14 @@ lvim.plugins = {
             FIX = {
               icon = " ", -- icon used for the sign, and in search results
               color = "error", -- can be a hex color, or a named color (see below)
-              alt = { "FIXME", "BUG", "FIXIT", "ISSUE" },
+              alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "FIX" },
               -- signs = false, -- configure signs for some keywords individually
             },
             TODO = { icon = " ", color = "info" },
             HACK = { icon = " ", color = "warning" },
-            WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+            WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX", "WARN" } },
             PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+            NOTE = { icon = " ", color = "hint", alt = { "NOTE", "INFO" } },
             TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
           },
           gui_style = {
@@ -273,6 +273,9 @@ vim.cmd [[set cmdheight=1]]
 -- Undo setting from lunarvim - wrapping cursor movement across lines
 vim.cmd [[set whichwrap=b,s]]
 vim.cmd [[set iskeyword+=_]]
+
+-- show search/replace in split window
+vim.cmd [[set inccommand=split]]
 
 vim.cmd [[autocmd FileType text,latex,tex,md,markdown setlocal spell]]
 
