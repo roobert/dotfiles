@@ -32,6 +32,9 @@ lvim.plugins = {
   -- my new cool theme!
   { "roobert/nightshift.vim" },
 
+  -- colorize hex colours
+  { "norcalli/nvim-colorizer.lua" },
+
   { "windwp/nvim-ts-autotag" },
 
   {
