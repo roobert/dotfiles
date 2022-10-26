@@ -24,6 +24,15 @@ LvimInfo
 LspInfo
 ]]
 
+-- NOTE
+-- TODO
+-- FIXME for lualine
+-- darken the grey?
+-- dont display lsp attached shit
+-- dont display file type?
+-- dont display left most aligned 'a' section
+-- trouble stats?
+
 --
 -- Plugins
 --
@@ -37,6 +46,7 @@ lvim.plugins = {
 
   { "windwp/nvim-ts-autotag" },
 
+  -- function signature hints
   {
     "ray-x/lsp_signature.nvim",
     config = function()
@@ -297,8 +307,6 @@ vim.opt.undofile = false
 -- remove inline diagnostic text
 vim.diagnostic.config({ virtual_text = false })
 
---vim.cmd [[ lua require('leap').add_default_mappings() ]]
-
 -- allow toggling of diagnostic text
 vim.g.diagnostics_visible = true
 function _G.toggle_diagnostics()
@@ -342,6 +350,7 @@ lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostic
 lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 
 -- highlight code and press Enter then write a character to align on
+-- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
 
 --
@@ -351,10 +360,10 @@ lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "shfmt", filetypes = { "sh" } },
-  { command = "terraform_fmt", filtypes = { "terraform" } },
   { command = "black", filetypes = { "python" } },
   { command = "isort", filetypes = { "python" } },
+  { command = "shfmt", filetypes = { "sh" } },
+  { command = "terraform_fmt", filtypes = { "terraform" } },
   {
     command = "prettier",
     extra_args = { "--print-with", "100" },
@@ -397,5 +406,3 @@ lvim.builtin.treesitter.ensure_installed = {
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
-
---vim.cmd [[ lua require('leap').leap { target_windows = { vim.fn.win_getid() } } ]]
