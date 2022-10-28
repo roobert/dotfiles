@@ -28,7 +28,7 @@ LspInfo
 -- TODO
 -- FIXME for lualine
 -- darken the grey?
--- dont display lsp attached shit
+-- dont display lsp attached stuff
 -- dont display file type?
 -- dont display left most aligned 'a' section
 -- trouble stats?
