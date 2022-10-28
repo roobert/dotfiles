@@ -118,6 +118,9 @@ lvim.plugins = {
   -- WARNING
   -- NOTE
   -- TODO
+  --
+  -- NOTE
+  -- Run PackerCompile after adjusting these settings..
   {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -125,10 +128,10 @@ lvim.plugins = {
       require("todo-comments").setup(
         {
           search = {
-            pattern = [[\b(KEYWORDS)\b]],
+            pattern = [[\b (KEYWORDS)\b]],
           },
           highlight = {
-            pattern = [[.*<(KEYWORDS)\s*]],
+            pattern = [[.*< (KEYWORDS)\s*]],
           },
           keywords = {
             FIXME = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", }, },
