@@ -10,7 +10,7 @@ TSInstall all
 
 # Install language servers (formatting, linting, etc.)
 Mason
-LspInstall psyright pylsp sumneko_lua bashls terraformls tflint yamlls
+LspInstall psyright pylsp sumneko_lua bashls terraformls tflint yamlls hadolint
 LspInstallInfo
 
 # Install plugins
@@ -33,6 +33,7 @@ LspInfo
 --
 -- Plugins
 --
+
 
 lvim.plugins = {
   -- my new cool theme!
@@ -71,16 +72,16 @@ lvim.plugins = {
   -- text objects for parenthesis, brackets, quotes, etc.
   { "onsails/lspkind-nvim" },
 
-  --     Old text                    Command         New text
-  -- --------------------------------------------------------------------------------
-  --     surr*ound_words             ysiw)           (surround_words)       you surround in ord
-  --     *make strings               ys$"            "make strings"         you sround to end of line
-  --     [delete ar*ound me!]        ds]             delete around me!      delete surround
-  --     remove <b>HTML t*ags</b>    dst             remove HTML tags       delete surround tags
-  --     'change quot*es'            cs'"            "change quotes"        change surround source target
-  --     <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>  change surround tag
-  --     delete(functi*on calls)     dsf             function calls         delete surround function
-  --     par*am                      yssffunc        func(param)            you surround some function
+  --     Old text                    Command    New text
+  -- ---------------------------------------------------------------------------
+  --     surr*ound_words             ysiw)      (surround_words)       you surround in ord
+  --     *make strings               ys$"       "make strings"         you sround to end of line
+  --     [delete ar*ound me!]        ds]        delete around me!      delete surround
+  --     remove <b>HTML t*ags</b>    dst        remove HTML tags       delete surround tags
+  --     'change quot*es'            cs'"       "change quotes"        change surround source target
+  --     <b>or tag* types</b>        csth1<CR>  <h1>or tag types</h1>  change surround tag
+  --     delete(functi*on calls)     dsf        function calls         delete surround function
+  --     par*am                      yssffunc   func(param)            you surround some function
   -- add around objects
   {
     "kylechui/nvim-surround",
@@ -96,6 +97,29 @@ lvim.plugins = {
   -- more text objects - allo changing values in next object without being inside it,
   -- i.e: ci"" from outside the quotes
   { "andymass/vim-matchup", event = "VimEnter" },
+
+  -- highlight jump letters for f/F and t/T
+  {
+    "jinh0/eyeliner.nvim",
+    config = function()
+      require 'eyeliner'.setup {
+        highlight_on_key = true
+      }
+    end
+  },
+
+  -- quick navigation within the visible buffer
+  {
+    "phaazon/hop.nvim",
+    as = "hop",
+    keys = { "s", "S" },
+    config = function()
+      -- see :h hop-config
+      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+      vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
+      vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
+    end,
+  },
 
   -- use '%' to jump between if/end/else, etc.
   { "wellle/targets.vim" },
@@ -127,26 +151,19 @@ lvim.plugins = {
     config = function()
       require("todo-comments").setup(
         {
-          search = {
-            pattern = [[\b (KEYWORDS)\b]],
-          },
-          highlight = {
-            pattern = [[.*< (KEYWORDS)\s*]],
-          },
-          keywords = {
-            FIXME = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", }, },
-            TODO = { icon = " ", color = "info" },
-            HACK = { icon = " ", color = "warning" },
+          search    = { pattern = [[\b(KEYWORDS)\b]], },
+          highlight = { pattern = [[.*<(KEYWORDS)\s*]], },
+          keywords  = {
+            FIXME   = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", }, },
             WARNING = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-            PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE = { icon = " ", color = "hint", alt = { "NOTE", "INFO" } },
-            TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+            TODO    = { icon = " ", color = "info" },
+            NOTE    = { icon = " ", color = "hint", alt = { "NOTE", "INFO" } },
           },
-          colors = {
-            error = { "DiagnosticError", "ErrorMsg", "#ffaaaa" },
+          colors    = {
+            error   = { "DiagnosticError", "ErrorMsg", "#ffaaaa" },
             warning = { "DiagnosticWarning", "WarningMsg", "#ffeedd" },
-            info = { "DiagnosticInfo", "#99ccff" },
-            hint = { "DiagnosticHint", "#99dddd" },
+            info    = { "DiagnosticInfo", "#99ccff" },
+            hint    = { "DiagnosticHint", "#99dddd" },
           },
         }
       )
@@ -182,19 +199,7 @@ lvim.plugins = {
 
   -- highlight whitespace at EOL
   { "ntpeters/vim-better-whitespace" },
-  { 'michaeljsmith/vim-indent-object' },
-
-  {
-    "phaazon/hop.nvim",
-    as = "hop",
-    keys = { "s", "S" },
-    config = function()
-      -- see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-      vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
-      vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
-    end,
-  },
+  { "michaeljsmith/vim-indent-object" },
 
   -- Auto handle ctags to allow jumping to definitions
   -- {
