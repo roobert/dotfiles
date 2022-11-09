@@ -98,28 +98,39 @@ lvim.plugins = {
   -- i.e: ci"" from outside the quotes
   { "andymass/vim-matchup", event = "VimEnter" },
 
-  -- highlight jump letters for f/F and t/T
+  -- Smart jump/search within visible buffer - incompatible with eyeliner.nvim
   {
-    "jinh0/eyeliner.nvim",
-    config = function()
-      require 'eyeliner'.setup {
-        highlight_on_key = true
-      }
+    "https://gitlab.com/madyanov/svart.nvim",
+    as = "svart.nvim",
+    configure = function()
+      require("svart").configure({
+        search_update_register = false
+      })
     end
   },
 
+  -- highlight jump letters for f/F and t/T
+  -- {
+  --   "jinh0/eyeliner.nvim",
+  --   config = function()
+  --     require 'eyeliner'.setup {
+  --       highlight_on_key = true
+  --     }
+  --   end
+  -- },
+
   -- quick navigation within the visible buffer
-  {
-    "phaazon/hop.nvim",
-    as = "hop",
-    keys = { "s", "S" },
-    config = function()
-      -- see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-      vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
-      vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
-    end,
-  },
+  -- {
+  --   "phaazon/hop.nvim",
+  --   as = "hop",
+  --   keys = { "s", "S" },
+  --   config = function()
+  --     -- see :h hop-config
+  --     require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+  --     vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
+  --     vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
+  --   end,
+  -- },
 
   -- use '%' to jump between if/end/else, etc.
   { "wellle/targets.vim" },
@@ -329,6 +340,11 @@ lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<C
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
+-- smart search in visible buffer
+lvim.keys.normal_mode["s"] = { "<CMD>Svart<CR>" }
+-- repeat with last searched query
+lvim.keys.normal_mode["S"] = { "<CMD>SvartRepeat<CR>" }
 
 --
 -- Formatting
