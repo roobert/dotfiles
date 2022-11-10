@@ -362,6 +362,10 @@ formatters.setup {
     extra_args = { "--print-with", "100" },
     filetypes = { "typescript", "typescriptreact" },
   },
+  { command = "gofmt", filetypes = { "go" } },
+  { command = "goimports", filetypes = { "go" } },
+  -- FIXME
+  -- { command = "goimports_reviser", filetypes = { "go" }} },
 }
 
 --
@@ -372,8 +376,7 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
   { command = "flake8", filetypes = { "python" } },
   { command = "shellcheck", extra_args = { "--severity", "warning" }, },
-  { command = "codespell", filetypes = { "javascript", "python" },
-  },
+  { command = "codespell", filetypes = { "javascript", "python" } },
 }
 
 --
