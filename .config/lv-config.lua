@@ -212,6 +212,55 @@ lvim.plugins = {
   { "ntpeters/vim-better-whitespace" },
   { "michaeljsmith/vim-indent-object" },
 
+  -- prevent delete from yanking
+  {
+    "tenxsoydev/karen-yank.nvim",
+    config = function()
+      require("karen-yank").setup(
+        {
+          on_delete = {
+            -- True: delete into "_ by default; use regular registers with karen key
+            -- False: use regular registers by default; delete into "_ with karen key
+            black_hole_default = true,
+          },
+          on_yank = {
+            -- Preserve cursor position on yank
+            preserve_cursor = true,
+            preserve_selection = false,
+          },
+          on_paste = {
+            -- True: paste-over-selection will delete replaced text without moving it into a register - Vim default.
+            -- False: paste-over-selection will move the replaced text into a register
+            black_hole_default = true,
+            preserve_selection = false,
+          },
+          number_regs = {
+            -- Use number registers for yanks
+            enable = true,
+            -- Prevent populating multiple number registers with the same entries
+            deduplicate = true,
+            -- For some conditions karen will use a transitory register
+            transitory_reg = {
+              -- Register to use
+              reg = "y",
+              -- Placeholder with which the register will be filled after use
+              -- E.g. possible values are '""' to clear it or 'false' to leave the transient content
+              placeholder = "👩🏼",
+            },
+          },
+          mappings = {
+            -- The key that controls usage of registers - will probably talk to the manager when things don't work as intended
+            -- You can map e.g., "<leader><leader>" if you are using the plugin inverted(black_whole_default=false)
+            karen = "y",
+            -- Unused keys possible values: { "d", "D", "c", "C", "x", "X", "s", "S" },
+            -- "S" / "s" are often utilized for plugins like surround or hop. Therefore, they are not used by default
+            unused = { "s", "S" },
+          },
+        }
+      )
+    end
+  },
+
   -- Auto handle ctags to allow jumping to definitions
   -- {
   --   "ludovicchabant/vim-gutentags",
