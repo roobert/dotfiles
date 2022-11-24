@@ -38,6 +38,9 @@ lvim.plugins = {
   -- my new cool theme!
   { "roobert/nightshift.vim" },
 
+  -- useful for TSHighlightCapturesUnderCursor
+  { "nvim-treesitter/playground" },
+
   -- colorize hex colours
   { "norcalli/nvim-colorizer.lua" },
 
@@ -161,7 +164,7 @@ lvim.plugins = {
   -- NOTE
   -- TODO
   --
-  -- NOTE
+  -- NOTE:
   -- Run PackerCompile after adjusting these settings..
   {
     "folke/todo-comments.nvim",
@@ -492,7 +495,7 @@ vim.opt.formatoptions = "tcrqnjv"
 
 vim.opt.undofile = false
 
--- FIXME
+-- FIXME:
 -- this toggle doesn't work when the virtual text is off by default
 
 -- remove inline diagnostic text
@@ -567,7 +570,7 @@ formatters.setup {
   },
   { command = "gofmt", filetypes = { "go" } },
   { command = "goimports", filetypes = { "go" } },
-  -- FIXME
+  -- FIXME:
   -- { command = "goimports_reviser", filetypes = { "go" }} },
 }
 
