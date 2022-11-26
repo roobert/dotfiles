@@ -36,7 +36,12 @@ LspInfo
 
 lvim.plugins = {
   -- my new cool theme!
-  { "roobert/nightshift.vim" },
+  { "roobert/nightshift.vim",
+    requires = "rktjmp/lush.nvim"
+  },
+
+  -- colorscheme creator
+  { "rktjmp/lush.nvim" },
 
   -- useful for TSHighlightCapturesUnderCursor
   { "nvim-treesitter/playground" },
@@ -44,7 +49,72 @@ lvim.plugins = {
   -- colorize hex colours
   { "norcalli/nvim-colorizer.lua" },
 
+  -- use treesitter to auto close and auto rename html tag
   { "windwp/nvim-ts-autotag" },
+
+  -- prevent overwriting yank buffer when deleting
+  {
+    "gbprod/cutlass.nvim",
+    config = function()
+      require("cutlass").setup({
+        cut_key = 'm'
+      })
+    end
+  },
+
+  -- displays regexp explanation for regexp under cursor
+  -- must TSInstall regex to use
+  { 'bennypowers/nvim-regexplainer',
+    config = function() require 'regexplainer'.setup({
+        -- 'narrative'
+        mode = 'narrative', -- TODO: 'ascii', 'graphical'
+
+        -- automatically show the explainer when the cursor enters a regexp
+        auto = true,
+
+        -- filetypes (i.e. extensions) in which to run the autocommand
+        filetypes = {
+          'html',
+          'js',
+          'cjs',
+          'mjs',
+          'ts',
+          'jsx',
+          'tsx',
+          'cjsx',
+          'mjsx',
+          'go',
+          'sh',
+          'tf',
+          'py',
+        },
+
+        -- Whether to log debug messages
+        debug = false,
+
+        -- 'split', 'popup'
+        display = 'split',
+
+        mappings = {
+          toggle = 'gR',
+          -- examples, not defaults:
+          -- show = 'gS',
+          -- hide = 'gH',
+          -- show_split = 'gP',
+          -- show_popup = 'gU',
+        },
+
+        narrative = {
+          separator = '\n',
+        },
+      }
+      )
+    end,
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+      'MunifTanjim/nui.nvim',
+    }
+  },
 
   -- function signature hints
   {
@@ -215,62 +285,11 @@ lvim.plugins = {
   -- set useful word boundaries for camel case and snake case
   { "chaoren/vim-wordmotion" },
 
-  -- colorscheme creator
-  { "rktjmp/lush.nvim" },
-
   -- highlight whitespace at EOL
   { "ntpeters/vim-better-whitespace" },
   { "michaeljsmith/vim-indent-object" },
 
-  -- -- prevent delete from yanking
-  -- {
-  --   "tenxsoydev/karen-yank.nvim",
-  --   config = function()
-  --     require("karen-yank").setup(
-  --       {
-  --         on_delete = {
-  --           -- True: delete into "_ by default; use regular registers with karen key
-  --           -- False: use regular registers by default; delete into "_ with karen key
-  --           black_hole_default = true,
-  --         },
-  --         on_yank = {
-  --           -- Preserve cursor position on yank
-  --           preserve_cursor = true,
-  --           preserve_selection = false,
-  --         },
-  --         on_paste = {
-  --           -- True: paste-over-selection will delete replaced text without moving it into a register - Vim default.
-  --           -- False: paste-over-selection will move the replaced text into a register
-  --           black_hole_default = true,
-  --           preserve_selection = false,
-  --         },
-  --         number_regs = {
-  --           -- Use number registers for yanks
-  --           enable = true,
-  --           -- Prevent populating multiple number registers with the same entries
-  --           deduplicate = true,
-  --           -- For some conditions karen will use a transitory register
-  --           transitory_reg = {
-  --             -- Register to use
-  --             reg = "y",
-  --             -- Placeholder with which the register will be filled after use
-  --             -- E.g. possible values are '""' to clear it or 'false' to leave the transient content
-  --             placeholder = "👩🏼",
-  --           },
-  --         },
-  --         mappings = {
-  --           -- The key that controls usage of registers - will probably talk to the manager when things don't work as intended
-  --           -- You can map e.g., "<leader><leader>" if you are using the plugin inverted(black_whole_default=false)
-  --           karen = "y",
-  --           -- Unused keys possible values: { "d", "D", "c", "C", "x", "X", "s", "S" },
-  --           -- "S" / "s" are often utilized for plugins like surround or hop. Therefore, they are not used by default
-  --           unused = { "s", "S" },
-  --         },
-  --       }
-  --     )
-  --   end
-  -- },
-
+  -- tpope copilot plugin..
   -- { "github/copilot.vim" },
 
   {
@@ -340,34 +359,6 @@ lvim.plugins = {
   -- end
   -- },
 
-  -- {
-  --   "hrsh7th/cmp-copilot",
-  --   disable = not lvim.builtin.sell_soul_to_devel,
-  --   config = function()
-  --     lvim.builtin.cmp.formatting.source_names["copilot"] = "(Cop)"
-  --     table.insert(lvim.builtin.cmp.sources, { name = "copilot" })
-  --   end
-  -- },
-
-  -- { "zbirenbaum/copilot.lua",
-  --   event = { "VimEnter" },
-  --   config = function()
-  --     vim.defer_fn(function()
-  --       require("copilot").setup {
-  --         plugin_manager_path = get_runtime_dir() .. "/site/pack/packer",
-  --       }
-  --     end, 100)
-  --   end,
-  -- },
-
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   after = { "copilot.lua", "nvim-cmp" },
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end
-  -- }
-
   -- Auto handle ctags to allow jumping to definitions
   -- {
   --   "ludovicchabant/vim-gutentags",
@@ -385,70 +376,6 @@ lvim.plugins = {
 
   -- Sidebar to show symbols
   --{ "simrat39/symbols-outline.nvim" },
-
-  -- Prevent overwriting yank buffer when deleting
-  -- {
-  --   "gbprod/cutlass.nvim",
-  --   config = function()
-  --     require("cutlass").setup({
-  --       cut_key = 'x'
-  --     })
-  --   end
-  -- }
-
-  -- displays regexp explanation for regexp under cursor
-  -- must TSInstall regex to use
-  { 'bennypowers/nvim-regexplainer',
-    config = function() require 'regexplainer'.setup({
-        -- 'narrative'
-        mode = 'narrative', -- TODO: 'ascii', 'graphical'
-
-        -- automatically show the explainer when the cursor enters a regexp
-        auto = true,
-
-        -- filetypes (i.e. extensions) in which to run the autocommand
-        filetypes = {
-          'html',
-          'js',
-          'cjs',
-          'mjs',
-          'ts',
-          'jsx',
-          'tsx',
-          'cjsx',
-          'mjsx',
-          'go',
-          'sh',
-          'tf',
-          'py',
-        },
-
-        -- Whether to log debug messages
-        debug = false,
-
-        -- 'split', 'popup'
-        display = 'split',
-
-        mappings = {
-          toggle = 'gR',
-          -- examples, not defaults:
-          -- show = 'gS',
-          -- hide = 'gH',
-          -- show_split = 'gP',
-          -- show_popup = 'gU',
-        },
-
-        narrative = {
-          separator = '\n',
-        },
-      }
-      )
-    end,
-    requires = {
-      'nvim-treesitter/nvim-treesitter',
-      'MunifTanjim/nui.nvim',
-    }
-  },
 }
 
 --
