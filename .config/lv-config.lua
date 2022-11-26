@@ -24,6 +24,7 @@ LvimInfo
 LspInfo
 ]]
 
+-- TODO:
 -- darken the grey?
 -- hide lsp attached stuff
 -- hide file type?
@@ -61,6 +62,9 @@ lvim.plugins = {
       })
     end
   },
+
+  -- a yank ring for yank history
+  { "svermeulen/vim-yoink" },
 
   -- displays regexp explanation for regexp under cursor
   -- must TSInstall regex to use
@@ -474,6 +478,19 @@ lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer l
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copilot" }
+
+-- yank history interaction
+lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
+lvim.keys.normal_mode["<c-n>"] = [[<plug>(YoinkPostPasteSwapForward)]]
+lvim.keys.normal_mode["p"] = [[<plug>(YoinkPaste_p)]]
+lvim.keys.normal_mode["P"] = [[<plug>(YoinkPaste_P)]]
+lvim.keys.normal_mode["gp"] = [[<plug>(YoinkPaste_gp)]]
+lvim.keys.normal_mode["gP"] = [[<plug>(YoinkPaste_gP)]]
+lvim.keys.normal_mode["<C-y>"] = [[<CMD>Yanks<CR>]]
+lvim.keys.insert_mode["<C-y>"] = [[<CMD>Yanks<CR>]]
+vim.cmd [[let g:yoinkIncludeDeleteOperations=1]]
+vim.cmd [[let g:yoinkSavePersistently=1]]
+
 
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
