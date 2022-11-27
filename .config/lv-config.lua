@@ -63,6 +63,9 @@ lvim.plugins = {
     end
   },
 
+  -- add substitution motions
+  { "svermeulen/vim-subversive" },
+
   -- a yank ring for yank history
   { "svermeulen/vim-yoink" },
 
