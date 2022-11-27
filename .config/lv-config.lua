@@ -575,3 +575,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     virtual_text = vim.g.diagnostics_visible
   }
 )
+
+
+lvim.builtin.bufferline.highlights = {
+  error_selected = { fg = '#b8e0ff', bold = false },
+  error_diagnostic_selected = { fg = '#dddddd', bold = false },
+}
