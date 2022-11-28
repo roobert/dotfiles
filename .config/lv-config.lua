@@ -38,7 +38,6 @@ LspInfo
 lvim.plugins = {
   { '~/git/cheatsheet.nvim' },
 
-
   -- my new cool theme!
   { "roobert/nightshift.vim",
     requires = "rktjmp/lush.nvim"
@@ -56,6 +55,15 @@ lvim.plugins = {
   -- use treesitter to auto close and auto rename html tag
   { "windwp/nvim-ts-autotag" },
 
+  -- permit toggling diagnostics
+  { "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
+    config = function()
+      require 'toggle_lsp_diagnostics'.init({
+        virtual_text = false
+      })
+    end
+  },
+
   -- prevent overwriting yank buffer when deleting
   {
     "gbprod/cutlass.nvim",
@@ -71,6 +79,9 @@ lvim.plugins = {
 
   -- a yank ring for yank history
   { "svermeulen/vim-yoink" },
+
+  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
+  --{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
   -- displays regexp explanation for regexp under cursor
   -- must TSInstall regex to use
@@ -432,24 +443,6 @@ vim.opt.formatoptions = "tcrqnjv"
 
 vim.opt.undofile = false
 
--- FIXME:
--- this toggle doesn't work when the virtual text is off by default
-
--- remove inline diagnostic text
-vim.diagnostic.config({ virtual_text = false })
-
--- allow toggling of diagnostic text
-vim.g.diagnostics_visible = false
-function _G.toggle_diagnostics()
-  if vim.g.diagnostics_visible then
-    vim.g.diagnostics_visible = false
-    vim.diagnostic.config({ virtual_text = false })
-  else
-    vim.g.diagnostics_visible = true
-    vim.diagnostic.config({ virtual_text = true })
-  end
-end
-
 --
 -- Bindings
 --
@@ -511,6 +504,34 @@ vim.cmd [[let g:yoinkSavePersistently=1]]
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
+--
+-- LSP
+--
+
+-- lvim.builtin["mason-lspconfig"].ensure_installed = {
+--   "awk_ls",
+--   "bashls",
+--   "cssls",
+--   "dockerls",
+--   "gopls",
+--   "gradle_ls",
+--   "grammarly",
+--   "graphql",
+--   "html",
+--   "jsonls",
+--   "tsserver",
+--   "sumneko_lua",
+--   "marksman",
+--   "pyright",
+--   "pylsp",
+--   "sqlls",
+--   "tailwindcss",
+--   "terraformls",
+--   "tflint",
+--   "vuels",
+--   "yamlls",
+-- }
 
 --
 -- Formatting
@@ -582,13 +603,7 @@ vim.g.copilot_node_command = "~/.nvm/versions/node/v16.18.1/bin/node"
 -- lvim.keys.insert_mode["<c-j>"] = { [[<CMD>Copilot panel<CR>]] }
 
 -- disable inline virtual text for diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = vim.g.diagnostics_visible
-  }
-)
-
+lvim.keys.normal_mode["<leader>--"] = [[<Plug>(toggle-lsp-diag-vtext)]]
 
 lvim.builtin.bufferline.highlights = {
   error_selected = { fg = '#b8e0ff', bold = false },
