@@ -492,7 +492,7 @@ vim.cmd [[let g:yoinkIncludeDeleteOperations=1]]
 vim.cmd [[let g:yoinkSavePersistently=1]]
 
 -- disable lunarvim leader-q to quit..
-lvim.builtin.which_key.mappings["q"] = false
+lvim.builtin.which_key.mappings["q"] = { "", "-" }
 
 -- disable lunarvim line-swapping
 lvim.keys.insert_mode["<A-j>"] = false
