@@ -475,18 +475,9 @@ lvim.keys.normal_mode["]d"] = ":lua vim.diagnostic.goto_next()<CR>"
 
 lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
-lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
-lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copilot" }
+lvim.builtin.which_key.mappings["-"] = { "<Plug>(toggle-lsp-diag-vtext)", "Toggle Diagnostics" }
 
--- disable line-swapping
-lvim.keys.insert_mode["<A-j>"] = false
-lvim.keys.insert_mode["<A-k>"] = false
-lvim.keys.normal_mode["<A-j>"] = false
-lvim.keys.normal_mode["<A-k>"] = false
-lvim.keys.visual_block_mode["<A-j>"] = false
-lvim.keys.visual_block_mode["<A-k>"] = false
-lvim.keys.visual_block_mode["J"] = false
-lvim.keys.visual_block_mode["K"] = false
+lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copilot" }
 
 -- yank history interaction
 lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
@@ -500,6 +491,18 @@ lvim.keys.insert_mode["<C-y>"] = [[<CMD>Yanks<CR>]]
 vim.cmd [[let g:yoinkIncludeDeleteOperations=1]]
 vim.cmd [[let g:yoinkSavePersistently=1]]
 
+-- disable lunarvim leader-q to quit..
+lvim.builtin.which_key.mappings["q"] = false
+
+-- disable lunarvim line-swapping
+lvim.keys.insert_mode["<A-j>"] = false
+lvim.keys.insert_mode["<A-k>"] = false
+lvim.keys.normal_mode["<A-j>"] = false
+lvim.keys.normal_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["<A-j>"] = false
+lvim.keys.visual_block_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["J"] = false
+lvim.keys.visual_block_mode["K"] = false
 
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
@@ -601,9 +604,6 @@ vim.g.copilot_node_command = "~/.nvm/versions/node/v16.18.1/bin/node"
 -- lvim.keys.insert_mode["<c-,>"] = { [[<Plug>(copilot-previous)]] }
 -- lvim.keys.insert_mode["<c-x>"] = { [[<Plug>(copilot-suggest)]] }
 -- lvim.keys.insert_mode["<c-j>"] = { [[<CMD>Copilot panel<CR>]] }
-
--- disable inline virtual text for diagnostics
-lvim.keys.normal_mode["<leader>--"] = [[<Plug>(toggle-lsp-diag-vtext)]]
 
 lvim.builtin.bufferline.highlights = {
   error_selected = { fg = '#b8e0ff', bold = false },
