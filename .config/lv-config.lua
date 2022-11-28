@@ -36,6 +36,9 @@ LspInfo
 --
 
 lvim.plugins = {
+  { '~/git/cheatsheet.nvim' },
+
+
   -- my new cool theme!
   { "roobert/nightshift.vim",
     requires = "rktjmp/lush.nvim"
@@ -481,6 +484,16 @@ lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer l
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 lvim.builtin.which_key.mappings["-"] = { "<CMD>call v:lua.toggle_diagnostics()<CR>", "Toggle Diagnostics" }
 lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copilot" }
+
+-- disable line-swapping
+lvim.keys.insert_mode["<A-j>"] = false
+lvim.keys.insert_mode["<A-k>"] = false
+lvim.keys.normal_mode["<A-j>"] = false
+lvim.keys.normal_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["<A-j>"] = false
+lvim.keys.visual_block_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["J"] = false
+lvim.keys.visual_block_mode["K"] = false
 
 -- yank history interaction
 lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
