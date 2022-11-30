@@ -630,6 +630,3 @@ lvim.builtin.bufferline.highlights = {
   error_selected = { fg = '#b8e0ff', bold = false },
   error_diagnostic_selected = { fg = '#dddddd', bold = false },
 }
-
--- this should be moved to the theme..
-require('lspconfig.ui.windows').default_options.border = 'single'
