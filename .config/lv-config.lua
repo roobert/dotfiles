@@ -80,8 +80,18 @@ lvim.plugins = {
   -- a yank ring for yank history
   { "svermeulen/vim-yoink" },
 
-  -- https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
-  --{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
+  -- automatically install all the formatters and linters specified by:
+  -- * lvim.builtin.null-ls.formatters
+  -- * lvim.builtin.null-ls.linters
+  { "jayp0521/mason-null-ls.nvim",
+    config = function()
+      require "mason-null-ls".setup({
+        automatic_installation = false,
+        automatic_setup = true,
+        ensure_installed = nil
+      })
+    end
+  },
 
   -- displays regexp explanation for regexp under cursor
   -- must TSInstall regex to use
