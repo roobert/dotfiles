@@ -65,8 +65,7 @@ lvim.plugins = {
   },
 
   -- prevent overwriting yank buffer when deleting
-  {
-    "gbprod/cutlass.nvim",
+  { "gbprod/cutlass.nvim",
     config = function()
       require("cutlass").setup({
         cut_key = 'm'
