@@ -1,0 +1,29 @@
+## movement
+Left, down, up, right   | h j k l
+Previous/next paragraph | { }
+Next/previous block     | [ ]
+Top/bottom of file      | gg G
+
+## comment-management
+Toggle comments         | <leader>-/
+
+## search-and-replace
+Search and Replace             | /<pattern>
+Disable highlight after search | <leader>-h
+Press * on a word (or visual selection), // represents selected string | * :%s//replace/gc
+Delete "whatever" from every open buffer | bufdo exe ":%g/whatever/d" | w
+
+## diagnostics
+Open diagnostics (Trouble plugin) and witch buffers with ctrl-j/k | <leader>-t
+Toggle inline diagnostics | <leader>--
+Next/previous diagnostics | ]d [d
+
+## introspection
+Show help/hint | <shift>-k
+Goto definition | gd
+
+## file-management
+Open file explorer | <leader>-e
+Prev/next buffer | <shift>-h <shift>-l
+Close buffer | <leader>-c
+Fuzzy switch between buffers | <leader>-f
