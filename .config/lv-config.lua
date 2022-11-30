@@ -80,8 +80,8 @@ lvim.plugins = {
   { "svermeulen/vim-yoink" },
 
   -- automatically install all the formatters and linters specified by:
-  -- * lvim.builtin.null-ls.formatters
-  -- * lvim.builtin.null-ls.linters
+  -- * linters.setup
+  -- * formatters.setup
   { "jayp0521/mason-null-ls.nvim",
     config = function()
       require "mason-null-ls".setup({
@@ -521,29 +521,31 @@ lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
 -- LSP
 --
 
--- lvim.builtin["mason-lspconfig"].ensure_installed = {
---   "awk_ls",
---   "bashls",
---   "cssls",
---   "dockerls",
---   "gopls",
---   "gradle_ls",
---   "grammarly",
---   "graphql",
---   "html",
---   "jsonls",
---   "tsserver",
---   "sumneko_lua",
---   "marksman",
---   "pyright",
---   "pylsp",
---   "sqlls",
---   "tailwindcss",
---   "terraformls",
---   "tflint",
---   "vuels",
---   "yamlls",
--- }
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "awk_ls",
+    "bashls",
+    "cssls",
+    "dockerls",
+    "gopls",
+    "gradle_ls",
+    "grammarly",
+    "graphql",
+    "html",
+    "jsonls",
+    "tsserver",
+    "sumneko_lua",
+    "marksman",
+    "pyright",
+    "pylsp",
+    "sqlls",
+    "tailwindcss",
+    "terraformls",
+    "tflint",
+    "vuels",
+    "yamlls"
+  }
+})
 
 --
 -- Formatting
