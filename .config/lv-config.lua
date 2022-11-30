@@ -23,7 +23,29 @@ lvim.plugins = {
       { 'nvim-telescope/telescope.nvim' },
       { 'nvim-lua/popup.nvim' },
       { 'nvim-lua/plenary.nvim' },
-    }
+    },
+    config = function()
+      require('cheatsheet').setup {
+        bundled_cheatsheets = false,
+        -- {
+        --   enabled = { 'default' },
+        --   disabled = {
+        --     'unicode',
+        --     'nerd-fonts',
+        --     'edit-vim',
+        --     'text-manipulation-vim',
+        --     'edit-vim',
+        --     'file-vim'
+        --   },
+        -- },
+        bundled_plugin_cheatsheets = false,
+        include_only_installed_plugins = false,
+        location = 'bottom',
+        keys_label = 'Keys',
+        description_label = 'Description',
+        show_help = true,
+      }
+    end,
   },
 
   -- my new cool theme!
@@ -608,3 +630,6 @@ lvim.builtin.bufferline.highlights = {
   error_selected = { fg = '#b8e0ff', bold = false },
   error_diagnostic_selected = { fg = '#dddddd', bold = false },
 }
+
+-- this should be moved to the theme..
+require('lspconfig.ui.windows').default_options.border = 'single'
