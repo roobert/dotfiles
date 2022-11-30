@@ -1,27 +1,8 @@
 --[[
+Read more about this config: https://roobert.github.io/2022/11/28/Extending-Neovim/
+
 # Reset the state
 rm -rf ~/.local/share/lunarvim
-
-# Install Diagnostics
-DIInstall python
-
-# Install Treesitter configs (highlighting, etc.)
-TSInstall all
-
-# Install language servers (formatting, linting, etc.)
-Mason
-LspInstall psyright pylsp sumneko_lua bashls terraformls tflint yamlls hadolint
-LspInstallInfo
-
-# Install plugins
-PackerSync
-
-# Show loaded plugins
-PackerStatus
-
-# More info
-LvimInfo
-LspInfo
 ]]
 
 -- TODO:
@@ -36,7 +17,14 @@ LspInfo
 --
 
 lvim.plugins = {
-  { '~/git/cheatsheet.nvim' },
+  -- place to store reminders and rarely used but useful stuff
+  { 'sudormrfbin/cheatsheet.nvim',
+    requires = {
+      { 'nvim-telescope/telescope.nvim' },
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-lua/plenary.nvim' },
+    }
+  },
 
   -- my new cool theme!
   { "roobert/nightshift.vim",
