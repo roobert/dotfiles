@@ -289,6 +289,9 @@ lvim.plugins = {
   -- set useful word boundaries for camel case and snake case
   { "chaoren/vim-wordmotion" },
 
+  -- use lua require("null-ls-embedded").buf_format() to format code blocks in markdown
+  { "LostNeophyte/null-ls-embedded" },
+
   -- highlight whitespace at EOL
   { "ntpeters/vim-better-whitespace" },
   { "michaeljsmith/vim-indent-object" },
@@ -550,6 +553,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "yaml",
   "go",
   "hcl",
+  "markdown",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
