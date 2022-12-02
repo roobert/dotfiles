@@ -5,13 +5,6 @@ Read more about this config: https://roobert.github.io/2022/11/28/Extending-Neov
 rm -rf ~/.local/share/lunarvim
 ]]
 
--- TODO:
--- darken the grey?
--- hide lsp attached stuff
--- hide file type?
--- hide left most aligned 'a' section
--- trouble stats?
-
 --
 -- Plugins
 --
@@ -223,35 +216,6 @@ lvim.plugins = {
     end,
   },
 
-  -- highlight jump letters for f/F and t/T
-  -- {
-  --   "jinh0/eyeliner.nvim",
-  --   config = function()
-  --     require 'eyeliner'.setup {
-  --       highlight_on_key = true
-  --     }
-  --   end
-  -- },
-
-  -- On-screen jump via labels <s><two characters>
-  -- { "ggandor/leap.nvim",
-  --   setup = function()
-  --     require("leap").add_default_mappings()
-  --   end,
-  -- },
-
-  -- -- Smart jump/search within visible buffer - incompatible with eyeliner.nvim
-  -- {
-  --   "https://gitlab.com/madyanov/svart.nvim",
-  --   as = "svart.nvim",
-  --   configure = function()
-  --     require("svart").configure({
-  --       search_update_register = false
-  --     })
-  --   end
-  -- },
-
-
   -- use '%' to jump between if/end/else, etc.
   { "wellle/targets.vim" },
 
@@ -394,11 +358,6 @@ lvim.plugins = {
 
   { 'kevinhwang91/nvim-bqf', ft = 'qf' },
 
-  -- { 'junegunn/fzf', run = function()
-  --   vim.fn['fzf#install']()
-  -- end
-  -- },
-
   -- Auto handle ctags to allow jumping to definitions
   -- {
   --   "ludovicchabant/vim-gutentags",
@@ -465,24 +424,6 @@ vim.opt.undofile = false
 --
 -- Bindings
 --
-
--- goto definition with gd
---
--- close a buffer leader-c
---
--- toggle buffer list leader-f
---
--- toggle trouble with leader-t
---
--- toggle diagnostic inline hints with leader--
---
--- toggle copilot = leader-+
---
--- gl = go to long description, i.e: to expand diagnostics
---
--- shift-k = show description / show full line in Trouble
---
--- switch panes with ctrl-hjkl
 
 -- switch buffers with shift-l/h
 lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
@@ -615,16 +556,6 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enable = true
 
 vim.g.copilot_node_command = "~/.nvm/versions/node/v16.18.1/bin/node"
---vim.g.copilot_no_tab_map = true
-
---lvim.keys.normal_mode["<c-p>"] = { [[<CMD>Copilot panel<CR>]] }
---lvim.keys.insert_mode["<c-p>"] = { [[<CMD>Copilot panel<CR>]] }
-
--- lvim.keys.insert_mode["<c-e>"] = { [[copilot#Accept("\<CR>")]], { expr = true, script = true } }
--- lvim.keys.insert_mode["<c-.>"] = { [[<Plug>(copilot-next)]] }
--- lvim.keys.insert_mode["<c-,>"] = { [[<Plug>(copilot-previous)]] }
--- lvim.keys.insert_mode["<c-x>"] = { [[<Plug>(copilot-suggest)]] }
--- lvim.keys.insert_mode["<c-j>"] = { [[<CMD>Copilot panel<CR>]] }
 
 lvim.builtin.bufferline.highlights = {
   error_selected = { fg = '#b8e0ff', bold = false },
