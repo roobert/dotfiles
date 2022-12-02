@@ -15,9 +15,9 @@ Press * on a word (or visual selection), | *
 Delete "whatever" from every open buffer | bufdo exe ":%g/whatever/d" | w
 
 ## diagnostics
-Open diagnostics (Trouble plugin) and witch buffers with ctrl-j/k | <leader>-t
-Toggle inline diagnostics                                         | <leader>--
-Next/previous diagnostics                                         | ]d [d
+Open diagnostics (Trouble plugin)     | <leader>-t
+Toggle inline diagnostic virtual text | <leader>--
+Next/previous diagnostics             | ]d [d
 
 ## introspection
 Show help/hint  | <shift>-k
@@ -28,3 +28,5 @@ Open file explorer           | <leader>-e
 Prev/next buffer             | <shift>-h <shift>-l
 Close buffer                 | <leader>-c
 Fuzzy switch between buffers | <leader>-f
+Switch buffers               | <ctrl>-j <ctrl>-k
+
