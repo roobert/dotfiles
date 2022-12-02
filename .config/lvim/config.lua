@@ -179,7 +179,7 @@ lvim.plugins = {
 
   --     Old text                    Command    New text
   -- ---------------------------------------------------------------------------
-  --     surr*ound_words             ysiw)      (surround_words)       you surround in ord
+  --     surr*ound_words             ysiw)      (surround_words)       you surround in word
   --     *make strings               ys$"       "make strings"         you sround to end of line
   --     [delete ar*ound me!]        ds]        delete around me!      delete surround
   --     remove <b>HTML t*ags</b>    dst        remove HTML tags       delete surround tags
