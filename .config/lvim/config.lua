@@ -1,5 +1,5 @@
 --[[
-Read more about this config: https://roobert.github.io/2022/11/28/Extending-Neovim/
+Read more about this config: https://roobert.github.io/2022/12/03/Extending-Neovim/
 
 # Reset the state
 rm -rf ~/.local/share/lunarvim
