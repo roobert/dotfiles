@@ -199,7 +199,7 @@ lvim.plugins = {
   },
   -- { "tpope/vim-surround" },
 
-  -- more text objects - allo changing values in next object without being inside it,
+  -- more text objects - allow changing values in next object without being inside it,
   -- i.e: ci"" from outside the quotes
   { "andymass/vim-matchup", event = "VimEnter" },
 
@@ -372,6 +372,14 @@ lvim.plugins = {
   --     vim.g.gutentags_cache_dir = os.getenv("HOME") .. "/.cache/tags"
   --   end,
   -- },
+
+  {
+    "iamcco/markdown-preview.nvim", run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
 
   -- Sidebar to show ctags
   --{ "majutsushi/tagbar" },
