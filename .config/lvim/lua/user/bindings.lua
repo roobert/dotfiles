@@ -1,16 +1,67 @@
--- switch buffers with shift-l/h
-lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
-lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrev<CR>"
+-- disable lunarvim line-swapping
+lvim.keys.insert_mode["<A-j>"] = false
+lvim.keys.insert_mode["<A-k>"] = false
+lvim.keys.normal_mode["<A-j>"] = false
+lvim.keys.normal_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["<A-j>"] = false
+lvim.keys.visual_block_mode["<A-k>"] = false
+lvim.keys.visual_block_mode["J"] = false
+lvim.keys.visual_block_mode["K"] = false
 
--- navigate between errors with [/]-d
-lvim.keys.normal_mode["[d"] = ":lua vim.diagnostic.goto_prev()<CR>"
-lvim.keys.normal_mode["]d"] = ":lua vim.diagnostic.goto_next()<CR>"
+-- disable Packer binding
+lvim.builtin.which_key.mappings["p"] = nil
 
-lvim.builtin.which_key.mappings["f"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
+-- disable Treesitter info binding
+lvim.builtin.which_key.mappings["T"] = nil
+
+-- disable dashboard binding
+lvim.builtin.which_key.mappings[";"] = nil
+
+-- disable lunarvim leader-q to quit..
+lvim.builtin.which_key.mappings["q"] = nil
+
+-- disable lunarvim submenu
+lvim.builtin.which_key.mappings["L"] = nil
+
+-- disable colorscheme search
+lvim.builtin.which_key.mappings["s"]["c"] = nil
+
+-- disable recent file search
+lvim.builtin.which_key.mappings["s"]["r"] = nil
+
+-- disable register search
+lvim.builtin.which_key.mappings["s"]["R"] = nil
+
+-- disable man page search
+lvim.builtin.which_key.mappings["s"]["M"] = nil
+
+-- disable find help
+lvim.builtin.which_key.mappings["s"]["h"] = nil
+
+-- disable unknown binding
+lvim.builtin.which_key.mappings["s"]["<space>"] = nil
+
+lvim.builtin.which_key.mappings["s"]["b"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
+lvim.builtin.which_key.mappings["s"]["B"] = { "<CMD>Telescope git_branches<CR>", "Branch list" }
+
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 lvim.builtin.which_key.mappings["-"] = { "<Plug>(toggle-lsp-diag-vtext)", "Toggle Diagnostics" }
 
 lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copilot" }
+
+-- override cheatsheet binding to improve description
+lvim.builtin.which_key.mappings["?"] = { "<CMD>Cheatsheet<CR>", "Cheatsheet" }
+
+-- switch buffers with shift-l/h
+lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrev<CR>"
+
+-- navigate between diagnostics/errors with [/]-d
+lvim.keys.normal_mode["[d"] = ":lua vim.diagnostic.goto_prev()<CR>"
+lvim.keys.normal_mode["]d"] = ":lua vim.diagnostic.goto_next()<CR>"
+
+-- FIXME: support visual block mode
+lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>", "Search / Replace" }
 
 -- yank history interaction
 lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
@@ -24,25 +75,6 @@ lvim.keys.insert_mode["<C-y>"] = [[<CMD>Yanks<CR>]]
 vim.cmd([[let g:yoinkIncludeDeleteOperations=1]])
 vim.cmd([[let g:yoinkSavePersistently=1]])
 
--- disable lunarvim leader-q to quit..
-lvim.builtin.which_key.mappings["q"] = { "", "-" }
-
--- disable lunarvim line-swapping
-lvim.keys.insert_mode["<A-j>"] = false
-lvim.keys.insert_mode["<A-k>"] = false
-lvim.keys.normal_mode["<A-j>"] = false
-lvim.keys.normal_mode["<A-k>"] = false
-lvim.keys.visual_block_mode["<A-j>"] = false
-lvim.keys.visual_block_mode["<A-k>"] = false
-lvim.keys.visual_block_mode["J"] = false
-lvim.keys.visual_block_mode["K"] = false
-
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
-
--- FIXME:
--- search/replace word under cursor
-lvim.keys.normal_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
-lvim.keys.visual_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
-lvim.keys.visual_block_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
