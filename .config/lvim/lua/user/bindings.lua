@@ -40,3 +40,9 @@ lvim.keys.visual_block_mode["K"] = false
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
+-- FIXME:
+-- search/replace word under cursor
+lvim.keys.normal_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
+lvim.keys.visual_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
+lvim.keys.visual_block_mode["<leader>r"] = ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>"
