@@ -6,8 +6,8 @@ alias ssh="ssh -t"
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
 # vim
-alias vim="lvim -p"
-alias vi="lvim -p"
+alias vim="lvim"
+alias vi="lvim"
 
 function gcm() {
     git commit -m "$*"
