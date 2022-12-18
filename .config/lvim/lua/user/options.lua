@@ -7,11 +7,27 @@ lvim.colorscheme = "nightshift"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 
-lvim.builtin.gitsigns.active = true
 lvim.builtin.bufferline.active = true
+lvim.builtin.alpha.active = false
+lvim.builtin.gitsigns.active = true
 lvim.builtin.breadcrumbs.active = true
 lvim.builtin.indentlines.active = false
-lvim.builtin.telescope.active = true
+lvim.builtin.telescope = {
+	active = true,
+	-- FIXME: this doesn't do anything
+	defaults = {
+		initial_mode = "normal",
+	},
+}
+
+lvim.builtin.project.active = false
+
+lvim.builtin.telescope = {
+	active = true,
+	defaults = {
+		layout_strategy = "vertical",
+	},
+}
 
 vim.cmd([[set timeoutlen=500]])
 vim.cmd([[set wrap]])

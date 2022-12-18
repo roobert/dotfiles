@@ -87,6 +87,15 @@ lvim.plugins = {
 		end,
 	},
 
+	-- scope buffers to tabs to work around vims annoying buffer and tab management
+	--{ "tiagovla/scope.nvim" },
+
+	-- merge bdelete, close, and quit
+	--{ "mhinz/vim-sayonara" },
+
+	-- get access to Bdelete nameless
+	{ "kazhala/close-buffers.nvim" },
+
 	-- displays regexp explanation for regexp under cursor
 	-- must TSInstall regex to use
 	{

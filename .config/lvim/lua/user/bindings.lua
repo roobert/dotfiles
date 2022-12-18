@@ -8,6 +8,18 @@ lvim.keys.visual_block_mode["<A-k>"] = false
 lvim.keys.visual_block_mode["J"] = false
 lvim.keys.visual_block_mode["K"] = false
 
+-- disable find file (use search submenu -> find file)
+lvim.builtin.which_key.mappings["f"] = nil
+
+-- disable debug submenu
+lvim.builtin.which_key.mappings["d"] = nil
+
+-- disable buffer submenu
+lvim.builtin.which_key.mappings["b"] = nil
+
+-- disable write file
+lvim.builtin.which_key.mappings["w"] = nil
+
 -- disable Packer binding
 lvim.builtin.which_key.mappings["p"] = nil
 
@@ -35,14 +47,16 @@ lvim.builtin.which_key.mappings["s"]["R"] = nil
 -- disable man page search
 lvim.builtin.which_key.mappings["s"]["M"] = nil
 
--- disable find help
-lvim.builtin.which_key.mappings["s"]["h"] = nil
+-- disable branch search
+lvim.builtin.which_key.mappings["s"]["B"] = nil
 
--- disable unknown binding
-lvim.builtin.which_key.mappings["s"]["<space>"] = nil
+-- improve keymap search with override
+lvim.builtin.which_key.mappings["s"]["k"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" }
+
+-- FIXME: disable unknown binding from BetterWhiteSpace
+lvim.builtin.which_key.mappings["s"]["<Space>"] = nil
 
 lvim.builtin.which_key.mappings["s"]["b"] = { "<CMD>Telescope buffers<CR>", "Buffer list" }
-lvim.builtin.which_key.mappings["s"]["B"] = { "<CMD>Telescope git_branches<CR>", "Branch list" }
 
 lvim.builtin.which_key.mappings["t"] = { "<CMD>TroubleToggle document_diagnostics<CR>", "Trouble" }
 lvim.builtin.which_key.mappings["-"] = { "<Plug>(toggle-lsp-diag-vtext)", "Toggle Diagnostics" }
@@ -52,9 +66,21 @@ lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copi
 -- override cheatsheet binding to improve description
 lvim.builtin.which_key.mappings["?"] = { "<CMD>Cheatsheet<CR>", "Cheatsheet" }
 
+-- NOTE: ctrl-hjkl moves between splits
+-- vsplit and split should open next hidden buffer in list..
+lvim.builtin.which_key.mappings["|"] = { "<CMD>vsplit +enew<CR>", "Vertical split" }
+lvim.builtin.which_key.mappings["_"] = { "<CMD>split +enew<CR>", "Horizontal split" }
+
+-- FIXME: close/bd/etc. should behave consistently
+lvim.builtin.which_key.mappings["c"] = { "<CMD>bd<CR>", "Close Buffer/Window" }
+
+-- FIXME: shouldn't need this after vsplit and split behave as we want
+lvim.builtin.which_key.mappings["d"] = { "<CMD>BDelete nameless<CR>", "Clear nameless buffers" }
+
 -- switch buffers with shift-l/h
-lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNext<CR>"
-lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrev<CR>"
+-- FIXME: don't cycle through visible buffers
+lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNextHidden<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrevHidden<CR>"
 
 -- navigate between diagnostics/errors with [/]-d
 lvim.keys.normal_mode["[d"] = ":lua vim.diagnostic.goto_prev()<CR>"
@@ -78,3 +104,7 @@ vim.cmd([[let g:yoinkSavePersistently=1]])
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
+-- remap q to work for buffers as well as
+--<cmd>BufferKill<CR>
+--cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'BufferKill' : 'q'
