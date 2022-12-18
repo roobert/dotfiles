@@ -50,6 +50,8 @@ lvim.builtin.which_key.mappings["s"]["M"] = nil
 -- disable branch search
 lvim.builtin.which_key.mappings["s"]["B"] = nil
 
+lvim.builtin.which_key.mappings["w"] = { "<CMD>WhichKey<CR>", "Top-level which-key" }
+
 -- improve keymap search with override
 lvim.builtin.which_key.mappings["s"]["k"] = { "<CMD>Telescope keymaps<CR>", "Keymaps" }
 
@@ -67,7 +69,7 @@ lvim.builtin.which_key.mappings["+"] = { "<CMD>Copilot toggle<CR>", "Toggle Copi
 lvim.builtin.which_key.mappings["?"] = { "<CMD>Cheatsheet<CR>", "Cheatsheet" }
 
 -- NOTE: ctrl-hjkl moves between splits
--- vsplit and split should open next hidden buffer in list..
+-- ideally vsplit and split should open next hidden buffer in list..
 lvim.builtin.which_key.mappings["|"] = { "<CMD>vsplit +enew<CR>", "Vertical split" }
 lvim.builtin.which_key.mappings["_"] = { "<CMD>split +enew<CR>", "Horizontal split" }
 
@@ -104,7 +106,14 @@ lvim.keys.normal_mode["[d"] = "<CMD>lua vim.diagnostic.goto_prev()<CR>"
 lvim.keys.normal_mode["]d"] = "<CMD>lua vim.diagnostic.goto_next()<CR>"
 
 -- FIXME: support visual block mode
-lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>", "Search / Replace" }
+lvim.builtin.which_key.mappings["r"] =
+	{ ":%s/\\<<C-R>/\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
+-- lvim.builtin.which_key.mappings["r"] =
+-- 	{ ":%s/<C-r><C-w>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace", mode = "n" }
+-- lvim.builtin.which_key.mappings["r"] =
+-- 	{ ":%s/<C-r><C-w>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace", mode = "v" }
+-- lvim.builtin.which_key.mappings["r"] =
+-- 	{ ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
 
 -- yank history interaction
 lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
@@ -121,3 +130,11 @@ vim.cmd([[let g:yoinkSavePersistently=1]])
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
+
+-- rebind git submenu to 'G' and bind lazygit to 'g'
+local git_orig = lvim.builtin.which_key.mappings.g
+lvim.builtin.which_key.mappings.g = nil
+lvim.builtin.terminal.execs = {
+	{ "lazygit", "<leader>g", "LazyGit", "float" },
+}
+lvim.builtin.which_key.mappings["G"] = git_orig
