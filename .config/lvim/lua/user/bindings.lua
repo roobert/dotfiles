@@ -71,20 +71,37 @@ lvim.builtin.which_key.mappings["?"] = { "<CMD>Cheatsheet<CR>", "Cheatsheet" }
 lvim.builtin.which_key.mappings["|"] = { "<CMD>vsplit +enew<CR>", "Vertical split" }
 lvim.builtin.which_key.mappings["_"] = { "<CMD>split +enew<CR>", "Horizontal split" }
 
--- FIXME: close/bd/etc. should behave consistently
+-- since we open empty splits - clean them up a we cycle through open buffers
+function ChangeTab(motion)
+	local last_buffer_id = vim.fn.bufnr()
+	local last_buffer_name = vim.fn.expand("%")
+
+	if motion == "next" then
+		vim.cmd([[BufferLineCycleNextHidden]])
+	elseif motion == "prev" then
+		vim.cmd([[BufferLineCyclePrevHidden]])
+	else
+		error("Invalid motion: " .. motion)
+		return
+	end
+
+	if last_buffer_name == "" then
+		vim.cmd("bd " .. last_buffer_id)
+	end
+end
+
+-- switch through visible buffers with shift-l/h
+lvim.keys.normal_mode["<S-l>"] = "<CMD>lua ChangeTab('next')<CR>"
+lvim.keys.normal_mode["<S-h>"] = "<CMD>lua ChangeTab('prev')<CR>"
+
 lvim.builtin.which_key.mappings["c"] = { "<CMD>bd<CR>", "Close Buffer/Window" }
 
--- FIXME: shouldn't need this after vsplit and split behave as we want
+-- not really required now we have a more intelligent tab function
 lvim.builtin.which_key.mappings["d"] = { "<CMD>BDelete nameless<CR>", "Clear nameless buffers" }
 
--- switch buffers with shift-l/h
--- FIXME: don't cycle through visible buffers
-lvim.keys.normal_mode["<S-l>"] = "<CMD>BufferLineCycleNextHidden<CR>"
-lvim.keys.normal_mode["<S-h>"] = "<CMD>BufferLineCyclePrevHidden<CR>"
-
 -- navigate between diagnostics/errors with [/]-d
-lvim.keys.normal_mode["[d"] = ":lua vim.diagnostic.goto_prev()<CR>"
-lvim.keys.normal_mode["]d"] = ":lua vim.diagnostic.goto_next()<CR>"
+lvim.keys.normal_mode["[d"] = "<CMD>lua vim.diagnostic.goto_prev()<CR>"
+lvim.keys.normal_mode["]d"] = "<CMD>lua vim.diagnostic.goto_next()<CR>"
 
 -- FIXME: support visual block mode
 lvim.builtin.which_key.mappings["r"] = { ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left>", "Search / Replace" }
@@ -104,7 +121,3 @@ vim.cmd([[let g:yoinkSavePersistently=1]])
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
-
--- remap q to work for buffers as well as
---<cmd>BufferKill<CR>
---cnoreabbrev <expr> q getcmdtype() == ":" && getcmdline() == 'q' ? 'BufferKill' : 'q'
