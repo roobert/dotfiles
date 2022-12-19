@@ -98,8 +98,10 @@ lvim.plugins = {
 		requires = {
 			{ "akinsho/bufferline.nvim" },
 		},
-		setup = function()
-			require("bufferline-cycle-windowless").setup()
+		config = function()
+			require("bufferline-cycle-windowless").setup({
+				default_enabled = true,
+			})
 		end,
 	},
 

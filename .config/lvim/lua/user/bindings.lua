@@ -95,6 +95,7 @@ end
 -- switch through visible buffers with shift-l/h
 lvim.keys.normal_mode["<S-l>"] = "<CMD>lua ChangeTab('next')<CR>"
 lvim.keys.normal_mode["<S-h>"] = "<CMD>lua ChangeTab('prev')<CR>"
+lvim.keys.normal_mode["<S-t>"] = "<CMD>BufferLineCycleWindowlessToggle<CR>"
 
 lvim.builtin.which_key.mappings["c"] = { "<CMD>bd<CR>", "Close Buffer/Window" }
 
@@ -107,7 +108,7 @@ lvim.keys.normal_mode["]d"] = "<CMD>lua vim.diagnostic.goto_next()<CR>"
 
 -- FIXME: support visual block mode
 lvim.builtin.which_key.mappings["r"] =
-	{ ":%s/\\<<C-R>/\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
+	{ ":%s/\\<<C-R><C-W>\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
 -- lvim.builtin.which_key.mappings["r"] =
 -- 	{ ":%s/<C-r><C-w>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace", mode = "n" }
 -- lvim.builtin.which_key.mappings["r"] =
