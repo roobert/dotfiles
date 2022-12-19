@@ -93,6 +93,16 @@ lvim.plugins = {
 	-- merge bdelete, close, and quit
 	--{ "mhinz/vim-sayonara" },
 
+	{
+		"/Users/rw/git/bufferline-cycle-windowless.nvim",
+		requires = {
+			{ "akinsho/bufferline.nvim" },
+		},
+		setup = function()
+			require("bufferline-cycle-windowless").setup()
+		end,
+	},
+
 	-- get access to Bdelete nameless
 	{ "kazhala/close-buffers.nvim" },
 
