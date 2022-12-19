@@ -23,6 +23,20 @@ lvim.builtin.bufferline = {
 	options = {
 		separator_style = "slant",
 	},
+	highlights = {
+		fill = {
+			bg = "#2d476e",
+		},
+		separator_selected = {
+			fg = "#2d476e",
+		},
+		separator_visible = {
+			fg = "#2d476e",
+		},
+		separator = {
+			fg = "#2d476e",
+		},
+	},
 }
 
 lvim.builtin.project.active = false
