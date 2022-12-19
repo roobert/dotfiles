@@ -1,1 +1,0 @@
-.config/lv-config.lua
