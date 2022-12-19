@@ -73,15 +73,15 @@ lvim.builtin.which_key.mappings["?"] = { "<CMD>Cheatsheet<CR>", "Cheatsheet" }
 lvim.builtin.which_key.mappings["|"] = { "<CMD>vsplit +enew<CR>", "Vertical split" }
 lvim.builtin.which_key.mappings["_"] = { "<CMD>split +enew<CR>", "Horizontal split" }
 
--- since we open empty splits - clean them up a we cycle through open buffers
+-- since we open empty splits - clean them up as we cycle through open buffers
 function ChangeTab(motion)
 	local last_buffer_id = vim.fn.bufnr()
 	local last_buffer_name = vim.fn.expand("%")
 
 	if motion == "next" then
-		vim.cmd([[BufferLineCycleNextHidden]])
+		vim.cmd([[BufferLineCycleWindowlessNext]])
 	elseif motion == "prev" then
-		vim.cmd([[BufferLineCyclePrevHidden]])
+		vim.cmd([[BufferLineCycleWindowlessPrev]])
 	else
 		error("Invalid motion: " .. motion)
 		return
