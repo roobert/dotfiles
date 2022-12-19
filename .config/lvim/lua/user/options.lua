@@ -7,7 +7,6 @@ lvim.colorscheme = "nightshift"
 lvim.format_on_save = true
 lvim.lint_on_save = true
 
-lvim.builtin.bufferline.active = true
 lvim.builtin.alpha.active = false
 lvim.builtin.gitsigns.active = true
 lvim.builtin.breadcrumbs.active = true
@@ -17,6 +16,12 @@ lvim.builtin.telescope = {
 	-- FIXME: this doesn't do anything
 	defaults = {
 		initial_mode = "normal",
+	},
+}
+lvim.builtin.bufferline = {
+	active = true,
+	options = {
+		separator_style = "slant",
 	},
 }
 
