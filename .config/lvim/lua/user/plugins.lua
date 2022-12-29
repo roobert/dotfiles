@@ -421,6 +421,6 @@ lvim.plugins = {
 -- Remove attached lsp clients from statusline
 lvim.builtin.lualine.on_config_done = function(lualine)
 	local config = lualine.get_config()
-	table.remove(config.sections.lualine_x, 2) -- remove treesitter icon
+	table.remove(config.sections.lualine_x, 2)
 	lualine.setup(config)
 end
