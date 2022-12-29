@@ -398,6 +398,7 @@ lvim.plugins = {
 
 	-- Sidebar to show symbols
 	--{ "simrat39/symbols-outline.nvim" },
+
 	{
 		"dense-analysis/neural",
 		config = function()
