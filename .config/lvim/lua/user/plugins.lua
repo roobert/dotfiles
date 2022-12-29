@@ -418,9 +418,14 @@ lvim.plugins = {
 	},
 }
 
--- Remove attached lsp clients from statusline
 lvim.builtin.lualine.on_config_done = function(lualine)
 	local config = lualine.get_config()
+
+	-- Remove attached lsp clients from statusline
 	table.remove(config.sections.lualine_x, 2)
+
+	-- Remove file type from statusline
+	table.remove(config.sections.lualine_x, 3)
+
 	lualine.setup(config)
 end
