@@ -398,4 +398,28 @@ lvim.plugins = {
 
 	-- Sidebar to show symbols
 	--{ "simrat39/symbols-outline.nvim" },
+	{
+		"dense-analysis/neural",
+		config = function()
+			require("neural").setup({
+				open_ai = {
+					api_key = os.getenv("NEOVIM_OPENAPI_KEY"),
+				},
+				ui = {
+					icon = " ",
+				},
+			})
+		end,
+		requires = {
+			"MunifTanjim/nui.nvim",
+			"ElPiloto/significant.nvim",
+		},
+	},
 }
+
+-- Remove attached lsp clients from statusline
+lvim.builtin.lualine.on_config_done = function(lualine)
+	local config = lualine.get_config()
+	table.remove(config.sections.lualine_x, 2) -- remove treesitter icon
+	lualine.setup(config)
+end
