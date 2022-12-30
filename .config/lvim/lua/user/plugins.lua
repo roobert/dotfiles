@@ -1,4 +1,18 @@
 lvim.plugins = {
+	-- my new cool theme!
+	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
+
+	{
+		dir = "../../../../git/search-replace.nvim",
+		name = "search-replace",
+		config = function()
+			require("search-replace").setup({})
+		end,
+	},
+
+	-- colorscheme creator
+	{ "rktjmp/lush.nvim" },
+
 	-- place to store reminders and rarely used but useful stuff
 	{
 		"sudormrfbin/cheatsheet.nvim",
@@ -30,12 +44,6 @@ lvim.plugins = {
 			})
 		end,
 	},
-
-	-- my new cool theme!
-	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
-
-	-- colorscheme creator
-	{ "rktjmp/lush.nvim" },
 
 	-- useful for TSHighlightCapturesUnderCursor
 	{ "nvim-treesitter/playground" },
