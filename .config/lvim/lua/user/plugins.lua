@@ -2,7 +2,7 @@ lvim.plugins = {
 	-- place to store reminders and rarely used but useful stuff
 	{
 		"sudormrfbin/cheatsheet.nvim",
-		requires = {
+		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },
 			{ "nvim-lua/popup.nvim" },
 			{ "nvim-lua/plenary.nvim" },
@@ -32,7 +32,7 @@ lvim.plugins = {
 	},
 
 	-- my new cool theme!
-	{ "roobert/nightshift.vim", requires = "rktjmp/lush.nvim" },
+	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
 
 	-- colorscheme creator
 	{ "rktjmp/lush.nvim" },
@@ -95,7 +95,7 @@ lvim.plugins = {
 
 	{
 		"roobert/bufferline-cycle-windowless.nvim",
-		requires = {
+		dependencies = {
 			{ "akinsho/bufferline.nvim" },
 		},
 		config = function()
@@ -157,7 +157,7 @@ lvim.plugins = {
 				},
 			})
 		end,
-		requires = {
+		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"MunifTanjim/nui.nvim",
 		},
@@ -204,7 +204,7 @@ lvim.plugins = {
 	-- add around objects
 	{
 		"kylechui/nvim-surround",
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
 			require("nvim-surround").setup({
 				-- Configuration here, or leave empty to use defaults
@@ -220,7 +220,7 @@ lvim.plugins = {
 	-- quick navigation within the visible buffer
 	{
 		"phaazon/hop.nvim",
-		as = "hop",
+		name = "hop",
 		keys = { "s", "S" },
 		config = function()
 			-- see :h hop-config
@@ -256,7 +256,7 @@ lvim.plugins = {
 	-- Run PackerCompile after adjusting these settings..
 	{
 		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
+		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("todo-comments").setup({
 				search = { pattern = [[\b(KEYWORDS)\b]] },
@@ -280,7 +280,7 @@ lvim.plugins = {
 	-- Nice interface for displaying nvim diagnostics
 	{
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
+		dependencies = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({})
 		end,
@@ -375,7 +375,7 @@ lvim.plugins = {
 	-- Auto handle ctags to allow jumping to definitions
 	-- {
 	--   "ludovicchabant/vim-gutentags",
-	--   setup = function()
+	--   init = function()
 	--     vim.g.gutentags_modules = { "ctags" }
 	--     vim.g.gutentags_project_root = { ".git" }
 	--     vim.g.gutentags_add_default_project_roots = 0
@@ -386,8 +386,8 @@ lvim.plugins = {
 
 	{
 		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
+		build = "cd app && npm install",
+		init = function()
 			vim.g.mkdp_filetypes = { "markdown" }
 		end,
 		ft = { "markdown" },
@@ -411,7 +411,7 @@ lvim.plugins = {
 				},
 			})
 		end,
-		requires = {
+		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"ElPiloto/significant.nvim",
 		},
