@@ -97,3 +97,15 @@ vim.opt.formatoptions = "tcrqnjv"
 vim.opt.undofile = false
 
 vim.g.copilot_node_command = "~/.nvm/versions/node/v16.18.1/bin/node"
+
+lvim.builtin.lualine.on_config_done = function(lualine)
+	local config = lualine.get_config()
+
+	-- Remove attached lsp clients from statusline
+	table.remove(config.sections.lualine_x, 2)
+
+	-- Remove file type from statusline
+	table.remove(config.sections.lualine_x, 3)
+
+	lualine.setup(config)
+end
