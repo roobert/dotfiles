@@ -130,11 +130,10 @@ lvim.builtin.terminal.execs = {
 }
 lvim.builtin.which_key.mappings["G"] = git_orig
 
-
 lvim.builtin.which_key.mappings["r"] = { name = "SearchReplace" }
-lvim.builtin.which_key.mappings["r"]["w"] = { "<CMD>SearchReplace<CR>", "SearchReplace word" }
-lvim.builtin.which_key.mappings["r"]["W"] = { "<CMD>SearchReplaceCWORD<CR>", "SearchReplace WORD" }
-lvim.builtin.which_key.mappings["r"]["v"] = { "<CMD>SearchReplaceVisualBlock<CR>", "SearchReplace visual block" }
-lvim.builtin.which_key.mappings["r"]["e"] = { "<CMD>SearchReplaceCExpr<CR>", "SearchReplace cexpr" }
-
-
+lvim.builtin.which_key.mappings["r"]["s"] = { "<CMD>SearchReplaceSelections<CR>", "SearchReplace show [s]elctions" }
+lvim.builtin.which_key.mappings["r"]["w"] = { "<CMD>SearchReplaceCWord<CR>", "SearchReplace [w]ord" }
+lvim.builtin.which_key.mappings["r"]["W"] = { "<CMD>SearchReplaceCWORD<CR>", "SearchReplace [W]ORD" }
+lvim.builtin.which_key.mappings["r"]["v"] = { "<CMD>SearchReplaceVisual<CR>", "SearchReplace [v]isual selection" }
+lvim.builtin.which_key.mappings["r"]["e"] = { "<CMD>SearchReplaceCExpr<CR>", "SearchReplace c[e]xpr" }
+lvim.builtin.which_key.mappings["r"]["f"] = { "<CMD>SearchReplaceCFile<CR>", "SearchReplace [f]ile" }
