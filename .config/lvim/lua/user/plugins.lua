@@ -3,10 +3,11 @@ lvim.plugins = {
 	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
 
 	{
-		dir = "../../../../git/search-replace.nvim",
+		-- "roobert/search-replace.nvim",
 		name = "search-replace",
+		dir = "/Users/rw/git/search-replace.nvim",
 		config = function()
-			require("search-replace").setup({})
+			require("search-replace").setup()
 		end,
 	},
 
@@ -226,17 +227,17 @@ lvim.plugins = {
 	{ "andymass/vim-matchup", event = "VimEnter" },
 
 	-- quick navigation within the visible buffer
-	{
-		"phaazon/hop.nvim",
-		name = "hop",
-		keys = { "s", "S" },
-		config = function()
-			-- see :h hop-config
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-			vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
-			vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
-		end,
-	},
+	-- {
+	-- 	"phaazon/hop.nvim",
+	-- 	name = "hop",
+	-- 	keys = { "s", "S" },
+	-- 	config = function()
+	-- 		-- see :h hop-config
+	-- 		require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+	-- 		vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
+	-- 		vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
+	-- 	end,
+	-- },
 
 	-- use '%' to jump between if/end/else, etc.
 	{ "wellle/targets.vim" },

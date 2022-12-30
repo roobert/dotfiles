@@ -5,6 +5,7 @@ Read more about this config: https://roobert.github.io/2022/12/03/Extending-Neov
 rm -rf ~/.local/share/lunarvim
 ]]
 
+reload("user.globals")
 reload("user.plugins")
 reload("user.options")
 reload("user.bindings")
