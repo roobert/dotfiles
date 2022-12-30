@@ -106,16 +106,6 @@ lvim.builtin.which_key.mappings["d"] = { "<CMD>BDelete nameless<CR>", "Clear nam
 lvim.keys.normal_mode["[d"] = "<CMD>lua vim.diagnostic.goto_prev()<CR>"
 lvim.keys.normal_mode["]d"] = "<CMD>lua vim.diagnostic.goto_next()<CR>"
 
--- FIXME: support visual block mode
-lvim.builtin.which_key.mappings["r"] =
-	{ ":%s/\\<<C-R><C-W>\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
--- lvim.builtin.which_key.mappings["r"] =
--- 	{ ":%s/<C-r><C-w>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace", mode = "n" }
--- lvim.builtin.which_key.mappings["r"] =
--- 	{ ":%s/<C-r><C-w>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace", mode = "v" }
--- lvim.builtin.which_key.mappings["r"] =
--- 	{ ":%s/\\<<C-r><C-w>\\>//gcI<Left><Left><Left><Left> <backspace>", "Search / Replace" }
-
 -- yank history interaction
 lvim.keys.normal_mode["<c-p>"] = [[<plug>(YoinkPostPasteSwapBack)]]
 lvim.keys.normal_mode["<c-n>"] = [[<plug>(YoinkPostPasteSwapForward)]]
@@ -139,3 +129,12 @@ lvim.builtin.terminal.execs = {
 	{ "lazygit", "<leader>g", "LazyGit", "float" },
 }
 lvim.builtin.which_key.mappings["G"] = git_orig
+
+
+lvim.builtin.which_key.mappings["r"] = { name = "SearchReplace" }
+lvim.builtin.which_key.mappings["r"]["w"] = { "<CMD>SearchReplace<CR>", "SearchReplace word" }
+lvim.builtin.which_key.mappings["r"]["W"] = { "<CMD>SearchReplaceCWORD<CR>", "SearchReplace WORD" }
+lvim.builtin.which_key.mappings["r"]["v"] = { "<CMD>SearchReplaceVisualBlock<CR>", "SearchReplace visual block" }
+lvim.builtin.which_key.mappings["r"]["e"] = { "<CMD>SearchReplaceCExpr<CR>", "SearchReplace cexpr" }
+
+
