@@ -7,7 +7,9 @@ lvim.plugins = {
 		name = "search-replace",
 		dir = "/Users/rw/git/search-replace.nvim",
 		config = function()
-			require("search-replace").setup()
+			require("search-replace").setup({
+				default_replace_options = "gcI",
+			})
 		end,
 	},
 
