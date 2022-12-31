@@ -12,6 +12,9 @@ lvim.builtin.gitsigns.active = true
 lvim.builtin.breadcrumbs.active = true
 lvim.builtin.indentlines.active = false
 
+-- highlight/match brackets
+lvim.builtin.treesitter.matchup.enable = true
+
 lvim.builtin.telescope = {
 	active = true,
 	-- FIXME: this doesn't do anything

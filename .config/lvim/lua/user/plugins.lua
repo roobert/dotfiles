@@ -209,7 +209,7 @@ lvim.plugins = {
 	--     [delete ar*ound me!]        ds]        delete around me!      delete surround
 	--     remove <b>HTML t*ags</b>    dst        remove HTML tags       delete surround tags
 	--     'change quot*es'            cs'"       "change quotes"        change surround source target
-	--     <b>or tag* types</b>        csth1<CR>  <h1>or tag types</h1>  change surround tag
+	--     <b>or tag* types</b>        csth1<CR>   change surround tag
 	--     delete(functi*on calls)     dsf        function calls         delete surround function
 	--     par*am                      yssffunc   func(param)            you surround some function
 	-- add around objects
@@ -226,7 +226,9 @@ lvim.plugins = {
 
 	-- more text objects - allow changing values in next object without being inside it,
 	-- i.e: ci"" from outside the quotes
-	{ "andymass/vim-matchup", event = "VimEnter" },
+
+	-- highlighting/navigation of matching brackets
+	{ "andymass/vim-matchup" },
 
 	-- quick navigation within the visible buffer
 	-- {
@@ -256,15 +258,6 @@ lvim.plugins = {
 	--
 	-- TODO:
 	-- some todo text
-
-	-- Without suffixed colon:
-	-- FIXME
-	-- WARNING
-	-- NOTE
-	-- TODO
-	--
-	-- NOTE:
-	-- Run PackerCompile after adjusting these settings..
 	{
 		"folke/todo-comments.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
