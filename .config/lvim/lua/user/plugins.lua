@@ -3,6 +3,16 @@ lvim.plugins = {
 	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
 
 	{
+		name = "neovim-test",
+		dir = "/Users/rw/git/neovim-test.nvim",
+		config = function()
+			require("neovim-test").setup({
+				test_opt = "blah",
+			})
+		end,
+	},
+
+	{
 		-- "roobert/search-replace.nvim",
 		name = "search-replace",
 		dir = "/Users/rw/git/search-replace.nvim",

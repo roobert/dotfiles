@@ -130,19 +130,25 @@ lvim.builtin.terminal.execs = {
 }
 lvim.builtin.which_key.mappings["G"] = git_orig
 
-lvim.builtin.which_key.mappings["r"] = { name = "SearchReplace" }
-lvim.builtin.which_key.mappings["r"]["s"] = { "<CMD>SearchReplaceSelections<CR>", "SearchReplace [s]elction list" }
-lvim.builtin.which_key.mappings["r"]["w"] = { "<CMD>SearchReplaceCWord<CR>", "SearchReplace [w]ord" }
-lvim.builtin.which_key.mappings["r"]["W"] = { "<CMD>SearchReplaceCWORD<CR>", "SearchReplace [W]ORD" }
-lvim.builtin.which_key.mappings["r"]["e"] = { "<CMD>SearchReplaceCExpr<CR>", "SearchReplace [e]xpr" }
-lvim.builtin.which_key.mappings["r"]["f"] = { "<CMD>SearchReplaceCFile<CR>", "SearchReplace [f]ile" }
-lvim.builtin.which_key.mappings["r"]["b"] = { "<CMD>SearchReplaceBlock<CR>", "SearchReplace [b]lock" }
-lvim.keys.visual_block_mode["<C-b>"] = [[<CMD>SearchReplaceWithinBlock<CR>]]
-lvim.keys.visual_block_mode["<C-r>"] = [[<CMD>SearchReplaceVisualSelection<CR>]]
+lvim.builtin.which_key.mappings["r"] = { name = "SearchReplaceSingleBuffer" }
+lvim.builtin.which_key.mappings["r"]["s"] =
+	{ "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" }
+lvim.builtin.which_key.mappings["r"]["o"] =
+	{ "<CMD>SearchReplaceSingleBufferOpen<CR>", "SearchReplaceSingleBuffer [o]pen" }
+lvim.builtin.which_key.mappings["r"]["w"] =
+	{ "<CMD>SearchReplaceSingleBufferCWord<CR>", "SearchReplaceSingleBuffer [w]ord" }
+lvim.builtin.which_key.mappings["r"]["W"] =
+	{ "<CMD>SearchReplaceSingleBufferCWORD<CR>", "SearchReplaceSingleBuffer [W]ORD" }
+lvim.builtin.which_key.mappings["r"]["e"] =
+	{ "<CMD>SearchReplaceSingleBufferCExpr<CR>", "SearchReplaceSingleBuffer [e]xpr" }
+lvim.builtin.which_key.mappings["r"]["f"] =
+	{ "<CMD>SearchReplaceSingleBufferCFile<CR>", "SearchReplaceSingleBuffer [f]ile" }
 
 lvim.builtin.which_key.mappings["r"]["b"] = { name = "SearchReplaceMultiBuffer" }
 lvim.builtin.which_key.mappings["r"]["b"]["s"] =
 	{ "<CMD>SearchReplaceMultiBufferSelections<CR>", "SearchReplaceMultiBuffer [s]elction list" }
+lvim.builtin.which_key.mappings["r"]["b"]["o"] =
+	{ "<CMD>SearchReplaceMultiBufferOpen<CR>", "SearchReplaceMultiBuffer [o]pen" }
 lvim.builtin.which_key.mappings["r"]["b"]["w"] =
 	{ "<CMD>SearchReplaceMultiBufferCWord<CR>", "SearchReplaceMultiBuffer [w]ord" }
 lvim.builtin.which_key.mappings["r"]["b"]["W"] =
@@ -151,3 +157,6 @@ lvim.builtin.which_key.mappings["r"]["b"]["e"] =
 	{ "<CMD>SearchReplaceMultiBufferCExpr<CR>", "SearchReplaceMultiBuffer [e]xpr" }
 lvim.builtin.which_key.mappings["r"]["b"]["f"] =
 	{ "<CMD>SearchReplaceMultiBufferCFile<CR>", "SearchReplaceMultiBuffer [f]ile" }
+
+lvim.keys.visual_block_mode["<C-r>"] = [[<CMD>SearchReplaceSingleBufferVisualSelection<CR>]]
+lvim.keys.visual_block_mode["<C-b>"] = [[<CMD>SearchReplaceWithinVisualSelectionCWord<CR>]]
