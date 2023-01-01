@@ -1,6 +1,14 @@
 lvim.plugins = {
 	-- my new cool theme!
-	{ "roobert/nightshift.vim", dependencies = "rktjmp/lush.nvim" },
+	{
+		"roobert/nightshift.vim",
+		dependencies = "rktjmp/lush.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.cmd([[colorscheme nightshift]])
+		end,
+	},
 
 	{
 		name = "neovim-test",
