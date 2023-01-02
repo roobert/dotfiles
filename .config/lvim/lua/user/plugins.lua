@@ -10,6 +10,8 @@ lvim.plugins = {
 		end,
 	},
 
+	{ "roobert/tailwindcss-colorizer.nvim" },
+
 	{
 		name = "neovim-test",
 		dir = "/Users/rw/git/neovim-test.nvim",
