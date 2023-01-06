@@ -10,20 +10,18 @@ lvim.plugins = {
 		end,
 	},
 
-	{ "roobert/tailwindcss-colorizer.nvim" },
+	-- {
+	-- 	name = "neovim-test",
+	-- 	dir = "/Users/rw/git/neovim-test.nvim",
+	-- 	config = function()
+	-- 		require("neovim-test").setup({
+	-- 			test_opt = "blah",
+	-- 		})
+	-- 	end,
+	-- },
 
 	{
-		name = "neovim-test",
-		dir = "/Users/rw/git/neovim-test.nvim",
-		config = function()
-			require("neovim-test").setup({
-				test_opt = "blah",
-			})
-		end,
-	},
-
-	{
-		-- "roobert/search-replace.nvim",
+		--"roobert/search-replace.nvim",
 		name = "search-replace",
 		dir = "/Users/rw/git/search-replace.nvim",
 		config = function()
@@ -84,6 +82,14 @@ lvim.plugins = {
 			require("toggle_lsp_diagnostics").init({
 				virtual_text = false,
 			})
+		end,
+	},
+
+	-- automatically stop hlsearch
+	{
+		"asiryk/auto-hlsearch.nvim",
+		config = function()
+			require("auto-hlsearch").setup()
 		end,
 	},
 
@@ -423,6 +429,7 @@ lvim.plugins = {
 	-- Sidebar to show symbols
 	--{ "simrat39/symbols-outline.nvim" },
 
+	-- Chatgpt interface
 	{
 		"dense-analysis/neural",
 		config = function()
@@ -440,4 +447,7 @@ lvim.plugins = {
 			"ElPiloto/significant.nvim",
 		},
 	},
+
+	-- Colorize hex codes
+	{ "roobert/tailwindcss-colorizer.nvim" },
 }
