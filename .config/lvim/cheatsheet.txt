@@ -4,8 +4,14 @@ Previous/next paragraph | { }
 Next/previous block     | [ ]
 Top/bottom of file      | gg G
 
+## node selection
+Initialize node | <CR>
+Scope increase  | <CR>
+Node increment  | <TAB>
+Node decrement  | <TAB>
+
 ## formatting
-format lines (can be used to reformat a paragraph) | gq
+format lines (can be used to reformat a paragraph) | gw
 
 ## comment-management
 Toggle comments         | <leader>-/

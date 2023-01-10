@@ -118,6 +118,8 @@ lvim.keys.insert_mode["<C-y>"] = [[<CMD>Yanks<CR>]]
 vim.cmd([[let g:yoinkIncludeDeleteOperations=1]])
 vim.cmd([[let g:yoinkSavePersistently=1]])
 
+lvim.keys.normal_mode["<C-k>"] = [[<CMD>lua require("ts-node-action").node_action()<CR>]]
+
 -- highlight code and press Enter then write a character to align on
 -- press ctrl-x to cycle to regexp
 lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
