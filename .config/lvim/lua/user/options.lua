@@ -30,14 +30,6 @@ lvim.builtin.treesitter.incremental_selection = {
 	end,
 }
 
-lvim.builtin.telescope = {
-	active = true,
-	-- FIXME: this doesn't do anything
-	defaults = {
-		initial_mode = "normal",
-	},
-}
-
 lvim.builtin.bufferline = {
 	active = true,
 	options = {
@@ -83,6 +75,7 @@ lvim.builtin.telescope = {
 	active = true,
 	defaults = {
 		layout_strategy = "vertical",
+		initial_mode = "insert",
 	},
 }
 
