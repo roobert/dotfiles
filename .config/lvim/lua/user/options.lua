@@ -15,6 +15,21 @@ lvim.builtin.indentlines.active = false
 -- highlight/match brackets
 lvim.builtin.treesitter.matchup.enable = true
 
+-- enable incremental selection with <CR> and <tab>/<s-tab>
+lvim.builtin.treesitter.incremental_selection = {
+	module_path = "nvim-treesitter.incremental_selection",
+	enable = true,
+	keymaps = {
+		init_selection = "<CR>",
+		scope_incremental = "<CR>",
+		node_incremental = "<TAB>",
+		node_decremental = "<S-TAB>",
+	},
+	is_supported = function()
+		return true
+	end,
+}
+
 lvim.builtin.telescope = {
 	active = true,
 	-- FIXME: this doesn't do anything
@@ -81,7 +96,7 @@ vim.cmd([[set whichwrap=b,s]])
 vim.cmd([[set iskeyword+=_]])
 
 -- show search/replace in split window
-vim.cmd([[set inccommand=split]])
+vim.o.inccommand = "split"
 
 vim.cmd([[autocmd FileType text,latex,tex,md,markdown setlocal spell]])
 

@@ -450,4 +450,13 @@ lvim.plugins = {
 
 	-- Colorize hex codes
 	{ "roobert/tailwindcss-colorizer.nvim" },
+
+	-- https://github.com/CKolkey/ts-node-action
+	{
+		"ckolkey/ts-node-action",
+		dependencies = { "nvim-treesitter" },
+		config = function() -- Optional
+			require("ts-node-action").setup({})
+		end,
+	},
 }
