@@ -21,9 +21,9 @@ lvim.builtin.treesitter.incremental_selection = {
 	enable = true,
 	keymaps = {
 		init_selection = "<CR>",
-		scope_incremental = "<CR>",
-		node_incremental = "<TAB>",
-		node_decremental = "<S-TAB>",
+		node_incremental = "<CR>",
+		node_decremental = "<TAB>",
+		scope_incremental = "<S-TAB>",
 	},
 	is_supported = function()
 		return true
