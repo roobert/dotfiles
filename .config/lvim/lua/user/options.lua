@@ -19,6 +19,9 @@ lvim.builtin.cmp.formatting = {
 -- highlight/match brackets
 lvim.builtin.treesitter.matchup.enable = true
 
+-- automatically update html tags when editing
+lvim.builtin.treesitter.autotag.enable = true
+
 -- enable incremental selection with <CR> and <tab>/<s-tab>
 lvim.builtin.treesitter.incremental_selection = {
   module_path = "nvim-treesitter.incremental_selection",
