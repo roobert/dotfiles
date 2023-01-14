@@ -70,7 +70,8 @@ lvim.plugins = {
   { "nvim-treesitter/playground" },
 
   -- colorize hex colours
-  { "norcalli/nvim-colorizer.lua" },
+  { "NvChad/nvim-colorizer.lua" },
+
 
   -- use treesitter to auto close and auto rename html tag
   { "windwp/nvim-ts-autotag" },
@@ -448,17 +449,22 @@ lvim.plugins = {
     },
   },
 
-  -- Colorize hex codes
-  { "roobert/tailwindcss-colorizer.nvim" },
-
   -- completion hints for tailwindcss
-  { "roobert/tailwindcss-colorizer-cmp.nvim" },
+  {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    branch = "color-square-size",
+    config = function()
+      require("tailwindcss-colorizer-cmp").setup({
+        color_square_width = 2,
+      })
+    end
+  },
 
   -- https://github.com/CKolkey/ts-node-action
   {
     "ckolkey/ts-node-action",
     dependencies = { "nvim-treesitter" },
-    config = function() -- Optional
+    config = function()
       require("ts-node-action").setup({})
     end,
   },

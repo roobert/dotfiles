@@ -23,9 +23,3 @@ require("mason-lspconfig").setup({
     "yamlls",
   },
 })
-
-lvim.lsp.on_attach_callback = function(client, bufnr)
-  if client.name == "tailwindcss" then
-    require("tailwindcss-colorizer/colorizer").buf_attach(bufnr, { single_column = false, debounce = 500 })
-  end
-end
