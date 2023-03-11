@@ -1,5 +1,5 @@
-#system tools
-alias ls="gls --group-directories-first --color=auto"
+# system tools
+which gls &>/dev/null && alias ls="gls --group-directories-first --color=auto"
 alias screen="TERM=xterm screen"
 alias ssh="ssh -t"
 
@@ -41,7 +41,7 @@ alias rzsh="exec zsh -l"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
-export EDITOR="nvim"
+export EDITOR="lvim"
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
@@ -62,4 +62,4 @@ alias -g COL9="awk '{ print \$9 }'"
 
 alias visox="vi ~/._doc/osx.md"
 
-alias kdebug="kubectl run --rm -it --image alpine kdebug /bin/sh"
+alias kdebug="kubectl run --rm -it --image ubuntu kdebug /bin/sh"
