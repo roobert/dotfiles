@@ -21,6 +21,10 @@ lvim.plugins = {
 		"prabirshrestha/vim-lsp",
 	},
 
+	-- chatgpt..
+	{ "MunifTanjim/nui.nvim" },
+	{ "dpayne/CodeGPT.nvim" },
+
 	-- {
 	-- 	name = "neovim-test",
 	-- 	dir = "/Users/rw/git/neovim-test.nvim",
@@ -88,17 +92,15 @@ lvim.plugins = {
 	-- 	end,
 	-- },
 
-	-- FIXME: re-enable
-	-- {
-	-- 	--"roobert/search-replace.nvim",
-	-- 	name = "search-replace",
-	-- 	dir = "/Users/rw/git/search-replace.nvim",
-	-- 	config = function()
-	-- 		require("search-replace").setup({
-	-- 			default_replace_options = "gcI",
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		"roobert/search-replace.nvim",
+		name = "search-replace",
+		config = function()
+			require("search-replace").setup({
+				default_replace_options = "gcI",
+			})
+		end,
+	},
 
 	-- colorscheme creator
 	{ "rktjmp/lush.nvim" },
