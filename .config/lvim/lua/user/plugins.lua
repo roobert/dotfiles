@@ -10,6 +10,16 @@ lvim.plugins = {
 		end,
 	},
 
+	{
+		dir = "/Users/rw/git/CodeGPT.nvim",
+		name = "dpayne/CodeGPT.nvim",
+		lazy = false,
+		priority = 100000,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
+	},
+
 	-- prefer fzf to telescope for fuzzy finding stuff
 	{
 		"ibhagwan/fzf-lua",
@@ -22,8 +32,8 @@ lvim.plugins = {
 	},
 
 	-- chatgpt..
-	{ "MunifTanjim/nui.nvim" },
-	{ "dpayne/CodeGPT.nvim" },
+	-- { "MunifTanjim/nui.nvim" },
+	--{ "dpayne/CodeGPT.nvim" },
 
 	-- {
 	-- 	name = "neovim-test",

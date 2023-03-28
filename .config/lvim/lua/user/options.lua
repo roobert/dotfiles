@@ -128,6 +128,7 @@ lvim.builtin.lualine.on_config_done = function(lualine)
 	-- FIXME: re-enable
 	-- table.insert(config.sections.lualine_x, 1, { require("node-type").statusline })
 	-- table.insert(config.sections.lualine_y, 1, { require("statusline-action-hints").statusline })
+	table.insert(config.sections.lualine_y, 1, { require("CodeGPT").status })
 
 	lualine.setup(config)
 end
