@@ -10,15 +10,15 @@ lvim.plugins = {
 		end,
 	},
 
-	{
-		dir = "/Users/rw/git/CodeGPT.nvim",
-		name = "dpayne/CodeGPT.nvim",
-		lazy = false,
-		priority = 100000,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-	},
+	-- {
+	-- 	dir = "/Users/rw/git/CodeGPT.nvim",
+	-- 	name = "dpayne/CodeGPT.nvim",
+	-- 	lazy = false,
+	-- 	priority = 100000,
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 	},
+	-- },
 
 	-- prefer fzf to telescope for fuzzy finding stuff
 	{
@@ -33,7 +33,7 @@ lvim.plugins = {
 
 	-- chatgpt..
 	-- { "MunifTanjim/nui.nvim" },
-	--{ "dpayne/CodeGPT.nvim" },
+	{ "dpayne/CodeGPT.nvim" },
 
 	-- {
 	-- 	name = "neovim-test",
@@ -429,7 +429,7 @@ lvim.plugins = {
 	-- Nice interface for displaying nvim diagnostics
 	{
 		"folke/trouble.nvim",
-		dependencies = "kyazdani42/nvim-web-devicons",
+		--dependencies = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({})
 		end,
