@@ -1,5 +1,11 @@
+
 # system tools
-which gls &>/dev/null && alias ls="gls --group-directories-first --color=auto"
+if test -x /opt/homebrew/bin/gls; then
+    alias ls="gls --group-directories-first --color=auto"
+else
+    alias ls="ls --color=auto"
+fi
+
 alias screen="TERM=xterm screen"
 alias ssh="ssh -t"
 
