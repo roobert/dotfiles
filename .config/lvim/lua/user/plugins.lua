@@ -90,17 +90,18 @@ lvim.plugins = {
 	},
 
 	-- FIXME: re-enable
-	-- {
-	-- 	dir = "/Users/rw/git/surround-ui.nvim",
-	-- 	dependencies = {
-	-- 		"kylechui/nvim-surround",
-	-- 		"folke/which-key.nvim",
-	-- 	},
-	-- 	name = "surround-ui",
-	-- 	config = function()
-	-- 		require("surround-ui").setup()
-	-- 	end,
-	-- },
+	{
+		--dir = "/Users/rw/git/surround-ui.nvim",
+		"roobert/surround-ui.nvim",
+		dependencies = {
+			"kylechui/nvim-surround",
+			"folke/which-key.nvim",
+		},
+		name = "surround-ui",
+		config = function()
+			require("surround-ui").setup()
+		end,
+	},
 
 	{
 		"roobert/search-replace.nvim",
