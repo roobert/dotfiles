@@ -75,21 +75,21 @@ lvim.builtin.which_key.mappings["_"] = { "<CMD>split +enew<CR>", "Horizontal spl
 
 -- since we open empty splits - clean them up as we cycle through open buffers
 function ChangeTab(motion)
-	local last_buffer_id = vim.fn.bufnr()
-	local last_buffer_name = vim.fn.expand("%")
+  local last_buffer_id = vim.fn.bufnr()
+  local last_buffer_name = vim.fn.expand("%")
 
-	if motion == "next" then
-		vim.cmd([[BufferLineCycleWindowlessNext]])
-	elseif motion == "prev" then
-		vim.cmd([[BufferLineCycleWindowlessPrev]])
-	else
-		error("Invalid motion: " .. motion)
-		return
-	end
+  if motion == "next" then
+    vim.cmd([[BufferLineCycleWindowlessNext]])
+  elseif motion == "prev" then
+    vim.cmd([[BufferLineCycleWindowlessPrev]])
+  else
+    error("Invalid motion: " .. motion)
+    return
+  end
 
-	if last_buffer_name == "" then
-		vim.cmd("bd " .. last_buffer_id)
-	end
+  if last_buffer_name == "" then
+    vim.cmd("bd " .. last_buffer_id)
+  end
 end
 
 -- switch through visible buffers with shift-l/h
@@ -128,41 +128,41 @@ lvim.keys.visual_mode["<Enter>"] = { "<Plug>(EasyAlign)" }
 local git_orig = lvim.builtin.which_key.mappings.g
 lvim.builtin.which_key.mappings.g = nil
 lvim.builtin.terminal.execs = {
-	{ "lazygit", "<leader>g", "LazyGit", "float" },
+  { "lazygit", "<leader>g", "LazyGit", "float" },
 }
 lvim.builtin.which_key.mappings["G"] = git_orig
 
 lvim.builtin.which_key.mappings["r"] = { name = "SearchReplaceSingleBuffer" }
 lvim.builtin.which_key.mappings["r"]["s"] =
-	{ "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" }
+{ "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" }
 lvim.builtin.which_key.mappings["r"]["o"] =
-	{ "<CMD>SearchReplaceSingleBufferOpen<CR>", "SearchReplaceSingleBuffer [o]pen" }
+{ "<CMD>SearchReplaceSingleBufferOpen<CR>", "SearchReplaceSingleBuffer [o]pen" }
 lvim.builtin.which_key.mappings["r"]["w"] =
-	{ "<CMD>SearchReplaceSingleBufferCWord<CR>", "SearchReplaceSingleBuffer [w]ord" }
+{ "<CMD>SearchReplaceSingleBufferCWord<CR>", "SearchReplaceSingleBuffer [w]ord" }
 lvim.builtin.which_key.mappings["r"]["W"] =
-	{ "<CMD>SearchReplaceSingleBufferCWORD<CR>", "SearchReplaceSingleBuffer [W]ORD" }
+{ "<CMD>SearchReplaceSingleBufferCWORD<CR>", "SearchReplaceSingleBuffer [W]ORD" }
 lvim.builtin.which_key.mappings["r"]["e"] =
-	{ "<CMD>SearchReplaceSingleBufferCExpr<CR>", "SearchReplaceSingleBuffer [e]xpr" }
+{ "<CMD>SearchReplaceSingleBufferCExpr<CR>", "SearchReplaceSingleBuffer [e]xpr" }
 lvim.builtin.which_key.mappings["r"]["f"] =
-	{ "<CMD>SearchReplaceSingleBufferCFile<CR>", "SearchReplaceSingleBuffer [f]ile" }
+{ "<CMD>SearchReplaceSingleBufferCFile<CR>", "SearchReplaceSingleBuffer [f]ile" }
 
 lvim.builtin.which_key.mappings["r"]["b"] = { name = "SearchReplaceMultiBuffer" }
 lvim.builtin.which_key.mappings["r"]["b"]["s"] =
-	{ "<CMD>SearchReplaceMultiBufferSelections<CR>", "SearchReplaceMultiBuffer [s]elction list" }
+{ "<CMD>SearchReplaceMultiBufferSelections<CR>", "SearchReplaceMultiBuffer [s]elction list" }
 lvim.builtin.which_key.mappings["r"]["b"]["o"] =
-	{ "<CMD>SearchReplaceMultiBufferOpen<CR>", "SearchReplaceMultiBuffer [o]pen" }
+{ "<CMD>SearchReplaceMultiBufferOpen<CR>", "SearchReplaceMultiBuffer [o]pen" }
 lvim.builtin.which_key.mappings["r"]["b"]["w"] =
-	{ "<CMD>SearchReplaceMultiBufferCWord<CR>", "SearchReplaceMultiBuffer [w]ord" }
+{ "<CMD>SearchReplaceMultiBufferCWord<CR>", "SearchReplaceMultiBuffer [w]ord" }
 lvim.builtin.which_key.mappings["r"]["b"]["W"] =
-	{ "<CMD>SearchReplaceMultiBufferCWORD<CR>", "SearchReplaceMultiBuffer [W]ORD" }
+{ "<CMD>SearchReplaceMultiBufferCWORD<CR>", "SearchReplaceMultiBuffer [W]ORD" }
 lvim.builtin.which_key.mappings["r"]["b"]["e"] =
-	{ "<CMD>SearchReplaceMultiBufferCExpr<CR>", "SearchReplaceMultiBuffer [e]xpr" }
+{ "<CMD>SearchReplaceMultiBufferCExpr<CR>", "SearchReplaceMultiBuffer [e]xpr" }
 lvim.builtin.which_key.mappings["r"]["b"]["f"] =
-	{ "<CMD>SearchReplaceMultiBufferCFile<CR>", "SearchReplaceMultiBuffer [f]ile" }
+{ "<CMD>SearchReplaceMultiBufferCFile<CR>", "SearchReplaceMultiBuffer [f]ile" }
 
 lvim.keys.visual_block_mode["<C-r>"] = [[<CMD>SearchReplaceSingleBufferVisualSelection<CR>]]
 lvim.keys.visual_block_mode["<C-s>"] = [[<CMD>SearchReplaceWithinVisualSelection<CR>]]
 lvim.keys.visual_block_mode["<C-b>"] = [[<CMD>SearchReplaceWithinVisualSelectionCWord<CR>]]
 
-lvim.keys.normal_mode["F"] = [[<CMD>FzfLua files<CR>]]
+lvim.keys.normal_mode["<C-f>"] = [[<CMD>FzfLua files<CR>]]
 lvim.keys.normal_mode["<C-g>"] = [[<CMD>FzfLua live_grep<CR>]]
