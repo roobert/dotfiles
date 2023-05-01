@@ -44,6 +44,7 @@ WHERE="%{$FG[250]%}%~"
 PS1='${WHERE} ${EXIT_STATUS}${VI_MODE}>%{$FX[reset]%} '
 RPS1=''
 
+
 if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     function zle-line-finish () {
         echoti rmkx

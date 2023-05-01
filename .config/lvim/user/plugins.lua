@@ -237,17 +237,17 @@ lvim.plugins = {
   -- automatically install all the formatters and linters specified by:
   -- * linters.setup
   -- * formatters.setup
-  {
-    "jayp0521/mason-null-ls.nvim",
-    config = function()
-      require("mason-null-ls").setup({
-        automatic_installation = false,
-        automatic_setup = true,
-        ensure_installed = nil,
-      })
-      require("mason-null-ls").setup_handlers()
-    end,
-  },
+  -- {
+  --   "jayp0521/mason-null-ls.nvim",
+  --   config = function()
+  --     require("mason-null-ls").setup({
+  --       automatic_installation = false,
+  --       automatic_setup = true,
+  --       ensure_installed = nil,
+  --     })
+  --     require("mason-null-ls").setup_handlers()
+  --   end,
+  -- },
 
   -- scope buffers to tabs to work around vims annoying buffer and tab management
   --{ "tiagovla/scope.nvim" },
@@ -451,7 +451,7 @@ lvim.plugins = {
   { "chaoren/vim-wordmotion" },
 
   -- use lua require("null-ls-embedded").buf_format() to format code blocks in markdown
-  { "LostNeophyte/null-ls-embedded" },
+  -- { "LostNeophyte/null-ls-embedded" },
 
   -- highlight whitespace at EOL
   { "ntpeters/vim-better-whitespace" },
