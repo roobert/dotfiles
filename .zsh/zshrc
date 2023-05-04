@@ -12,7 +12,5 @@ for f in ${ZSH_ROOT}/robs/*.zsh; do
   source $f
 done
 
-source ${ZSH_ROOT}/venv-autoswitch/autoswitch_virtualenv.plugin.zsh
-
 # reload bookmarks
 b > /dev/null 2>&1
