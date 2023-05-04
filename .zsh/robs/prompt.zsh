@@ -38,10 +38,16 @@ precmd() {
   else
     unset EXIT_STATUS
   fi
+
+  if [ -n "${VIRTUAL_ENV}" ]; then
+    VIRTUAL_ENV_SIGN="v "
+  else
+    VIRTUAL_ENV_SIGN=""
+  fi
 }
 
 WHERE="%{$FG[250]%}%~"
-PS1='${WHERE} ${EXIT_STATUS}${VI_MODE}>%{$FX[reset]%} '
+PS1='${VIRTUAL_ENV_SIGN}${WHERE} ${EXIT_STATUS}${VI_MODE}>%{$FX[reset]%} '
 RPS1=''
 
 
