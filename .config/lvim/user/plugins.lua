@@ -376,17 +376,17 @@ lvim.plugins = {
   { "andymass/vim-matchup" },
 
   -- quick navigation within the visible buffer
-  {
-    "phaazon/hop.nvim",
-    name = "hop",
-    keys = { "s", "S" },
-    config = function()
-      -- see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-      vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
-      vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
-    end,
-  },
+  -- {
+  --   "phaazon/hop.nvim",
+  --   name = "hop",
+  --   keys = { "s", "S" },
+  --   config = function()
+  --     -- see :h hop-config
+  --     require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+  --     vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", {})
+  --     vim.api.nvim_set_keymap("n", "S", ":HopPattern<cr>", {})
+  --   end,
+  -- },
 
   -- use '%' to jump between if/end/else, etc.
   { "wellle/targets.vim" },
@@ -585,4 +585,38 @@ lvim.plugins = {
       require("ts-node-action").setup({})
     end,
   },
+
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          -- default options: exact mode, multi window, all directions, with a backdrop
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+      {
+        "r",
+        mode = "o",
+        function()
+          require("flash").remote()
+        end,
+        desc = "Remote Flash",
+      },
+    },
+  }
 }
