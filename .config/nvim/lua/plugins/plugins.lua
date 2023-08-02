@@ -9,6 +9,21 @@ return {
     end,
   },
 
+  -- prefer fzf to telescope for fuzzy finding stuff
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("fzf-lua").setup({
+        actions = {
+          files = {
+            ["default"] = require("fzf-lua.actions").file_edit,
+          },
+        },
+      })
+    end,
+  },
+
   -- {
   --   dir = "/Users/rw/git/CodeGPT.nvim",
   --   name = "dpayne/CodeGPT.nvim",
@@ -17,18 +32,6 @@ return {
   --   dependencies = {
   --     "MunifTanjim/nui.nvim",
   --   },
-  -- },
-
-  -- prefer fzf to telescope for fuzzy finding stuff
-  -- {
-  --   "ibhagwan/fzf-lua",
-  --   setup = require("fzf-lua").setup({
-  --     actions = {
-  --       files = {
-  --         ["default"] = require("fzf-lua.actions").file_edit,
-  --       },
-  --     },
-  --   }),
   -- },
 
   -- chatgpt..
@@ -48,7 +51,7 @@ return {
   {
     "roobert/f-string-toggle.nvim",
     dependencies = "nvim-treesitter",
-    config = function()
+    cmnfig = function()
       require("f-string-toggle").setup()
     end,
   },
@@ -193,29 +196,29 @@ return {
   -- { "kazhala/close-buffers.nvim" },
 
   -- function signature hints
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   config = function()
-  --     require("lsp_signature").on_attach({
-  --       bind = true,
-  --       doc_lines = 2,
-  --       floating_window = true,
-  --       hint_enable = true,
-  --       hint_prefix = " 👉 ",
-  --       fix_pos = true,
-  --       hint_scheme = "String",
-  --       use_lspsaga = false,
-  --       hi_parameter = "Search",
-  --       max_height = 12,
-  --       handler_opts = {
-  --         max_width = 120,
-  --         border = "single",
-  --       },
-  --       extra_trigger_chars = {},
-  --     })
-  --   end,
-  --   event = "BufRead",
-  -- },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").on_attach({
+        bind = true,
+        doc_lines = 2,
+        floating_window = true,
+        hint_enable = true,
+        hint_prefix = " 👉 ",
+        fix_pos = true,
+        hint_scheme = "String",
+        use_lspsaga = false,
+        hi_parameter = "Search",
+        max_height = 12,
+        handler_opts = {
+          max_width = 120,
+          border = "single",
+        },
+        extra_trigger_chars = {},
+      })
+    end,
+    event = "BufRead",
+  },
 
   -- text objects for parenthesis, brackets, quotes, etc.
   -- { "onsails/lspkind-nvim" },
@@ -379,59 +382,109 @@ return {
     end,
     keys = {
       -- stylua: ignore
-    { "<leader>p", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "Open Yank History" },
-      { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
-      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
-      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
-      { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after selection" },
-      { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before selection" },
-      { "[y", "<Plug>(YankyCycleForward)", desc = "Cycle forward through yank history" },
-      { "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle backward through yank history" },
-      { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indented after cursor (linewise)" },
-      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indented before cursor (linewise)" },
-      { "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indented after cursor (linewise)" },
-      { "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indented before cursor (linewise)" },
-      { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and indent right" },
-      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and indent left" },
-      { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put before and indent right" },
-      { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put before and indent left" },
-      { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put after applying a filter" },
-      { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put before applying a filter" },
-    },
-  },
-
-  {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-    build = ":MasonUpdate",
-    opts = {
-      ensure_installed = {
-        "stylua",
-        "shfmt",
-        -- "flake8",
+      {
+        "<leader>p",
+        function() require("telescope").extensions.yank_history.yank_history({}) end,
+        desc =
+        "Open Yank History"
+      },
+      {
+        "y",
+        "<Plug>(YankyYank)",
+        mode = { "n", "x" },
+        desc = "Yank text",
+      },
+      {
+        "p",
+        "<Plug>(YankyPutAfter)",
+        mode = { "n", "x" },
+        desc = "Put yanked text after cursor",
+      },
+      {
+        "P",
+        "<Plug>(YankyPutBefore)",
+        mode = { "n", "x" },
+        desc = "Put yanked text before cursor",
+      },
+      {
+        "gp",
+        "<Plug>(YankyGPutAfter)",
+        mode = { "n", "x" },
+        desc = "Put yanked text after selection",
+      },
+      {
+        "gP",
+        "<Plug>(YankyGPutBefore)",
+        mode = { "n", "x" },
+        desc = "Put yanked text before selection",
+      },
+      {
+        "[y",
+        "<Plug>(YankyCycleForward)",
+        desc = "Cycle forward through yank history",
+      },
+      {
+        "]y",
+        "<Plug>(YankyCycleBackward)",
+        desc = "Cycle backward through yank history",
+      },
+      {
+        "]p",
+        "<Plug>(YankyPutIndentAfterLinewise)",
+        desc = "Put indented after cursor (linewise)",
+      },
+      {
+        "[p",
+        "<Plug>(YankyPutIndentBeforeLinewise)",
+        desc = "Put indented before cursor (linewise)",
+      },
+      {
+        "]P",
+        "<Plug>(YankyPutIndentAfterLinewise)",
+        desc = "Put indented after cursor (linewise)",
+      },
+      {
+        "[P",
+        "<Plug>(YankyPutIndentBeforeLinewise)",
+        desc = "Put indented before cursor (linewise)",
+      },
+      {
+        ">p",
+        "<Plug>(YankyPutIndentAfterShiftRight)",
+        desc = "Put and indent right",
+      },
+      {
+        "<p",
+        "<Plug>(YankyPutIndentAfterShiftLeft)",
+        desc = "Put and indent left",
+      },
+      {
+        ">P",
+        "<Plug>(YankyPutIndentBeforeShiftRight)",
+        desc = "Put before and indent right",
+      },
+      {
+        "<P",
+        "<Plug>(YankyPutIndentBeforeShiftLeft)",
+        desc = "Put before and indent left",
+      },
+      {
+        "=p",
+        "<Plug>(YankyPutAfterFilter)",
+        desc = "Put after applying a filter",
+      },
+      {
+        "=P",
+        "<Plug>(YankyPutBeforeFilter)",
+        desc = "Put before applying a filter",
       },
     },
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    opts = function(_, opts)
-      if type(opts.sources) == "table" then
-        local null_ls = require("null-ls")
-        vim.list_extend(opts.sources, {
-          null_ls.builtins.formatting.terraform_fmt,
-          null_ls.builtins.diagnostics.terraform_validate,
-          null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.shfmt,
-        })
-      end
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     opts = {
+      format = { timeout_ms = 4000 },
       servers = {
         pyright = {},
         ruff_lsp = {},
@@ -444,6 +497,15 @@ return {
           if client.name == "ruff_lsp" then
             -- Disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
+          end
+        end)
+      end,
+      -- Disable terraform syntax highlighting from language server in favor
+      -- of treesitter highlighting
+      terraformls = function()
+        require("lazyvim.util").on_attach(function(client, _)
+          if client.name == "terraformls" then
+            client.server_capabilities.semanticTokensProvider = nil
           end
         end)
       end,
@@ -545,11 +607,11 @@ return {
     optional = true,
     dependencies = {
       "mfussenegger/nvim-dap-python",
-    -- stylua: ignore
-    keys = {
-      { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-      { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class" },
-    },
+      -- stylua: ignore
+      keys = {
+        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
+        { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class" },
+      },
       config = function()
         local path = require("mason-registry").get_package("debugpy"):get_install_path()
         require("dap-python").setup(path .. "/venv/bin/python")
@@ -739,5 +801,73 @@ return {
         update_n_lines = "gzn", -- Update `n_lines`
       },
     },
+  },
+
+  -- add symbols-outline
+  {
+    "simrat39/symbols-outline.nvim",
+    cmd = "SymbolsOutline",
+    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    config = true,
+  },
+
+  -- Mason ensures dependencies are installed
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    build = ":MasonUpdate",
+    opts = {
+      ensure_installed = {
+        "proselint",
+        "write-good",
+        "alex",
+        "stylua",
+        "shfmt",
+        "black",
+        "isort",
+        "sqlfluff",
+        "sqlfmt",
+      },
+    },
+  },
+
+  -- null-ls permits running linters/formatters that are not LSP based
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    opts = function(_, opts)
+      if type(opts.sources) == "table" then
+        local null_ls = require("null-ls")
+        vim.list_extend(opts.sources, {
+          null_ls.builtins.diagnostics.proselint,
+          null_ls.builtins.code_actions.proselint,
+          null_ls.builtins.diagnostics.alex,
+          null_ls.builtins.diagnostics.write_good,
+          null_ls.builtins.formatting.terraform_fmt,
+          null_ls.builtins.diagnostics.terraform_validate,
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.formatting.shfmt,
+          null_ls.builtins.diagnostics.shellcheck,
+          null_ls.builtins.code_actions.shellcheck,
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.isort,
+          null_ls.builtins.formatting.sql_formatter.with({
+            extra_filetypes = { "sql", "bigquery" },
+            extra_args = { "-l", "bigquery" },
+          }),
+          -- null_ls.builtins.formatting.sqlfluff.with({
+          --   extra_filetypes = { "sql", "bigquery" },
+          --   args = { "fix", "--disable-progress-bar", "-f", "-n", "-" },
+          --   extra_args = { "--dialect", "bigquery" },
+          -- }),
+          -- null_ls.builtins.diagnostics.sqlfluff.with({
+          --   extra_filetypes = { "sql", "bigquery" },
+          --   extra_args = { "--dialect", "bigquery" },
+          -- }),
+          -- null_ls.builtins.formatting.sqlformat,
+          -- null_ls.builtins.formatting.sqlfmt,
+        })
+      end
+    end,
   },
 }
