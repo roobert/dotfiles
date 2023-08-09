@@ -25,3 +25,49 @@ map("i", "<A-j>", "", {})
 map("i", "<A-k>", "", {})
 map("v", "<A-j>", "", {})
 map("v", "<A-k>", "", {})
+
+local lazyterm = function()
+  Util.float_term(nil, { cwd = Util.get_root() })
+end
+-- map("n", "<c-/>", "", {})
+map("n", "<c-t>", lazyterm, { desc = "Terminal (root dir)" })
+
+-- map("v", "<leader>/", "<CMD>MiniComment.textobject()<CR>", { "Comment" })
+
+-- unbind telescope grep
+-- map("n", "<leader>/", "", {})
+-- map("n", "<leader>/", "gc", { "Comment" })
+-- map("v", "<leader>/", "gc", { "Comment" })
+-- map("x", "<leader>/", "gc", { "Comment" })
+
+-- map("n", "<c-g>", "<CMD>FzfLua grep<CR>", { desc = "fzf grep" })
+-- map("n", "<c-f>", "<CMD>FzfLua files<CR>", { desc = "fzf files" })
+-- map("n", "<c-b>", "<CMD>FzfLua buffers<CR>", { desc = "fzf buffers" })
+-- map("n", "<c-r>", "<CMD>FzfLua lsp_references<CR>", { desc = "fzf lsp references" })
+-- map("n", "<c-k>", "<CMD>FzfLua keymaps<CR>", { desc = "fzf keymaps" })
+-- map("n", "<c-s>", "<CMD>FzfLua lsp_document_symbols<CR>", { desc = "fzf lsp document symbols" })
+
+map("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>", {})
+map("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCWord<CR>", {})
+map("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>", {})
+
+map("n", "<leader>rs", "<CMD>SearchReplaceSingleBufferSelections<CR>", {})
+map("n", "<leader>ro", "<CMD>SearchReplaceSingleBufferOpen<CR>", {})
+map("n", "<leader>rw", "<CMD>SearchReplaceSingleBufferCWord<CR>", {})
+map("n", "<leader>rW", "<CMD>SearchReplaceSingleBufferCWORD<CR>", {})
+map("n", "<leader>re", "<CMD>SearchReplaceSingleBufferCExpr<CR>", {})
+map("n", "<leader>rf", "<CMD>SearchReplaceSingleBufferCFile<CR>", {})
+
+map("n", "<leader>rbs", "<CMD>SearchReplaceMultiBufferSelections<CR>", {})
+map("n", "<leader>rbo", "<CMD>SearchReplaceMultiBufferOpen<CR>", {})
+map("n", "<leader>rbw", "<CMD>SearchReplaceMultiBufferCWord<CR>", {})
+map("n", "<leader>rbW", "<CMD>SearchReplaceMultiBufferCWORD<CR>", {})
+map("n", "<leader>rbe", "<CMD>SearchReplaceMultiBufferCExpr<CR>", {})
+map("n", "<leader>rbf", "<CMD>SearchReplaceMultiBufferCFile<CR>", {})
+
+map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
+map("v", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
+map("x", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
+
+-- show the effects of a search / replace in a live preview window
+vim.o.inccommand = "split"

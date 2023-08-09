@@ -1,29 +1,4 @@
 return {
-  {
-    "roobert/nightshift.vim",
-    dependencies = "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme nightshift]])
-    end,
-  },
-
-  -- prefer fzf to telescope for fuzzy finding stuff
-  {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("fzf-lua").setup({
-        actions = {
-          files = {
-            ["default"] = require("fzf-lua.actions").file_edit,
-          },
-        },
-      })
-    end,
-  },
-
   -- {
   --   dir = "/Users/rw/git/CodeGPT.nvim",
   --   name = "dpayne/CodeGPT.nvim",
@@ -48,14 +23,6 @@ return {
   --   end,
   -- },
 
-  {
-    "roobert/f-string-toggle.nvim",
-    dependencies = "nvim-treesitter",
-    cmnfig = function()
-      require("f-string-toggle").setup()
-    end,
-  },
-
   -- {
   --   dir = "/Users/rw/git/tldr-lang.nvim",
   --   name = "tldr-lang",
@@ -74,14 +41,6 @@ return {
   --       definition_identifier = "gd",
   --       template = "%s ref:%s",
   --     })
-  --   end,
-  -- },
-
-  -- {
-  --   dir = "/Users/rw/git/node-type.nvim",
-  --   name = "node-type",
-  --   config = function()
-  --     require("node-type").setup()
   --   end,
   -- },
 
@@ -106,76 +65,8 @@ return {
   --   end,
   -- },
 
-  {
-    "roobert/search-replace.nvim",
-    name = "search-replace",
-    config = function()
-      require("search-replace").setup({
-        default_replace_options = "gcI",
-      })
-    end,
-  },
-
-  -- colorscheme creator
-  { "rktjmp/lush.nvim" },
-
-  -- useful for TSHighlightCapturesUnderCursor
-  { "nvim-treesitter/playground" },
-
-  -- colorize hex colours
-  { "NvChad/nvim-colorizer.lua" },
-
   -- use treesitter to auto close and auto rename html tag
   -- { "windwp/nvim-ts-autotag" },
-
-  -- permit toggling diagnostics
-  -- {
-  --   "WhoIsSethDaniel/toggle-lsp-diagnostics.nvim",
-  --   config = function()
-  --     require("toggle_lsp_diagnostics").init({
-  --       virtual_text = false,
-  --     })
-  --   end,
-  -- },
-
-  -- automatically stop hlsearch
-  -- {
-  --   "asiryk/auto-hlsearch.nvim",
-  --   config = function()
-  --     require("auto-hlsearch").setup()
-  --   end,
-  -- },
-
-  -- prevent overwriting yank buffer when deleting
-  {
-    "gbprod/cutlass.nvim",
-    config = function()
-      require("cutlass").setup({
-        cut_key = "m",
-      })
-    end,
-  },
-
-  -- add substitution motions
-  -- { "svermeulen/vim-subversive" },
-
-  -- automatically install all the formatters and linters specified by:
-  -- * linters.setup
-  -- * formatters.setup
-  -- {
-  --   "jayp0521/mason-null-ls.nvim",
-  --   config = function()
-  --     require("mason-null-ls").setup({
-  --       automatic_installation = false,
-  --       automatic_setup = true,
-  --       ensure_installed = nil,
-  --     })
-  --     require("mason-null-ls").setup_handlers()
-  --   end,
-  -- },
-
-  -- scope buffers to tabs to work around vims annoying buffer and tab management
-  --{ "tiagovla/scope.nvim" },
 
   -- merge bdelete, close, and quit
   --{ "mhinz/vim-sayonara" },
@@ -195,39 +86,11 @@ return {
   -- get access to Bdelete nameless
   -- { "kazhala/close-buffers.nvim" },
 
-  -- function signature hints
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("lsp_signature").on_attach({
-        bind = true,
-        doc_lines = 2,
-        floating_window = true,
-        hint_enable = true,
-        hint_prefix = " 👉 ",
-        fix_pos = true,
-        hint_scheme = "String",
-        use_lspsaga = false,
-        hi_parameter = "Search",
-        max_height = 12,
-        handler_opts = {
-          max_width = 120,
-          border = "single",
-        },
-        extra_trigger_chars = {},
-      })
-    end,
-    event = "BufRead",
-  },
-
   -- text objects for parenthesis, brackets, quotes, etc.
   -- { "onsails/lspkind-nvim" },
 
   -- more text objects - allow changing values in next object without being inside it,
   -- i.e: ci"" from outside the quotes
-
-  -- highlighting/navigation of matching brackets
-  -- { "andymass/vim-matchup" },
 
   -- Highlighting for:
   -- FIXME:
@@ -272,21 +135,6 @@ return {
   --     require("trouble").setup({})
   --   end,
   -- },
-
-  -- Visual-block+enter to align stuff, ctrl-x to switch to regexp
-  { "junegunn/vim-easy-align" },
-
-  -- Hint about code actions to make them discoverable
-  -- { "kosayoda/nvim-lightbulb" },
-
-  -- auto switch between relative and normal line numbers
-  { "jeffkreeftmeijer/vim-numbertoggle" },
-
-  -- toggle booleans with c-x
-  { "can3p/incbool.vim" },
-
-  -- set useful word boundaries for camel case and snake case
-  { "chaoren/vim-wordmotion" },
 
   -- use lua require("null-ls-embedded").buf_format() to format code blocks in markdown
   -- { "LostNeophyte/null-ls-embedded" },
@@ -343,6 +191,142 @@ return {
   --   },
   -- },
 
+  -- https://github.com/CKolkey/ts-node-action
+  -- {
+  --   "ckolkey/ts-node-action",
+  --   dependencies = { "nvim-treesitter" },
+  --   config = function()
+  --     require("ts-node-action").setup({})
+  --   end,
+  -- },
+
+  -- Hint about code actions to make them discoverable
+  { "kosayoda/nvim-lightbulb" },
+
+  {
+    "roobert/nightshift.vim",
+    dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme nightshift]])
+    end,
+  },
+
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  {
+    "nvim-telescope/telescope.nvim",
+    config = function()
+      require("telescope").setup({
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
+      })
+      require("telescope").load_extension("fzf")
+    end,
+  },
+
+  -- prefer fzf to telescope for fuzzy finding stuff
+  -- unfortunately telescope is too tightly integrated into lazyvim so telescope-fzf-native is a
+  -- better option
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   config = function()
+  --     require("fzf-lua").setup({
+  --       winopts = {
+  --         preview = {
+  --           layout = "vertical",
+  --         },
+  --       },
+  --       actions = {
+  --         files = {
+  --           ["default"] = require("fzf-lua.actions").file_edit,
+  --         },
+  --       },
+  --     })
+  --   end,
+  -- },
+
+  {
+    "roobert/f-string-toggle.nvim",
+    dependencies = "nvim-treesitter",
+    config = function()
+      require("f-string-toggle").setup()
+    end,
+  },
+
+  {
+    "roobert/search-replace.nvim",
+    name = "search-replace",
+    config = function()
+      require("search-replace").setup({
+        default_replace_options = "gcI",
+      })
+    end,
+  },
+
+  -- colorscheme creator
+  { "rktjmp/lush.nvim" },
+
+  -- useful for TSHighlightCapturesUnderCursor, or use <leader>ui
+  { "nvim-treesitter/playground" },
+
+  -- colorize hex colours
+  { "NvChad/nvim-colorizer.lua" },
+
+  -- prevent overwriting yank buffer when deleting
+  {
+    "gbprod/cutlass.nvim",
+    config = function()
+      require("cutlass").setup({
+        cut_key = "m",
+      })
+    end,
+  },
+
+  -- function signature hints
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").on_attach({
+        bind = true,
+        doc_lines = 2,
+        floating_window = true,
+        hint_enable = true,
+        hint_prefix = " 👉 ",
+        fix_pos = true,
+        hint_scheme = "String",
+        use_lspsaga = false,
+        hi_parameter = "Search",
+        max_height = 12,
+        handler_opts = {
+          max_width = 120,
+          border = "single",
+        },
+        extra_trigger_chars = {},
+      })
+    end,
+    event = "BufRead",
+  },
+
+  -- Visual-block+enter to align stuff, ctrl-x to switch to regexp
+  { "junegunn/vim-easy-align" },
+
+  -- auto switch between relative and normal line numbers
+  { "jeffkreeftmeijer/vim-numbertoggle" },
+
+  -- toggle booleans with c-x
+  { "can3p/incbool.vim" },
+
+  -- set useful word boundaries for camel case and snake case
+  { "chaoren/vim-wordmotion" },
+
   -- completion hints for tailwindcss
   {
     "roobert/tailwindcss-colorizer-cmp.nvim",
@@ -353,163 +337,26 @@ return {
     end,
   },
 
-  -- https://github.com/CKolkey/ts-node-action
-  -- {
-  --   "ckolkey/ts-node-action",
-  --   dependencies = { "nvim-treesitter" },
-  --   config = function()
-  --     require("ts-node-action").setup({})
-  --   end,
-  -- },
-
+  -- this is too tightly integrated with telescope..
   {
     "gbprod/yanky.nvim",
+    enabled = false,
     dependencies = { { "kkharji/sqlite.lua", enabled = not jit.os:find("Windows") } },
     opts = function()
-      local mapping = require("yanky.telescope.mapping")
-      local mappings = mapping.get_defaults()
-      mappings.i["<c-p>"] = nil
+      -- local mapping = require("yanky.telescope.mapping")
+      -- local mappings = mapping.get_defaults()
+      -- mappings.i["<c-p>"] = nil
       return {
         highlight = { timer = 200 },
         ring = { storage = jit.os:find("Windows") and "shada" or "sqlite" },
         picker = {
           telescope = {
             use_default_mappings = false,
-            mappings = mappings,
+            -- mappings = mappings,
           },
         },
       }
     end,
-    keys = {
-      -- stylua: ignore
-      {
-        "<leader>p",
-        function() require("telescope").extensions.yank_history.yank_history({}) end,
-        desc =
-        "Open Yank History"
-      },
-      {
-        "y",
-        "<Plug>(YankyYank)",
-        mode = { "n", "x" },
-        desc = "Yank text",
-      },
-      {
-        "p",
-        "<Plug>(YankyPutAfter)",
-        mode = { "n", "x" },
-        desc = "Put yanked text after cursor",
-      },
-      {
-        "P",
-        "<Plug>(YankyPutBefore)",
-        mode = { "n", "x" },
-        desc = "Put yanked text before cursor",
-      },
-      {
-        "gp",
-        "<Plug>(YankyGPutAfter)",
-        mode = { "n", "x" },
-        desc = "Put yanked text after selection",
-      },
-      {
-        "gP",
-        "<Plug>(YankyGPutBefore)",
-        mode = { "n", "x" },
-        desc = "Put yanked text before selection",
-      },
-      {
-        "[y",
-        "<Plug>(YankyCycleForward)",
-        desc = "Cycle forward through yank history",
-      },
-      {
-        "]y",
-        "<Plug>(YankyCycleBackward)",
-        desc = "Cycle backward through yank history",
-      },
-      {
-        "]p",
-        "<Plug>(YankyPutIndentAfterLinewise)",
-        desc = "Put indented after cursor (linewise)",
-      },
-      {
-        "[p",
-        "<Plug>(YankyPutIndentBeforeLinewise)",
-        desc = "Put indented before cursor (linewise)",
-      },
-      {
-        "]P",
-        "<Plug>(YankyPutIndentAfterLinewise)",
-        desc = "Put indented after cursor (linewise)",
-      },
-      {
-        "[P",
-        "<Plug>(YankyPutIndentBeforeLinewise)",
-        desc = "Put indented before cursor (linewise)",
-      },
-      {
-        ">p",
-        "<Plug>(YankyPutIndentAfterShiftRight)",
-        desc = "Put and indent right",
-      },
-      {
-        "<p",
-        "<Plug>(YankyPutIndentAfterShiftLeft)",
-        desc = "Put and indent left",
-      },
-      {
-        ">P",
-        "<Plug>(YankyPutIndentBeforeShiftRight)",
-        desc = "Put before and indent right",
-      },
-      {
-        "<P",
-        "<Plug>(YankyPutIndentBeforeShiftLeft)",
-        desc = "Put before and indent left",
-      },
-      {
-        "=p",
-        "<Plug>(YankyPutAfterFilter)",
-        desc = "Put after applying a filter",
-      },
-      {
-        "=P",
-        "<Plug>(YankyPutBeforeFilter)",
-        desc = "Put before applying a filter",
-      },
-    },
-  },
-
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      format = { timeout_ms = 4000 },
-      servers = {
-        pyright = {},
-        ruff_lsp = {},
-        terraformls = {},
-      },
-    },
-    setup = {
-      ruff_lsp = function()
-        require("lazyvim.util").on_attach(function(client, _)
-          if client.name == "ruff_lsp" then
-            -- Disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end
-        end)
-      end,
-      -- Disable terraform syntax highlighting from language server in favor
-      -- of treesitter highlighting
-      terraformls = function()
-        require("lazyvim.util").on_attach(function(client, _)
-          if client.name == "terraformls" then
-            client.server_capabilities.semanticTokensProvider = nil
-          end
-        end)
-      end,
-    },
   },
 
   {
@@ -552,7 +399,6 @@ return {
         "python",
         "query",
         "regex",
-        "terraform",
         "hcl",
         "tsx",
         "typescript",
@@ -811,6 +657,29 @@ return {
     config = true,
   },
 
+  --
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      -- increase timeout for slow formatters/linters called via null-ls
+      format = { timeout_ms = 4000 },
+
+      -- alternate path to call Mason.ensure_installed()
+      -- list of available servers: https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
+      --
+      -- terraform/python (and where possible) configure through lazyvim extras: https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
+      servers = {
+        dotls = {},
+        gopls = {},
+        graphql = {},
+        sqlls = {},
+        svelte = {},
+        yamlls = {},
+      },
+    },
+    setup = {},
+  },
+
   -- Mason ensures dependencies are installed
   {
     "williamboman/mason.nvim",
@@ -819,15 +688,34 @@ return {
     build = ":MasonUpdate",
     opts = {
       ensure_installed = {
-        "proselint",
-        "write-good",
         "alex",
-        "stylua",
-        "shfmt",
+        "awk-language-server",
+        "bash-language-server",
         "black",
+        "dockerfile-language-server",
+        "dot-language-server",
+        "eslint-lsp",
+        "html-lsp",
+        "htmlbeautifier",
         "isort",
+        "jq",
+        "jq-lsp",
+        "misspell",
+        "prettier",
+        "proselint",
+        -- prefer ruff and pyright
+        -- "python-lsp-server",
+        "shellcheck",
+        "shfmt",
+        "sql-formatter",
         "sqlfluff",
         "sqlfmt",
+        "sqlls",
+        "stylua",
+        "svelte-language-server",
+        "vue-language-server",
+        "write-good",
+        "yq",
       },
     },
   },
@@ -838,16 +726,16 @@ return {
     opts = function(_, opts)
       if type(opts.sources) == "table" then
         local null_ls = require("null-ls")
+        -- stuff here also gets installed by Mason via mason-null-ls
         vim.list_extend(opts.sources, {
           null_ls.builtins.diagnostics.proselint,
           null_ls.builtins.code_actions.proselint,
           null_ls.builtins.diagnostics.alex,
           null_ls.builtins.diagnostics.write_good,
-          null_ls.builtins.formatting.terraform_fmt,
-          null_ls.builtins.diagnostics.terraform_validate,
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.formatting.shfmt,
-          null_ls.builtins.diagnostics.shellcheck,
+          -- shellcheck diagnostics now supplied by bash-language-server
+          --null_ls.builtins.diagnostics.shellcheck,
           null_ls.builtins.code_actions.shellcheck,
           null_ls.builtins.formatting.black,
           null_ls.builtins.formatting.isort,
