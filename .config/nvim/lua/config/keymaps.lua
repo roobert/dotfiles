@@ -30,7 +30,7 @@ local lazyterm = function()
   Util.float_term(nil, { cwd = Util.get_root() })
 end
 -- map("n", "<c-/>", "", {})
-map("n", "<c-t>", lazyterm, { desc = "Terminal (root dir)" })
+-- map("n", "<c-t>", lazyterm, { desc = "Terminal (root dir)" })
 
 -- map("v", "<leader>/", "<CMD>MiniComment.textobject()<CR>", { "Comment" })
 
@@ -65,9 +65,18 @@ map("n", "<leader>rbW", "<CMD>SearchReplaceMultiBufferCWORD<CR>", {})
 map("n", "<leader>rbe", "<CMD>SearchReplaceMultiBufferCExpr<CR>", {})
 map("n", "<leader>rbf", "<CMD>SearchReplaceMultiBufferCFile<CR>", {})
 
+-- show the effects of a search / replace in a live preview window
+vim.o.inccommand = "split"
+
 map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 map("v", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 map("x", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 
--- show the effects of a search / replace in a live preview window
-vim.o.inccommand = "split"
+-- map("i", "<M-left>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
+-- map("i", "<M-right>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
+--
+-- map("n", "<M-left>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
+-- map("n", "<M-right>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
+--
+-- map("n", "<S-Tab>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
+-- map("n", "<Tab>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
