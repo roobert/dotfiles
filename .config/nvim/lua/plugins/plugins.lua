@@ -1,6 +1,22 @@
+function P(input)
+  print(vim.inspect(input))
+end
+
 local actions = require("telescope.actions")
 local transform_mod = require("telescope.actions.mt").transform_mod
 local action_state = require("telescope.actions.state")
+
+-- string split
+function ssplit(inputstr, sep)
+  if sep == nil then
+    sep = "%s"
+  end
+  local t = {}
+  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+    table.insert(t, str)
+  end
+  return t
+end
 
 local function multiopen(prompt_bufnr, method)
   local cmd_map = {
@@ -19,6 +35,23 @@ local function multiopen(prompt_bufnr, method)
     for i, entry in ipairs(multi_selection) do
       -- opinionated use-case
       local cmd = i == 1 and "edit" or cmd_map[method]
+
+      -- if we're in a sub dir of a project, then we need to use relative path..
+
+      -- -- if path length is greater than 1, then pop off the first element to correct
+      -- -- path
+      -- local dir_path
+      -- local dir_path_parts = ssplit(entry.value, "/")
+      --
+      -- -- print(vim.inspect(dir_path_parts))
+      --
+      -- if #dir_path_parts > 1 then
+      --   table.remove(dir_path_parts, 1)
+      --   dir_path = dir_path_parts
+      -- end
+      --
+      -- dir_path = table.concat(dir_path_parts, "/")
+
       vim.cmd(string.format("%s %s", cmd, entry.value))
     end
   else
@@ -267,6 +300,27 @@ return {
   --   end,
   -- },
 
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+
+  -- tab navigation jumping between significant code elements, such as brackets, quotes, etc.
+  {
+    "roobert/tabtree.nvim",
+    config = function()
+      require("tabtree").setup()
+    end,
+  },
+
   -- Hint about code actions to make them discoverable
   { "kosayoda/nvim-lightbulb" },
 
@@ -299,6 +353,38 @@ return {
       })
       require("telescope").load_extension("fzf")
     end,
+  },
+
+  -- FIXME: this would be nice.. probably needs customizing cmp
+  {
+    "abecodes/tabout.nvim",
+    config = function()
+      require("tabout").setup({
+        tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+        backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+        act_as_tab = true, -- shift content if tab out is not possible
+        act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+        default_tab = "<C-t>", -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+        default_shift_tab = "<C-d>", -- reverse shift default action,
+        enable_backwards = true, -- well ...
+        completion = true, -- if the tabkey is used in a completion pum
+        tabouts = {
+          { open = "'", close = "'" },
+          { open = '"', close = '"' },
+          { open = "`", close = "`" },
+          { open = "(", close = ")" },
+          { open = "[", close = "]" },
+          { open = "{", close = "}" },
+        },
+        ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+        exclude = {}, -- tabout will ignore these filetypes
+      })
+    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "L3MON4D3/LuaSnip",
+      "hrsh7th/nvim-cmp",
+    },
   },
 
   -- prefer fzf to telescope for fuzzy finding stuff
@@ -341,6 +427,7 @@ return {
     end,
   },
 
+  -- :Lushify appears broken in LazyVim
   -- colorscheme creator
   { "rktjmp/lush.nvim" },
 
@@ -385,6 +472,7 @@ return {
     event = "BufRead",
   },
 
+  -- FIXME:
   -- Visual-block+enter to align stuff, ctrl-x to switch to regexp
   { "junegunn/vim-easy-align" },
 
@@ -727,7 +815,6 @@ return {
     config = true,
   },
 
-  --
   {
     "neovim/nvim-lspconfig",
     opts = {
