@@ -100,30 +100,6 @@ local multi_open_mappings = {
 
 return {
   -- {
-  --   dir = "/Users/rw/git/CodeGPT.nvim",
-  --   name = "dpayne/CodeGPT.nvim",
-  --   lazy = false,
-  --   priority = 100000,
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --   },
-  -- },
-
-  -- chatgpt..
-  -- { "MunifTanjim/nui.nvim" },
-  -- { "dpayne/CodeGPT.nvim" },
-
-  -- {
-  --   name = "neovim-test",
-  --   dir = "/Users/rw/git/neovim-test.nvim",
-  --   config = function()
-  --     require("neovim-test").setup({
-  --       test_opt = "blah",
-  --     })
-  --   end,
-  -- },
-
-  -- {
   --   dir = "/Users/rw/git/tldr-lang.nvim",
   --   name = "tldr-lang",
   --   dependencies = "roobert/node-type.nvim",
@@ -234,7 +210,7 @@ return {
   -- },
 
   -- use lua require("null-ls-embedded").buf_format() to format code blocks in markdown
-  -- { "LostNeophyte/null-ls-embedded" },
+  { "LostNeophyte/null-ls-embedded" },
 
   -- highlight whitespace at EOL
   -- { "ntpeters/vim-better-whitespace" },
@@ -1119,6 +1095,9 @@ return {
           -- }),
           -- null_ls.builtins.formatting.sqlformat,
           -- null_ls.builtins.formatting.sqlfmt,
+          require("null-ls-embedded").nls_source.with({
+            filetypes = { "markdown", "html", "vue", "lua" },
+          }),
         })
       end
     end,
