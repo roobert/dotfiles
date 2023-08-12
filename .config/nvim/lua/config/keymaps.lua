@@ -72,6 +72,8 @@ map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition
 map("v", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 map("x", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 
+map("n", "gmf", "<CMD>lua require('null-ls-embedded').format_current()<CR>", { desc = "Format markdown code block" })
+
 -- map("i", "<M-left>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
 -- map("i", "<M-right>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
 --
