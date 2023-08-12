@@ -132,20 +132,20 @@ return {
   --   end,
   -- },
 
-  -- FIXME: re-enable
-  -- {
-  --   dir = "/Users/rw/git/statusline-action-hints.nvim",
-  --   name = "statusline-action-hints",
-  --   config = function()
-  --     require("statusline-action-hints").setup({
-  --       definition_identifier = "gd",
-  --       template = "%s ref:%s",
-  --     })
-  --   end,
-  -- },
+  {
+    -- "roobert/statusline-action-hints.nvim",
+    dir = "/Users/rw/git/statusline-action-hints.nvim",
+    name = "statusline-action-hints",
+    dependencies = "roobert/nightshift.vim",
+    config = function()
+      require("statusline-action-hints").setup({
+        use_virtual_text = true,
+      })
+    end,
+  },
 
   -- {
-  --   "symphorien/node-type.nvim",
+  --   "roobert/node-type.nvim",
   --   config = function()
   --     require("node-type").setup()
   --   end,
@@ -166,10 +166,7 @@ return {
   -- },
 
   -- use treesitter to auto close and auto rename html tag
-  -- { "windwp/nvim-ts-autotag" },
-
-  -- merge bdelete, close, and quit
-  --{ "mhinz/vim-sayonara" },
+  { "windwp/nvim-ts-autotag" },
 
   -- {
   --   "roobert/bufferline-cycle-windowless.nvim",
@@ -318,6 +315,7 @@ return {
     "roobert/tabtree.nvim",
     -- dir = "/Users/rw/git/tabtree.nvim",
     -- name = "tabtree",
+    keys = { "<Tab>", "<S-Tab>" },
     config = function()
       require("tabtree").setup()
     end,
@@ -325,6 +323,7 @@ return {
 
   {
     "roobert/hoversplit.nvim",
+    keys = { "<space>h" },
     -- dir = "/Users/rw/git/hoversplit.nvim",
     -- name = "hoversplit",
     config = function()
@@ -332,8 +331,37 @@ return {
     end,
   },
 
+  -- split/join blocks with leader-m
+  {
+    "Wansmer/treesj",
+    keys = { "<space>m" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("treesj").setup({
+        use_default_keymaps = false,
+      })
+      vim.keymap.set("n", "<leader>m", require("treesj").toggle)
+    end,
+  },
+
   -- Hint about code actions to make them discoverable
-  { "kosayoda/nvim-lightbulb" },
+  {
+    "kosayoda/nvim-lightbulb",
+    config = function()
+      require("nvim-lightbulb").setup({
+        sign = {
+          enabled = false,
+        },
+        virtual_text = {
+          enabled = true,
+          text = "⏹",
+          hl = "MatchParen",
+        },
+
+        autocmd = { enabled = true },
+      })
+    end,
+  },
 
   {
     "roobert/nightshift.vim",
@@ -792,6 +820,101 @@ return {
     cmd = "SymbolsOutline",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
+  },
+
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = function()
+      local icons = require("lazyvim.config").icons
+      local Util = require("lazyvim.util")
+
+      return {
+        options = {
+          theme = "auto",
+          globalstatus = true,
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
+        },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+
+        sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {
+            {
+              "diagnostics",
+              symbols = {
+                error = icons.diagnostics.Error,
+                warn = icons.diagnostics.Warn,
+                info = icons.diagnostics.Info,
+                hint = icons.diagnostics.Hint,
+              },
+            },
+            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            {
+              function()
+                return require("nvim-navic").get_location()
+              end,
+              cond = function()
+                return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+              end,
+            },
+          },
+          lualine_x = {
+            -- {
+            --   require("node-type").statusline,
+            -- },
+            {
+              require("statusline-action-hints").statusline,
+            },
+            {
+              function()
+                return require("noice").api.status.command.get()
+              end,
+              cond = function()
+                return package.loaded["noice"] and require("noice").api.status.command.has()
+              end,
+              color = Util.fg("Statement"),
+            },
+            {
+              function()
+                return require("noice").api.status.mode.get()
+              end,
+              cond = function()
+                return package.loaded["noice"] and require("noice").api.status.mode.has()
+              end,
+              color = Util.fg("Constant"),
+            },
+            {
+              function()
+                return "  " .. require("dap").status()
+              end,
+              cond = function()
+                return package.loaded["dap"] and require("dap").status() ~= ""
+              end,
+              color = Util.fg("Debug"),
+            },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
+            {
+              "diff",
+              symbols = {
+                added = icons.git.added,
+                modified = icons.git.modified,
+                removed = icons.git.removed,
+              },
+            },
+          },
+          lualine_y = {
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
+          },
+          lualine_z = {},
+        },
+        extensions = { "neo-tree", "lazy" },
+      }
+    end,
   },
 
   {
