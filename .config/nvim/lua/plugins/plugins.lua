@@ -109,8 +109,8 @@ return {
   -- },
 
   {
-    -- "roobert/statusline-action-hints.nvim",
-    dir = "/Users/rw/git/action-hints.nvim",
+    "roobert/statusline-action-hints.nvim",
+    -- dir = "/Users/rw/git/action-hints.nvim",
     name = "action-hints",
     dependencies = "roobert/nightshift.vim",
     config = function()
@@ -274,13 +274,65 @@ return {
   -- },
 
   {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    vscode = true,
+    ---@type Flash.Config
+    opts = {
+      modes = {
+        search = {
+          enabled = false,
+        },
+      },
+    },
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+    },
+  },
+
+  {
     dir = "/Users/rw/git/chatgpt.nvim",
     -- "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     -- commit = "24bcca7",
     keys = {
-      { "<leader>cc", ":<C-U>:ChatGPTEditWithInstructions<CR>", desc = "ChatGPT" },
-      { "<leader>cc", ":<C-U>:ChatGPTEditWithInstructions<CR>", mode = "v", desc = "ChatGPT" },
+      { "<leader>cc", ":<C-U>:ChatGPTEditWithInstructions<CR>", desc = "ChatGPT Interactive" },
+      { "<leader>cc", ":<C-U>:ChatGPTEditWithInstructions<CR>", mode = "v", desc = "ChatGPT Interactive" },
+
+      { "<leader>cg", "", desc = "ChatGPT" },
+      { "<leader>cg", "", mode = "v", desc = "ChatGPT" },
+
+      { "<leader>cgc", ":<C-U>:ChatGPTRun complete_code<CR>", desc = "Complete" },
+      { "<leader>cgc", ":<C-U>:ChatGPTRun complete_code<CR>", mode = "v", desc = "Complete" },
+
+      { "<leader>cgd", ":<C-U>:ChatGPTRun docstring<CR>", desc = "Document" },
+      { "<leader>cgd", ":<C-U>:ChatGPTRun docstring<CR>", mode = "v", desc = "Document" },
+
+      { "<leader>cgo", ":<C-U>:ChatGPTRun optimize_code<CR>", desc = "Optimize" },
+      { "<leader>cgo", ":<C-U>:ChatGPTRun optimize_code<CR>", mode = "v", desc = "Optimize" },
+      { "<leader>cgt", ":<C-U>:ChatGPTRun add_tests<CR>", desc = "Tests" },
+      { "<leader>cgt", ":<C-U>:ChatGPTRun add_tests<CR>", mode = "v", desc = "Tests" },
+
+      { "<leader>cgf", ":<C-U>:ChatGPTRun fix_bugs<CR>", desc = "Fix" },
+      { "<leader>cgf", ":<C-U>:ChatGPTRun fix_bugs<CR>", mode = "v", desc = "Fix" },
+
+      { "<leader>cga", ":<C-U>:ChatGPTRun code_readability_analysis<CR>", desc = "Analyze" },
+      { "<leader>cga", ":<C-U>:ChatGPTRun code_readability_analysis<CR>", mode = "v", desc = "Analyze" },
     },
     config = function()
       require("chatgpt").setup({
@@ -466,23 +518,23 @@ return {
   },
 
   -- Hint about code actions to make them discoverable
-  {
-    "kosayoda/nvim-lightbulb",
-    config = function()
-      require("nvim-lightbulb").setup({
-        sign = {
-          enabled = false,
-        },
-        virtual_text = {
-          enabled = true,
-          text = "⏹",
-          hl = "MatchParen",
-        },
-
-        autocmd = { enabled = true },
-      })
-    end,
-  },
+  -- {
+  --   "kosayoda/nvim-lightbulb",
+  --   config = function()
+  --     require("nvim-lightbulb").setup({
+  --       sign = {
+  --         enabled = false,
+  --       },
+  --       virtual_text = {
+  --         enabled = true,
+  --         text = "⏹",
+  --         hl = "MatchParen",
+  --       },
+  --
+  --       autocmd = { enabled = true },
+  --     })
+  --   end,
+  -- },
 
   {
     "roobert/nightshift.vim",
@@ -931,6 +983,46 @@ return {
         highlight = "gzh", -- Highlight surrounding
         replace = "gzr", -- Replace surrounding
         update_n_lines = "gzn", -- Update `n_lines`
+      },
+    },
+  },
+
+  {
+    dir = "/Users/rw/git/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    opts = { use_diagnostic_signs = true, wrap = true },
+    keys = {
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").previous({ skip_groups = true, jump = true })
+          else
+            local ok, err = pcall(vim.cmd.cprev)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
+          end
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").next({ skip_groups = true, jump = true })
+          else
+            local ok, err = pcall(vim.cmd.cnext)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
+          end
+        end,
+        desc = "Next trouble/quickfix item",
       },
     },
   },

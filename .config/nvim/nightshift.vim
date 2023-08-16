@@ -1,0 +1,1 @@
+/Users/rw/.local/share/nvim/lazy/nightshift.vim
