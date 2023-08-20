@@ -38,5 +38,6 @@ vim.opt.wrap = true
 vim.opt.textwidth = 88
 vim.opt.linebreak = true
 vim.opt.inccommand = "split"
+vim.opt.undofile = false
 
 vim.g.markdown_recommended_style = 0
