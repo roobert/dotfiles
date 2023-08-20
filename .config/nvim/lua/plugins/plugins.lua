@@ -109,6 +109,17 @@ return {
   -- },
 
   {
+    -- "roobert/statusline-action-hints.nvim",
+    dir = "/Users/rw/git/keymap-gpt.nvim",
+    name = "keymap-gpt",
+    -- config = function()
+    --   require("keymap-gpt").setup({
+    --     use_virtual_text = true,
+    --   })
+    -- end,
+  },
+
+  {
     "roobert/statusline-action-hints.nvim",
     -- dir = "/Users/rw/git/action-hints.nvim",
     name = "action-hints",
@@ -976,13 +987,14 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gza", -- Add surrounding in Normal and Visual modes
-        delete = "gzd", -- Delete surrounding
-        find = "gzf", -- Find surrounding (to the right)
-        find_left = "gzF", -- Find surrounding (to the left)
-        highlight = "gzh", -- Highlight surrounding
-        replace = "gzr", -- Replace surrounding
-        update_n_lines = "gzn", -- Update `n_lines`
+        -- prefer "go surround" as mnemonic
+        add = "gsa", -- Add surrounding in Normal and Visual modes
+        delete = "gsd", -- Delete surrounding
+        find = "gsf", -- Find surrounding (to the right)
+        find_left = "gsF", -- Find surrounding (to the left)
+        highlight = "gsh", -- Highlight surrounding
+        replace = "gsr", -- Replace surrounding
+        update_n_lines = "gsn", -- Update `n_lines`
       },
     },
   },
@@ -1099,6 +1111,29 @@ return {
         tab_selected = {
           bold = false,
         },
+      },
+    },
+  },
+
+  {
+    "echasnovski/mini.comment",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+      mappings = {
+        -- Toggle comment (like `gcip` - comment inner paragraph) for both
+        -- Normal and Visual modes
+        comment = "<leader>/",
+
+        -- Toggle comment on current line
+        comment_line = "<leader>/",
+
+        -- Define 'comment' textobject (like `dgc` - delete whole comment block)
+        textobject = "gc",
       },
     },
   },
