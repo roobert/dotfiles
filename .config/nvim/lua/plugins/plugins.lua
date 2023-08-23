@@ -318,6 +318,8 @@ return {
 
   {
     dir = "/Users/rw/git/chatgpt.nvim",
+    name = "chatgpt",
+    branch = "fix-ChatGPTEditWithInstructions-visual-range",
     -- "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     -- commit = "24bcca7",
@@ -708,6 +710,9 @@ return {
     end,
   },
 
+  -- color picker / highlighter
+  { "uga-rosa/ccc.nvim" },
+
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
@@ -999,8 +1004,16 @@ return {
     },
   },
 
+  -- try to get better habbits
+  {
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+
   {
     dir = "/Users/rw/git/trouble.nvim",
+    branch = "feature-buffer-wrap",
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true, wrap = true },
     keys = {
