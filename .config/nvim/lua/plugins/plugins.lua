@@ -2,102 +2,6 @@ function P(input)
   print(vim.inspect(input))
 end
 
-local actions = require("telescope.actions")
-local transform_mod = require("telescope.actions.mt").transform_mod
-local action_state = require("telescope.actions.state")
-
--- string split
-function ssplit(inputstr, sep)
-  if sep == nil then
-    sep = "%s"
-  end
-  local t = {}
-  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
-    table.insert(t, str)
-  end
-  return t
-end
-
-local function multiopen(prompt_bufnr, method)
-  local cmd_map = {
-    vertical = "vsplit",
-    horizontal = "split",
-    tab = "tabe",
-    default = "edit",
-  }
-  local picker = action_state.get_current_picker(prompt_bufnr)
-  local multi_selection = picker:get_multi_selection()
-
-  if #multi_selection > 1 then
-    require("telescope.pickers").on_close_prompt(prompt_bufnr)
-    pcall(vim.api.nvim_set_current_win, picker.original_win_id)
-
-    for i, entry in ipairs(multi_selection) do
-      -- opinionated use-case
-      local cmd = i == 1 and "edit" or cmd_map[method]
-
-      -- if we're in a sub dir of a project, then we need to use relative path..
-
-      -- -- if path length is greater than 1, then pop off the first element to correct
-      -- -- path
-      -- local dir_path
-      -- local dir_path_parts = ssplit(entry.value, "/")
-      --
-      -- -- print(vim.inspect(dir_path_parts))
-      --
-      -- if #dir_path_parts > 1 then
-      --   table.remove(dir_path_parts, 1)
-      --   dir_path = dir_path_parts
-      -- end
-      --
-      -- dir_path = table.concat(dir_path_parts, "/")
-
-      vim.cmd(string.format("%s %s", cmd, entry.value))
-    end
-  else
-    actions["select_" .. method](prompt_bufnr)
-  end
-end
-
-local custom_actions = transform_mod({
-  multi_selection_open_vertical = function(prompt_bufnr)
-    multiopen(prompt_bufnr, "vertical")
-  end,
-  multi_selection_open_horizontal = function(prompt_bufnr)
-    multiopen(prompt_bufnr, "horizontal")
-  end,
-  multi_selection_open_tab = function(prompt_bufnr)
-    multiopen(prompt_bufnr, "tab")
-  end,
-  multi_selection_open = function(prompt_bufnr)
-    multiopen(prompt_bufnr, "default")
-  end,
-})
-
-local function stopinsert(callback)
-  return function(prompt_bufnr)
-    vim.cmd.stopinsert()
-    vim.schedule(function()
-      callback(prompt_bufnr)
-    end)
-  end
-end
-
-local multi_open_mappings = {
-  i = {
-    ["<C-v>"] = stopinsert(custom_actions.multi_selection_open_vertical),
-    ["<C-s>"] = stopinsert(custom_actions.multi_selection_open_horizontal),
-    ["<C-t>"] = stopinsert(custom_actions.multi_selection_open_tab),
-    ["<CR>"] = stopinsert(custom_actions.multi_selection_open),
-  },
-  n = {
-    ["<C-v>"] = custom_actions.multi_selection_open_vertical,
-    ["<C-s>"] = custom_actions.multi_selection_open_horizontal,
-    ["<C-t>"] = custom_actions.multi_selection_open_tab,
-    ["<CR>"] = custom_actions.multi_selection_open,
-  },
-}
-
 return {
   -- {
   --   dir = "/Users/rw/git/tldr-lang.nvim",
@@ -560,12 +464,32 @@ return {
   },
 
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+
   {
     "nvim-telescope/telescope.nvim",
     config = function()
+      local select_one_or_multi = function(prompt_bufnr)
+        local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+        local multi = picker:get_multi_selection()
+        if not vim.tbl_isempty(multi) then
+          require("telescope.actions").close(prompt_bufnr)
+          for _, j in pairs(multi) do
+            if j.path ~= nil then
+              vim.cmd(string.format("%s %s", "edit", j.path))
+            end
+          end
+        else
+          require("telescope.actions").select_default(prompt_bufnr)
+        end
+      end
+
       require("telescope").setup({
         defaults = {
-          mappings = multi_open_mappings,
+          mappings = {
+            i = {
+              ["<CR>"] = select_one_or_multi,
+            },
+          },
         },
         extensions = {
           fzf = {
@@ -1005,11 +929,11 @@ return {
   },
 
   -- try to get better habbits
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {},
-  },
+  -- {
+  --   "m4xshen/hardtime.nvim",
+  --   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+  --   opts = {},
+  -- },
 
   {
     dir = "/Users/rw/git/trouble.nvim",
