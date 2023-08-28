@@ -27,7 +27,7 @@ return {
     "roobert/statusline-action-hints.nvim",
     -- dir = "/Users/rw/git/action-hints.nvim",
     name = "action-hints",
-    dependencies = "roobert/nightshift.vim",
+    -- dependencies = "roobert/nightshift.vim",
     config = function()
       require("action-hints").setup({
         use_virtual_text = true,
@@ -453,9 +453,19 @@ return {
   --   end,
   -- },
 
+  -- {
+  --   "roobert/nightshift.vim",
+  --   dependencies = "rktjmp/lush.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd([[colorscheme nightshift]])
+  --   end,
+  -- },
+
   {
-    "roobert/nightshift.vim",
-    dependencies = "rktjmp/lush.nvim",
+    dir = "/Users/rw/git/nightshift.nvim",
+    name = "nightshift",
     lazy = false,
     priority = 1000,
     config = function()
@@ -552,7 +562,14 @@ return {
   { "nvim-treesitter/playground" },
 
   -- colorize hex colours
-  { "NvChad/nvim-colorizer.lua" },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
+  },
+
+  -- { dir = "/Users/rw/git/colorscheme_highlighter.nvim" },
 
   -- prevent overwriting yank buffer when deleting
   {
