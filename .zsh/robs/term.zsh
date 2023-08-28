@@ -7,7 +7,5 @@ case $TERM in
     preexec() {
       print -Pn "\e]0;$1\a"
     }
-
-    TERM="screen-256color"
   ;;
 esac
