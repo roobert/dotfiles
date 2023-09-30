@@ -1,0 +1,11 @@
+-- show LSP progress in bottom right of screen
+-- {
+--   "j-hui/fidget.nvim",
+--   tag = "legacy",
+--   config = function()
+--     require("fidget").setup({
+--       -- options
+--     })
+--   end,
+-- },
+return {}

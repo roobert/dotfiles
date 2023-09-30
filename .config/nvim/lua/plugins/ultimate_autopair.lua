@@ -1,0 +1,14 @@
+-- {
+--   "altermo/ultimate-autopair.nvim",
+--   event = { "InsertEnter", "CmdlineEnter" },
+--   branch = "v0.6",
+--   opts = {
+--     fastwarp = {
+--       multi = true,
+--       {},
+--       { faster = true, map = "<C-A-e>", cmap = "<C-A-e>" },
+--     },
+--   },
+--   commit = "667d2304e8eb9ddbfa7f962528cfce0a5edcc163",
+-- },
+return {}

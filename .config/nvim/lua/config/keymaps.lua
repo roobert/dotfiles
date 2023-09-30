@@ -26,6 +26,9 @@ map("i", "<A-k>", "", {})
 map("v", "<A-j>", "", {})
 map("v", "<A-k>", "", {})
 
+map("n", "gl", "$", { desc = "EOL" })
+map("n", "gh", "^", { desc = "BOL" })
+
 local lazyterm = function()
   Util.float_term(nil, { cwd = Util.get_root() })
 end
