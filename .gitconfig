@@ -23,6 +23,7 @@
 	editor = lvim
 [push]
 	default = current
+	autoSetupRemote = true
 [include]
 	path = ~/.gitconfig.gitrepo
 
