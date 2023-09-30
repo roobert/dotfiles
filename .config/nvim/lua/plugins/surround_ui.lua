@@ -1,0 +1,14 @@
+-- FIXME: re-enable
+-- return {
+--   --dir = "/Users/rw/git/surround-ui.nvim",
+--   "roobert/surround-ui.nvim",
+--   dependencies = {
+--     "kylechui/nvim-surround",
+--     "folke/which-key.nvim",
+--   },
+--   name = "surround-ui",
+--   config = function()
+--     require("surround-ui").setup()
+--   end,
+-- }
+return {}
