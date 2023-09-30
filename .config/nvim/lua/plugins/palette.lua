@@ -7,14 +7,18 @@ return {
     require("palette").setup({
       caching = true,
       palettes = {
-        -- built in colorscheme: grey
-        main = "dark",
-        -- main = "starfield",
-        -- main = "light",
         -- main = "dark",
+        -- main = "light",
+        -- main = "desert",
+        -- main = "forest",
+        --
         -- built in accents: pastel, bright, dark
+        accent = "pastel",
         -- accent = "dark",
+        -- accent = "bright",
+        state = "pastel",
         -- state = "dark",
+        -- state = "bright",
       },
 
       italics = true,
@@ -35,15 +39,40 @@ return {
             color8 = "#e9e9ed",
           },
 
-          starfield = {
-            color0 = "#191d33",
-            color1 = "#1A1E39",
-            color2 = "#2E3453",
-            color3 = "#5f78a3",
-            color4 = "#D7A64A",
+          -- FIXME:
+          desert = {
+            color0 = "#2b2a2a",
+            color1 = "#454545",
+            color2 = "#3E372A",
+            color3 = "#8A794D",
+            color4 = "#CCB488",
             color5 = "#DFE5F1",
-            color6 = "#bdbfc9",
-            color7 = "#979ca6",
+            color6 = "#91939F",
+            color7 = "#959795",
+            color8 = "#F4F5F7",
+          },
+
+          forest = {
+            color0 = "#2b2a2a",
+            color1 = "#454545",
+            color2 = "#3c5f2a",
+            color3 = "#678359",
+            color4 = "#93a689",
+            color5 = "#DFE5F1",
+            color6 = "#91939F",
+            color7 = "#bec9b8",
+            color8 = "#F4F5F7",
+          },
+
+          ocean = {
+            color0 = "#070f03",
+            color1 = "#0f1f07",
+            color2 = "#3c5f2a",
+            color3 = "#678359",
+            color4 = "#93a689",
+            color5 = "#DFE5F1",
+            color6 = "#91939F",
+            color7 = "#bec9b8",
             color8 = "#F4F5F7",
           },
 
@@ -83,25 +112,14 @@ return {
             }
           ),
         },
-        accent = {
-          starfield = {
-            accent0 = "#C72139",
-            accent1 = "#E26137",
-            accent2 = "#D7A64A",
-            accent3 = "#7ED64A",
-            accent4 = "#4A87D7",
-            accent5 = "#8B4AD7",
-            accent6 = "#A14AD7",
-          },
-        },
-        state = {
-          starfield = {
-            error = "#C72139",
-            warning = "#E26137",
-            hint = "#D7A64A",
-            ok = "#7ED64A",
-            info = "#4A87D7",
-          },
+        accent = {},
+        state = {},
+      },
+      custom_highlights = {
+        {
+          "LineNr",
+          "#454545",
+          nil,
         },
       },
     })
