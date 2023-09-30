@@ -53,7 +53,7 @@ sudo usermod -aG docker rw
 
 # download components
 
-# make the following changes to venus-docker-grafana to allow grafana to scrape metrics
+Make the following changes to venus-docker-grafana to allow grafana to scrape metrics
 
 from plug influxdb instance
 
