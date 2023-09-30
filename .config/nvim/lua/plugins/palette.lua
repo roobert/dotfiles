@@ -7,19 +7,25 @@ return {
     require("palette").setup({
       caching = true,
       palettes = {
-        -- main = "dark",
+        main = "dark",
         -- main = "light",
         -- main = "desert",
+        -- main = "new_retro_wave",
         -- main = "forest",
-        --
+
         -- built in accents: pastel, bright, dark
-        accent = "pastel",
+        -- accent = "pastel",
         -- accent = "dark",
         -- accent = "bright",
-        state = "pastel",
+        -- accent = "fluro",
+
+        -- state = "pastel",
         -- state = "dark",
         -- state = "bright",
+        -- state = "fluro",
       },
+
+      --custom_highlight_group = "forest",
 
       italics = true,
       transparent_background = false,
@@ -39,7 +45,18 @@ return {
             color8 = "#e9e9ed",
           },
 
-          -- FIXME:
+          new_retro_wave = {
+            color0 = "#01012b",
+            color1 = "#1a1a40",
+            color2 = "#003c54",
+            color3 = "#005678",
+            color4 = "#05d9e8",
+            color5 = "#d1f7ff",
+            color6 = "#bdbfc9",
+            color7 = "#ff2a6d",
+            color8 = "#e9e9ed",
+          },
+
           desert = {
             color0 = "#2b2a2a",
             color1 = "#454545",
@@ -112,14 +129,38 @@ return {
             }
           ),
         },
-        accent = {},
-        state = {},
+
+        accent = {
+          fluro = {
+            accent0 = "#FF5A5A",
+            accent1 = "#FF8555",
+            accent2 = "#FFEE55",
+            accent3 = "#6FFF80",
+            accent4 = "#55D7FF",
+            accent5 = "#50AFFF",
+            accent6 = "#FF5A8F",
+            accent7 = "#D45AFA",
+          },
+        },
+
+        state = {
+          fluro = {
+            error = "#FF5A5A",
+            warning = "#FF8555",
+            hint = "#FFEE55",
+            ok = "#6FFF80",
+            info = "#55D7FF",
+          },
+        },
       },
-      custom_highlights = {
-        {
-          "LineNr",
-          "#454545",
-          nil,
+
+      custom_highlight_groups = {
+        forest = {
+          {
+            "LineNr",
+            "#454545",
+            nil,
+          },
         },
       },
     })

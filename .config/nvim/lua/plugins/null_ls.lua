@@ -33,7 +33,12 @@ return {
         -- null_ls.builtins.formatting.sqlformat,
         -- null_ls.builtins.formatting.sqlfmt,
         require("null-ls-embedded").nls_source.with({
-          filetypes = { "markdown", "html", "vue", "lua" },
+          filetypes = {
+            "markdown",
+            "html",
+            "vue",
+            "lua",
+          },
         }),
       })
     end

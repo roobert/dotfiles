@@ -1,2 +1,6 @@
--- use lua require("null-ls-embedded").buf_format() to format code blocks in markdown
-return { "LostNeophyte/null-ls-embedded" }
+return {
+  "LostNeophyte/null-ls-embedded",
+  keys = {
+    { "gmf", "<CMD>lua require('null-ls-embedded').format_current()<CR>", desc = "Format markdown code block" },
+  },
+}
