@@ -130,22 +130,14 @@ RemainAfterExit=yes
 WantedBy=multi-user.target
 ```
 
-Go to the admin interface @ http://localhost:8088, default username and password are admin and admin.
-Accessing Grafana on http://localhost:3000 and enter `admin` for user name and `admin` for password.
-
-Login to the victron site hosted on the pi and add the einstine/cervo thing to discovery page by IP
-
-Login to router and reserve the leases to addresses for the various devices don't
-
-Change the influxdb retention period.. through the Venus UI - for cerbo data, and
-
-through ??? for plug data? 30 years: 10950d
-
-Mount the data volume on external SSD
-
-Change dashboard colour to light
-
-Add these plugins, or add them to the Dockerfile for grafana
+1. Go to the admin interface @ http://localhost:8088, default username and password are admin and admin.
+2. Access Grafana on http://localhost:3000 and enter `admin` for user name and `admin` for password.
+3. Login to the victron site hosted on the pi and add the einstine/cervo thing to discovery page by IP
+4. Login to router and reserve the leases to addresses for the various devices don't
+5. Change the influxdb retention period.. through the Venus UI - for cerbo data, and through ??? for plug data? 30 years: 10950d
+6. Mount the data volume on external SSD
+7. Change dashboard colour to light
+8. Add these plugins, or add them to the Dockerfile for grafana
 
 ```bash
 docker ps
