@@ -1,4 +1,11 @@
-# RPI / Docker / Grafana / InfluxDB / MQQT / Victron / Tasmoto - Power Monitoring System (work in progress/notes)
+# RPI [WIP]
+
+- Dockerfile
+- grafana
+- InfluxDB
+- MQQT
+- victron
+- Tasmoto
 
 Disable swap
 
