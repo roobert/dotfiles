@@ -2,25 +2,29 @@
 
 # disable swap
 
+```bash
 sudo dphys-swapfile swapoff
 sudo dphys-swapfile uninstall
 sudo update-rc.d dphys-swapfile remove
 sudo apt purge dphys-swapfile
+```
 
 # install log2ram
 
+```bash
 echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bullseye main" | sudo tee /etc/apt/sources.list.d/azlux.list
 sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg https://azlux.fr/repo.gpg
 sudo apt update
 sudo apt install log2ram
+```
 
 ## edit /etc/log2ram.conf
 
+```bash
 MAIL=false
-
-# du -sh /var/log ...
-
+du -sh /var/log ...
 SIZE=512M
+```
 
 # TODO:
 
@@ -31,14 +35,14 @@ SIZE=512M
 
 - install docker-ce not docker from apt..
 
-```
+```bash
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 sudo apt -y install docker-ce docker-ce-cli containerd.io
 ```
 
 - install docker-compose from github
 
-```
+```bash
 wget https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-linux-aarch64
 mv docker-compose-linux-aarch64 bin/docker-compose
 sudo systemctl enable docker
@@ -46,7 +50,7 @@ sudo systemctl enable docker
 
 - permit our user to use docker
 
-```
+```bash
 sudo service start docker
 sudo usermod -aG docker rw
 ```
@@ -59,15 +63,24 @@ from plug influxdb instance
 
 ```
 # for each service, add:
+
+```
+
     restart: always
     networks:
       - network0
 
+```
+
 # add a network block:
+```
+
 networks:
-  network0:
-    name: network0
-    external: true
+network0:
+name: network0
+external: true
+
+```
 
 # change grafana docker tag from latest to: armhf-2.0.0
 # change upnp and server docker tags from latest to: armhf-latest
@@ -77,7 +90,7 @@ access to services via network
 
 ```
 
-```
+```bash
 sudo docker network create network0
 ```
 
@@ -141,9 +154,11 @@ through ??? for plug data? 30 years: 10950d
 
 # add these plugins, or add them to the Dockerfile for grafana
 
+```
 docker ps
 docker exec <grafana container id> grafana-cli plugins install pr0ps-trackmap-panel
 grafana-cli plugins install briangann-gauge-panel
+```
 
 # Rebuild docker image, update docker-compose with new image/version
 
