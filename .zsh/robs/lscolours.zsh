@@ -13,6 +13,10 @@
 #   fi
 # fi
 
+if which gdircolors > /dev/null 2>&1; then
+  eval $(gdircolors)
+fi
+
 LS_COLORS="$(vivid generate palette_dark)"
 
 export ZLS_COLORS=$LS_COLORS
