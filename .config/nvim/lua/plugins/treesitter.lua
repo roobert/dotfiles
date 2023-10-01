@@ -24,6 +24,7 @@ return {
   opts = {
     highlight = { enable = true },
     indent = { enable = true },
+
     ensure_installed = {
       "bash",
       "c",
@@ -45,6 +46,7 @@ return {
       "vimdoc",
       "yaml",
     },
+
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -54,7 +56,46 @@ return {
         node_decremental = "<bs>",
       },
     },
+
+    -- FIXME: make this useful?
+    move = {
+      enable = false,
+      set_jumps = true,
+      goto_next_start = {
+        -- ["]m"] = "@function.outer",
+        -- ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        -- ["]M"] = "@function.outer",
+        -- ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        -- ["[m"] = "@function.outer",
+        -- ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        -- ["[M"] = "@function.outer",
+        -- ["[]"] = "@class.outer",
+      },
+    },
+    textobjects = {
+      select = {
+        enable = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["aa"] = "@parameter.outer",
+          ["ia"] = "@parameter.inner",
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+      },
+    },
   },
+
   ---@param opts TSConfig
   config = function(_, opts)
     if type(opts.ensure_installed) == "table" then
@@ -68,21 +109,22 @@ return {
         return true
       end, opts.ensure_installed)
     end
+
     require("nvim-treesitter.configs").setup(opts)
 
-    if load_textobjects then
-      -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-      if opts.textobjects then
-        for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-          if opts.textobjects[mod] and opts.textobjects[mod].enable then
-            local Loader = require("lazy.core.loader")
-            Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-            local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-            require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-            break
-          end
-        end
-      end
-    end
+    --   if load_textobjects then
+    --     -- PERF: no need to load the plugin, if we only need its queries for mini.ai
+    --     if opts.textobjects then
+    --       for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+    --         if opts.textobjects[mod] and opts.textobjects[mod].enable then
+    --           local Loader = require("lazy.core.loader")
+    --           Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+    --           local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+    --           require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+    --           break
+    --         end
+    --       end
+    --     end
+    --   end
   end,
 }
