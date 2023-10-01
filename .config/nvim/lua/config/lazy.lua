@@ -53,10 +53,32 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
 
-  -- install = { colorscheme = { "nightshift" } },
+  -- load colorscheme before installing newly detected plugins..
+  install = { colorscheme = { "palette" } },
+
+  -- directory where you store your local plugin projects
+  dev = {
+    path = "~/git/neovim_plugins",
+    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+    patterns = { "roobert" },
+    -- Fallback to git when local plugin doesn't exist
+    fallback = true,
+  },
 
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    concurrency = nil,
+    notify = true,
+    -- prefer once a day
+    frequency = 3600 * 24,
+  },
+
+  -- prefer manually reloading neovim to pull in changes, better for development..
+  change_detection = {
+    enabled = false,
+    notify = false,
+  },
 
   ui = {
     border = "rounded",
