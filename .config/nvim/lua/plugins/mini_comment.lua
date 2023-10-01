@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.comment",
-  -- set priority to ensure <leader>/ overrides telescope live_grep binding..
-  priority = 100,
+  -- ensure <leader>/ overrides telescope live_grep binding..
+  dependencies = { "nvim-telescope/telescope.nvim" },
   event = "VeryLazy",
   opts = {
     options = {

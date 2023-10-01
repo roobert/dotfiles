@@ -32,6 +32,10 @@ map("n", "<C-h>", "^", { desc = "BOL" })
 map("n", "<C-j>", "<C-d>", { desc = "Scroll down" })
 map("n", "<C-k>", "<C-u>", { desc = "Scroll up" })
 
+-- A more native tab experience using bufferline_cycle_windowless.nvim
+map("n", "<S-l>", "<CMD>BufferLineCycleWindowlessNext<CR>", { desc = "Next windowless buffer" })
+map("n", "<S-h>", "<CMD>BufferLineCycleWindowlessPrev<CR>", { desc = "Previous windowless buffer" })
+
 -- remap all window management to Option key
 map("n", "<M-l>", "<C-w><Right>", { desc = "Win Left" })
 map("n", "<M-h>", "<C-w><Left>", { desc = "Win Right" })
@@ -43,14 +47,10 @@ map("n", "<M-|>", "<CMD>vsplit<CR>", { desc = "VSplit" })
 map("n", "<M-_>", "<CMD>split<CR>", { desc = "Split" })
 map("n", "<M-->", "<CMD>split<CR>", { desc = "Split" })
 map("n", "<M-\\>", "<CMD>vsplit<CR>", { desc = "VSplit" })
-map("n", "<Leader>-_", "<CMD>split<CR>", { desc = "Split" })
+map("n", "<Leader>_", "<CMD>split<CR>", { desc = "Split" })
 
--- close buffers
+-- close window (not buffer)
 map("n", "<M-d>", "<CMD>close<CR>", { desc = "Close" })
-
-local lazyterm = function()
-  Util.float_term(nil, { cwd = Util.get_root() })
-end
 
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
