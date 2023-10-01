@@ -1,6 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  version = false, -- last release is way too old and doesn't work on Windows
+  version = false,
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
   dependencies = {
@@ -17,8 +17,8 @@ return {
   },
   cmd = { "TSUpdateSync" },
   keys = {
-    { "<c-space>", desc = "Increment selection" },
-    { "<bs>", desc = "Decrement selection", mode = "x" },
+    { "<CR>", desc = "Increment selection" },
+    { "<BS>", desc = "Decrement selection", mode = "x" },
   },
   ---@type TSConfig
   opts = {
@@ -48,8 +48,8 @@ return {
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "<C-space>",
-        node_incremental = "<C-space>",
+        init_selection = "<CR>",
+        node_incremental = "<CR>",
         scope_incremental = false,
         node_decremental = "<bs>",
       },

@@ -1,7 +1,5 @@
 return {
   "roobert/palette.nvim",
-  -- dir = "/Users/rw/git/palette.nvim",
-  -- name = "palette",
   lazy = false,
   priority = 1000,
   config = function()
