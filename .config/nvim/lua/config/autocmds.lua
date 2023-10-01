@@ -45,3 +45,11 @@ autocmd("Filetype", {
   group = "formatoptions",
   desc = "Set formatoptions for all filetypes",
 })
+
+-- disable the back tick coneallevel for markdown files..
+autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.md" },
+  callback = function()
+    vim.cmd("set conceallevel=0")
+  end,
+})
