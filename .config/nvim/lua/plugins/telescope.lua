@@ -1,5 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
+  -- mappings to open telescope
   keys = {
     {
       -- prefer C-g for grep because <leader>/ is remapped to commenting
@@ -26,9 +27,10 @@ return {
 
     require("telescope").setup({
       defaults = {
+        -- mappings within open telescope
         mappings = {
-          -- FIXME:
-          n = {
+          -- permit opening multiple files from telescope file selectors
+          i = {
             ["<CR>"] = select_one_or_multi,
           },
         },
