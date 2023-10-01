@@ -1,5 +1,7 @@
 return {
   "echasnovski/mini.comment",
+  -- set priority to ensure <leader>/ overrides telescope live_grep binding..
+  priority = 100,
   event = "VeryLazy",
   opts = {
     options = {
