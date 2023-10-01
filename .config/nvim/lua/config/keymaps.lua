@@ -52,25 +52,6 @@ local lazyterm = function()
   Util.float_term(nil, { cwd = Util.get_root() })
 end
 
--- FIXME: move to plugin keys table
-map("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>", {})
-map("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCWord<CR>", {})
-map("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>", {})
-
-map("n", "<leader>rs", "<CMD>SearchReplaceSingleBufferSelections<CR>", {})
-map("n", "<leader>ro", "<CMD>SearchReplaceSingleBufferOpen<CR>", {})
-map("n", "<leader>rw", "<CMD>SearchReplaceSingleBufferCWord<CR>", {})
-map("n", "<leader>rW", "<CMD>SearchReplaceSingleBufferCWORD<CR>", {})
-map("n", "<leader>re", "<CMD>SearchReplaceSingleBufferCExpr<CR>", {})
-map("n", "<leader>rf", "<CMD>SearchReplaceSingleBufferCFile<CR>", {})
-
-map("n", "<leader>rbs", "<CMD>SearchReplaceMultiBufferSelections<CR>", {})
-map("n", "<leader>rbo", "<CMD>SearchReplaceMultiBufferOpen<CR>", {})
-map("n", "<leader>rbw", "<CMD>SearchReplaceMultiBufferCWord<CR>", {})
-map("n", "<leader>rbW", "<CMD>SearchReplaceMultiBufferCWORD<CR>", {})
-map("n", "<leader>rbe", "<CMD>SearchReplaceMultiBufferCExpr<CR>", {})
-map("n", "<leader>rbf", "<CMD>SearchReplaceMultiBufferCFile<CR>", {})
-
 -- show the effects of a search / replace in a live preview window
 vim.o.inccommand = "split"
 

@@ -1,5 +1,13 @@
 return {
   "nvim-telescope/telescope.nvim",
+  keys = {
+    {
+      -- prefer C-g for grep because <leader>/ is remapped to commenting
+      "<C-g>",
+      require("lazyvim.util").telescope("live_grep"),
+      desc = "Grep (root dir)",
+    },
+  },
   config = function()
     local select_one_or_multi = function(prompt_bufnr)
       local picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
@@ -19,7 +27,8 @@ return {
     require("telescope").setup({
       defaults = {
         mappings = {
-          i = {
+          -- FIXME:
+          n = {
             ["<CR>"] = select_one_or_multi,
           },
         },
