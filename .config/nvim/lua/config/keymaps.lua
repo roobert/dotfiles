@@ -26,6 +26,7 @@ map("i", "<A-k>", "", {})
 map("v", "<A-j>", "", {})
 map("v", "<A-k>", "", {})
 
+-- better navigation using ctrl-hjkl
 map("n", "<C-l>", "$", { desc = "EOL" })
 map("n", "<C-h>", "^", { desc = "BOL" })
 map("n", "<C-j>", "<C-d>", { desc = "Scroll down" })
@@ -37,34 +38,21 @@ map("n", "<M-h>", "<C-w><Left>", { desc = "Win Right" })
 map("n", "<M-j>", "<C-w><Down>", { desc = "Win Down" })
 map("n", "<M-k>", "<C-w><Up>", { desc = "Win Up" })
 
+-- splitting, with and without shift key
 map("n", "<M-|>", "<CMD>vsplit<CR>", { desc = "VSplit" })
 map("n", "<M-_>", "<CMD>split<CR>", { desc = "Split" })
 map("n", "<M-->", "<CMD>split<CR>", { desc = "Split" })
 map("n", "<M-\\>", "<CMD>vsplit<CR>", { desc = "VSplit" })
 map("n", "<Leader>-_", "<CMD>split<CR>", { desc = "Split" })
+
+-- close buffers
 map("n", "<M-d>", "<CMD>close<CR>", { desc = "Close" })
 
 local lazyterm = function()
   Util.float_term(nil, { cwd = Util.get_root() })
 end
--- map("n", "<c-/>", "", {})
--- map("n", "<c-t>", lazyterm, { desc = "Terminal (root dir)" })
 
--- map("v", "<leader>/", "<CMD>MiniComment.textobject()<CR>", { "Comment" })
-
--- unbind telescope grep
--- map("n", "<leader>/", "", {})
--- map("n", "<leader>/", "gc", { "Comment" })
--- map("v", "<leader>/", "gc", { "Comment" })
--- map("x", "<leader>/", "gc", { "Comment" })
-
--- map("n", "<c-g>", "<CMD>FzfLua grep<CR>", { desc = "fzf grep" })
--- map("n", "<c-f>", "<CMD>FzfLua files<CR>", { desc = "fzf files" })
--- map("n", "<c-b>", "<CMD>FzfLua buffers<CR>", { desc = "fzf buffers" })
--- map("n", "<c-r>", "<CMD>FzfLua lsp_references<CR>", { desc = "fzf lsp references" })
--- map("n", "<c-k>", "<CMD>FzfLua keymaps<CR>", { desc = "fzf keymaps" })
--- map("n", "<c-s>", "<CMD>FzfLua lsp_document_symbols<CR>", { desc = "fzf lsp document symbols" })
-
+-- FIXME: move to plugin keys table
 map("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>", {})
 map("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCWord<CR>", {})
 map("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>", {})
@@ -89,12 +77,3 @@ vim.o.inccommand = "split"
 map("n", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 map("v", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
 map("x", "gd", "<CMD>lua vim.lsp.buf.definition()<CR>", { desc = "LSP definition" })
-
--- map("i", "<M-left>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
--- map("i", "<M-right>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
---
--- map("n", "<M-left>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
--- map("n", "<M-right>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
---
--- map("n", "<S-Tab>", "<CMD>lua require('tabtree').previous()<CR>", { desc = "Previous node" })
--- map("n", "<Tab>", "<CMD>lua require('tabtree').next()<CR>", { desc = "Next node" })
