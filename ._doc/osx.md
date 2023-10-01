@@ -97,6 +97,7 @@ brew install font-jetbrains-mono-nerd-font
 - Disable tab close
 - Appearance -> panes -> disable show per-pane titlebar
 - Profiles -> session -> status bar enabled
+- Profiles -> Keys -> Left Option Key = Esc+
 - Configure status bar -> git, rainbow, set background as same as left panel
   (color picker)
 - Apperance -> status bar location -> bottom
