@@ -1,3 +1,4 @@
+-- dressing improves vim.ui.select() and we configure it for use by Legendary
 return {
   "stevearc/dressing.nvim",
   event = "VeryLazy",
