@@ -1,5 +1,3 @@
--- NOTE: defaults probably ok for now..
-
 -- return {
 --   "echasnovski/mini.bufremove",
 --   keys = {

@@ -1,6 +1,5 @@
 -- FIXME: re-enable
 -- return {
---   --dir = "/Users/rw/git/surround-ui.nvim",
 --   "roobert/surround-ui.nvim",
 --   dependencies = {
 --     "kylechui/nvim-surround",
