@@ -18,6 +18,7 @@ return {
       "isort",
       "jq",
       "jq-lsp",
+      "markdownlint",
       "misspell",
       "prettier",
       "proselint",

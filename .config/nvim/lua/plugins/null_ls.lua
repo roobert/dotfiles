@@ -1,5 +1,7 @@
 -- null-ls permits running linters/formatters that are not LSP based
 return {
+  -- NOTE: Disabled! replaced with conform.nvim
+  enabled = false,
   "nvimtools/none-ls.nvim",
   opts = function(_, opts)
     if type(opts.sources) == "table" then
