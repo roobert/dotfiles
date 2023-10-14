@@ -10,6 +10,7 @@ return {
       "awk-language-server",
       "bash-language-server",
       "black",
+      "codespell",
       "dockerfile-language-server",
       "dot-language-server",
       "eslint-lsp",

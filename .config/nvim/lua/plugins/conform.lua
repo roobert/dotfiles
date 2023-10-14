@@ -3,6 +3,7 @@ return {
   optional = true,
   opts = {
     formatters_by_ft = {
+      ["*"] = { "codespell" },
       ["markdown"] = { { "prettierd", "prettier" }, "proselint", "alex", "write_good" },
       ["markdown.mdx"] = { { "prettierd", "prettier" }, "proselint", "alex", "write_good" },
 
