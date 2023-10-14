@@ -2,8 +2,6 @@
 -- * replace with: https://github.com/Bekaboo/dropbar.nvim
 return {
   "SmiteshP/nvim-navic",
-  -- NOTE: disabled!
-  -- enabled = false,
   lazy = true,
   init = function()
     vim.g.navic_silence = true
@@ -17,10 +15,7 @@ return {
     return {
       separator = " ",
       highlight = true,
-      -- FIXME: this doesn't work properly..
-      -- NOTE: change to 1 so we only see filename.
-      -- use treesitter-context instead for breadcrumbs..
-      depth_limit = 1,
+      depth_limit = 0,
       icons = require("lazyvim.config").icons.kinds,
     }
   end,
