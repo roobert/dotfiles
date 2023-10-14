@@ -87,6 +87,7 @@ require("lazy").setup({
     notify = false,
   },
 
+  -- FIXME: broken since 10.x
   ui = {
     border = "rounded",
   },
