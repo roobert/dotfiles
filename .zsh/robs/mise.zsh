@@ -1,11 +1,13 @@
-eval "$(/Users/rw/.local/bin/mise activate zsh)"
+if [ -f /Users/rw/.local/bin/mise ]; then
+	eval "$(/Users/rw/.local/bin/mise activate zsh)"
 
-function pyinit() {
-	cat >.mise.toml <<EOF
+	function pyinit() {
+		cat >.mise.toml <<EOF
 [env]
 _.python.venv = { path = ".venv", create = true }
 
 [tools]
 python = "3.10"
 EOF
-}
+	}
+fi
