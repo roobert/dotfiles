@@ -7,5 +7,5 @@ if [ ! -n "$PS1" ]; then return; fi
 source $HOME/.zsh/zshrc
 
 if [ -r $HOME/.zsh/local ]; then
-  source $HOME/.zsh/local
+	source $HOME/.zsh/local
 fi
