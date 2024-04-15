@@ -1,13 +1,12 @@
-
 # system tools
 if test -x /opt/homebrew/bin/gls; then
-    alias ls="gls --group-directories-first --color=auto"
+	alias ls="gls --group-directories-first --color=auto"
 else
-    alias ls="ls --color=auto"
+	alias ls="ls --color=auto"
 fi
 
 alias screen="TERM=xterm screen"
-alias ssh="ssh -t"
+alias ssh="TERM=xterm256-color ssh -t"
 
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
@@ -16,7 +15,7 @@ alias vim="nvim --"
 alias vi="nvim --"
 
 function gcm() {
-    git commit -m "$*"
+	git commit -m "$*"
 }
 
 # git
