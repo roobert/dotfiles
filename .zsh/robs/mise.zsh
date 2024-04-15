@@ -1,5 +1,5 @@
-if [ -f /Users/rw/.local/bin/mise ]; then
-	eval "$(/Users/rw/.local/bin/mise activate zsh)"
+if [ -f $HOME/.local/bin/mise ]; then
+	eval "$($HOME/.local/bin/mise activate zsh)"
 
 	function pyinit() {
 		cat >.mise.toml <<EOF
