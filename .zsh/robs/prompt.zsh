@@ -46,7 +46,12 @@ precmd() {
   fi
 }
 
-WHERE="%{$FG[250]%}%~"
+if $HOSTNAME == "mbp0.local"; then
+  WHERE="%{$FG[250]%}%~"
+else
+  # include hostname in prompt
+  WHERE="%{$FG[250]%}%m:%~"
+fi
 PS1='${VIRTUAL_ENV_SIGN}${WHERE} ${EXIT_STATUS}${VI_MODE}>%{$FX[reset]%} '
 RPS1=''
 
