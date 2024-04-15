@@ -46,7 +46,7 @@ precmd() {
   fi
 }
 
-if $HOSTNAME == "mbp0.local"; then
+if [[ $HOSTNAME == "mbp0.local" ]]; then
   WHERE="%{$FG[250]%}%~"
 else
   # include hostname in prompt
