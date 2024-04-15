@@ -6,7 +6,7 @@ else
 fi
 
 alias screen="TERM=xterm screen"
-alias ssh="TERM=xterm256-color ssh -t"
+alias ssh="TERM=xterm-256color ssh -t"
 
 alias empty_trash="rm -rf ~/.local/share/Trash"
 
