@@ -3,7 +3,8 @@ return {
   optional = true,
   opts = {
     formatters_by_ft = {
-      ["*"] = { "codespell" },
+      -- NOTE: codespell can update code to be incorrect!
+      --["*"] = { "codespell" },
       ["markdown"] = { { "prettierd", "prettier" }, "proselint", "alex", "write_good" },
       ["markdown.mdx"] = { { "prettierd", "prettier" }, "proselint", "alex", "write_good" },
 
@@ -32,11 +33,13 @@ return {
       ["json"] = { "prettierd", "prettier" },
       ["yaml"] = { "prettierd", "prettier" },
       ["toml"] = { "prettierd", "prettier" },
+
+      ["terraform"] = { "terraform_fmt" },
     },
     formatters = {
       sql_formatter_bq = {
         command = "sql-formatter",
-        args = { "--dialect", "bigquery" },
+        args = { "-l", "bigquery" },
       },
       dprint = {
         condition = function(ctx)

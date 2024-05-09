@@ -6,22 +6,22 @@ return {
     require("palette").setup({
       caching = true,
       palettes = {
-        -- main = "dark",
+        main = "dark",
         -- main = "light",
         -- main = "desert",
-        main = "new_retro_wave",
+        -- main = "new_retro_wave",
         -- main = "forest",
 
         -- built in accents: pastel, bright, dark
-        -- accent = "pastel",
+        accent = "pastel",
         -- accent = "dark",
         -- accent = "bright",
-        accent = "fluro",
+        -- accent = "fluro",
 
-        -- state = "pastel",
+        state = "pastel",
         -- state = "dark",
         -- state = "bright",
-        state = "fluro",
+        -- state = "fluro",
       },
 
       --custom_highlight_group = "forest",
