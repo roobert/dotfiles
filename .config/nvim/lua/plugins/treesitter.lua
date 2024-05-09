@@ -26,6 +26,7 @@ return {
     indent = { enable = true },
 
     ensure_installed = {
+      "arduino",
       "bash",
       "c",
       "html",
