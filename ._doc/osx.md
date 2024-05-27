@@ -154,3 +154,10 @@ cargo install stylua
 pyenv install 3.10.0
 pyenv global 3.10.0
 ```
+
+## AltTab
+
+- Install AltTab: https://alt-tab-macos.netlify.app/
+- Show windows from All apps on visible spaces on screen showing AltTab
+- Appearance: Hide apps with no window! Disable preview window
+- Hide minmised/hidden/fullscreen windows.
