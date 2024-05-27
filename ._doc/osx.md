@@ -161,3 +161,7 @@ pyenv global 3.10.0
 - Show windows from All apps on visible spaces on screen showing AltTab
 - Appearance: Hide apps with no window! Disable preview window
 - Hide minmised/hidden/fullscreen windows.
+
+## Mission Control
+
+- Under Keyboard Settings -> Mission Control Add bindings for `ctrl-<#>` for each desktop
