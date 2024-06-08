@@ -7,7 +7,7 @@ if [ -f $HOME/.local/bin/mise ]; then
 _.python.venv = { path = ".venv", create = true }
 
 [tools]
-python = "3.10"
+python = "3.12"
 EOF
 	}
 fi
