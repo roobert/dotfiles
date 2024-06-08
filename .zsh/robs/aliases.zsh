@@ -14,10 +14,6 @@ alias empty_trash="rm -rf ~/.local/share/Trash"
 alias vim="nvim --"
 alias vi="nvim --"
 
-function gcm() {
-	git commit -m "$*"
-}
-
 # git
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdl="gl -p"
@@ -34,6 +30,22 @@ alias ga='git add'
 alias gaa='git add .'
 alias grh='git reset HEAD'
 alias gm='git checkout master'
+
+function gcommit() {
+	git commit -m "$*"
+}
+
+function gfix() {
+	git commit -m "fix: $*"
+}
+
+function gfeat() {
+	git commit -m "feat: $*"
+}
+
+function gdoc() {
+	git commit -m "doc: $*"
+}
 
 # linux ps stuff
 alias p="ps ww -u"
