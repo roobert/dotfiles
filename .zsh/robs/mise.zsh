@@ -1,13 +1,15 @@
-if [ -f $HOME/.local/bin/mise ]; then
-	eval "$($HOME/.local/bin/mise activate zsh)"
+if [ ! -f /opt/homebrew/bin/mise ]; then
+  return
+fi
 
-	function pyinit() {
-		cat >.mise.toml <<EOF
+eval "$(/opt/homebrew/bin/mise activate zsh)"
+
+function miseinit() {
+  cat >.mise.toml <<EOF
 [env]
 _.python.venv = { path = ".venv", create = true }
 
 [tools]
 python = "3.12"
 EOF
-	}
-fi
+}

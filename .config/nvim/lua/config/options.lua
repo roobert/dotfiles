@@ -13,10 +13,10 @@ vim.opt.inccommand = "split"
 vim.opt.undofile = true
 
 -- Use internal formatting for bindings like gq.
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    vim.bo[args.buf].formatexpr = nil
-  end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args)
+--     vim.bo[args.buf].formatexpr = nil
+--   end,
+-- })
 
 vim.g.markdown_recommended_style = 0

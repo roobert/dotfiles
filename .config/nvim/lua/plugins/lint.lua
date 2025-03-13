@@ -4,8 +4,8 @@ return {
     linters_by_ft = {
       lua = { "selene", "luacheck" },
       -- FIXME: re-add alex and write-good
-      markdown = { "markdownlint", "proselint" },
-      text = { "proselint" },
+      --markdown = { "markdownlint", "proselint" },
+      --text = { "proselint" },
       json = { "jsonlint" },
     },
     linters = {
