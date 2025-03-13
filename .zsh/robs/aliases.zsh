@@ -1,8 +1,8 @@
 # system tools
 if test -x /opt/homebrew/bin/gls; then
-	alias ls="gls --group-directories-first --color=auto"
+  alias ls="gls --group-directories-first --color=auto"
 else
-	alias ls="ls --color=auto"
+  alias ls="ls --color=auto"
 fi
 
 alias screen="TERM=xterm screen"
@@ -32,19 +32,19 @@ alias grh='git reset HEAD'
 alias gm='git checkout master'
 
 function gcommit() {
-	git commit -m "$*"
+  git commit -m "$*"
 }
 
 function gfix() {
-	git commit -m "fix: $*"
+  git commit -m "fix: $*"
 }
 
 function gfeat() {
-	git commit -m "feat: $*"
+  git commit -m "feat: $*"
 }
 
 function gdoc() {
-	git commit -m "doc: $*"
+  git commit -m "doc: $*"
 }
 
 # linux ps stuff
@@ -58,7 +58,7 @@ alias rzsh="exec zsh -l"
 
 # configure some stuff
 export LESS="-R" # allow escape sequences to be interpreted properly
-export EDITOR="lvim"
+export EDITOR="vim"
 
 export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='1;32'
