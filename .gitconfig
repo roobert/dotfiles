@@ -20,7 +20,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	pager = less -F -X
-	editor = lvim
+	editor = vim
 [push]
 	default = current
 	autoSetupRemote = true
