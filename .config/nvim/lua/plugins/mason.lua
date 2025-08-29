@@ -1,6 +1,7 @@
 -- Mason ensures dependencies are installed
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
+  version = "1.11.0",
   cmd = "Mason",
   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
   build = ":MasonUpdate",

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "feedbackSurveyState": {
+    "lastShownTime": 1754073096318
+  },
+  "model": "opusplan",
+  "outputStyle": "explanatory",
+  "vimMode": true,
+  "statusLine": {
+    "type": "command",
+    "command": "#!/bin/bash\n\n# Simplified Claude Code Status Line\n# Shows model, context usage, and cache size\n\ninput=$(cat)\n\n# Extract key information from JSON input with fallbacks\nmodel_name=$(echo \"$input\" | jq -r '.model.display_name // .model.id // \"Claude\"')\nif [[ \"$model_name\" == \"null\" || -z \"$model_name\" ]]; then\n    model_name=\"Claude\"\nfi\n\n# Get context usage estimate (approximate based on transcript size if available)\ncontext_current=\"0\"\ntranscript_path=$(echo \"$input\" | jq -r '.transcript_path // \"\"')\nif [[ -n \"$transcript_path\" && \"$transcript_path\" != \"null\" && -f \"$transcript_path\" ]]; then\n    # Rough estimate: 1 token ≈ 4 characters\n    transcript_size=$(wc -c < \"$transcript_path\" 2>/dev/null || echo \"0\")\n    estimated_tokens=$((transcript_size / 4))\n    \n    # Format with K/M suffixes\n    if [[ $estimated_tokens -gt 1000000 ]]; then\n        context_current=\"$((estimated_tokens / 1000000))M\"\n    elif [[ $estimated_tokens -gt 1000 ]]; then\n        context_current=\"$((estimated_tokens / 1000))K\"\n    else\n        context_current=\"${estimated_tokens}\"\n    fi\nfi\n\n# Get total context size based on model\ncontext_total=\"200K\"\nif [[ \"$model_name\" == *\"Claude 3\"* || \"$model_name\" == *\"Sonnet\"* || \"$model_name\" == *\"Haiku\"* ]]; then\n    context_total=\"200K\"\nelif [[ \"$model_name\" == *\"Opus\"* ]]; then\n    context_total=\"200K\"\nfi\n\n# Get cache size (check for various possible cache-related fields)\ncache_info=\"\"\ncache_size=$(echo \"$input\" | jq -r '.cache_size // .cache.size // .memory.cache_size // \"\"')\nif [[ -n \"$cache_size\" && \"$cache_size\" != \"null\" && \"$cache_size\" != \"\" ]]; then\n    # Format cache size with K/M suffixes if it's a number\n    if [[ \"$cache_size\" =~ ^[0-9]+$ ]]; then\n        if [[ $cache_size -gt 1000000 ]]; then\n            cache_display=\"$((cache_size / 1000000))M\"\n        elif [[ $cache_size -gt 1000 ]]; then\n            cache_display=\"$((cache_size / 1000))K\"\n        else\n            cache_display=\"${cache_size}\"\n        fi\n        cache_info=\" [cache: $cache_display]\"\n    else\n        cache_info=\" [cache: $cache_size]\"\n    fi\nfi\n\n# Format output with colors (using printf for ANSI codes)\nprintf \"\\033[36m%s\\033[0m [ctx: \\033[33m%s\\033[0m/\\033[90m%s\\033[0m]%s\" \\\n    \"$model_name\" \\\n    \"$context_current\" \\\n    \"$context_total\" \\\n    \"$cache_info\""
+  }
+}

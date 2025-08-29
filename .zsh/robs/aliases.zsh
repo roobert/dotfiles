@@ -36,15 +36,36 @@ function gcommit() {
 }
 
 function gfix() {
-  git commit -m "fix: $*"
+  local first_arg=$1
+  shift
+  if [[ $first_arg == *"/"* || $first_arg == *"."* ]]; then
+    # If the first argument contains a slash or dot, assume it's not a scope
+    git commit -m "fix: $first_arg $*"
+  else
+    git commit -m "fix($first_arg): $*"
+  fi
 }
 
 function gfeat() {
-  git commit -m "feat: $*"
+  local first_arg=$1
+  shift
+  if [[ $first_arg == *"/"* || $first_arg == *"."* ]]; then
+    # If the first argument contains a slash or dot, assume it's not a scope
+    git commit -m "feat: $first_arg $*"
+  else
+    git commit -m "feat($first_arg): $*"
+  fi
 }
 
 function gdoc() {
-  git commit -m "doc: $*"
+  local first_arg=$1
+  shift
+  if [[ $first_arg == *"/"* || $first_arg == *"."* ]]; then
+    # If the first argument contains a slash or dot, assume it's not a scope
+    git commit -m "doc: $first_arg $*"
+  else
+    git commit -m "doc($first_arg): $*"
+  fi
 }
 
 # linux ps stuff
