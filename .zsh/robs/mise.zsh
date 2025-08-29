@@ -13,3 +13,8 @@ _.python.venv = { path = ".venv", create = true }
 python = "3.12"
 EOF
 }
+
+_check_mise_on_cd() {
+  [[ -f .mise.toml ]] && mise-install-helper
+}
+add-zsh-hook chpwd _check_mise_on_cd

@@ -77,8 +77,8 @@ require("lazy").setup({
     enabled = true,
     concurrency = nil,
     notify = true,
-    -- prefer once a day
-    frequency = 3600 * 24,
+    -- prefer once a week
+    frequency = 3600 * 24 * 7,
   },
 
   -- prefer manually reloading neovim to pull in changes, better for development..

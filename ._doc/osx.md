@@ -165,3 +165,7 @@ pyenv global 3.10.0
 ## Mission Control
 
 - Under Keyboard Settings -> Mission Control Add bindings for `ctrl-<#>` for each desktop
+
+## Aggregate Sound Device
+
+Add an aggregate sound device so zoom and meet can both use the microphone.

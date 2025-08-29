@@ -36,6 +36,10 @@ map("n", "<C-k>", "<C-u>", { desc = "Scroll up" })
 map("n", "<S-l>", "<CMD>BufferLineCycleWindowlessNext<CR>", { desc = "Next windowless buffer" })
 map("n", "<S-h>", "<CMD>BufferLineCycleWindowlessPrev<CR>", { desc = "Previous windowless buffer" })
 
+-- A more native tab experience using bufferline_cycle_windowless.nvim
+map("n", "<M-Tab>", "<CMD>BufferLineCycleWindowlessNext<CR>", { desc = "Next windowless buffer" })
+map("n", "<S-M-Tab>", "<CMD>BufferLineCycleWindowlessPrev<CR>", { desc = "Previous windowless buffer" })
+
 -- remap all window management to Option key
 map("n", "<M-l>", "<C-w><Right>", { desc = "Win Left" })
 map("n", "<M-h>", "<C-w><Left>", { desc = "Win Right" })
