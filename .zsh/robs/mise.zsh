@@ -1,8 +1,9 @@
-if [ ! -f /opt/homebrew/bin/mise ]; then
+MISE=$HOME/.local/bin/mise
+if [ ! -f $HOME/.local/bin/mise ]; then
   return
 fi
 
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+eval "$($MISE activate zsh)"
 
 function miseinit() {
   cat >.mise.toml <<EOF

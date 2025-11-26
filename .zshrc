@@ -9,3 +9,6 @@ source $HOME/.zsh/zshrc
 if [ -r $HOME/.zsh/local ]; then
 	source $HOME/.zsh/local
 fi
+
+# Added by Antigravity
+export PATH="/Users/rw/.antigravity/antigravity/bin:$PATH"

@@ -101,3 +101,5 @@ alias -g COL9="awk '{ print \$9 }'"
 alias visox="vi ~/._doc/osx.md"
 
 alias kdebug="kubectl run --rm -it --image ubuntu kdebug /bin/sh"
+
+#alias claude='~/bin/claude-sandbox.sh'
