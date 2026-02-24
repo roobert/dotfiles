@@ -27,8 +27,8 @@ defaults write com.googlecode.iterm2 HideTabCloseButton -bool true
 # Dim inactive split panes
 defaults write com.googlecode.iterm2 DimInactiveSplitPanes -bool true
 
-# Dimming amount (~100% text dimming)
-defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -float 0.4
+# Dimming amount (0.2 = subtle inactive fade)
+defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -float 0.2
 
 # Focus follows mouse
 defaults write com.googlecode.iterm2 FocusFollowsMouse -bool true
@@ -56,6 +56,9 @@ defaults write com.googlecode.iterm2 WindowNumber -bool false
 
 # Applications may access clipboard
 defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
+
+# Enable Python API (used by Claude Code hooks to set status bar variables)
+defaults write com.googlecode.iterm2 EnableAPIServer -bool true
 
 echo "    iTerm2 app-level defaults applied."
 
@@ -120,14 +123,29 @@ profile["Option Key Sends"] = 2
 # Cursor type: line (1=vertical bar, 2=underline, 0=box)
 profile["Cursor Type"] = 1
 
-# Background color: #1c2240
-profile["Background Color"] = {
+# Foreground color: #1c1c1c (near-black)
+_fg = {
     "Red Component": 0.10980392156862745,
-    "Green Component": 0.13333333333333333,
-    "Blue Component": 0.25098039215686274,
+    "Green Component": 0.10980392156862745,
+    "Blue Component": 0.10980392156862745,
     "Color Space": "sRGB",
     "Alpha Component": 1.0,
 }
+profile["Foreground Color"] = dict(_fg)
+profile["Foreground Color (Light)"] = dict(_fg)
+profile["Foreground Color (Dark)"] = dict(_fg)
+
+# Background color: #e8e8e8 (slightly darker white)
+_bg = {
+    "Red Component": 0.9098039215686274,
+    "Green Component": 0.9098039215686274,
+    "Blue Component": 0.9098039215686274,
+    "Color Space": "sRGB",
+    "Alpha Component": 1.0,
+}
+profile["Background Color"] = dict(_bg)
+profile["Background Color (Light)"] = dict(_bg)
+profile["Background Color (Dark)"] = dict(_bg)
 
 # Enable status bar
 profile["Show Status Bar"] = True
@@ -135,32 +153,33 @@ profile["Show Status Bar"] = True
 # Status bar layout
 # Key is "Status Bar Layout" with lowercase inner keys per iTerm2 source:
 # https://github.com/gnachman/iTerm2/blob/master/sources/iTermStatusBarLayout.m
-components = [
-    "iTermStatusBarWorkingDirectoryComponent",
-    "iTermStatusBarGitComponent",
-]
+layout_cfg = {
+    "algorithm": 1,
+    "font": ".AppleSystemUIFont 12",
+    "remove empty components": False,
+}
+
+def make_component(cls, extra_knobs=None):
+    knobs = {"base: priority": 5.0, "base: compression resistance": 1}
+    if extra_knobs:
+        knobs.update(extra_knobs)
+    return {
+        "class": cls,
+        "configuration": {
+            "knobs": knobs,
+            "layout advanced configuration dictionary value": dict(layout_cfg),
+        },
+    }
+
 profile["Status Bar Layout"] = {
-    "advanced configuration": {
-        "algorithm": 1,
-        "font": ".AppleSystemUIFont 12",
-        "remove empty components": False,
-    },
+    "advanced configuration": dict(layout_cfg),
     "components": [
-        {
-            "class": c,
-            "configuration": {
-                "knobs": {
-                    "base: priority": 5.0,
-                    "base: compression resistance": 1,
-                },
-                "layout advanced configuration dictionary value": {
-                    "algorithm": 1,
-                    "font": ".AppleSystemUIFont 12",
-                    "remove empty components": False,
-                },
-            },
-        }
-        for c in components
+        make_component("iTermStatusBarWorkingDirectoryComponent"),
+        make_component("iTermStatusBarGitComponent"),
+        make_component(
+            "iTermStatusBarSwiftyStringComponent",
+            {"expression": "\\(user.claude_session)"},
+        ),
     ],
 }
 
@@ -194,10 +213,16 @@ cat > "$DYNAMIC_DIR/setup-profile.json" << 'EOF'
       "Option Key Sends": 2,
       "Show Status Bar": true,
       "Cursor Type": 1,
-      "Background Color": {
+      "Foreground Color": {
         "Red Component": 0.10980392156862745,
-        "Green Component": 0.13333333333333333,
-        "Blue Component": 0.25098039215686274,
+        "Green Component": 0.10980392156862745,
+        "Blue Component": 0.10980392156862745,
+        "Color Space": "sRGB"
+      },
+      "Background Color": {
+        "Red Component": 0.9098039215686274,
+        "Green Component": 0.9098039215686274,
+        "Blue Component": 0.9098039215686274,
         "Color Space": "sRGB"
       }
     }

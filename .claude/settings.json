@@ -9,5 +9,27 @@
   "feedbackSurveyState": {
     "lastShownTime": 1754073096318
   },
-  "vimMode": true
+  "vimMode": true,
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/set-iterm-claude-session.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/clear-iterm-claude-session.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
