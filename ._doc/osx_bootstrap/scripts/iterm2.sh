@@ -131,7 +131,7 @@ components = [
 ]
 profile["Status Bar Layout"] = {
     "advanced configuration": {
-        "algorithm": 0,
+        "algorithm": 1,
         "font": ".AppleSystemUIFont 12",
         "remove empty components": False,
     },
@@ -144,7 +144,7 @@ profile["Status Bar Layout"] = {
                     "base: compression resistance": 1,
                 },
                 "layout advanced configuration dictionary value": {
-                    "algorithm": 0,
+                    "algorithm": 1,
                     "font": ".AppleSystemUIFont 12",
                     "remove empty components": False,
                 },
