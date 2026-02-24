@@ -6,3 +6,6 @@ BREWFILE="${SCRIPT_DIR}/../Brewfile"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 brew bundle --file="$BREWFILE"
+
+# Rosetta 2 is needed by OrbStack for running x86 containers
+softwareupdate --install-rosetta --agree-to-license
