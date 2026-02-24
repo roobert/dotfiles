@@ -4,17 +4,19 @@ set -euo pipefail
 
 MAINTENANCE_FILE="$HOME/.zsh_maintenance_required"
 
+export HOME="${HOME:-$(eval echo ~)}"
 export PATH="/opt/homebrew/bin:$PATH"
-eval "$(mise activate bash)"
+
+mkdir -p "$HOME/.local/log"
 
 updates=""
 
-mise_outdated=$(mise outdated 2>/dev/null || true)
+mise_outdated=$(/opt/homebrew/bin/mise outdated 2>/dev/null || true)
 if [[ -n "$mise_outdated" ]]; then
   updates+="mise:\n${mise_outdated}\n\n"
 fi
 
-brew_outdated=$(brew outdated 2>/dev/null || true)
+brew_outdated=$(/opt/homebrew/bin/brew outdated 2>/dev/null || true)
 if [[ -n "$brew_outdated" ]]; then
   updates+="brew:\n${brew_outdated}\n"
 fi

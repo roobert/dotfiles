@@ -4,15 +4,17 @@
 # Apply immediately
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 
-# Create the script that runs at boot
+# Create the script that runs at login
 cat << 'SCRIPT' > ~/.tilde-switch
 #!/usr/bin/env bash
 hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
 SCRIPT
 chmod +x ~/.tilde-switch
 
-# Install LaunchDaemon (requires sudo)
-sudo tee /Library/LaunchDaemons/org.custom.tilde-switch.plist > /dev/null << EOF
+# Install LaunchAgent (runs in user session, not as root)
+PLIST="$HOME/Library/LaunchAgents/org.custom.tilde-switch.plist"
+mkdir -p "$HOME/Library/LaunchAgents"
+cat > "$PLIST" << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -29,6 +31,7 @@ sudo tee /Library/LaunchDaemons/org.custom.tilde-switch.plist > /dev/null << EOF
 </plist>
 EOF
 
-sudo launchctl load -w /Library/LaunchDaemons/org.custom.tilde-switch.plist 2>/dev/null || true
+launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
+launchctl bootstrap "gui/$(id -u)" "$PLIST"
 
 echo "    Keyboard swap configured."

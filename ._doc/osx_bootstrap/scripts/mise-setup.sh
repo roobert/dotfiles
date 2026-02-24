@@ -2,11 +2,10 @@
 # mise: runtime version manager
 # uv: Python package/venv manager (uses whatever Python mise provides)
 
-# Activate mise
-eval "$(mise activate bash)"
+eval "$(/opt/homebrew/bin/mise activate bash)"
 
 # Install global runtimes
-mise use --global python@3.14
+mise use --global python@latest
 mise use --global node@24
 mise use --global go@latest
 

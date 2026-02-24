@@ -8,20 +8,12 @@
 # Virtual key codes for number keys:
 #   1=18, 2=19, 3=20, 4=21, 5=23, 6=22, 7=26, 8=28, 9=25
 
-declare -A DESKTOP_KEYS=(
-  [118]=18  # Desktop 1
-  [119]=19  # Desktop 2
-  [120]=20  # Desktop 3
-  [121]=21  # Desktop 4
-  [122]=23  # Desktop 5
-  [123]=22  # Desktop 6
-  [124]=26  # Desktop 7
-  [125]=28  # Desktop 8
-  [126]=25  # Desktop 9
-)
+hotkey_ids="118 119 120 121 122 123 124 125 126"
+keycodes="18  19  20  21  23  22  26  28  25"
 
-for hotkey_id in "${!DESKTOP_KEYS[@]}"; do
-  keycode="${DESKTOP_KEYS[$hotkey_id]}"
+set -- $keycodes
+for hotkey_id in $hotkey_ids; do
+  keycode="$1"; shift
   defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$hotkey_id" \
     "<dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>${keycode}</integer><integer>262144</integer></array><key>type</key><string>standard</string></dict></dict>"
 done

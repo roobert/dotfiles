@@ -1,15 +1,17 @@
+[[ -o interactive ]] || return
+
 if [[ -f "$HOME/.zsh_maintenance_required" ]]; then
-  echo "\033[33m── updates available ──\033[0m"
+  print $'\033[33m── updates available ──\033[0m'
   cat "$HOME/.zsh_maintenance_required"
-  echo ""
+  print ""
   read -q "reply?Run upgrades now? (N/y) "
-  echo ""
+  print ""
   if [[ "$reply" =~ ^[Yy]$ ]]; then
-    echo "==> brew upgrade"
+    print "==> brew upgrade"
     brew upgrade
-    echo "==> mise upgrade"
+    print "==> mise upgrade"
     mise upgrade
     rm -f "$HOME/.zsh_maintenance_required"
-    echo "\033[32mDone.\033[0m"
+    print $'\033[32mDone.\033[0m'
   fi
 fi

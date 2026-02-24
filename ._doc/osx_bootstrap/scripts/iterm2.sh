@@ -35,8 +35,8 @@ defaults write com.googlecode.iterm2 SeparateStatusBarsPerPane -bool true
 # Disable per-pane titlebar
 defaults write com.googlecode.iterm2 ShowPaneTitles -bool false
 
-# Tab position: left
-defaults write com.googlecode.iterm2 TabViewType -int 1
+# Tab position: left (0=Top, 1=Bottom, 2=Left)
+defaults write com.googlecode.iterm2 TabViewType -int 2
 
 # Applications may access clipboard
 defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
@@ -109,13 +109,12 @@ EOF
 echo "    iTerm2 Dynamic Profile installed."
 
 # --- Keybindings ---
-# Import the custom keybindings (tab navigation etc.)
-defaults write com.googlecode.iterm2 GlobalKeyMap -dict \
-  "0xf72d-0x20000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>' \
-  "0xf72b-0x100000" '<dict><key>Action</key><integer>4</integer><key>Text</key><string></string></dict>' \
-  "0xf72d-0x100000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>' \
-  "0xf72c-0x100000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>' \
-  "0xf729-0x100000" '<dict><key>Action</key><integer>5</integer><key>Text</key><string></string></dict>' \
-  "0xf72c-0x20000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
+# Import the custom keybindings (tab navigation etc.) using -dict-add to preserve existing bindings
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72d-0x20000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72b-0x100000" '<dict><key>Action</key><integer>4</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72d-0x100000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72c-0x100000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf729-0x100000" '<dict><key>Action</key><integer>5</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72c-0x20000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
 
 echo "    iTerm2 keybindings applied."

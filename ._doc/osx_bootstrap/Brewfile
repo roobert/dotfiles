@@ -1,8 +1,3 @@
-# Taps
-tap "homebrew/services"
-tap "vmware-tanzu/carvel"
-tap "hashicorp/tap"
-
 # CLI tools
 brew "coreutils"
 brew "findutils"
@@ -20,32 +15,22 @@ brew "ripgrep"
 brew "graphviz"
 brew "qemu"
 brew "neovim"
-brew "zplug"
 brew "gh"
+brew "gnupg"
 brew "mise"
 brew "uv"
 brew "util-linux"
 brew "libgit2"
-brew "luarocks"
-brew "rust"
-brew "shellcheck"
-brew "shfmt"
-
-# Dev tools
-brew "tfenv"
-brew "kapp"
-brew "hashicorp/tap/terraform-ls"
-brew "efm-langserver"
-brew "universal-ctags", args: ["HEAD"]
 
 # Cask apps
 cask "iterm2"
-cask "docker"
+cask "orbstack"
 cask "slack"
 cask "whatsapp"
 cask "istat-menus"
 cask "alt-tab"
-cask "google-cloud-sdk"
+cask "gcloud-cli"
+cask "zoom"
 
 # Fonts
 cask "font-hack-nerd-font"
