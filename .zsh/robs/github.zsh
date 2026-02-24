@@ -21,7 +21,12 @@ _dotfiles() {
       return
       ;;
     *)
-      _git_commands
+      local -a subcmds
+      subcmds=(
+        add diff status commit push pull log checkout restore
+        branch merge rebase stash show tag reset fetch remote
+      )
+      _describe 'git commands' subcmds
       return
       ;;
   esac
