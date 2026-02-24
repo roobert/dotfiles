@@ -13,14 +13,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Keyboard: disable double-space period shortcut
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
-# Keyboard: fast key repeat rate (2=fastest GUI setting, 30ms)
-defaults write NSGlobalDomain KeyRepeat -int 2
 
-# Keyboard: short initial key repeat delay (15=fastest GUI setting, 225ms)
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-
-# Keyboard: disable press-and-hold for accent characters (enables key repeat)
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+# Trackpad: disable "natural" scrolling (use traditional scroll direction)
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
 # Menu bar clock: show seconds, 24h format, day and date
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm:ss"

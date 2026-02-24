@@ -1,171 +1,76 @@
-# Workstation Config
+# Workstation Setup
 
-## Display
+Automated macOS setup. Run `._doc/osx_bootstrap/setup.sh` to configure a new machine.
 
-- Accessibility -> Reduce motion (no animation on desktop switch)
+## Usage
 
-## Keyboard
-
-- Switch `§` and `\`` keys:
-- -> https://apple.stackexchange.com/questions/329085/tilde-and-plus-minus
-
-```
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
-cat << 'EOF' > ~/.tilde-switch && chmod +x ~/.tilde-switch
-hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064},{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035}]}'
-EOF
-sudo /usr/bin/env bash -c "cat > /Library/LaunchDaemons/org.custom.tilde-switch.plist" << EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>Label</key>
-    <string>org.custom.tilde-switch</string>
-    <key>Program</key>
-    <string>${HOME}/.tilde-switch</string>
-    <key>RunAtLoad</key>
-    <true/>
-    <key>KeepAlive</key>
-    <false/>
-  </dict>
-</plist>
-EOF
-sudo launchctl load -w -- /Library/LaunchDaemons/org.custom.tilde-switch.plist
+```bash
+./._doc/osx_bootstrap/setup.sh
 ```
 
-- Switch escape key:
-- - https://stackoverflow.com/a/40254864
-- Switch to Australian keyboard layout to remap shift-3 to '#'
-- Under Keyboard -> Text disable double spacebar full-stop
-- Disable smart quotes
-- Set key repeat to fastest/shortest
-- disable swipe to go back in chrome:
+## Pre-setup (manual)
+
+The script will prompt you to do these first:
+
+1. Open Mission Control (three-finger swipe up) and create desktops using the `+` button
+2. Enable Input Monitoring for iTerm: System Settings > Privacy & Security > Input Monitoring, then restart iTerm
+
+## What it does
+
+Scripts run in order by `setup.sh`:
+
+| Script | What it does |
+|---|---|
+| `pre-setup.sh` | Prompts for manual pre-setup steps |
+| `hostname-timezone.sh` | Sets hostname (default: `mbp0`) and timezone (default: `Europe/London`) |
+| `xcode-homebrew.sh` | Installs Xcode CLI tools and Homebrew |
+| `brew-bundle.sh` | Installs all packages, apps, and fonts from `Brewfile` |
+| `macos-defaults.sh` | System preferences (see below) |
+| `keyboard-swap.sh` | Swaps §/` and Caps Lock/Escape via `hidutil` + LaunchAgent |
+| `iterm2.sh` | iTerm2 theme, font, colours, keybindings, dynamic profile |
+| `mission-control.sh` | Binds Ctrl+1..9 to switch desktops |
+| `mise-setup.sh` | Installs Python, Node, Go via mise; sets `PIP_REQUIRE_VIRTUALENV` |
+| `maintenance-launchd.sh` | Weekly launchd job that checks for outdated brew/mise packages |
+| `fzf-setup.sh` | Installs fzf key bindings and completion |
+
+## macOS defaults applied
+
+- Reduce motion (no desktop switch animation)
+- Disable smart quotes, smart dashes, double-space period
+- Disable "natural" scrolling (traditional scroll direction)
+- Menu bar clock: 24h with seconds (`EEE d MMM HH:mm:ss`)
+- Chrome: disable swipe-to-navigate
+- AltTab: show on current screen, hide minimised/hidden/fullscreen windows
+
+## Packages installed (Brewfile)
+
+**CLI tools:** coreutils, findutils, gnu-tar, gnu-sed, gawk, gnutls, gnu-indent, gnu-getopt, grep, wget, jq, fzf, ripgrep, graphviz, qemu, neovim, gh, gnupg, mise, uv, util-linux, libgit2
+
+**Apps:** iTerm2, OrbStack, Slack, WhatsApp, iStat Menus, AltTab, gcloud CLI, Zoom
+
+**Fonts:** Hack Nerd Font, JetBrains Mono Nerd Font
+
+## Tool version management
+
+- **mise** manages runtime versions (Python, Node, Go, etc.)
+- **uv** manages Python packages and virtual environments
+- `PIP_REQUIRE_VIRTUALENV=true` prevents accidental global pip installs
+- Editor tooling (LSPs, linters, formatters) is managed by the editor, not brew
+
+## Maintenance
+
+A weekly launchd job checks for outdated brew and mise packages. If updates are found, it writes `~/.zsh_maintenance_required`. On next terminal open, `maintenance.zsh` prompts:
 
 ```
-defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool FALSE
+── updates available ──
+mise:
+python  3.14.3 -> 3.14.4
+
+Run upgrades now? (N/y)
 ```
 
-## Programs
+## Still manual
 
-- iterm2
-- slack
-- signal
-- whatsapp
-- homebrew
-- docker
-- istatmenus
-- bitwarden
-- gcloud sdk:
-
-```
-curl https://sdk.cloud.google.com | bash
-gcloud components update --version=...
-```
-
-- gist:
-
-```
-brew install gh
-gh auth login
-```
-
-gnu tools
-
-```
-brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-indent gnu-getopt grep
-```
-
-## Configure iTerm2
-
-```
-brew tap homebrew/cask-fonts
-brew install font-hack-nerd-font
-brew install font-jetbrains-mono-nerd-font
-```
-
-- Select Jetbrains Nerd Font from iterm2
-- Applications in terminal may access clipboard?
-- Apperance -> theme -> minimal
-- seprate status bar per pane
-- status bar location: bottom
-- dim interactive split panes
-- dimming affects text ~100%
-- background colour: #1c2240
-- Unlimited scrollback
-- Tabs -> show tab bar even when there is one tab
-- Disable show tab numbers
-- Disable tab close
-- Appearance -> panes -> disable show per-pane titlebar
-- Profiles -> session -> status bar enabled
-- Profiles -> Keys -> Left Option Key = Esc+
-- Configure status bar -> git, rainbow, set background as same as left panel
-  (color picker)
-- Apperance -> status bar location -> bottom
-- Enable icons (search icons)
-- Left tabs
-- Mouse follow focus
-- Adjust colour to blue
-- Enable git hint thing
-- Line cursor
-- Tab order, remap control-tab to next tab: https://gitlab.com/gnachman/iterm2/-/issues/8219
-- Disable beep
-
-- Keybindings
-
-```
-{"Key Mappings":{"0xf72d-0x20000":{"Action":8,"Text":""},"0xf72b-0x100000":{"Action":4,"Text":""},"0xf700-0x300000-0x7e":{"Label":"","Action":20,"Text":""},"0xf701-0x300000-0x7d":{"Label":"","Action":21,"Text":""},"0xf72d-0x100000":{"Action":8,"Text":""},"0x9-0x40000-0x0":{"Label":"","Action":0,"Text":""},"0xf702-0x300000-0x7b":{"Label":"","Action":18,"Text":""},"0xf700-0x320000-0x7e":{"Label":"","Action":55,"Text":""},"0x19-0x60000-0x0":{"Label":"","Action":2,"Text":""},"0xf703-0x320000-0x7c":{"Label":"","Action":29,"Text":"88C029F2-350F-49CC-96D1-24912313B78C"},"0xf702-0x320000-0x7b":{"Label":"","Action":53,"Text":""},"0xf72c-0x100000":{"Action":9,"Text":""},"0xf729-0x100000":{"Action":5,"Text":""},"0xf701-0x320000-0x7d":{"Label":"","Action":28,"Text":"88C029F2-350F-49CC-96D1-24912313B78C"},"0xf72c-0x20000":{"Action":9,"Text":""},"0xf703-0x300000-0x7c":{"Label":"","Action":19,"Text":""}},"Touch Bar Items":{}}
-```
-
-## Shell
-
-- Add dotfiles
-- Install fzf
-
-```
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion --no-update-rc
-```
-
-- Add other stuff..
-
-```
-brew install zplug
-brew tap vmware-tanzu/carvel
-brew install coreutils wget pyenv fzf jq tfenv kapp \
-  util-linux ripgrep graphviz qemu npm neovim libgit2 libgit2-dev
-
-# language servers and linters for neovim - also install with LspInfo
-brew install hashicorp/tap/terraform-ls
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-brew install efm-langserver shellcheck shfmt
-brew install luarocks
-
-luarocks install --server=https://luarocks.org/dev luaformatter
-luarocks install luacheck
-
-brew install rust
-cargo install stylua
-```
-
-## Python
-
-```
-# NOTE: gnutools must not be in path when compiling python on m1 macs..
-pyenv install 3.10.0
-pyenv global 3.10.0
-```
-
-## AltTab
-
-- Install AltTab: https://alt-tab-macos.netlify.app/
-- Show windows from All apps on visible spaces on screen showing AltTab
-- Appearance: Hide apps with no window! Disable preview window
-- Hide minmised/hidden/fullscreen windows.
-
-## Mission Control
-
-- Under Keyboard Settings -> Mission Control Add bindings for `ctrl-<#>` for each desktop
-
-## Aggregate Sound Device
-
-Add an aggregate sound device so zoom and meet can both use the microphone.
+- Set up Aggregate Sound Device in Audio MIDI Setup
+- Switch to Australian keyboard layout in System Settings
+- `gh auth login`
