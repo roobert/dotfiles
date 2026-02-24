@@ -17,7 +17,9 @@ if which gdircolors > /dev/null 2>&1; then
   eval $(gdircolors)
 fi
 
-LS_COLORS="$(vivid generate palette_dark)"
+if command -v vivid > /dev/null 2>&1; then
+  LS_COLORS="$(vivid generate palette_dark)"
+fi
 
 export ZLS_COLORS=$LS_COLORS
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}

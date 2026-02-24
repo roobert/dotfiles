@@ -1,6 +1,10 @@
 ZSH_ROOT="${HOME}/.zsh"
 
-export TERM=xterm-256color-italic
+if [[ -r $HOME/.terminfo/78/xterm-256color-italic ]]; then
+  export TERM=xterm-256color-italic
+else
+  export TERM=xterm-256color
+fi
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin"
 
 autoload -U compinit && compinit
