@@ -21,6 +21,9 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm:ss"
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
 
+# Desktop: disable click wallpaper to reveal desktop
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
 # Chrome: disable swipe-to-navigate
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 
