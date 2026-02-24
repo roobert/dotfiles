@@ -113,15 +113,15 @@ status_cmd() {
   formulae=$(grep -c '^brew ' "$BREWFILE" 2>/dev/null || echo 0)
   casks=$(grep -c '^cask ' "$BREWFILE" 2>/dev/null || echo 0)
 
+  echo "Dotfiles (~/.dotfiles)"
+  git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status --short --branch
+
+  echo ""
   echo "Brew ($BREWFILE)"
   echo "  ${formulae} formulae, ${casks} casks"
 
   local check
   check=$(brew bundle check --file="$BREWFILE" 2>&1) && echo "  $check" || echo "  $check"
-
-  echo ""
-  echo "Dotfiles (~/.dotfiles)"
-  git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status --short --branch
 }
 
 dotfiles_cmd() {
@@ -135,6 +135,8 @@ dotfiles_cmd() {
 
   case "$subcmd" in
     up)
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status --short
+      echo ""
       git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" add -u
       git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" commit -m "updated"
       git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" push
@@ -172,6 +174,7 @@ case "${1:-}" in
     esac
     ;;
   claude)
+    shift
     cd "$HOME/._doc" && exec claude "$@"
     ;;
   dotfiles)
