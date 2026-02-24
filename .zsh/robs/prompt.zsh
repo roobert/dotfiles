@@ -6,42 +6,6 @@ setopt PROMPT_SUBST
 
 # detect terminal background: "light" or "dark"
 function _detect_terminal_background() {
-  # try OSC 11 query (skip for Terminal.app which doesn't support it)
-  if [[ "$TERM_PROGRAM" != "Apple_Terminal" ]]; then
-    local old_stty=$(stty -g)
-    stty raw -echo min 0 time 5
-    printf '\e]11;?\a'
-    local response=""
-    local char
-    while IFS= read -rs -k 1 char 2>/dev/null; do
-      response+="$char"
-      if [[ "$char" == $'\a' ]] || [[ "$response" == *$'\e\\' ]]; then
-        break
-      fi
-    done
-    stty "$old_stty"
-
-    if [[ "$response" =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]]; then
-      local r g b
-      if (( ${#match[1]} == 4 )); then
-        r=$(( 16#${match[1][1,2]} ))
-        g=$(( 16#${match[2][1,2]} ))
-        b=$(( 16#${match[3][1,2]} ))
-      else
-        r=$(( 16#${match[1]} ))
-        g=$(( 16#${match[2]} ))
-        b=$(( 16#${match[3]} ))
-      fi
-      if (( (299 * r + 587 * g + 114 * b) / 1000 > 128 )); then
-        echo "light"
-      else
-        echo "dark"
-      fi
-      return
-    fi
-  fi
-
-  # fallback: macOS system appearance
   if [[ "$(uname)" == "Darwin" ]]; then
     if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
       echo "dark"
