@@ -1,0 +1,161 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+BREWFILE="$HOME/._doc/osx_bootstrap/Brewfile"
+
+usage() {
+  cat <<'EOF'
+Usage: mbp <command> [args...]
+
+Commands:
+  brew list                        List packages in Brewfile
+  brew install [--cask] <pkg>...   Add package(s) to Brewfile and install
+  brew remove <pkg>...             Remove package(s) from Brewfile and uninstall
+  dotfiles <git-cmd> [args...]     Manage dotfiles (bare git repo)
+  status                           Overview of brew packages and dotfiles
+  help                             Show this help
+EOF
+}
+
+brew_install() {
+  local cask=0
+  if [[ "${1:-}" == "--cask" ]]; then
+    cask=1
+    shift
+  fi
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: mbp brew install [--cask] <pkg> [<pkg>...]" >&2
+    return 1
+  fi
+
+  local pkg directive section_header
+  if (( cask )); then
+    directive="cask"
+    section_header="# Cask apps"
+  else
+    directive="brew"
+    section_header="# CLI tools"
+  fi
+
+  for pkg in "$@"; do
+    local entry="${directive} \"${pkg}\""
+    if grep -qxF "$entry" "$BREWFILE"; then
+      echo "Already in Brewfile: $entry"
+    else
+      # Insert after the section header line
+      if grep -qF "$section_header" "$BREWFILE"; then
+        sed -i '' "/^${section_header}$/a\\
+${entry}
+" "$BREWFILE"
+        echo "Added to Brewfile: $entry"
+      else
+        # Section doesn't exist — append it
+        printf '\n%s\n%s\n' "$section_header" "$entry" >> "$BREWFILE"
+        echo "Added new section and entry: $entry"
+      fi
+    fi
+  done
+
+  echo "Running brew bundle..."
+  brew bundle --file="$BREWFILE"
+}
+
+brew_list() {
+  sed -n 's/^[a-z]* "\(.*\)"/\1/p' "$BREWFILE"
+}
+
+brew_remove() {
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: mbp brew remove <pkg> [<pkg>...]" >&2
+    return 1
+  fi
+
+  for pkg in "$@"; do
+    # Match both brew "pkg" and cask "pkg"
+    local pattern="^(brew|cask) \"${pkg}\"$"
+    if grep -qE "$pattern" "$BREWFILE"; then
+      sed -i '' -E "/^(brew|cask) \"${pkg}\"$/d" "$BREWFILE"
+      echo "Removed from Brewfile: $pkg"
+    else
+      echo "Not found in Brewfile: $pkg" >&2
+    fi
+    echo "Uninstalling $pkg..."
+    brew uninstall "$pkg" || true
+  done
+}
+
+status_cmd() {
+  local formulae casks
+  formulae=$(grep -c '^brew ' "$BREWFILE" 2>/dev/null || echo 0)
+  casks=$(grep -c '^cask ' "$BREWFILE" 2>/dev/null || echo 0)
+
+  echo "Brew ($BREWFILE)"
+  echo "  ${formulae} formulae, ${casks} casks"
+
+  local check
+  check=$(brew bundle check --file="$BREWFILE" 2>&1) && echo "  $check" || echo "  $check"
+
+  echo ""
+  echo "Dotfiles (~/.dotfiles)"
+  git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status --short --branch
+}
+
+dotfiles_cmd() {
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: mbp dotfiles <git-command> [args...]" >&2
+    return 1
+  fi
+
+  local subcmd="$1"
+  shift
+
+  case "$subcmd" in
+    commit)
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" add -u
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" commit "$@"
+      ;;
+    *)
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$subcmd" "$@"
+      ;;
+  esac
+}
+
+# --- main ---
+case "${1:-}" in
+  brew)
+    shift
+    case "${1:-}" in
+      list)
+        brew_list
+        ;;
+      install)
+        shift
+        brew_install "$@"
+        ;;
+      remove)
+        shift
+        brew_remove "$@"
+        ;;
+      *)
+        echo "Usage: mbp brew {list|install|remove} [args...]" >&2
+        exit 1
+        ;;
+    esac
+    ;;
+  dotfiles)
+    shift
+    dotfiles_cmd "$@"
+    ;;
+  status)
+    status_cmd
+    ;;
+  help|"")
+    usage
+    ;;
+  *)
+    echo "Unknown command: $1" >&2
+    usage >&2
+    exit 1
+    ;;
+esac
