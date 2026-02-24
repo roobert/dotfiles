@@ -1,0 +1,55 @@
+# Taps
+tap "homebrew/services"
+tap "vmware-tanzu/carvel"
+tap "hashicorp/tap"
+
+# CLI tools
+brew "coreutils"
+brew "findutils"
+brew "gnu-tar"
+brew "gnu-sed"
+brew "gawk"
+brew "gnutls"
+brew "gnu-indent"
+brew "gnu-getopt"
+brew "grep"
+brew "wget"
+brew "jq"
+brew "fzf"
+brew "ripgrep"
+brew "graphviz"
+brew "qemu"
+brew "neovim"
+brew "zplug"
+brew "gh"
+brew "mise"
+brew "uv"
+brew "util-linux"
+brew "libgit2"
+brew "luarocks"
+brew "rust"
+brew "shellcheck"
+brew "shfmt"
+
+# Dev tools
+brew "tfenv"
+brew "kapp"
+brew "hashicorp/tap/terraform-ls"
+brew "efm-langserver"
+brew "universal-ctags", args: ["HEAD"]
+
+# Cask apps
+cask "iterm2"
+cask "docker"
+cask "slack"
+cask "whatsapp"
+cask "istat-menus"
+cask "alt-tab"
+cask "google-cloud-sdk"
+
+# Fonts
+cask "font-hack-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
+
+# Mac App Store (uncomment and add IDs as needed)
+# mas "Magnet", id: 441258766

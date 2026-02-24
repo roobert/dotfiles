@@ -4,12 +4,70 @@ autoload -U colors
 colors
 setopt PROMPT_SUBST
 
+# detect terminal background: "light" or "dark"
+function _detect_terminal_background() {
+  # try OSC 11 query (skip for Terminal.app which doesn't support it)
+  if [[ "$TERM_PROGRAM" != "Apple_Terminal" ]]; then
+    local old_stty=$(stty -g)
+    stty raw -echo min 0 time 5
+    printf '\e]11;?\a'
+    local response=""
+    local char
+    while IFS= read -rs -k 1 char 2>/dev/null; do
+      response+="$char"
+      if [[ "$char" == $'\a' ]] || [[ "$response" == *$'\e\\' ]]; then
+        break
+      fi
+    done
+    stty "$old_stty"
+
+    if [[ "$response" =~ 'rgb:([0-9a-fA-F]+)/([0-9a-fA-F]+)/([0-9a-fA-F]+)' ]]; then
+      local r g b
+      if (( ${#match[1]} == 4 )); then
+        r=$(( 16#${match[1][1,2]} ))
+        g=$(( 16#${match[2][1,2]} ))
+        b=$(( 16#${match[3][1,2]} ))
+      else
+        r=$(( 16#${match[1]} ))
+        g=$(( 16#${match[2]} ))
+        b=$(( 16#${match[3]} ))
+      fi
+      if (( (299 * r + 587 * g + 114 * b) / 1000 > 128 )); then
+        echo "light"
+      else
+        echo "dark"
+      fi
+      return
+    fi
+  fi
+
+  # fallback: macOS system appearance
+  if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
+      echo "dark"
+    else
+      echo "light"
+    fi
+    return
+  fi
+
+  echo "dark"
+}
+
+TERMINAL_BACKGROUND=$(_detect_terminal_background)
+
 zle -N zle-line-init
-zle -N zle-line-finish
 zle -N zle-keymap-select
 
-MODE_CMD="%{$FG[128]%}"
-MODE_INS="%{$FG[156]%}"
+if [[ "$TERMINAL_BACKGROUND" == "light" ]]; then
+  MODE_CMD="%{$FG[128]%}"
+  MODE_INS="%{$FG[022]%}"
+  PATH_COLOR="%{$FG[238]%}"
+else
+  MODE_CMD="%{$FG[128]%}"
+  MODE_INS="%{$FG[156]%}"
+  PATH_COLOR="%{$FG[250]%}"
+fi
 
 function zle-line-init zle-keymap-select {
   case ${KEYMAP} in
@@ -47,10 +105,10 @@ precmd() {
 }
 
 if [[ $HOSTNAME == "mbp0.local" ]]; then
-  WHERE="%{$FG[250]%}%~"
+  WHERE="${PATH_COLOR}%~"
 else
   # include hostname in prompt
-  WHERE="%{$FG[250]%}%m:%~"
+  WHERE="${PATH_COLOR}%m:%~"
 fi
 PS1='${VIRTUAL_ENV_SIGN}${WHERE} ${EXIT_STATUS}${VI_MODE}>%{$FX[reset]%} '
 RPS1=''
@@ -60,4 +118,5 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     function zle-line-finish () {
         echoti rmkx
     }
+    zle -N zle-line-finish
 fi
