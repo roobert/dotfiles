@@ -3,6 +3,13 @@
 
 PLIST=~/Library/Preferences/com.googlecode.iterm2.plist
 
+# --- macOS Sequoia: disable window tiling interference ---
+# Frees up modifier keys (Cmd+Shift+Option) that macOS intercepts for edge-drag tiling
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool false
+defaults write com.apple.WindowManager EnableTilingOptionAccelerator -bool false
+echo "    macOS window tiling disabled."
+
 # --- App-level settings (defaults write) ---
 
 # Theme: Minimal
