@@ -11,6 +11,7 @@ Commands:
   brew list                        List packages in Brewfile
   brew install [--cask] <pkg>...   Add package(s) to Brewfile and install
   brew remove <pkg>...             Remove package(s) from Brewfile and uninstall
+  claude                            Launch Claude Code in ._doc dir
   dotfiles up                       Stage, commit "updated", and push
   dotfiles <git-cmd> [args...]     Manage dotfiles (bare git repo)
   status                           Overview of brew packages and dotfiles
@@ -169,6 +170,9 @@ case "${1:-}" in
         exit 1
         ;;
     esac
+    ;;
+  claude)
+    cd "$HOME/._doc" && exec claude "$@"
     ;;
   dotfiles)
     shift

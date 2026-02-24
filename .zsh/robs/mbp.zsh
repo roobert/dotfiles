@@ -1,6 +1,6 @@
 _mbp() {
   local -a top
-  top=(brew dotfiles status help)
+  top=(brew claude dotfiles status help)
 
   if (( CURRENT == 2 )); then
     _describe 'mbp commands' top
