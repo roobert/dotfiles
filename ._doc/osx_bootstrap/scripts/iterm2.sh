@@ -109,12 +109,30 @@ EOF
 echo "    iTerm2 Dynamic Profile installed."
 
 # --- Keybindings ---
-# Import the custom keybindings (tab navigation etc.) using -dict-add to preserve existing bindings
+# Uses -dict-add to preserve existing bindings
+# Key format: 0xKEYCODE-0xMODIFIERS (modifiers: Shift=0x20000, Ctrl=0x40000, Opt=0x80000, Cmd=0x100000)
+# Action codes: https://github.com/gnachman/iTerm2/blob/master/sources/iTermKeyBindingAction.h
+
+# Scroll: Shift+PageDn / Cmd+PageDn = Page Down (8)
 defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72d-0x20000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>'
-defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72b-0x100000" '<dict><key>Action</key><integer>4</integer><key>Text</key><string></string></dict>'
 defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72d-0x100000" '<dict><key>Action</key><integer>8</integer><key>Text</key><string></string></dict>'
-defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72c-0x100000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
-defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf729-0x100000" '<dict><key>Action</key><integer>5</integer><key>Text</key><string></string></dict>'
+# Scroll: Shift+PageUp / Cmd+PageUp = Page Up (9)
 defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72c-0x20000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72c-0x100000" '<dict><key>Action</key><integer>9</integer><key>Text</key><string></string></dict>'
+# Scroll: Cmd+End = Scroll to End (4), Cmd+Home = Scroll to Top (5)
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf72b-0x100000" '<dict><key>Action</key><integer>4</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0xf729-0x100000" '<dict><key>Action</key><integer>5</integer><key>Text</key><string></string></dict>'
+
+# Split: Ctrl+X = Split Vertically (29), Ctrl+Shift+X = Split Horizontally (28)
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x78-0x40000" '<dict><key>Action</key><integer>29</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x58-0x60000" '<dict><key>Action</key><integer>28</integer><key>Text</key><string></string></dict>'
+
+# Tabs: Ctrl+Tab = Next Tab (0), Ctrl+Shift+Tab = Previous Tab (2)
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x9-0x40000" '<dict><key>Action</key><integer>0</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x9-0x60000" '<dict><key>Action</key><integer>2</integer><key>Text</key><string></string></dict>'
+
+# Panes: Ctrl+` = Next Pane (30), Ctrl+Shift+` = Previous Pane (31)
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x60-0x40000" '<dict><key>Action</key><integer>30</integer><key>Text</key><string></string></dict>'
+defaults write com.googlecode.iterm2 GlobalKeyMap -dict-add "0x60-0x60000" '<dict><key>Action</key><integer>31</integer><key>Text</key><string></string></dict>'
 
 echo "    iTerm2 keybindings applied."

@@ -30,6 +30,27 @@ brew_install() {
   fi
 
   local pkg directive section_header
+
+  # Auto-detect: if user didn't pass --cask, check if the package is only a cask
+  if (( ! cask )); then
+    for pkg in "$@"; do
+      local has_formula=0 has_cask=0
+      brew info --json=v2 --formula "$pkg" &>/dev/null && has_formula=1
+      brew info --json=v2 --cask "$pkg" &>/dev/null && has_cask=1
+      if (( ! has_formula && has_cask )); then
+        echo "\"$pkg\" is a cask (GUI app), not a formula."
+        printf "Install as cask instead? [Y/n] "
+        read -r answer
+        if [[ "${answer:-Y}" =~ ^[Yy]$ ]]; then
+          cask=1
+          break
+        else
+          return 1
+        fi
+      fi
+    done
+  fi
+
   if (( cask )); then
     directive="cask"
     section_header="# Cask apps"
@@ -111,6 +132,11 @@ dotfiles_cmd() {
   shift
 
   case "$subcmd" in
+    up)
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" add -u
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" commit -m "updated"
+      git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" push
+      ;;
     commit)
       git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" add -u
       git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" commit "$@"
