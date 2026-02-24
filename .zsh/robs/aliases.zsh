@@ -24,7 +24,6 @@ alias gp='git pull'
 alias gdh='git diff HEAD'
 alias gdc='git diff --cached'
 alias gb='git checkout -b'
-alias gc='git checkout'
 alias gd='git diff'
 alias ga='git add'
 alias gaa='git add .'
@@ -81,7 +80,7 @@ alias rzsh="exec zsh -l"
 export LESS="-R" # allow escape sequences to be interpreted properly
 export EDITOR="vim"
 
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=auto'
 export GREP_COLOR='1;32'
 
 # global aliases mean you can do: foo DN and it'll expand to 'foo >/dev/null 2>&1'

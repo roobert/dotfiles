@@ -1,12 +1,11 @@
 ZSH_ROOT="${HOME}/.zsh"
 
 export TERM=xterm-256color-italic
-export PATH="/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin"
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin"
 
 autoload -U compinit && compinit
 
 source ${ZSH_ROOT}/spectrum.zsh
-source ${ZSH_ROOT}/vi-mode/vi-mode.plugin.zsh
 
 for f in ${ZSH_ROOT}/robs/*.zsh; do
   source $f

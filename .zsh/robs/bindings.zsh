@@ -58,6 +58,18 @@ zle -N insert-next-word; bindkey keys $_
 bindkey -M viins "^[[1;5B" insert-next-word
 bindkey -M vicmd "^[[1;5B" insert-next-word
 
+# ctrl-p/n for history navigation
+bindkey -M viins '^P' up-history
+bindkey -M vicmd '^P' up-history
+bindkey -M viins '^N' down-history
+bindkey -M vicmd '^N' down-history
+# ctrl-s for forward history search
+bindkey -M viins '^s' history-incremental-search-forward
+bindkey -M vicmd '^s' history-incremental-search-forward
+# ctrl-a for beginning of line
+bindkey -M viins '^a' beginning-of-line
+bindkey -M vicmd '^a' beginning-of-line
+
 # changing mode clobbers the keybinds, so store the keybinds before and execute
 # them after
 binds=`bindkey -L`
