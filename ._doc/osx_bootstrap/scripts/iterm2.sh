@@ -51,6 +51,9 @@ defaults write com.googlecode.iterm2 MinTabWidth -int 40
 defaults write com.googlecode.iterm2 MinCompactTabWidth -int 40
 defaults write com.googlecode.iterm2 OptimumTabWidth -int 100
 
+# Hide window number (⌥⌘N) hint in title bar
+defaults write com.googlecode.iterm2 WindowNumber -bool false
+
 # Applications may access clipboard
 defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
 
