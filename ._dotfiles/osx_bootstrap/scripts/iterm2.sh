@@ -135,17 +135,37 @@ profile["Foreground Color"] = dict(_fg)
 profile["Foreground Color (Light)"] = dict(_fg)
 profile["Foreground Color (Dark)"] = dict(_fg)
 
-# Background color: #e8e8e8 (slightly darker white)
+# Background color: #e0e0e0 (light gray)
 _bg = {
-    "Red Component": 0.9098039215686274,
-    "Green Component": 0.9098039215686274,
-    "Blue Component": 0.9098039215686274,
+    "Red Component": 0.8784313725490196,
+    "Green Component": 0.8784313725490196,
+    "Blue Component": 0.8784313725490196,
     "Color Space": "sRGB",
     "Alpha Component": 1.0,
 }
 profile["Background Color"] = dict(_bg)
 profile["Background Color (Light)"] = dict(_bg)
 profile["Background Color (Dark)"] = dict(_bg)
+
+# Ansi 7 (white/light gray): #999999 — better contrast against light background
+_ansi7 = {
+    "Red Component": 0.6,
+    "Green Component": 0.6,
+    "Blue Component": 0.6,
+    "Color Space": "sRGB",
+    "Alpha Component": 1.0,
+}
+profile["Ansi 7 Color"] = dict(_ansi7)
+
+# Ansi 8 (bright black/dim gray): #4a4a4a — darker for visibility
+_ansi8 = {
+    "Red Component": 0.2901960784313726,
+    "Green Component": 0.2901960784313726,
+    "Blue Component": 0.2901960784313726,
+    "Color Space": "sRGB",
+    "Alpha Component": 1.0,
+}
+profile["Ansi 8 Color"] = dict(_ansi8)
 
 # Enable status bar
 profile["Show Status Bar"] = True
@@ -220,9 +240,21 @@ cat > "$DYNAMIC_DIR/setup-profile.json" << 'EOF'
         "Color Space": "sRGB"
       },
       "Background Color": {
-        "Red Component": 0.9098039215686274,
-        "Green Component": 0.9098039215686274,
-        "Blue Component": 0.9098039215686274,
+        "Red Component": 0.8784313725490196,
+        "Green Component": 0.8784313725490196,
+        "Blue Component": 0.8784313725490196,
+        "Color Space": "sRGB"
+      },
+      "Ansi 7 Color": {
+        "Red Component": 0.6,
+        "Green Component": 0.6,
+        "Blue Component": 0.6,
+        "Color Space": "sRGB"
+      },
+      "Ansi 8 Color": {
+        "Red Component": 0.2901960784313726,
+        "Green Component": 0.2901960784313726,
+        "Blue Component": 0.2901960784313726,
         "Color Space": "sRGB"
       }
     }

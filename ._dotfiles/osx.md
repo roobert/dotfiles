@@ -39,6 +39,7 @@ Scripts run in order by `setup.sh`:
 - Disable smart quotes, smart dashes, double-space period
 - Disable "natural" scrolling (traditional scroll direction)
 - Menu bar clock: 24h with seconds (`EEE d MMM HH:mm:ss`)
+- Menu bar: show Sound control, hide Spotlight
 - Chrome: disable swipe-to-navigate
 - AltTab: show on current screen, hide minimised/hidden/fullscreen windows
 

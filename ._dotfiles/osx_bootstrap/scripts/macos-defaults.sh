@@ -21,6 +21,13 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM HH:mm:ss"
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
 
+# Menu bar: show Sound control
+defaults -currentHost write com.apple.controlcenter Sound -int 18
+defaults write com.apple.controlcenter "NSStatusItem Visible Sound" -bool true
+
+# Menu bar: hide Spotlight
+defaults -currentHost write com.apple.Spotlight MenuItemHidden -int 1
+
 # Desktop: disable click wallpaper to reveal desktop
 defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 
