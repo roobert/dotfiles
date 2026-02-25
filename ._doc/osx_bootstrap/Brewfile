@@ -23,6 +23,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "1password-cli"
 cask "ghostty"
 cask "iterm2"
 cask "orbstack"
