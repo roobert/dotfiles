@@ -94,17 +94,18 @@ echo "    iTerm2 keybindings applied."
 # --- Profile-level settings (direct plist manipulation) ---
 # Must run AFTER all defaults write commands.
 # Uses python3 because PlistBuddy can't handle keys containing colons (e.g. "base: priority").
-# Flush defaults cache to disk first, then edit, then reload.
+# Creates the plist from scratch if iTerm2 hasn't been launched yet.
+defaults read com.googlecode.iterm2 > /dev/null 2>&1 || true
 
-if [[ -f "$PLIST" ]]; then
-  defaults read com.googlecode.iterm2 > /dev/null 2>&1  # ensure cache is flushed to disk
-
-  python3 - "$PLIST" << 'PYEOF'
-import plistlib, sys
+python3 - "$PLIST" << 'PYEOF'
+import plistlib, sys, os
 
 plist_path = sys.argv[1]
-with open(plist_path, "rb") as f:
-    plist = plistlib.load(f)
+if os.path.exists(plist_path):
+    with open(plist_path, "rb") as f:
+        plist = plistlib.load(f)
+else:
+    plist = {"New Bookmarks": [{"Guid": "Default"}]}
 
 profile = plist["New Bookmarks"][0]
 
@@ -135,11 +136,11 @@ profile["Foreground Color"] = dict(_fg)
 profile["Foreground Color (Light)"] = dict(_fg)
 profile["Foreground Color (Dark)"] = dict(_fg)
 
-# Background color: #e0e0e0 (light gray)
+# Background color: #ffffff (white)
 _bg = {
-    "Red Component": 0.8784313725490196,
-    "Green Component": 0.8784313725490196,
-    "Blue Component": 0.8784313725490196,
+    "Red Component": 1.0,
+    "Green Component": 1.0,
+    "Blue Component": 1.0,
     "Color Space": "sRGB",
     "Alpha Component": 1.0,
 }
@@ -147,25 +148,8 @@ profile["Background Color"] = dict(_bg)
 profile["Background Color (Light)"] = dict(_bg)
 profile["Background Color (Dark)"] = dict(_bg)
 
-# Ansi 7 (white/light gray): #999999 — better contrast against light background
-_ansi7 = {
-    "Red Component": 0.6,
-    "Green Component": 0.6,
-    "Blue Component": 0.6,
-    "Color Space": "sRGB",
-    "Alpha Component": 1.0,
-}
-profile["Ansi 7 Color"] = dict(_ansi7)
-
-# Ansi 8 (bright black/dim gray): #4a4a4a — darker for visibility
-_ansi8 = {
-    "Red Component": 0.2901960784313726,
-    "Green Component": 0.2901960784313726,
-    "Blue Component": 0.2901960784313726,
-    "Color Space": "sRGB",
-    "Alpha Component": 1.0,
-}
-profile["Ansi 8 Color"] = dict(_ansi8)
+# Minimum contrast: forces text to be readable regardless of true color values
+profile["Minimum Contrast"] = 0.4
 
 # Enable status bar
 profile["Show Status Bar"] = True
@@ -207,59 +191,38 @@ with open(plist_path, "wb") as f:
     plistlib.dump(plist, f)
 PYEOF
 
-  # Tell cfprefsd to reload the plist from disk
-  defaults read com.googlecode.iterm2 > /dev/null 2>&1
+# Tell cfprefsd to reload the plist from disk
+defaults read com.googlecode.iterm2 > /dev/null 2>&1
 
-  echo "    iTerm2 profile settings applied."
-else
-  echo "    iTerm2 plist not found - launch iTerm2 once first, then re-run this script."
-  echo "    Alternatively, the Dynamic Profile below will be used on next launch."
+echo "    iTerm2 profile settings applied (plist)."
+
+# --- Apply profile settings to running sessions via Python API ---
+VENV_DIR="$(dirname "$0")/.venv"
+VENV_PYTHON="$VENV_DIR/bin/python3"
+
+if ! [[ -x "$VENV_PYTHON" ]]; then
+  python3 -m venv "$VENV_DIR"
+  "$VENV_PYTHON" -m pip install --quiet iterm2
 fi
 
-# --- Dynamic Profile (works even before first launch) ---
-DYNAMIC_DIR="$HOME/Library/Application Support/iTerm2/DynamicProfiles"
-mkdir -p "$DYNAMIC_DIR"
+if ps -eo comm= | grep -q "iTerm2$"; then
+  "$VENV_PYTHON" - << 'PYEOF'
+import iterm2
 
-cat > "$DYNAMIC_DIR/setup-profile.json" << 'EOF'
-{
-  "Profiles": [
-    {
-      "Name": "Default",
-      "Guid": "setup-default-profile",
-      "Dynamic Profile Parent Name": "Default",
-      "Normal Font": "JetBrainsMonoNFM-Regular 14",
-      "Unlimited Scrollback": true,
-      "Silence Bell": true,
-      "Option Key Sends": 2,
-      "Show Status Bar": true,
-      "Cursor Type": 1,
-      "Foreground Color": {
-        "Red Component": 0.10980392156862745,
-        "Green Component": 0.10980392156862745,
-        "Blue Component": 0.10980392156862745,
-        "Color Space": "sRGB"
-      },
-      "Background Color": {
-        "Red Component": 0.8784313725490196,
-        "Green Component": 0.8784313725490196,
-        "Blue Component": 0.8784313725490196,
-        "Color Space": "sRGB"
-      },
-      "Ansi 7 Color": {
-        "Red Component": 0.6,
-        "Green Component": 0.6,
-        "Blue Component": 0.6,
-        "Color Space": "sRGB"
-      },
-      "Ansi 8 Color": {
-        "Red Component": 0.2901960784313726,
-        "Green Component": 0.2901960784313726,
-        "Blue Component": 0.2901960784313726,
-        "Color Space": "sRGB"
-      }
-    }
-  ]
-}
-EOF
+async def main(connection):
+    # Update the underlying profile — all sessions using it update automatically
+    profiles = await iterm2.PartialProfile.async_query(connection)
+    for partial in profiles:
+        if partial.name == "Default":
+            full = await partial.async_get_full_profile()
+            await full.async_set_foreground_color(iterm2.Color(28, 28, 28))
+            await full.async_set_background_color(iterm2.Color(255, 255, 255))
+            await full.async_set_minimum_contrast(0.4)
 
-echo "    iTerm2 Dynamic Profile installed."
+    print("    iTerm2 live sessions updated.")
+
+iterm2.run_until_complete(main)
+PYEOF
+else
+  echo "    iTerm2 not running — settings will apply on next launch."
+fi

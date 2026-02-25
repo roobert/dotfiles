@@ -1,5 +1,5 @@
-MISE=$HOME/.local/bin/mise
-if [ ! -f $HOME/.local/bin/mise ]; then
+MISE=$(command -v mise)
+if [[ -z "$MISE" ]]; then
   return
 fi
 
@@ -15,7 +15,7 @@ python = "3.12"
 EOF
 }
 
-_check_mise_on_cd() {
-  [[ -f .mise.toml ]] && mise-install-helper
-}
-add-zsh-hook chpwd _check_mise_on_cd
+# _check_mise_on_cd() {
+#   [[ -f .mise.toml ]] && mise-install-helper
+# }
+# add-zsh-hook chpwd _check_mise_on_cd
