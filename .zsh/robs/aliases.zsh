@@ -15,6 +15,7 @@ alias vim="nvim --"
 alias vi="nvim --"
 
 # git
+alias clone="gh repo clone"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gdl="gl -p"
 alias gdt="git diff-tree --no-commit-id --name-only -r HEAD"
@@ -97,7 +98,7 @@ alias -g COL7="awk '{ print \$7 }'"
 alias -g COL8="awk '{ print \$8 }'"
 alias -g COL9="awk '{ print \$9 }'"
 
-alias visox="vi ~/._doc/osx.md"
+alias visox="vi ~/._dotfiles/osx.md"
 
 alias kdebug="kubectl run --rm -it --image ubuntu kdebug /bin/sh"
 

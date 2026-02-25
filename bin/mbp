@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-BREWFILE="$HOME/._doc/osx_bootstrap/Brewfile"
+BREWFILE="$HOME/._dotfiles/osx_bootstrap/Brewfile"
 
 usage() {
   cat <<'EOF'
@@ -11,9 +11,9 @@ Commands:
   brew list                        List packages in Brewfile
   brew install [--cask] <pkg>...   Add package(s) to Brewfile and install
   brew remove <pkg>...             Remove package(s) from Brewfile and uninstall
-  claude                            Launch Claude Code in ._doc dir
-  dotfiles up                       Stage, commit "updated", and push
-  dotfiles <git-cmd> [args...]     Manage dotfiles (bare git repo)
+  claude                            Launch Claude Code in ._dotfiles dir
+  dfs up                             Stage, commit "updated", and push
+  dfs <git-cmd> [args...]           Manage dotfiles (bare git repo)
   status                           Overview of brew packages and dotfiles
   help                             Show this help
 EOF
@@ -126,7 +126,7 @@ status_cmd() {
 
 dotfiles_cmd() {
   if [[ $# -eq 0 ]]; then
-    echo "Usage: mbp dotfiles <git-command> [args...]" >&2
+    echo "Usage: mbp dfs <git-command> [args...]" >&2
     return 1
   fi
 
@@ -175,9 +175,9 @@ case "${1:-}" in
     ;;
   claude)
     shift
-    cd "$HOME/._doc" && exec claude "$@"
+    cd "$HOME/._dotfiles" && exec claude "$@"
     ;;
-  dotfiles)
+  dfs)
     shift
     dotfiles_cmd "$@"
     ;;

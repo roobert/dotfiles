@@ -1,11 +1,11 @@
 # Workstation Setup
 
-Automated macOS setup. Run `._doc/osx_bootstrap/setup.sh` to configure a new machine.
+Automated macOS setup. Run `._dotfiles/osx_bootstrap/setup.sh` to configure a new machine.
 
 ## Usage
 
 ```bash
-./._doc/osx_bootstrap/setup.sh
+./._dotfiles/osx_bootstrap/setup.sh
 ```
 
 ## Pre-setup (manual)

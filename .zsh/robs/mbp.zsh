@@ -1,6 +1,6 @@
 _mbp() {
   local -a top
-  top=(brew claude dotfiles status help)
+  top=(brew claude dfs status help)
 
   if (( CURRENT == 2 )); then
     _describe 'mbp commands' top
@@ -35,14 +35,14 @@ _mbp() {
           fi
           ;;
         remove)
-          local brewfile="$HOME/._doc/osx_bootstrap/Brewfile"
+          local brewfile="$HOME/._dotfiles/osx_bootstrap/Brewfile"
           local -a entries
           entries=(${(f)"$(sed -n 's/^[a-z]* "\(.*\)"/\1/p' "$brewfile" 2>/dev/null)"})
           _describe 'Brewfile entries' entries
           ;;
       esac
       ;;
-    dotfiles)
+    dfs)
       if (( CURRENT == 3 )); then
         local -a git_cmds
         git_cmds=(status diff commit push log add checkout restore branch)
