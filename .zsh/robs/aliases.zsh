@@ -102,5 +102,5 @@ alias visox="vi ~/._dotfiles/osx.md"
 
 alias kdebug="kubectl run --rm -it --image ubuntu kdebug /bin/sh"
 
-alias tclaude="cd tmp; claude"
+alias tclaude="cd ~/tmp; claude"
 #alias claude='~/bin/claude-sandbox.sh'
