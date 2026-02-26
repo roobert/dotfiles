@@ -1,4 +1,5 @@
 # CLI tools
+brew "tree-sitter-cli"
 brew "tree-sitter"
 brew "cloudflared"
 brew "coreutils"
