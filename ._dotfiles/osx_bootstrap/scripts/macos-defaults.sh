@@ -13,6 +13,11 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Keyboard: disable double-space period shortcut
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
+# Keyboard: fast key repeat rate (2 = fast, 1 = fastest, default = 6)
+defaults write NSGlobalDomain KeyRepeat -int 2
+
+# Keyboard: short delay until repeat (30 = short, 15 = shortest, default = 68)
+defaults write NSGlobalDomain InitialKeyRepeat -int 30
 
 # Trackpad: disable "natural" scrolling (use traditional scroll direction)
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false

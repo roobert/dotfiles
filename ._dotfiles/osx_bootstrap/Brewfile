@@ -1,4 +1,6 @@
 # CLI tools
+brew "tree-sitter"
+brew "cloudflared"
 brew "coreutils"
 brew "findutils"
 brew "gnu-tar"
@@ -23,6 +25,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "lulu"
 cask "1password"
 cask "1password-cli"
 cask "ghostty"
