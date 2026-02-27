@@ -27,8 +27,8 @@ defaults write com.googlecode.iterm2 HideTabCloseButton -bool true
 # Dim inactive split panes
 defaults write com.googlecode.iterm2 DimInactiveSplitPanes -bool true
 
-# Dimming amount (0.2 = subtle inactive fade)
-defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -float 0.2
+# Dimming amount (0.15 = subtle inactive fade)
+defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -float 0.15
 
 # Focus follows mouse
 defaults write com.googlecode.iterm2 FocusFollowsMouse -bool true
@@ -136,11 +136,11 @@ profile["Foreground Color"] = dict(_fg)
 profile["Foreground Color (Light)"] = dict(_fg)
 profile["Foreground Color (Dark)"] = dict(_fg)
 
-# Background color: #ffffff (white)
+# Background color: #e5e5e5 (light gray)
 _bg = {
-    "Red Component": 1.0,
-    "Green Component": 1.0,
-    "Blue Component": 1.0,
+    "Red Component": 0.8980392156862745,
+    "Green Component": 0.8980392156862745,
+    "Blue Component": 0.8980392156862745,
     "Color Space": "sRGB",
     "Alpha Component": 1.0,
 }
@@ -216,7 +216,7 @@ async def main(connection):
         if partial.name == "Default":
             full = await partial.async_get_full_profile()
             await full.async_set_foreground_color(iterm2.Color(28, 28, 28))
-            await full.async_set_background_color(iterm2.Color(255, 255, 255))
+            await full.async_set_background_color(iterm2.Color(229, 229, 229))
             await full.async_set_minimum_contrast(0.4)
 
     print("    iTerm2 live sessions updated.")

@@ -39,6 +39,7 @@ cask "alt-tab"
 cask "gcloud-cli"
 cask "zoom"
 cask "nordlayer"
+cask "transmission"
 
 # Fonts
 cask "font-hack-nerd-font"
