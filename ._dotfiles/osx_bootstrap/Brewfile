@@ -26,6 +26,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "vlc"
 cask "lulu"
 cask "1password"
 cask "1password-cli"
