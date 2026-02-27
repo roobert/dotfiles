@@ -121,8 +121,8 @@ profile["Silence Bell"] = True
 # Left Option Key = Esc+
 profile["Option Key Sends"] = 2
 
-# Cursor type: line (1=vertical bar, 2=underline, 0=box)
-profile["Cursor Type"] = 1
+# Cursor type: 0=underline, 1=vertical bar, 2=block
+profile["Cursor Type"] = 2
 
 # Foreground color: #1c1c1c (near-black)
 _fg = {
