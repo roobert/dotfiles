@@ -1,6 +1,6 @@
 _mbp() {
   local -a top
-  top=(brew claude dfs status help)
+  top=(brew claude dfs dfss dfs-clone status help)
 
   if (( CURRENT == 2 )); then
     _describe 'mbp commands' top
@@ -58,6 +58,22 @@ _mbp() {
           ;;
       esac
       ;;
+    dfss)
+      if (( CURRENT == 3 )); then
+        local -a git_cmds
+        git_cmds=(status diff commit push log add checkout restore branch)
+        _describe 'git commands' git_cmds
+        return
+      fi
+      case "${words[3]}" in
+        add|diff|checkout|restore)
+          local -a files
+          files=(${(f)"$(command git --git-dir=$HOME/.dotfiles-secret --work-tree=$HOME diff --name-only 2>/dev/null)"})
+          _describe 'modified files' files
+          ;;
+      esac
+      ;;
+    dfs-clone) ;;
     help) ;;
   esac
 }

@@ -14,6 +14,9 @@ Commands:
   claude                            Launch Claude Code in ._dotfiles dir
   dfs up                             Stage, commit "updated", and push
   dfs <git-cmd> [args...]           Manage dotfiles (bare git repo)
+  dfss up                            Stage, commit "updated", and push (secret)
+  dfss <git-cmd> [args...]          Manage secret dotfiles (bare git repo)
+  dfs-clone                          Clone dotfiles-secret bare repo
   status                           Overview of brew packages and dotfiles
   help                             Show this help
 EOF
@@ -117,6 +120,14 @@ status_cmd() {
   git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" status --short --branch
 
   echo ""
+  if [[ -d "$HOME/.dotfiles-secret" ]]; then
+    echo "Dotfiles-secret (~/.dotfiles-secret)"
+    git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" status --short --branch
+  else
+    echo "Dotfiles-secret: not cloned (run: mbp dfs-clone)"
+  fi
+
+  echo ""
   echo "Brew ($BREWFILE)"
   echo "  ${formulae} formulae, ${casks} casks"
 
@@ -151,6 +162,45 @@ dotfiles_cmd() {
   esac
 }
 
+dotfiles_secret_cmd() {
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: mbp dfss <git-command> [args...]" >&2
+    return 1
+  fi
+
+  local subcmd="$1"
+  shift
+
+  case "$subcmd" in
+    up)
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" status --short
+      echo ""
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" add -u
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" commit -m "updated"
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" push
+      ;;
+    commit)
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" add -u
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" commit "$@"
+      ;;
+    *)
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" "$subcmd" "$@"
+      ;;
+  esac
+}
+
+dfs_clone_cmd() {
+  local repo_dir="$HOME/.dotfiles-secret"
+  if [[ -d "$repo_dir" ]]; then
+    echo "Already exists: $repo_dir" >&2
+    return 1
+  fi
+  git clone --bare https://github.com/roobert/dotfiles-secret.git "$repo_dir"
+  git --git-dir="$repo_dir" --work-tree="$HOME" config --local status.showUntrackedFiles no
+  git --git-dir="$repo_dir" --work-tree="$HOME" checkout -f
+  echo "Secret dotfiles installed."
+}
+
 # --- main ---
 case "${1:-}" in
   brew)
@@ -180,6 +230,13 @@ case "${1:-}" in
   dfs)
     shift
     dotfiles_cmd "$@"
+    ;;
+  dfss)
+    shift
+    dotfiles_secret_cmd "$@"
+    ;;
+  dfs-clone)
+    dfs_clone_cmd
     ;;
   status)
     status_cmd
