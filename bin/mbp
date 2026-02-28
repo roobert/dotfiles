@@ -12,6 +12,7 @@ Commands:
   brew install [--cask] <pkg>...   Add package(s) to Brewfile and install
   brew remove <pkg>...             Remove package(s) from Brewfile and uninstall
   claude                            Launch Claude Code in ._dotfiles dir
+  up                                 Run dfs up + dfss up
   dfs up                             Stage, commit "updated", and push
   dfs <git-cmd> [args...]           Manage dotfiles (bare git repo)
   dfss up                            Stage, commit "updated", and push (secret)
@@ -226,6 +227,13 @@ case "${1:-}" in
   claude)
     shift
     cd "$HOME/._dotfiles" && exec claude "$@"
+    ;;
+  up)
+    echo "==> dotfiles"
+    dotfiles_cmd up || true
+    echo ""
+    echo "==> dotfiles-secret"
+    dotfiles_secret_cmd up || true
     ;;
   dfs)
     shift
