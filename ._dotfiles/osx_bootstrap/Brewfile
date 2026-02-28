@@ -1,5 +1,4 @@
 # CLI tools
-brew "srm"
 brew "tree-sitter-cli"
 brew "tree-sitter"
 brew "cloudflared"
