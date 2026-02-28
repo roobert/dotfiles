@@ -9,6 +9,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/projekt0n/github-nvim-theme" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
 })
 
 -- colorscheme
@@ -62,6 +63,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 		end
 	end,
+})
+
+-- copilot
+require("copilot").setup({
+	suggestion = {
+		auto_trigger = true,
+		keymap = {
+			accept = "<Tab>",
+			next = "<M-]>",
+			prev = "<M-[>",
+			dismiss = "<C-]>",
+		},
+	},
+	panel = { enabled = false },
 })
 
 -- diagnostics
@@ -118,6 +133,12 @@ vim.keymap.set("n", "<leader><S-f>", function()
 	vim.notify("Auto-format: " .. (vim.g.autoformat and "on" or "off"))
 end)
 
+-- keymaps: copilot
+vim.keymap.set("n", "<leader><S-c>", function()
+	require("copilot.suggestion").toggle_auto_trigger()
+	vim.notify("Copilot: " .. (vim.b.copilot_suggestion_auto_trigger ~= false and "on" or "off"))
+end)
+
 -- keymaps: diagnostics
 vim.keymap.set("n", "<leader>i", function()
 	local current = vim.diagnostic.config().virtual_text
@@ -169,15 +190,20 @@ local function statusline()
 	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 	local parts = {}
 	for _, c in ipairs(clients) do
-		local caps = {}
-		if c:supports_method("textDocument/formatting") then caps[#caps + 1] = "f" end
-		if c:supports_method("textDocument/publishDiagnostics") then caps[#caps + 1] = "d" end
-		if c:supports_method("textDocument/codeAction") then caps[#caps + 1] = "a" end
-		if c:supports_method("textDocument/rename") then caps[#caps + 1] = "r" end
-		if c:supports_method("textDocument/completion") then caps[#caps + 1] = "c" end
-		local name = c.name
-		if #caps > 0 then name = name .. "[" .. table.concat(caps) .. "]" end
-		parts[#parts + 1] = name
+		if c.name == "copilot" then
+			local enabled = vim.b.copilot_suggestion_auto_trigger ~= false
+			parts[#parts + 1] = "copilot(" .. (enabled and "✓" or "✗") .. ")"
+		else
+			local caps = {}
+			if c:supports_method("textDocument/formatting") then caps[#caps + 1] = "f" end
+			if c:supports_method("textDocument/publishDiagnostics") then caps[#caps + 1] = "d" end
+			if c:supports_method("textDocument/codeAction") then caps[#caps + 1] = "a" end
+			if c:supports_method("textDocument/rename") then caps[#caps + 1] = "r" end
+			if c:supports_method("textDocument/completion") then caps[#caps + 1] = "c" end
+			local name = c.name
+			if #caps > 0 then name = name .. "[" .. table.concat(caps) .. "]" end
+			parts[#parts + 1] = name
+		end
 	end
 	lsp = table.concat(parts, " ")
 
@@ -289,5 +315,12 @@ vim.keymap.set("n", "<leader><space>", function()
 		"]w / [w     next / prev warning",
 		"SPC i       toggle inline diagnostics",
 		"SPC d       toggle diagnostics list",
+		"",
+		"── Copilot ──────────────────────────────",
+		"Tab         accept suggestion",
+		"M-] / M-[   next / prev suggestion",
+		"C-]         dismiss suggestion",
+		"SPC C       toggle copilot on/off",
+		":Copilot auth   first-time login",
 	})
 end)
