@@ -18,6 +18,7 @@ Commands:
   dfss up                            Stage, commit "updated", and push (secret)
   dfss <git-cmd> [args...]          Manage secret dotfiles (bare git repo)
   dfs-clone                          Clone dotfiles-secret bare repo
+  dlog                              Show diff log for dfs + dfss
   status                           Overview of brew packages and dotfiles
   help                             Show this help
 EOF
@@ -234,6 +235,18 @@ case "${1:-}" in
     echo ""
     echo "==> dotfiles-secret"
     dotfiles_secret_cmd up || true
+    ;;
+  dlog)
+    shift
+    echo "==> dotfiles"
+    git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" log -p "$@"
+    echo ""
+    if [[ -d "$HOME/.dotfiles-secret" ]]; then
+      echo "==> dotfiles-secret"
+      git --git-dir="$HOME/.dotfiles-secret" --work-tree="$HOME" log -p "$@"
+    else
+      echo "dotfiles-secret: not cloned (run: mbp dfs-clone)"
+    fi
     ;;
   dfs)
     shift

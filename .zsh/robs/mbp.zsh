@@ -1,6 +1,6 @@
 _mbp() {
   local -a top
-  top=(brew claude dfs dfss dfs-clone status help)
+  top=(brew claude dfs dfss dfs-clone dlog status help)
 
   if (( CURRENT == 2 )); then
     _describe 'mbp commands' top
@@ -73,6 +73,7 @@ _mbp() {
           ;;
       esac
       ;;
+    dlog) ;;
     dfs-clone) ;;
     help) ;;
   esac
