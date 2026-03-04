@@ -42,4 +42,6 @@ fi
 echo "    Some changes require a logout/restart to take effect."
 echo "    Manual steps remaining:"
 echo "    - Switch to Australian keyboard layout in System Settings"
+echo "    - Set default browser to Chrome: System Settings > Desktop & Dock > Default web browser"
+echo "    - Enable Input Monitoring for iTerm: System Settings > Privacy & Security > Input Monitoring (restart iTerm after)"
 echo "    - gh auth login"

@@ -46,4 +46,11 @@ defaults write com.lwouis.alt-tab-macos hideHiddenWindows -int 1
 defaults write com.lwouis.alt-tab-macos hideFullscreenWindows -int 1
 defaults write com.lwouis.alt-tab-macos showTabsAsWindows -bool false
 
+# Keyboard: disable emoji picker (fn/globe key does nothing)
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0
+
+# Dock: position on left
+defaults write com.apple.dock orientation -string left
+killall Dock 2>/dev/null || true
+
 echo "    System defaults applied."
