@@ -206,6 +206,11 @@ fi
 "$VENV_PYTHON" -m pip install --quiet --upgrade pip
 "$VENV_PYTHON" -m pip install --quiet iterm2
 
+if ! ps -eo comm= | grep -q "iTerm2$"; then
+  open -a iTerm2
+  sleep 3
+fi
+
 if ps -eo comm= | grep -q "iTerm2$"; then
   "$VENV_PYTHON" - << 'PYEOF' 2>/dev/null
 import iterm2
