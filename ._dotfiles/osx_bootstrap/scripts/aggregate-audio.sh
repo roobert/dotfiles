@@ -17,7 +17,7 @@ name = "Aggregate Device"
 
 subdevices = [
     {
-        "channels-in": 2,
+        "channels-in": 1,
         "channels-out": 0,
         "don't pad": 0,
         "drift": 0,
@@ -25,20 +25,20 @@ subdevices = [
         "drift quality": 127,
         "latency-in": 0,
         "latency-out": 0,
-        "name": "Brio 500",
-        "uid": "AppleUSBAudioEngine:Unknown Manufacturer:Brio 500:2431ZBE1QKD8:3",
+        "name": "MacBook Pro Microphone",
+        "uid": "BuiltInMicrophoneDevice",
     },
     {
-        "channels-in": 6,
-        "channels-out": 2,
+        "channels-in": 2,
+        "channels-out": 0,
         "don't pad": 0,
         "drift": 1,
         "drift algorithm": 0,
         "drift quality": 127,
         "latency-in": 0,
         "latency-out": 0,
-        "name": "MacBook Pro Speakers",
-        "uid": "BuiltInSpeakerDevice",
+        "name": "Brio 500",
+        "uid": "AppleUSBAudioEngine:Unknown Manufacturer:Brio 500:2431ZBE1QKD8:3",
     },
 ]
 
