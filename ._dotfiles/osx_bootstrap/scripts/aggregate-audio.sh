@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Creates an aggregate audio device combining MacBook Pro Speakers + Logitech
+# Creates an aggregate audio device combining MacBook Pro Microphone + Logitech
 # Brio 500 webcam mic. Writes directly to the CoreAudio SystemSettings plist.
 # Requires sudo. Idempotent.
 

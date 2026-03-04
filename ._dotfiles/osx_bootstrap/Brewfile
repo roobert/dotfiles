@@ -28,6 +28,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "claude-code"
 cask "zed"
 cask "vlc"
 cask "lulu"
