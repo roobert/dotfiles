@@ -1,4 +1,5 @@
 # CLI tools
+brew "gemini-cli"
 brew "mas"
 brew "tree-sitter-cli"
 brew "tree-sitter"

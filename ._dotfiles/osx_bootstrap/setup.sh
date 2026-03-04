@@ -31,6 +31,7 @@ run_step "Configuring Mission Control hotkeys" "${SCRIPT_DIR}/scripts/mission-co
 run_step "Configuring mise + uv" "${SCRIPT_DIR}/scripts/mise-setup.sh"
 run_step "Setting up weekly maintenance check" "${SCRIPT_DIR}/scripts/maintenance-launchd.sh"
 run_step "Setting up fzf" "${SCRIPT_DIR}/scripts/fzf-setup.sh"
+run_step "Setting up aggregate audio device" "${SCRIPT_DIR}/scripts/aggregate-audio.sh"
 
 echo ""
 if [[ $ERRORS -gt 0 ]]; then
@@ -40,6 +41,5 @@ else
 fi
 echo "    Some changes require a logout/restart to take effect."
 echo "    Manual steps remaining:"
-echo "    - Set up Aggregate Sound Device in Audio MIDI Setup"
 echo "    - Switch to Australian keyboard layout in System Settings"
 echo "    - gh auth login"
