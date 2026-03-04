@@ -202,11 +202,12 @@ VENV_PYTHON="$VENV_DIR/bin/python3"
 
 if ! [[ -x "$VENV_PYTHON" ]]; then
   python3 -m venv "$VENV_DIR"
-  "$VENV_PYTHON" -m pip install --quiet iterm2
 fi
+"$VENV_PYTHON" -m pip install --quiet --upgrade pip
+"$VENV_PYTHON" -m pip install --quiet iterm2
 
 if ps -eo comm= | grep -q "iTerm2$"; then
-  "$VENV_PYTHON" - << 'PYEOF'
+  "$VENV_PYTHON" - << 'PYEOF' 2>/dev/null
 import iterm2
 
 async def main(connection):
@@ -223,6 +224,9 @@ async def main(connection):
 
 iterm2.run_until_complete(main)
 PYEOF
+  if [[ $? -ne 0 ]]; then
+    echo "    iTerm2 running but Python API not enabled — enable it in Preferences > General > Magic > Enable Python API."
+  fi
 else
   echo "    iTerm2 not running — settings will apply on next launch."
 fi
