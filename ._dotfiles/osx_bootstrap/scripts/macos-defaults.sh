@@ -49,8 +49,12 @@ defaults write com.lwouis.alt-tab-macos showTabsAsWindows -bool false
 # Keyboard: disable emoji picker (fn/globe key does nothing)
 defaults write com.apple.HIToolbox AppleFnUsageType -int 0
 
-# Dock: position on left
+# Finder: small sidebar icons
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Dock: position on left, small icons
 defaults write com.apple.dock orientation -string left
+defaults write com.apple.dock tilesize -int 36
 killall Dock 2>/dev/null || true
 
 echo "    System defaults applied."
