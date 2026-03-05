@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Creates an aggregate audio device combining MacBook Pro Microphone + Logitech
-# Brio 500 webcam mic. Writes directly to the CoreAudio SystemSettings plist.
+# Creates an aggregate audio device combining Logitech Brio 500 webcam mic +
+# MacBook Pro Microphone. Writes directly to the CoreAudio SystemSettings plist.
 # Requires sudo. Idempotent.
 
 PLIST="/Library/Preferences/Audio/com.apple.audio.SystemSettings.plist"
@@ -20,7 +20,7 @@ subdevices = [
         "channels-in": 1,
         "channels-out": 0,
         "don't pad": 0,
-        "drift": 0,
+        "drift": 1,
         "drift algorithm": 0,
         "drift quality": 127,
         "latency-in": 0,
@@ -47,11 +47,14 @@ with open(path, "rb") as f:
 
 meta_key = f"MetaDevice.{uid}"
 
-# Check if aggregate already exists with correct subdevices
+# Check if aggregate already exists with correct subdevices and drift settings
 existing = data.get(meta_key, {}).get("subdevices", [])
 existing_uids = {d.get("uid") for d in existing if isinstance(d, dict)}
 wanted_uids = {d["uid"] for d in subdevices}
-if existing_uids == wanted_uids:
+drift_ok = all(
+    d.get("drift") == 1 for d in existing if isinstance(d, dict)
+)
+if existing_uids == wanted_uids and drift_ok:
     print("    Aggregate device already configured, skipping.")
     sys.exit(0)
 
@@ -65,6 +68,7 @@ data[meta_key] = {
     "name": name,
     "subdevices": subdevices,
     "uid": uid,
+    "vocal isolation type": 0,
 }
 
 with open(path, "wb") as f:

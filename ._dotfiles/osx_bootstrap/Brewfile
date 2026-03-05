@@ -29,6 +29,7 @@ brew "libgit2"
 
 # Cask apps
 cask "claude-code"
+cask "obsidian"
 cask "zed"
 cask "vlc"
 cask "lulu"
