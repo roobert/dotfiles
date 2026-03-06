@@ -1,0 +1,496 @@
+#!/usr/bin/env python3
+"""ccreport - Claude Code usage report.
+
+Reads local JSONL session files and groups token usage into 5-hour billing
+windows, showing per-block token counts, message counts, and estimated costs.
+Also provides a status line mode for integration with Claude Code's status bar,
+displaying model, working directory, block usage, and context window percentage.
+
+Usage:
+    ccreport              Show all blocks from last 3 days
+    ccreport --days 7     Show blocks from last 7 days
+    ccreport --all        Show all blocks ever
+    ccreport --active     Show only the currently active block
+    ccreport --json       Output as JSON
+    ccreport --statusline Status bar string (reads hook JSON from stdin)
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+from collections import defaultdict
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+# ── Pricing per 1M tokens (update as needed) ────────────────────────────────
+
+PRICING = {
+    "opus": {"input": 15.00, "output": 75.00, "cache_read": 1.50},
+    "sonnet": {"input": 3.00, "output": 15.00, "cache_read": 0.30},
+    "haiku": {"input": 0.80, "output": 4.00, "cache_read": 0.08},
+}
+
+BLOCK_HOURS = 5
+CONFIG_PATH = Path.home() / ".claude" / "ccreport.json"
+DEFAULT_LIMIT = None  # set via --limit or config file
+
+
+def load_config() -> dict:
+    """Load config from ~/.claude/ccreport.json if it exists."""
+    if CONFIG_PATH.is_file():
+        try:
+            return json.loads(CONFIG_PATH.read_text())
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {}
+
+
+def parse_limit(val: str) -> int:
+    """Parse a message limit like '225'."""
+    try:
+        return int(val.strip())
+    except ValueError:
+        print(f"Error: invalid message limit '{val}' (expected an integer)", file=sys.stderr)
+        sys.exit(1)
+
+
+def match_pricing(model_name: str) -> dict:
+    """Match a model string like 'claude-opus-4-6' to a pricing tier."""
+    m = model_name.lower()
+    for key in PRICING:
+        if key in m:
+            return PRICING[key]
+    return PRICING["sonnet"]  # fallback
+
+
+def compute_cost(usage: dict, pricing: dict) -> float:
+    inp = usage.get("input_tokens", 0) + usage.get("cache_creation_input_tokens", 0)
+    out = usage.get("output_tokens", 0)
+    cache_r = usage.get("cache_read_input_tokens", 0)
+    return (inp * pricing["input"] + out * pricing["output"] + cache_r * pricing["cache_read"]) / 1_000_000
+
+
+# ── JSONL loading ────────────────────────────────────────────────────────────
+
+def _is_subagent_file(path: Path) -> bool:
+    """Check if a JSONL file is from a subagent (not a top-level session)."""
+    return path.name.startswith("agent-") or "subagents" in path.parts
+
+
+def _parse_ts(ts_str: str) -> datetime | None:
+    try:
+        return datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+    except (ValueError, AttributeError):
+        return None
+
+
+def load_entries(projects_dir: Path, since: datetime | None) -> tuple[list[dict], list[datetime]]:
+    """Load assistant entries (tokens/cost) and user message counts."""
+    seen_assistant = set()
+    seen_user = set()
+    entries = []
+    user_messages = []  # (timestamp,) for counting
+
+    for jsonl_file in projects_dir.rglob("*.jsonl"):
+        if since and datetime.fromtimestamp(jsonl_file.stat().st_mtime, tz=timezone.utc) < since:
+            continue
+
+        is_subagent = _is_subagent_file(jsonl_file)
+
+        try:
+            with open(jsonl_file) as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+
+                    # Count user messages from main session files only
+                    if not is_subagent and '"user"' in line:
+                        try:
+                            d = json.loads(line)
+                        except json.JSONDecodeError:
+                            continue
+                        if d.get("type") == "user":
+                            ts = _parse_ts(d.get("timestamp", ""))
+                            if ts and (not since or ts >= since):
+                                uid = d.get("uuid", "")
+                                if uid not in seen_user:
+                                    seen_user.add(uid)
+                                    user_messages.append(ts)
+                            continue
+
+                    if '"assistant"' not in line:
+                        continue
+                    try:
+                        d = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if d.get("type") != "assistant":
+                        continue
+                    msg = d.get("message", {})
+                    usage = msg.get("usage")
+                    if not usage:
+                        continue
+
+                    dedup_key = (msg.get("id", ""), d.get("requestId", ""))
+                    if dedup_key in seen_assistant:
+                        continue
+                    seen_assistant.add(dedup_key)
+
+                    ts = _parse_ts(d.get("timestamp", ""))
+                    if not ts or (since and ts < since):
+                        continue
+
+                    entries.append({
+                        "ts": ts,
+                        "model": msg.get("model", "unknown"),
+                        "input_tokens": usage.get("input_tokens", 0),
+                        "output_tokens": usage.get("output_tokens", 0),
+                        "cache_creation_input_tokens": usage.get("cache_creation_input_tokens", 0),
+                        "cache_read_input_tokens": usage.get("cache_read_input_tokens", 0),
+                    })
+        except (OSError, PermissionError):
+            continue
+
+    entries.sort(key=lambda e: e["ts"])
+    user_messages.sort()
+    return entries, user_messages
+
+
+# ── Block grouping ───────────────────────────────────────────────────────────
+
+def group_into_blocks(entries: list[dict], user_messages: list[datetime]) -> list[dict]:
+    """Group entries into 5-hour billing blocks."""
+    if not entries:
+        return []
+
+    blocks = []
+    current_block = None
+
+    for entry in entries:
+        block_start = entry["ts"].replace(minute=0, second=0, microsecond=0)
+
+        if current_block is None or entry["ts"] >= current_block["start"] + timedelta(hours=BLOCK_HOURS):
+            current_block = {
+                "start": block_start,
+                "end": entry["ts"],
+                "models": set(),
+                "input_tokens": 0,
+                "output_tokens": 0,
+                "cache_creation_input_tokens": 0,
+                "cache_read_input_tokens": 0,
+                "cost": 0.0,
+                "api_calls": 0,
+                "user_messages": 0,
+            }
+            blocks.append(current_block)
+
+        current_block["end"] = entry["ts"]
+        current_block["models"].add(entry["model"])
+        current_block["input_tokens"] += entry["input_tokens"]
+        current_block["output_tokens"] += entry["output_tokens"]
+        current_block["cache_creation_input_tokens"] += entry["cache_creation_input_tokens"]
+        current_block["cache_read_input_tokens"] += entry["cache_read_input_tokens"]
+        current_block["cost"] += compute_cost(entry, match_pricing(entry["model"]))
+        current_block["api_calls"] += 1
+
+    # Assign user messages to blocks
+    for block in blocks:
+        block_end = block["start"] + timedelta(hours=BLOCK_HOURS)
+        block["user_messages"] = sum(
+            1 for ts in user_messages if block["start"] <= ts < block_end
+        )
+
+    return blocks
+
+
+# ── Formatting ───────────────────────────────────────────────────────────────
+
+def fmt_tokens(n: int) -> str:
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.1f}k"
+    return str(n)
+
+
+def fmt_duration(start: datetime, end: datetime) -> str:
+    delta = end - start
+    total_min = int(delta.total_seconds() / 60)
+    h, m = divmod(total_min, 60)
+    if h == 0:
+        return f"{m}m"
+    return f"{h}h{m:02d}m"
+
+
+def short_model(model: str) -> str:
+    """Shorten model names: claude-opus-4-6 -> opus, claude-sonnet-4-5-20250929 -> sonnet"""
+    m = model.lower()
+    for name in ("opus", "sonnet", "haiku"):
+        if name in m:
+            return name
+    if m.startswith("<") or m == "unknown":
+        return "other"
+    return model[:12]
+
+
+def print_report(blocks: list[dict], now: datetime):
+    local_tz = now.astimezone().tzinfo
+
+    # Header
+    print()
+    print("  5-Hour Blocks Report")
+    print("  " + "━" * 76)
+    header = f"  {'Block Start':<21}{'Dur':>7}  {'Model':<18} {'In Tok':>8} {'Out Tok':>8} {'Cache R':>8}  {'Cost':>7}"
+    print(header)
+    print("  " + "─" * 76)
+
+    totals = {"input": 0, "output": 0, "cache_r": 0, "cost": 0.0}
+
+    for block in blocks:
+        local_start = block["start"].astimezone(local_tz)
+        is_active = now < block["start"] + timedelta(hours=BLOCK_HOURS)
+
+        models_str = "/".join(sorted(short_model(m) for m in block["models"]))
+        if len(models_str) > 18:
+            models_str = models_str[:16] + ".."
+
+        dur = fmt_duration(block["start"], block["end"])
+        marker = " ◀" if is_active else ""
+
+        in_tok = block["input_tokens"] + block["cache_creation_input_tokens"]
+
+        row = (
+            f"  {local_start.strftime('%Y-%m-%d %H:%M'):<21}"
+            f"{dur:>7}  "
+            f"{models_str:<18} "
+            f"{fmt_tokens(in_tok):>8} "
+            f"{fmt_tokens(block['output_tokens']):>8} "
+            f"{fmt_tokens(block['cache_read_input_tokens']):>8}  "
+            f"${block['cost']:>6.2f}"
+            f"{marker}"
+        )
+        print(row)
+
+        totals["input"] += in_tok
+        totals["output"] += block["output_tokens"]
+        totals["cache_r"] += block["cache_read_input_tokens"]
+        totals["cost"] += block["cost"]
+
+    print("  " + "─" * 76)
+    n = len(blocks)
+    print(
+        f"  {'Total (' + str(n) + ' block' + ('s' if n != 1 else '') + ')':<30}"
+        f"{'':>14} "
+        f"{fmt_tokens(totals['input']):>8} "
+        f"{fmt_tokens(totals['output']):>8} "
+        f"{fmt_tokens(totals['cache_r']):>8}  "
+        f"${totals['cost']:>6.2f}"
+    )
+    print()
+
+
+def block_to_dict(block: dict, now: datetime, msg_limit: int | None) -> dict:
+    """Convert a block to a JSON-serializable dict."""
+    in_tok = block["input_tokens"] + block["cache_creation_input_tokens"]
+    total_tok = in_tok + block["output_tokens"] + block["cache_read_input_tokens"]
+    block_end = block["start"] + timedelta(hours=BLOCK_HOURS)
+    remaining = block_end - now
+    remaining_min = max(0, int(remaining.total_seconds() / 60))
+
+    result = {
+        "start": block["start"].isoformat(),
+        "end": block_end.isoformat(),
+        "active": now < block_end,
+        "remaining_minutes": remaining_min,
+        "duration_minutes": int((block["end"] - block["start"]).total_seconds() / 60),
+        "models": sorted(short_model(m) for m in block["models"]),
+        "total_tokens": total_tok,
+        "input_tokens": in_tok,
+        "output_tokens": block["output_tokens"],
+        "cache_read_tokens": block["cache_read_input_tokens"],
+        "cost_usd": round(block["cost"], 2),
+        "user_messages": block["user_messages"],
+        "api_calls": block["api_calls"],
+    }
+    if msg_limit is not None:
+        result["message_limit"] = msg_limit
+        result["usage_pct"] = round(block["user_messages"] / msg_limit * 100, 1)
+    return result
+
+
+def print_json(blocks: list[dict], now: datetime, msg_limit: int | None):
+    result = {
+        "blocks": [block_to_dict(b, now, msg_limit) for b in blocks],
+        "total": {
+            "input_tokens": sum(b["input_tokens"] + b["cache_creation_input_tokens"] for b in blocks),
+            "output_tokens": sum(b["output_tokens"] for b in blocks),
+            "cache_read_tokens": sum(b["cache_read_input_tokens"] for b in blocks),
+            "cost_usd": round(sum(b["cost"] for b in blocks), 2),
+            "user_messages": sum(b["user_messages"] for b in blocks),
+            "block_count": len(blocks),
+        },
+        "generated_at": now.isoformat(),
+    }
+    if msg_limit is not None:
+        result["message_limit"] = msg_limit
+    print(json.dumps(result, indent=2))
+
+
+def _color(text: str, pct: float) -> str:
+    """Color text green/yellow/red based on percentage thresholds."""
+    if pct >= 80:
+        return f"\033[31m{text}\033[0m"  # red
+    elif pct >= 50:
+        return f"\033[33m{text}\033[0m"  # yellow
+    return f"\033[32m{text}\033[0m"      # green
+
+
+def _read_effort_level(model_id: str) -> str:
+    """Read effort level from ~/.claude/settings.json, falling back to model default."""
+    try:
+        settings = json.loads((Path.home() / ".claude" / "settings.json").read_text())
+        level = settings.get("effortLevel", "")
+        if level:
+            return level
+    except (json.JSONDecodeError, OSError):
+        pass
+    # Opus 4.6 defaults to medium; others default to high
+    if "opus-4-6" in model_id:
+        return "medium"
+    return "high"
+
+
+def print_statusline(blocks: list[dict], now: datetime, msg_limit: int | None, hook_data: dict | None):
+    """Print a single pre-formatted line for the Claude Code status bar."""
+    parts = []
+
+    # Model + dir from hook data
+    if hook_data:
+        model = hook_data.get("model", {}).get("display_name", "")
+        cwd = hook_data.get("workspace", {}).get("current_dir", "")
+        home = str(Path.home())
+        if cwd.startswith(home):
+            cwd = "~" + cwd[len(home):]
+        # Git branch from working directory
+        branch = ""
+        raw_cwd = hook_data.get("workspace", {}).get("current_dir", "")
+        if raw_cwd:
+            try:
+                branch = subprocess.run(
+                    ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                    cwd=raw_cwd, capture_output=True, text=True, timeout=2,
+                ).stdout.strip()
+            except (subprocess.TimeoutExpired, OSError):
+                pass
+
+        # Effort level from settings
+        model_id = hook_data.get("model", {}).get("id", "")
+        effort = _read_effort_level(model_id)
+
+        if model:
+            dim = "\033[2m"
+            rst = "\033[0m"
+            effort_bars = {
+                "low": f"\033[1;31m●{rst}{dim}●●{rst}",
+                "medium": f"\033[1;38;5;208m●●{rst}{dim}●{rst}",
+                "high": f"\033[1;32m●●●{rst}",
+            }
+            effort_str = effort_bars.get(effort, effort)
+            parts.append(f"{model} {effort_str}")
+        if cwd:
+            parts.append(cwd)
+        if branch:
+            parts.append(branch)
+
+    # Block usage
+    if blocks:
+        block = blocks[-1]
+        msgs = block["user_messages"]
+        block_end = block["start"] + timedelta(hours=BLOCK_HOURS)
+        remaining_min = max(0, int((block_end - now).total_seconds() / 60))
+        h, m = divmod(remaining_min, 60)
+
+        if msg_limit:
+            usage_str = f"{msgs}/{msg_limit}"
+        else:
+            usage_str = f"{msgs}"
+
+        parts.append(f"{usage_str} ~${block['cost']:.2f} ({h}h{m:02d}m left)")
+
+    # Context window from hook data
+    if hook_data:
+        ctx = hook_data.get("context_window", {})
+        pct = ctx.get("used_percentage")
+        if pct is not None:
+            parts.append(_color(f"ctx {pct}%", pct))
+
+    print(" | ".join(parts))
+
+
+# ── Main ─────────────────────────────────────────────────────────────────────
+
+def main():
+    parser = argparse.ArgumentParser(description="Claude Code usage report")
+    parser.add_argument("--days", type=int, default=3, help="Look back N days (default: 3)")
+    parser.add_argument("--all", action="store_true", help="Show all blocks (no time filter)")
+    parser.add_argument("--active", action="store_true", help="Show only the currently active block")
+    parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--statusline", action="store_true", help="Output pre-formatted status bar string")
+    parser.add_argument("--limit", type=str, help="Message limit per 5h block (e.g. 225). Saved to config.")
+    parser.add_argument("--dir", type=str, help="Override projects directory")
+    args = parser.parse_args()
+
+    config = load_config()
+
+    # Handle --limit: save to config if provided, otherwise read from config
+    msg_limit = None
+    if args.limit:
+        msg_limit = parse_limit(args.limit)
+        config["message_limit"] = msg_limit
+        CONFIG_PATH.write_text(json.dumps(config, indent=2) + "\n")
+    elif "message_limit" in config:
+        msg_limit = config["message_limit"]
+
+    projects_dir = Path(args.dir) if args.dir else Path.home() / ".claude" / "projects"
+    if not projects_dir.is_dir():
+        print(f"Error: {projects_dir} not found", file=sys.stderr)
+        sys.exit(1)
+
+    now = datetime.now(timezone.utc)
+    since = None if args.all else now - timedelta(days=args.days)
+
+    entries, user_messages = load_entries(projects_dir, since)
+    if not entries:
+        print("No usage data found.")
+        sys.exit(0)
+
+    blocks = group_into_blocks(entries, user_messages)
+
+    if args.active:
+        blocks = [b for b in blocks if now < b["start"] + timedelta(hours=BLOCK_HOURS)]
+        if not blocks:
+            print("No active block.")
+            sys.exit(0)
+
+    if args.statusline:
+        # Read Claude Code hook JSON from stdin if available
+        hook_data = None
+        if not sys.stdin.isatty():
+            try:
+                hook_data = json.load(sys.stdin)
+            except (json.JSONDecodeError, EOFError):
+                pass
+        active = [b for b in blocks if now < b["start"] + timedelta(hours=BLOCK_HOURS)]
+        print_statusline(active, now, msg_limit, hook_data)
+    elif args.json:
+        print_json(blocks, now, msg_limit)
+    else:
+        print_report(blocks, now)
+
+
+if __name__ == "__main__":
+    main()
