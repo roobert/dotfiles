@@ -12,8 +12,8 @@ mise use --global go@latest
 # Prevent bare pip install from polluting global Python
 mise set --global PIP_REQUIRE_VIRTUALENV=true
 
-# Global npm packages
-npm install -g @anthropic-ai/claude-code@latest
+# Claude Code (native installer, auto-updates)
+curl -fsSL https://claude.ai/install.sh | bash
 
 echo "    mise runtimes installed."
 echo "    uv installed via brew (uses mise-managed Python, handles venvs + packages)."
