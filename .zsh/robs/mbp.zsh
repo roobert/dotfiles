@@ -11,7 +11,7 @@ _mbp() {
     brew)
       if (( CURRENT == 3 )); then
         local -a brew_cmds
-        brew_cmds=(list install remove)
+        brew_cmds=(list install remove update upgrade)
         _describe 'brew subcommands' brew_cmds
         return
       fi

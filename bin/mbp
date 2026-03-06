@@ -11,6 +11,8 @@ Commands:
   brew list                        List packages in Brewfile
   brew install [--cask] <pkg>...   Add package(s) to Brewfile and install
   brew remove <pkg>...             Remove package(s) from Brewfile and uninstall
+  brew update                      Fetch latest package info (brew update)
+  brew upgrade                     Upgrade all packages (brew upgrade)
   claude                            Launch Claude Code in ._dotfiles dir
   up                                 Run dfs up + dfss up
   dfs up                             Stage, commit "updated", and push
@@ -219,8 +221,14 @@ case "${1:-}" in
         shift
         brew_remove "$@"
         ;;
+      update)
+        brew update
+        ;;
+      upgrade)
+        brew upgrade
+        ;;
       *)
-        echo "Usage: mbp brew {list|install|remove} [args...]" >&2
+        echo "Usage: mbp brew {list|install|remove|update|upgrade} [args...]" >&2
         exit 1
         ;;
     esac
