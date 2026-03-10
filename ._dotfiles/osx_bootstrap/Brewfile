@@ -1,4 +1,5 @@
 # CLI tools
+brew "ansible"
 brew "gemini-cli"
 brew "mas"
 brew "tree-sitter-cli"
@@ -28,6 +29,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "bambu-studio"
 cask "obsidian"
 cask "zed"
 cask "vlc"
