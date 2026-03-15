@@ -1,4 +1,6 @@
 # CLI tools
+brew "zig"
+brew "pwgen"
 brew "ansible"
 brew "gemini-cli"
 brew "mas"
@@ -29,6 +31,7 @@ brew "util-linux"
 brew "libgit2"
 
 # Cask apps
+cask "kicad"
 cask "bambu-studio"
 cask "obsidian"
 cask "zed"
