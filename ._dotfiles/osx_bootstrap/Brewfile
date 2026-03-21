@@ -1,4 +1,5 @@
 # CLI tools
+brew "watch"
 brew "zig"
 brew "pwgen"
 brew "ansible"

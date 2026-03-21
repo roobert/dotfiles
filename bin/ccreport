@@ -354,14 +354,12 @@ def _read_effort_level(model_id: str) -> str:
     try:
         settings = json.loads((Path.home() / ".claude" / "settings.json").read_text())
         level = settings.get("effortLevel", "")
-        if level:
+        if level in ("low", "medium", "high", "max", "auto"):
             return level
     except (json.JSONDecodeError, OSError):
         pass
-    # Opus 4.6 defaults to medium; others default to high
-    if "opus-4-6" in model_id:
-        return "medium"
-    return "high"
+    # Default is auto
+    return "auto"
 
 
 def print_statusline(blocks: list[dict], now: datetime, msg_limit: int | None, hook_data: dict | None):
@@ -395,9 +393,11 @@ def print_statusline(blocks: list[dict], now: datetime, msg_limit: int | None, h
             dim = "\033[2m"
             rst = "\033[0m"
             effort_bars = {
-                "low": f"\033[1;31m●{rst}{dim}●●{rst}",
-                "medium": f"\033[1;38;5;208m●●{rst}{dim}●{rst}",
-                "high": f"\033[1;32m●●●{rst}",
+                "low": f"\033[1;31m●{rst}{dim}●●●{rst}",
+                "medium": f"\033[1;38;5;208m●●{rst}{dim}●●{rst}",
+                "high": f"\033[1;32m●●●{rst}{dim}●{rst}",
+                "max": f"\033[1;32m●●●●{rst}",
+                "auto": f"\033[1;34m●●●●{rst}",
             }
             effort_str = effort_bars.get(effort, effort)
             parts.append(f"{model} {effort_str}")
