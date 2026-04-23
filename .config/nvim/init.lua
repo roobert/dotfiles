@@ -2,14 +2,15 @@ vim.g.mapleader = " "
 vim.o.clipboard = "unnamedplus"
 vim.o.showmode = false
 
--- plugins
+-- plugins (pinned to commit SHAs to mitigate supply chain attacks;
+-- to bump: review upstream diff, then update SHA and restart)
 vim.pack.add({
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/projekt0n/github-nvim-theme" },
-	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "b9171ede5de41b3f2dfa33fe33ebd585d795f928" },
+	{ src = "https://github.com/mason-org/mason.nvim",            version = "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim",  version = "2ab512d3d8e2fd1f679543c13e0dc4606c3d3d2e" },
+	{ src = "https://github.com/neovim/nvim-lspconfig",           version = "f386df19b145607a33885b6110ef5c04faae42cb" },
+	{ src = "https://github.com/projekt0n/github-nvim-theme",     version = "c106c9472154d6b2c74b74565616b877ae8ed31d" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua",          version = "00446a63cba4cc59bb24fc1e210a555a3e4acdfb" },
 })
 
 -- colorscheme
@@ -32,18 +33,27 @@ vim.api.nvim_create_autocmd("PackChanged", {
 	end,
 })
 
--- lsp
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"terraformls", "gopls", "ruff", "pyright",
-		"lua_ls", "ts_ls",
-	},
+-- lsp (servers pinned to mitigate supply chain attacks; registry pin locks
+-- the name+version -> download URL mapping, package pins lock the payload)
+require("mason").setup({
+	registries = { "github:mason-org/mason-registry@2026-04-09-ruby-grease" },
 })
-vim.lsp.enable({
-	"terraformls", "gopls", "ruff", "pyright",
-	"lua_ls", "ts_ls",
-})
+
+local lsp_servers = {
+	{ "terraformls", "v0.38.4" },
+	{ "gopls",       "v0.21.1" },
+	{ "ruff",        "0.15.3"  },
+	{ "pyright",     "1.1.408" },
+	{ "lua_ls",      "3.17.1"  },
+	{ "ts_ls",       "5.1.3"   },
+}
+local ensure_installed, enable_servers = {}, {}
+for _, s in ipairs(lsp_servers) do
+	ensure_installed[#ensure_installed + 1] = s[1] .. "@" .. s[2]
+	enable_servers[#enable_servers + 1] = s[1]
+end
+require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+vim.lsp.enable(enable_servers)
 
 -- completion + format on save
 vim.api.nvim_create_autocmd("LspAttach", {

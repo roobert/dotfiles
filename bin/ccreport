@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from collections import defaultdict
@@ -350,11 +351,16 @@ def _color(text: str, pct: float) -> str:
 
 
 def _read_effort_level(model_id: str) -> str:
-    """Read effort level from ~/.claude/settings.json, falling back to model default."""
+    """Read effort level, checking env var first (captures session-only 'max'), then settings."""
+    valid = ("low", "medium", "high", "max", "auto")
+    # Env var is set by Claude Code at runtime and reflects session effort (including max)
+    env_level = os.environ.get("CLAUDE_CODE_EFFORT_LEVEL", "").lower()
+    if env_level in valid:
+        return env_level
     try:
         settings = json.loads((Path.home() / ".claude" / "settings.json").read_text())
         level = settings.get("effortLevel", "")
-        if level in ("low", "medium", "high", "max", "auto"):
+        if level in valid:
             return level
     except (json.JSONDecodeError, OSError):
         pass

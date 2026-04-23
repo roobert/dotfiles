@@ -31,6 +31,21 @@ cat > "$PLIST" << PLISTEOF
     <true/>
     <key>KeepAlive</key>
     <false/>
+    <key>LaunchEvents</key>
+    <dict>
+      <key>com.apple.iokit.matching</key>
+      <dict>
+        <key>keyboard-attach</key>
+        <dict>
+          <key>IOProviderClass</key>
+          <string>IOHIDDevice</string>
+          <key>PrimaryUsagePage</key>
+          <integer>1</integer>
+          <key>PrimaryUsage</key>
+          <integer>6</integer>
+        </dict>
+      </dict>
+    </dict>
   </dict>
 </plist>
 PLISTEOF
