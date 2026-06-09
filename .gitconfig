@@ -39,3 +39,20 @@
   new = green bold
 [pull]
 	rebase = false
+[safe]
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-WlhXhy/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-s7y8j0/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-asevbA/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-xW1aib/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-07nWkZ/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-VWqXmP/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-apD8cD/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-60TBWO/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-OMUsjp/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-bxb0TU/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-WtU9oN/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-5KiWdT/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-eC0yaI/repos/project_123.git
+	directory = /tmp/claude-501/protoline-git-test-1Q3BJ5/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-kzRo3P/repos/project_123.git
+	directory = /var/folders/f1/8057vvfd7wngv8ttyc3np6x40000gn/T/protoline-git-test-hlZXiv/repos/project_123.git
